@@ -1,0 +1,30 @@
+{
+  "name": "belieflang",
+  "version": "0.1.0",
+  "description": "A probabilistic programming language for AI agents and uncertain systems.",
+  "type": "module",
+  "bin": {
+    "bel": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js run examples/intent.bel",
+    "test": "node --test dist/tests/*.test.js",
+    "dev": "tsx src/cli.ts run examples/intent.bel"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "probabilistic-programming",
+    "belief-state",
+    "dsl",
+    "language"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^20.11.30",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.0"
+  }
+}
