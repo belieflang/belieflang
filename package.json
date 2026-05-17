@@ -1,6 +1,6 @@
 {
   "name": "belieflang",
-  "version": "0.1.0",
+  "version": "0.1.1-alpha",
   "description": "A probabilistic programming language for AI agents and uncertain systems.",
   "type": "module",
   "bin": {

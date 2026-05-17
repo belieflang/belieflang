@@ -58,6 +58,9 @@ npm run dev
 
 - `belief` blocks
 - normalized probability distributions
+- `let` variables
+- tool return values
+- property access like `flights.count`
 - `confidence(...)`
 - normalized `entropy(...)`
 - `when` rules

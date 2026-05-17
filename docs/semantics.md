@@ -1,49 +1,23 @@
 # BeliefLang Semantics
 
-BeliefLang programs operate over belief state.
+BeliefLang programs operate over belief state and variables.
 
-A belief state is a named probability distribution:
-
-```bel
-belief intent {
-  book_flight: 0.82
-  book_hotel: 0.12
-  unknown: 0.06
-}
-```
-
-The runtime normalizes distributions automatically.
-
-## Confidence
+## Variables
 
 ```bel
-confidence(intent.book_flight)
+let threshold = 0.7
+let flights = call search_flights()
 ```
 
-Returns the probability assigned to a single belief value.
+Variables can store literals or tool return values.
 
-## Entropy
+## Property access
 
 ```bel
-entropy(intent)
+when flights.count > 0:
+  ask_user("I found flight options.")
 ```
-
-Returns normalized Shannon entropy in `[0, 1]`.
-
-- `0` means certain
-- `1` means maximally uncertain
-
-## Rules
-
-```bel
-when confidence(intent.book_flight) > 0.7:
-  call search_flights()
-```
-
-Rules are reactive. They fire when their condition evaluates to true.
 
 ## Tools
 
-Tools are external capabilities exposed to the runtime.
-
-They may call APIs, models, databases, browsers, or other systems.
+Tools return JSON-compatible values.

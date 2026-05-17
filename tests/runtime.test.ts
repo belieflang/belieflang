@@ -18,17 +18,27 @@ test("normalizes belief distributions", () => {
   assert.equal(runtime.confidence("intent.hotel"), 1 / 3);
 });
 
-test("computes normalized entropy", () => {
+test("stores literal variables", async () => {
   const runtime = new BeliefRuntime();
 
-  runtime.loadBelief({
-    kind: "belief",
-    name: "intent",
-    values: {
-      a: 0.5,
-      b: 0.5,
-    },
+  await runtime.assign("threshold", {
+    kind: "number",
+    value: 0.7,
   });
 
-  assert.equal(runtime.entropy("intent"), 1);
+  assert.equal(runtime.getVars().threshold, 0.7);
+});
+
+test("stores tool return values", async () => {
+  const runtime = new BeliefRuntime({
+    custom_tool: () => ({ count: 2 }),
+  });
+
+  await runtime.assign("result", {
+    kind: "call_expr",
+    toolName: "custom_tool",
+  });
+
+  assert.deepEqual(runtime.getVars().result, { count: 2 });
+  assert.equal(runtime.resolvePath("result.count"), 2);
 });
