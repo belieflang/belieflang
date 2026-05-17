@@ -1,6 +1,11 @@
 # BeliefLang
 
-BeliefLang is an experimental programming language for AI agents and uncertain systems.
+## Status
+
+BeliefLang is experimental and under active development.
+Breaking changes are expected before 1.0.
+
+BeliefLang is an experimental language runtime for AI agents and uncertain systems.
 
 Instead of treating state as fixed values, BeliefLang represents state as probability distributions and executes actions when confidence or uncertainty crosses a threshold.
 
@@ -33,8 +38,7 @@ The goal is to make uncertain state explicit, inspectable, and executable.
 ## Install
 
 ```bash
-npm install
-npm run build
+npm install -g belieflang
 ```
 
 ## Run
