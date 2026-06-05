@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BeliefLang Docs</title>
+    <meta
+      name="description"
+      content="BeliefLang language documentation: syntax, semantics, runtime behavior, and examples."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-bg" aria-hidden="true"></div>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <p class="eyebrow">Language Docs</p>
+          <h1>BeliefLang</h1>
+          <p class="subtitle">
+            A small runtime for explicit uncertainty, belief updates, and deterministic rule execution.
+          </p>
+        </div>
+
+        <nav class="toc" aria-label="Table of contents">
+          <a href="#quickstart">Quick Start</a>
+          <a href="#mental-model">Mental Model</a>
+          <a href="#syntax">Syntax</a>
+          <a href="#belief-modes">Belief Modes</a>
+          <a href="#conditions">Conditions</a>
+          <a href="#dynamic-cycle">Observe, Infer, Merge</a>
+          <a href="#trace-provenance">Trace and Provenance</a>
+          <a href="#api">Runtime API</a>
+          <a href="#example">Full Example</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="hero section">
+          <p class="badge">Experimental</p>
+          <h2>Readable docs for building with uncertainty</h2>
+          <p>
+            BeliefLang helps you model intent and constraints as belief state, then run clear rules over that state.
+            Use it when you want behavior that is inspectable, traceable, and not hidden inside prompt text.
+          </p>
+        </header>
+
+        <section class="section" id="quickstart">
+          <h3>Quick Start</h3>
+          <p>Install, build, and run with trace output:</p>
+          <pre><code class="language-bash">npm install -g belieflang
+npm run build
+bel run examples/intent.bel --trace</code></pre>
+        </section>
+
+        <section class="section" id="mental-model">
+          <h3>Mental Model</h3>
+          <p>
+            BeliefLang separates language understanding from execution logic.
+            You keep uncertain state explicit and run deterministic policies on top.
+          </p>
+          <pre><code class="language-txt">natural language -&gt; observations -&gt; inferred beliefs -&gt; merge -&gt; rules -&gt; actions</code></pre>
+        </section>
+
+        <section class="section" id="syntax">
+          <h3>Syntax</h3>
+          <div class="card-grid">
+            <article class="card">
+              <h4>Beliefs</h4>
+              <pre><code class="language-bel">belief intent exclusive closed {
+  book_flight: 0.82
+  book_hotel: 0.12
+  unknown: 0.06
+}</code></pre>
+            </article>
+            <article class="card">
+              <h4>Variables</h4>
+              <pre><code class="language-bel">let threshold = 0.7
+let flights = call search_flights()</code></pre>
+            </article>
+            <article class="card">
+              <h4>Rules</h4>
+              <pre><code class="language-bel">when confidence(intent.book_flight) &gt; threshold:
+  call rank_flights()</code></pre>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="belief-modes">
+          <h3>Belief Modes</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Mode</th>
+                <th>Meaning</th>
+                <th>Runtime behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>exclusive closed</td>
+                <td>Exactly one listed label is true</td>
+                <td>Values are normalized to sum to 1.0</td>
+              </tr>
+              <tr>
+                <td>exclusive open</td>
+                <td>One listed or unlisted label is true</td>
+                <td>Listed values must sum to &lt;= 1.0, remainder is confidence(name.other)</td>
+              </tr>
+              <tr>
+                <td>multi closed</td>
+                <td>Independent label confidences</td>
+                <td>Each value is in [0, 1], no distribution normalization</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section" id="conditions">
+          <h3>Conditions</h3>
+          <p>Use comparison and boolean operators with grouping:</p>
+          <pre><code class="language-bel">when confidence(intent.book_flight) &gt; 0.7 && (flights.count &gt; 0 || !false):
+  ask_user("I found flight options.")</code></pre>
+          <ul>
+            <li>Comparison: &gt;, &gt;=, &lt;, &lt;=, ==, !=</li>
+            <li>Boolean: &&, ||, !</li>
+            <li>Metrics: confidence(name.label), entropy(name)</li>
+          </ul>
+        </section>
+
+        <section class="section" id="dynamic-cycle">
+          <h3>Observe, Infer, Merge</h3>
+          <p>
+            Dynamic updates happen in a small pipeline: store observation, run inference adapter, merge returned beliefs.
+          </p>
+          <pre><code class="language-bel">let message = "I need a cheap direct flight"
+
+observe user_message(message)
+infer beliefs from user_message
+
+let extracted = call extract_patch()
+merge beliefs from extracted</code></pre>
+          <p>
+            Merge accepts patch objects by belief name. Existing labels are preserved unless overwritten.
+            For multi beliefs, merged values are clamped into [0, 1].
+          </p>
+        </section>
+
+        <section class="section" id="trace-provenance">
+          <h3>Trace and Provenance</h3>
+          <p>Run with --trace to inspect evaluation and actions:</p>
+          <pre><code class="language-bash">bel run examples/observe_infer_merge.bel --trace</code></pre>
+          <p>Runtime also tracks provenance for belief updates from load, merge, and infer steps.</p>
+          <pre><code class="language-ts">runtime.getProvenance()
+runtime.explainBelief("intent.book_flight")</code></pre>
+        </section>
+
+        <section class="section" id="api">
+          <h3>Runtime API</h3>
+          <div class="card-grid api-grid">
+            <article class="card">
+              <h4>State Access</h4>
+              <ul>
+                <li>getState()</li>
+                <li>getVars()</li>
+                <li>confidence(path)</li>
+                <li>entropy(beliefName)</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h4>Dynamic Data</h4>
+              <ul>
+                <li>observe(eventName, value)</li>
+                <li>infer(source)</li>
+                <li>mergeBeliefsFromRuntimeValue(patch, source)</li>
+              </ul>
+            </article>
+            <article class="card">
+              <h4>Auditability</h4>
+              <ul>
+                <li>getObservations()</li>
+                <li>getProvenance()</li>
+                <li>explainBelief(path)</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="example">
+          <h3>Full Example</h3>
+          <pre><code class="language-bel">let message = "I need a cheap direct flight to Berlin"
+
+belief intent exclusive closed {
+  unknown: 1
+}
+
+observe user_message(message)
+infer beliefs from user_message
+
+let extracted = call extract_patch()
+merge beliefs from extracted
+
+when confidence(intent.book_flight) &gt; 0.7 && confidence(user.budget_sensitive) &gt; 0.5:
+  call rank_flights()
+
+when entropy(intent) &gt; 0.5:
+  ask_user("Can you clarify your travel intent?")</code></pre>
+        </section>
+
+        <footer class="footer">
+          <p>
+            BeliefLang is experimental and expected to change before 1.0.
+            Keep semantics explicit and tests close to policy behavior.
+          </p>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
