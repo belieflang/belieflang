@@ -88,6 +88,29 @@ body {
   font-size: 0.95rem;
 }
 
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.78rem;
+  border-radius: 999px;
+  border: 1px solid #97ddd3;
+  background: linear-gradient(180deg, #dbf7f2 0%, #c7eee8 100%);
+  color: #0c5952;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.86rem;
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+.github-link:hover,
+.github-link:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(15, 118, 110, 0.2);
+  filter: saturate(1.05);
+  outline: none;
+}
+
 .toc {
   display: grid;
   gap: 0.35rem;
