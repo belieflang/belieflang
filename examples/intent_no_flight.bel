@@ -1,16 +1,15 @@
-belief intent {
+belief intent exclusive open {
   book_flight: 0.28
   book_hotel: 0.57
-  unknown: 0.15
 }
 
-belief user {
+belief user multi closed {
   budget_sensitive: 0.91
   prefers_direct: 0.84
 }
 
-when confidence(intent.book_flight) > 0.7:
+when confidence(intent.book_flight) > 0.7 && user.prefers_direct > 0.6:
   call search_flights()
 
-when entropy(intent) > 0.4:
+when entropy(intent) > 0.4 || confidence(intent.other) > 0.1:
   ask_user("What exactly do you want to book?")

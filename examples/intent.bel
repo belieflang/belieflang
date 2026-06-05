@@ -1,20 +1,20 @@
 let threshold = 0.7
 
-belief intent {
+belief intent exclusive closed {
   book_flight: 0.82
   book_hotel: 0.12
   unknown: 0.06
 }
 
-belief user {
+belief user multi closed {
   budget_sensitive: 0.91
   prefers_direct: 0.84
 }
 
 let flights = call search_flights()
 
-when confidence(intent.book_flight) > threshold:
+when confidence(intent.book_flight) > threshold && user.prefers_direct > 0.5:
   call rank_flights()
 
-when flights.count > 0:
+when flights.count > 0 || entropy(intent) > 0.6:
   ask_user("I found flight options.")
