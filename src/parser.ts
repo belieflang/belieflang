@@ -16,7 +16,7 @@ type TokenKind =
   | "identifier"
   | "number"
   | "string"
-  | "{" 
+  | "{"
   | "}"
   | "("
   | ")"
@@ -72,7 +72,10 @@ function syntaxError(message: string, line: number, col: number): SyntaxError {
 }
 
 export function stripComments(source: string): string {
-  return source;
+  return source
+    .split("\n")
+    .map((line) => line.split("#", 1)[0])
+    .join("\n");
 }
 
 function tokenize(source: string): Token[] {
