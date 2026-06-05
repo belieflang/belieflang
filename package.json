@@ -4,11 +4,11 @@
   "description": "A probabilistic programming language for AI agents and uncertain systems.",
   "type": "module",
   "bin": {
-    "bel": "./dist/cli.js"
+    "bel": "./dist/src/cli.js"
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/cli.js run examples/intent.bel",
+    "start": "node dist/src/cli.js run examples/intent.bel",
     "test": "node --test dist/tests/*.test.js",
     "dev": "tsx src/cli.ts run examples/intent.bel"
   },

@@ -59,6 +59,58 @@ Condition operators:
 
 Tools return JSON-compatible values.
 
+## Observations
+
+```bel
+let message = "I need a cheap direct flight"
+observe user_message(message)
+```
+
+- An observation is appended to runtime observation history.
+- The latest observed value is also assigned to a variable with the same event name (`user_message` in the example).
+
+## Inference
+
+```bel
+infer beliefs from user_message
+```
+
+- Inference passes the source value and runtime context (observations, current state, variables) to an infer adapter.
+- The inferred patch is merged into current beliefs using merge semantics.
+
+## Merge beliefs
+
+```bel
+let extracted = call extract_patch()
+merge beliefs from extracted
+```
+
+- Merge accepts an object keyed by belief name.
+- Each entry can be either a direct distribution object or a structured patch:
+
+```txt
+{
+  intent: {
+    cardinality: "exclusive",
+    domain: "closed",
+    values: { book_flight: 0.9, book_hotel: 0.1 }
+  },
+  constraint: {
+    values: { cheap: 1.2 }
+  }
+}
+```
+
+- Existing labels are preserved unless overwritten.
+- Multi-belief merge clamps values into `[0, 1]`.
+
+## Provenance
+
+- Every belief load/merge/infer update records provenance with source and timestamp.
+- Runtime APIs:
+  - `getProvenance()` for full history
+  - `explainBelief("intent.book_flight")` for filtered history
+
 ## Trace mode
 
 Run with `--trace` to print rule evaluation details and executed actions.

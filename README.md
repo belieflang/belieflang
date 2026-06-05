@@ -28,6 +28,21 @@ when entropy(intent) > 0.4 || confidence(intent.other) > 0.1:
   ask_user("What exactly do you want to book?")
 ```
 
+With dynamic updates:
+
+```bel
+let message = "I need a cheap direct flight"
+
+observe user_message(message)
+infer beliefs from user_message
+
+let extracted = call extract_patch()
+merge beliefs from extracted
+
+when confidence(intent.book_flight) > 0.7:
+  call rank_flights()
+```
+
 ## Why
 
 Current AI systems repeatedly pass large natural-language context into LLMs. That is expensive and brittle.
@@ -81,7 +96,11 @@ npm run dev
 - compound conditions with `&&`, `||`, `!`, and parentheses
 - `call tool()`
 - `ask_user("...")`
+- `observe event(value)`
+- `infer beliefs from value`
+- `merge beliefs from value`
 - trace output with `--trace`
+- provenance history with `getProvenance()` and `explainBelief("belief.label")`
 - tiny Node.js CLI
 
 ## Non-goals
@@ -105,8 +124,6 @@ It is a small experimental runtime for belief-state execution, AI agents, and un
 
 ## Roadmap
 
-- observations
-- belief updates
 - provenance tracking
 - confidence decay
 - JSON belief import/export

@@ -5,7 +5,10 @@ import type {
   BeliefDistribution,
   BeliefDomain,
   ConditionExpression,
+  InferStatement,
   LetStatement,
+  MergeBeliefsStatement,
+  ObserveStatement,
   Operator,
   Rule,
   Statement,
@@ -283,6 +286,9 @@ class Parser {
   private parseStatement(): Statement {
     if (this.isKeyword("belief")) return this.parseBelief();
     if (this.isKeyword("let")) return this.parseLet();
+    if (this.isKeyword("observe")) return this.parseObserve();
+    if (this.isKeyword("infer")) return this.parseInfer();
+    if (this.isKeyword("merge")) return this.parseMergeBeliefs();
     if (this.isKeyword("when")) return this.parseRule();
 
     this.fail(`Unexpected token '${this.current().kind}'`);
@@ -361,6 +367,56 @@ class Parser {
     });
 
     return { kind: "let", name, value };
+  }
+
+  private parseObserve(): ObserveStatement {
+    this.expectKeyword("observe");
+    const eventName = this.expectIdentifier();
+    this.expect("(");
+
+    let value: ValueExpression | undefined;
+    if (!this.is(")")) {
+      value = this.parseValueExpression({
+        allowCallExpression: true,
+        allowMetric: true,
+      });
+    }
+
+    this.expect(")");
+
+    return {
+      kind: "observe",
+      eventName,
+      value,
+    };
+  }
+
+  private parseInfer(): InferStatement {
+    this.expectKeyword("infer");
+    this.expectKeyword("beliefs");
+    this.expectKeyword("from");
+
+    return {
+      kind: "infer",
+      source: this.parseValueExpression({
+        allowCallExpression: true,
+        allowMetric: true,
+      }),
+    };
+  }
+
+  private parseMergeBeliefs(): MergeBeliefsStatement {
+    this.expectKeyword("merge");
+    this.expectKeyword("beliefs");
+    this.expectKeyword("from");
+
+    return {
+      kind: "merge_beliefs",
+      source: this.parseValueExpression({
+        allowCallExpression: true,
+        allowMetric: true,
+      }),
+    };
   }
 
   private parseRule(): Rule {

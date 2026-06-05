@@ -1,0 +1,17 @@
+let message = "I need a cheap direct flight to Berlin"
+
+belief intent exclusive closed {
+  unknown: 1
+}
+
+observe user_message(message)
+infer beliefs from user_message
+
+let extracted = call extract_patch()
+merge beliefs from extracted
+
+when confidence(intent.book_flight) > 0.7 && confidence(user.budget_sensitive) > 0.5:
+  call rank_flights()
+
+when entropy(intent) > 0.5:
+  ask_user("Can you clarify your travel intent?")

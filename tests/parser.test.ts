@@ -65,3 +65,50 @@ when confidence(intent.book_flight) > 0.7 && (flights.count > 0 || !false):
   assert.equal(rule.condition.left.kind, "comparison");
   assert.equal(rule.condition.right.kind, "or");
 });
+
+test("parses observe infer and merge statements", () => {
+  const statements = parse(`
+let message = "I need a cheap direct flight"
+
+observe user_message(message)
+infer beliefs from message
+
+let extracted = call extract_beliefs()
+merge beliefs from extracted
+
+when confidence(intent.book_flight) > 0.7:
+  call rank_flights()
+`);
+
+  assert.deepEqual(
+    statements.map((statement) => statement.kind),
+    [
+      "let",
+      "observe",
+      "infer",
+      "let",
+      "merge_beliefs",
+      "rule",
+    ],
+  );
+
+  const observe = statements[1];
+  const infer = statements[2];
+  const merge = statements[4];
+
+  if (observe.kind !== "observe") {
+    assert.fail("Expected observe statement");
+  }
+
+  if (infer.kind !== "infer") {
+    assert.fail("Expected infer statement");
+  }
+
+  if (merge.kind !== "merge_beliefs") {
+    assert.fail("Expected merge beliefs statement");
+  }
+
+  assert.equal(observe.eventName, "user_message");
+  assert.equal(infer.source.kind, "identifier");
+  assert.equal(merge.source.kind, "identifier");
+});

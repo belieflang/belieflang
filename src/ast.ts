@@ -42,6 +42,22 @@ export type LetStatement = {
   value: ValueExpression;
 };
 
+export type ObserveStatement = {
+  kind: "observe";
+  eventName: string;
+  value?: ValueExpression;
+};
+
+export type InferStatement = {
+  kind: "infer";
+  source: ValueExpression;
+};
+
+export type MergeBeliefsStatement = {
+  kind: "merge_beliefs";
+  source: ValueExpression;
+};
+
 export type Action =
   | { kind: "call"; toolName: string }
   | { kind: "ask_user"; message: string }
@@ -79,4 +95,10 @@ export type Rule = {
   action: Action;
 };
 
-export type Statement = BeliefBlock | LetStatement | Rule;
+export type Statement =
+  | BeliefBlock
+  | LetStatement
+  | ObserveStatement
+  | InferStatement
+  | MergeBeliefsStatement
+  | Rule;

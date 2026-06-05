@@ -145,3 +145,140 @@ when confidence(intent.book_flight) > 0.7:
   assert.ok(logs.some((line) => line.includes("[trace] rule 1")));
   assert.ok(logs.some((line) => line.includes("action call rank_flights()")));
 });
+
+test("stores observations and exposes latest observed value as variable", async () => {
+  const runtime = new BeliefRuntime();
+
+  await runtime.observe("user_message", {
+    kind: "string",
+    value: "book me a flight",
+  });
+
+  const observations = runtime.getObservations();
+  assert.equal(observations.length, 1);
+  assert.equal(observations[0].eventName, "user_message");
+  assert.equal(observations[0].value, "book me a flight");
+  assert.equal(runtime.getVars().user_message, "book me a flight");
+});
+
+test("infers beliefs with adapter and records provenance", async () => {
+  const runtime = new BeliefRuntime(
+    {},
+    {
+      inferBeliefs: () => ({
+        intent: {
+          cardinality: "exclusive",
+          domain: "closed",
+          values: {
+            book_flight: 0.9,
+            book_hotel: 0.1,
+          },
+        },
+      }),
+    },
+  );
+
+  await runtime.assign("message", {
+    kind: "string",
+    value: "book a flight",
+  });
+
+  await runtime.infer({
+    kind: "identifier",
+    name: "message",
+  });
+
+  assert.equal(runtime.confidence("intent.book_flight"), 0.9);
+  const evidence = runtime.explainBelief("intent.book_flight");
+  assert.ok(evidence.some((record) => record.origin === "infer"));
+});
+
+test("merges belief patches with multi-value clamping", () => {
+  const runtime = new BeliefRuntime();
+
+  runtime.loadBelief({
+    kind: "belief",
+    name: "constraint",
+    cardinality: "multi",
+    domain: "closed",
+    values: {
+      cheap: 0.2,
+      direct: 0.3,
+    },
+  });
+
+  runtime.mergeBeliefsFromRuntimeValue(
+    {
+      constraint: {
+        cardinality: "multi",
+        domain: "closed",
+        values: {
+          cheap: 1.4,
+          direct: -0.2,
+        },
+      },
+    },
+    {
+      origin: "merge",
+      source: "test",
+    },
+  );
+
+  assert.equal(runtime.confidence("constraint.cheap"), 1);
+  assert.equal(runtime.confidence("constraint.direct"), 0);
+  const evidence = runtime.explainBelief("constraint.cheap");
+  assert.ok(evidence.some((record) => record.origin === "merge"));
+});
+
+test("runs observe infer merge pipeline before rule evaluation", async () => {
+  let rankCalls = 0;
+
+  const runtime = new BeliefRuntime(
+    {
+      extract_patch: () => ({
+        intent: {
+          cardinality: "exclusive",
+          domain: "closed",
+          values: {
+            book_flight: 0.95,
+            book_hotel: 0.05,
+          },
+        },
+      }),
+      rank_flights: () => {
+        rankCalls += 1;
+        return null;
+      },
+    },
+    {
+      inferBeliefs: () => ({
+        intent: {
+          cardinality: "exclusive",
+          domain: "closed",
+          values: {
+            book_flight: 0.6,
+            book_hotel: 0.4,
+          },
+        },
+      }),
+    },
+  );
+
+  const statements = parse(`
+let message = "book me a flight"
+observe user_message(message)
+infer beliefs from user_message
+
+let extracted = call extract_patch()
+merge beliefs from extracted
+
+when confidence(intent.book_flight) > 0.7:
+  call rank_flights()
+`);
+
+  await runtime.run(statements);
+
+  assert.equal(runtime.getObservations().length, 1);
+  assert.equal(rankCalls, 1);
+  assert.equal(runtime.confidence("intent.book_flight"), 0.95);
+});
