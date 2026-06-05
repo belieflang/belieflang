@@ -1,6 +1,9 @@
 export type BeliefDistribution = Record<string, number>;
 export type BeliefState = Record<string, BeliefDistribution>;
 
+export type BeliefCardinality = "exclusive" | "multi";
+export type BeliefDomain = "open" | "closed";
+
 export type RuntimeValue =
   | string
   | number
@@ -12,11 +15,13 @@ export type RuntimeValue =
 export type BeliefBlock = {
   kind: "belief";
   name: string;
+  cardinality: BeliefCardinality;
+  domain: BeliefDomain;
   values: BeliefDistribution;
 };
 
 export type ConditionFunction = "confidence" | "entropy";
-export type Operator = ">" | ">=" | "<" | "<=" | "==";
+export type Operator = ">" | ">=" | "<" | "<=" | "==" | "!=";
 
 export type CallExpression = {
   kind: "call_expr";
@@ -28,6 +33,7 @@ export type ValueExpression =
   | { kind: "string"; value: string }
   | { kind: "boolean"; value: boolean }
   | { kind: "identifier"; name: string }
+  | { kind: "metric"; fn: ConditionFunction; arg: string }
   | CallExpression;
 
 export type LetStatement = {
@@ -41,15 +47,35 @@ export type Action =
   | { kind: "ask_user"; message: string }
   | { kind: "assign_call"; variableName: string; toolName: string };
 
-export type ConditionOperand =
-  | { kind: "fn"; fn: ConditionFunction; arg: string }
-  | { kind: "ref"; path: string };
+export type ConditionExpression =
+  | {
+      kind: "comparison";
+      left: ValueExpression;
+      op: Operator;
+      right: ValueExpression;
+    }
+  | {
+      kind: "and";
+      left: ConditionExpression;
+      right: ConditionExpression;
+    }
+  | {
+      kind: "or";
+      left: ConditionExpression;
+      right: ConditionExpression;
+    }
+  | {
+      kind: "not";
+      expr: ConditionExpression;
+    }
+  | {
+      kind: "truthy";
+      expr: ValueExpression;
+    };
 
 export type Rule = {
   kind: "rule";
-  left: ConditionOperand;
-  op: Operator;
-  right: ValueExpression;
+  condition: ConditionExpression;
   action: Action;
 };
 
