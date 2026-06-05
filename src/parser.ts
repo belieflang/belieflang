@@ -1,168 +1,648 @@
 import type {
   Action,
   BeliefBlock,
+  BeliefCardinality,
   BeliefDistribution,
-  ConditionOperand,
+  BeliefDomain,
+  ConditionExpression,
   LetStatement,
+  Operator,
   Rule,
   Statement,
   ValueExpression,
 } from "./ast.js";
 
-const BELIEF_BLOCK_RE = /belief\s+([A-Za-z_][A-Za-z0-9_]*)\s*\{([\s\S]*?)\}/g;
-const ITEM_RE = /([A-Za-z_][A-Za-z0-9_]*)\s*:\s*([0-9]*\.?[0-9]+)/g;
-const LET_RE = /^let\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.+)$/gm;
-const RULE_RE =
-  /when\s+(.+?)\s*(>=|<=|==|>|<)\s*(.+?)\s*:\s*\n\s*(call\s+[A-Za-z_][A-Za-z0-9_]*\(\)|ask_user\(".*?"\)|let\s+[A-Za-z_][A-Za-z0-9_]*\s*=\s*call\s+[A-Za-z_][A-Za-z0-9_]*\(\))/gs;
+type TokenKind =
+  | "identifier"
+  | "number"
+  | "string"
+  | "{" 
+  | "}"
+  | "("
+  | ")"
+  | ":"
+  | "."
+  | "="
+  | ">"
+  | ">="
+  | "<"
+  | "<="
+  | "=="
+  | "!="
+  | "&&"
+  | "||"
+  | "!"
+  | "newline"
+  | "eof";
 
-const CALL_RE = /^call\s+([A-Za-z_][A-Za-z0-9_]*)\(\)$/;
-const ASK_RE = /^ask_user\("(.*?)"\)$/;
-const ASSIGN_CALL_RE =
-  /^let\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*call\s+([A-Za-z_][A-Za-z0-9_]*)\(\)$/;
-const FN_OPERAND_RE =
-  /^(confidence|entropy)\(([A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)?)\)$/;
+type Token = {
+  kind: TokenKind;
+  value?: string;
+  line: number;
+  col: number;
+};
+
+const COMPARISON_KINDS: readonly TokenKind[] = [
+  ">",
+  ">=",
+  "<",
+  "<=",
+  "==",
+  "!=",
+];
+
+function isDigit(char: string): boolean {
+  return char >= "0" && char <= "9";
+}
+
+function isIdentifierStart(char: string): boolean {
+  return (
+    (char >= "A" && char <= "Z") ||
+    (char >= "a" && char <= "z") ||
+    char === "_"
+  );
+}
+
+function isIdentifierPart(char: string): boolean {
+  return isIdentifierStart(char) || isDigit(char);
+}
+
+function syntaxError(message: string, line: number, col: number): SyntaxError {
+  return new SyntaxError(`${message} at ${line}:${col}`);
+}
 
 export function stripComments(source: string): string {
-  return source
-    .split("\n")
-    .map((line) => line.split("#", 1)[0])
-    .join("\n");
+  return source;
 }
 
-function parseValueExpression(source: string): ValueExpression {
-  const trimmed = source.trim();
+function tokenize(source: string): Token[] {
+  const tokens: Token[] = [];
+  let i = 0;
+  let line = 1;
+  let col = 1;
 
-  const callMatch = CALL_RE.exec(trimmed);
-  if (callMatch) return { kind: "call_expr", toolName: callMatch[1] };
+  while (i < source.length) {
+    const char = source[i];
 
-  if (/^[0-9]*\.?[0-9]+$/.test(trimmed)) {
-    return { kind: "number", value: Number(trimmed) };
+    if (char === " " || char === "\t" || char === "\r") {
+      i += 1;
+      col += 1;
+      continue;
+    }
+
+    if (char === "\n") {
+      tokens.push({ kind: "newline", line, col });
+      i += 1;
+      line += 1;
+      col = 1;
+      continue;
+    }
+
+    if (char === "#") {
+      while (i < source.length && source[i] !== "\n") {
+        i += 1;
+        col += 1;
+      }
+      continue;
+    }
+
+    if (char === '"') {
+      const tokenLine = line;
+      const tokenCol = col;
+      i += 1;
+      col += 1;
+
+      let value = "";
+      let closed = false;
+
+      while (i < source.length) {
+        const nextChar = source[i];
+
+        if (nextChar === '"') {
+          i += 1;
+          col += 1;
+          closed = true;
+          break;
+        }
+
+        if (nextChar === "\\") {
+          const escaped = source[i + 1];
+
+          if (escaped === undefined) {
+            throw syntaxError("Unterminated string literal", tokenLine, tokenCol);
+          }
+
+          if (escaped === "n") value += "\n";
+          else if (escaped === "t") value += "\t";
+          else if (escaped === '"') value += '"';
+          else if (escaped === "\\") value += "\\";
+          else value += escaped;
+
+          i += 2;
+          col += 2;
+          continue;
+        }
+
+        if (nextChar === "\n") {
+          throw syntaxError("Unterminated string literal", tokenLine, tokenCol);
+        }
+
+        value += nextChar;
+        i += 1;
+        col += 1;
+      }
+
+      if (!closed) {
+        throw syntaxError("Unterminated string literal", tokenLine, tokenCol);
+      }
+
+      tokens.push({ kind: "string", value, line: tokenLine, col: tokenCol });
+      continue;
+    }
+
+    if (isDigit(char)) {
+      const tokenLine = line;
+      const tokenCol = col;
+      const start = i;
+
+      while (i < source.length && isDigit(source[i])) {
+        i += 1;
+        col += 1;
+      }
+
+      if (source[i] === ".") {
+        i += 1;
+        col += 1;
+
+        while (i < source.length && isDigit(source[i])) {
+          i += 1;
+          col += 1;
+        }
+      }
+
+      const raw = source.slice(start, i);
+      if (raw.endsWith(".")) {
+        throw syntaxError(`Invalid number '${raw}'`, tokenLine, tokenCol);
+      }
+
+      tokens.push({
+        kind: "number",
+        value: raw,
+        line: tokenLine,
+        col: tokenCol,
+      });
+      continue;
+    }
+
+    if (isIdentifierStart(char)) {
+      const tokenLine = line;
+      const tokenCol = col;
+      const start = i;
+
+      i += 1;
+      col += 1;
+
+      while (i < source.length && isIdentifierPart(source[i])) {
+        i += 1;
+        col += 1;
+      }
+
+      tokens.push({
+        kind: "identifier",
+        value: source.slice(start, i),
+        line: tokenLine,
+        col: tokenCol,
+      });
+      continue;
+    }
+
+    const twoChar = source.slice(i, i + 2);
+    if (
+      twoChar === ">=" ||
+      twoChar === "<=" ||
+      twoChar === "==" ||
+      twoChar === "!=" ||
+      twoChar === "&&" ||
+      twoChar === "||"
+    ) {
+      tokens.push({ kind: twoChar as TokenKind, line, col });
+      i += 2;
+      col += 2;
+      continue;
+    }
+
+    if (
+      char === "{" ||
+      char === "}" ||
+      char === "(" ||
+      char === ")" ||
+      char === ":" ||
+      char === "." ||
+      char === "=" ||
+      char === ">" ||
+      char === "<" ||
+      char === "!"
+    ) {
+      tokens.push({ kind: char as TokenKind, line, col });
+      i += 1;
+      col += 1;
+      continue;
+    }
+
+    throw syntaxError(`Unexpected character '${char}'`, line, col);
   }
 
-  if (trimmed === "true" || trimmed === "false") {
-    return { kind: "boolean", value: trimmed === "true" };
-  }
-
-  const stringMatch = /^"(.*)"$/.exec(trimmed);
-  if (stringMatch) return { kind: "string", value: stringMatch[1] };
-
-  if (/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*$/.test(trimmed)) {
-    return { kind: "identifier", name: trimmed };
-  }
-
-  throw new SyntaxError(`Invalid value expression: ${source}`);
+  tokens.push({ kind: "eof", line, col });
+  return tokens;
 }
 
-function parseConditionOperand(source: string): ConditionOperand {
-  const trimmed = source.trim();
+class Parser {
+  private index = 0;
 
-  const fnMatch = FN_OPERAND_RE.exec(trimmed);
-  if (fnMatch) {
-    return {
-      kind: "fn",
-      fn: fnMatch[1] as ConditionOperand["fn"],
-      arg: fnMatch[2],
-    };
+  constructor(private readonly tokens: Token[]) {}
+
+  parseProgram(): Statement[] {
+    const statements: Statement[] = [];
+    this.consumeNewlines();
+
+    while (!this.is("eof")) {
+      statements.push(this.parseStatement());
+      this.consumeNewlines();
+    }
+
+    if (statements.length === 0) {
+      this.fail("No BeliefLang statements found");
+    }
+
+    return statements;
   }
 
-  if (/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)*$/.test(trimmed)) {
-    return { kind: "ref", path: trimmed };
+  private parseStatement(): Statement {
+    if (this.isKeyword("belief")) return this.parseBelief();
+    if (this.isKeyword("let")) return this.parseLet();
+    if (this.isKeyword("when")) return this.parseRule();
+
+    this.fail(`Unexpected token '${this.current().kind}'`);
   }
 
-  throw new SyntaxError(`Invalid condition operand: ${source}`);
-}
+  private parseBelief(): BeliefBlock {
+    this.expectKeyword("belief");
 
-function parseAction(source: string): Action {
-  const trimmed = source.trim();
+    const name = this.expectIdentifier();
 
-  const assignCallMatch = ASSIGN_CALL_RE.exec(trimmed);
-  if (assignCallMatch) {
-    return {
-      kind: "assign_call",
-      variableName: assignCallMatch[1],
-      toolName: assignCallMatch[2],
-    };
-  }
+    let cardinality: BeliefCardinality = "exclusive";
+    let domain: BeliefDomain = "closed";
+    let cardinalitySet = false;
+    let domainSet = false;
 
-  const callMatch = CALL_RE.exec(trimmed);
-  if (callMatch) return { kind: "call", toolName: callMatch[1] };
+    while (this.current().kind === "identifier") {
+      const modifier = this.current().value;
 
-  const askMatch = ASK_RE.exec(trimmed);
-  if (askMatch) return { kind: "ask_user", message: askMatch[1] };
+      if (modifier === "exclusive" || modifier === "multi") {
+        if (cardinalitySet) {
+          this.fail("Belief cardinality already declared");
+        }
 
-  throw new SyntaxError(`Invalid action: ${source}`);
-}
+        cardinality = modifier;
+        cardinalitySet = true;
+        this.advance();
+        continue;
+      }
 
-function parseBeliefBlocks(clean: string): BeliefBlock[] {
-  const blocks: BeliefBlock[] = [];
+      if (modifier === "open" || modifier === "closed") {
+        if (domainSet) {
+          this.fail("Belief domain already declared");
+        }
 
-  for (const match of clean.matchAll(BELIEF_BLOCK_RE)) {
-    const [, name, body] = match;
+        domain = modifier;
+        domainSet = true;
+        this.advance();
+        continue;
+      }
+
+      break;
+    }
+
+    this.expect("{");
+    this.consumeNewlines();
+
     const values: BeliefDistribution = {};
 
-    for (const item of body.matchAll(ITEM_RE)) {
-      const [, key, value] = item;
-      values[key] = Number(value);
+    while (!this.is("}")) {
+      const key = this.expectIdentifier();
+      this.expect(":");
+      const value = this.expectNumber();
+      values[key] = value;
+
+      if (this.is("}")) break;
+      this.requireAtLeastOneNewline();
+      this.consumeNewlines();
     }
+
+    this.expect("}");
 
     if (Object.keys(values).length === 0) {
-      throw new SyntaxError(`belief ${name} has no values`);
+      this.fail(`belief ${name} has no values`);
     }
 
-    blocks.push({ kind: "belief", name, values });
+    return { kind: "belief", name, cardinality, domain, values };
   }
 
-  return blocks;
-}
-
-function parseLets(clean: string): LetStatement[] {
-  const lets: LetStatement[] = [];
-
-  for (const match of clean.matchAll(LET_RE)) {
-    const [, name, rawValue] = match;
-    const previousLine = clean.slice(0, match.index).split("\n").at(-1) ?? "";
-
-    if (previousLine.trim().endsWith(":")) continue;
-
-    lets.push({
-      kind: "let",
-      name,
-      value: parseValueExpression(rawValue),
+  private parseLet(): LetStatement {
+    this.expectKeyword("let");
+    const name = this.expectIdentifier();
+    this.expect("=");
+    const value = this.parseValueExpression({
+      allowCallExpression: true,
+      allowMetric: true,
     });
+
+    return { kind: "let", name, value };
   }
 
-  return lets;
-}
+  private parseRule(): Rule {
+    this.expectKeyword("when");
+    const condition = this.parseConditionExpression();
+    this.expect(":");
+    this.requireAtLeastOneNewline();
+    this.consumeNewlines();
+    const action = this.parseAction();
 
-function parseRules(clean: string): Rule[] {
-  const rules: Rule[] = [];
+    return { kind: "rule", condition, action };
+  }
 
-  for (const match of clean.matchAll(RULE_RE)) {
-    const [, left, op, right, actionSource] = match;
+  private parseAction(): Action {
+    if (this.isKeyword("call")) {
+      const toolName = this.parseToolInvocationFromCallKeyword();
+      return { kind: "call", toolName };
+    }
 
-    rules.push({
-      kind: "rule",
-      left: parseConditionOperand(left),
-      op: op as Rule["op"],
-      right: parseValueExpression(right),
-      action: parseAction(actionSource),
+    if (this.isKeyword("ask_user")) {
+      this.expectKeyword("ask_user");
+      this.expect("(");
+      const message = this.expectString();
+      this.expect(")");
+      return { kind: "ask_user", message };
+    }
+
+    if (this.isKeyword("let")) {
+      this.expectKeyword("let");
+      const variableName = this.expectIdentifier();
+      this.expect("=");
+      const toolName = this.parseToolInvocationFromCallKeyword();
+
+      return {
+        kind: "assign_call",
+        variableName,
+        toolName,
+      };
+    }
+
+    this.fail("Invalid rule action");
+  }
+
+  private parseToolInvocationFromCallKeyword(): string {
+    this.expectKeyword("call");
+    const toolName = this.expectIdentifier();
+    this.expect("(");
+    this.expect(")");
+    return toolName;
+  }
+
+  private parseConditionExpression(): ConditionExpression {
+    return this.parseOrCondition();
+  }
+
+  private parseOrCondition(): ConditionExpression {
+    let left = this.parseAndCondition();
+
+    while (this.match("||")) {
+      const right = this.parseAndCondition();
+      left = { kind: "or", left, right };
+    }
+
+    return left;
+  }
+
+  private parseAndCondition(): ConditionExpression {
+    let left = this.parseNotCondition();
+
+    while (this.match("&&")) {
+      const right = this.parseNotCondition();
+      left = { kind: "and", left, right };
+    }
+
+    return left;
+  }
+
+  private parseNotCondition(): ConditionExpression {
+    if (this.match("!")) {
+      return {
+        kind: "not",
+        expr: this.parseNotCondition(),
+      };
+    }
+
+    return this.parseConditionPrimary();
+  }
+
+  private parseConditionPrimary(): ConditionExpression {
+    if (this.match("(")) {
+      const expression = this.parseConditionExpression();
+      this.expect(")");
+      return expression;
+    }
+
+    return this.parseComparisonOrTruthy();
+  }
+
+  private parseComparisonOrTruthy(): ConditionExpression {
+    const left = this.parseValueExpression({
+      allowCallExpression: false,
+      allowMetric: true,
     });
+
+    if (COMPARISON_KINDS.includes(this.current().kind)) {
+      const opToken = this.advance();
+      const right = this.parseValueExpression({
+        allowCallExpression: false,
+        allowMetric: true,
+      });
+
+      return {
+        kind: "comparison",
+        left,
+        op: opToken.kind as Operator,
+        right,
+      };
+    }
+
+    return { kind: "truthy", expr: left };
   }
 
-  return rules;
+  private parseValueExpression(options: {
+    allowCallExpression: boolean;
+    allowMetric: boolean;
+  }): ValueExpression {
+    const token = this.current();
+
+    if (token.kind === "number") {
+      this.advance();
+      return { kind: "number", value: Number(token.value) };
+    }
+
+    if (token.kind === "string") {
+      this.advance();
+      return { kind: "string", value: token.value ?? "" };
+    }
+
+    if (token.kind === "identifier") {
+      const value = token.value ?? "";
+
+      if (value === "true" || value === "false") {
+        this.advance();
+        return { kind: "boolean", value: value === "true" };
+      }
+
+      if (
+        options.allowMetric &&
+        (value === "confidence" || value === "entropy") &&
+        this.peek().kind === "("
+      ) {
+        this.advance();
+        this.expect("(");
+        const arg = this.parsePath();
+        this.expect(")");
+
+        return {
+          kind: "metric",
+          fn: value,
+          arg,
+        };
+      }
+
+      if (options.allowCallExpression && value === "call") {
+        const toolName = this.parseToolInvocationFromCallKeyword();
+        return { kind: "call_expr", toolName };
+      }
+
+      return { kind: "identifier", name: this.parsePath() };
+    }
+
+    this.fail("Invalid value expression");
+  }
+
+  private parsePath(): string {
+    const parts = [this.expectIdentifier()];
+
+    while (this.match(".")) {
+      parts.push(this.expectIdentifier());
+    }
+
+    return parts.join(".");
+  }
+
+  private consumeNewlines(): void {
+    while (this.match("newline")) {
+      // Skip blank lines.
+    }
+  }
+
+  private requireAtLeastOneNewline(): void {
+    if (!this.match("newline")) {
+      this.fail("Expected newline");
+    }
+  }
+
+  private is(kind: TokenKind): boolean {
+    return this.current().kind === kind;
+  }
+
+  private current(): Token {
+    return this.tokens[this.index] ?? this.tokens[this.tokens.length - 1];
+  }
+
+  private peek(offset = 1): Token {
+    return this.tokens[this.index + offset] ?? this.tokens[this.tokens.length - 1];
+  }
+
+  private advance(): Token {
+    const token = this.current();
+    this.index += 1;
+    return token;
+  }
+
+  private match(kind: TokenKind): boolean {
+    if (this.current().kind !== kind) return false;
+    this.index += 1;
+    return true;
+  }
+
+  private expect(kind: TokenKind): Token {
+    const token = this.current();
+
+    if (token.kind !== kind) {
+      this.fail(`Expected '${kind}', got '${token.kind}'`, token);
+    }
+
+    this.index += 1;
+    return token;
+  }
+
+  private isKeyword(keyword: string): boolean {
+    const token = this.current();
+    return token.kind === "identifier" && token.value === keyword;
+  }
+
+  private expectKeyword(keyword: string): void {
+    const token = this.current();
+
+    if (token.kind !== "identifier" || token.value !== keyword) {
+      this.fail(`Expected keyword '${keyword}'`, token);
+    }
+
+    this.index += 1;
+  }
+
+  private expectIdentifier(): string {
+    const token = this.current();
+
+    if (token.kind !== "identifier") {
+      this.fail("Expected identifier", token);
+    }
+
+    this.index += 1;
+    return token.value ?? "";
+  }
+
+  private expectNumber(): number {
+    const token = this.current();
+
+    if (token.kind !== "number") {
+      this.fail("Expected number", token);
+    }
+
+    this.index += 1;
+    return Number(token.value);
+  }
+
+  private expectString(): string {
+    const token = this.current();
+
+    if (token.kind !== "string") {
+      this.fail("Expected string", token);
+    }
+
+    this.index += 1;
+    return token.value ?? "";
+  }
+
+  private fail(message: string, token = this.current()): never {
+    throw syntaxError(message, token.line, token.col);
+  }
 }
 
 export function parse(source: string): Statement[] {
-  const clean = stripComments(source);
-  const statements: Statement[] = [
-    ...parseBeliefBlocks(clean),
-    ...parseLets(clean),
-    ...parseRules(clean),
-  ];
-
-  if (statements.length === 0) {
-    throw new SyntaxError("No BeliefLang statements found");
-  }
-
-  return statements;
+  const tokens = tokenize(source);
+  return new Parser(tokens).parseProgram();
 }
