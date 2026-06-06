@@ -235,6 +235,48 @@ p {
   margin: 0 0 0.75rem;
 }
 
+.token {
+  display: inline-block;
+  padding: 0.05rem 0.42rem;
+  border-radius: 999px;
+  background: #ecf8f6;
+  border: 1px solid #b8e9e2;
+  color: #0a5a53;
+  font-family: var(--mono);
+  font-size: 0.84rem;
+}
+
+.step-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.step {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.75rem 0.85rem;
+  background: #fffefb;
+}
+
+.compact-steps .step {
+  padding: 0.65rem 0.75rem;
+}
+
+.step h4 {
+  margin-bottom: 0.35rem;
+}
+
+.mode-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-bottom: 0.95rem;
+}
+
+.mode-card p {
+  margin: 0;
+}
+
 ul {
   margin: 0.5rem 0 0;
   padding-left: 1.1rem;
@@ -319,6 +361,10 @@ tbody tr:last-child td {
   .card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .mode-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 720px) {
@@ -336,6 +382,10 @@ tbody tr:last-child td {
   }
 
   .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mode-grid {
     grid-template-columns: 1fr;
   }
 

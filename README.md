@@ -9,6 +9,48 @@ BeliefLang is an experimental language runtime for AI agents and uncertain syste
 
 Instead of treating state as fixed values, BeliefLang represents state as probability distributions and executes actions when confidence or uncertainty crosses a threshold.
 
+## Core pitch
+
+BeliefLang compresses natural-language reasoning into atomic belief state.
+
+Instead of repeatedly sending long conversation history to an LLM, BeliefLang stores intermediate reasoning as probability-weighted beliefs and executes deterministic rules over them.
+
+Architecture:
+
+```txt
+LLM for extraction.
+BeliefLang for state.
+Rules for control.
+Tools for action.
+```
+
+Typical agent flow (token heavy):
+
+```txt
+Step 1 LLM: parse user message
+Step 2 LLM: decide intent
+Step 3 LLM: decide tool
+Step 4 LLM: interpret result
+Step 5 LLM: decide next action
+```
+
+BeliefLang flow:
+
+```txt
+natural language -> belief extraction
+beliefs -> rules -> tools
+```
+
+Why this is useful:
+
+- less token usage
+- more deterministic execution
+- better debugging
+- clear thresholds
+- lower hallucination risk
+- reusable state
+- auditable decisions
+
 ```bel
 belief intent exclusive closed {
   book_flight: 0.82
