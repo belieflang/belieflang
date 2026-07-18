@@ -336,6 +336,171 @@ tbody tr:last-child td {
   padding: 0.8rem;
 }
 
+.playground-section {
+  border-left: 6px solid #b45309;
+}
+
+.playground-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.playground-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.playground-controls label {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.playground-controls select,
+.playground-controls button {
+  min-height: 2.3rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+}
+
+.playground-controls select {
+  max-width: 13.5rem;
+  padding: 0.36rem 0.55rem;
+  color: var(--ink);
+  background: #fffdf8;
+}
+
+.playground-controls button {
+  padding: 0.35rem 0.85rem;
+  background: #0f766e;
+  color: #fffdf8;
+  border-color: #0f766e;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.playground-controls button:hover,
+.playground-controls button:focus-visible {
+  background: #0a5f59;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.playground-controls button:disabled {
+  cursor: progress;
+  opacity: 0.76;
+  transform: none;
+}
+
+.trace-control {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+  min-height: 2.3rem;
+  padding: 0 0.2rem;
+}
+
+.trace-control input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--accent);
+}
+
+.playground-shell {
+  display: grid;
+  grid-template-columns: minmax(20rem, 0.95fr) minmax(0, 1.05fr);
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.playground-editor,
+.result-panel {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf8;
+}
+
+.playground-editor {
+  display: grid;
+  grid-template-rows: auto minmax(28rem, 1fr);
+  overflow: hidden;
+}
+
+.panel-label,
+.result-panel h4 {
+  margin: 0;
+  padding: 0.58rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+  color: #304840;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+#playground-source {
+  width: 100%;
+  min-height: 28rem;
+  resize: vertical;
+  border: 0;
+  padding: 0.8rem;
+  background: #17211e;
+  color: #e9f2ef;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+#playground-source:focus {
+  outline: 3px solid #97ddd3;
+  outline-offset: -3px;
+}
+
+.playground-results {
+  min-width: 0;
+}
+
+.playground-error {
+  margin: 0 0 0.7rem;
+  padding: 0.58rem 0.7rem;
+  border: 1px solid #f2b8a0;
+  border-radius: 8px;
+  color: #7c2d12;
+  background: #fff1eb;
+  font-family: var(--mono);
+  font-size: 0.86rem;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.result-panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.result-panel pre {
+  min-height: 7.5rem;
+  max-height: 16rem;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: #17211e;
+}
+
+.trace-panel {
+  grid-column: 1 / -1;
+}
+
 .api-grid .card ul {
   margin-top: 0;
 }
@@ -360,6 +525,15 @@ tbody tr:last-child td {
 
   .card-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .playground-heading,
+  .playground-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .playground-controls {
+    justify-content: flex-start;
   }
 
   .mode-grid {
@@ -387,6 +561,25 @@ tbody tr:last-child td {
 
   .mode-grid {
     grid-template-columns: 1fr;
+  }
+
+  .playground-controls {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .playground-controls select,
+  .playground-controls button {
+    width: 100%;
+    max-width: none;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #playground-source {
+    min-height: 24rem;
   }
 
   th,

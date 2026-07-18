@@ -38,6 +38,7 @@
         <nav class="toc" aria-label="Table of contents">
           <a href="#core-pitch">Core Pitch</a>
           <a href="#quickstart">Quick Start</a>
+          <a href="#playground">Playground</a>
           <a href="#syntax-one-by-one">Syntax One by One</a>
           <a href="#belief-block">Belief Block Breakdown</a>
           <a href="#belief-modes">exclusive/open/closed/multi</a>
@@ -110,6 +111,75 @@ bel run examples/intent.bel --trace</code></pre>
 
 when confidence(intent.book_flight) &gt; 0.7:
   ask_user("I can help you with flights.")</code></pre>
+        </section>
+
+        <section class="section playground-section" id="playground">
+          <div class="playground-heading">
+            <div>
+              <p class="badge">Live</p>
+              <h3>BeliefLang Playground</h3>
+              <p>
+                Try the language in the browser with the same core syntax as the runtime:
+                beliefs, variables, observations, inference, merge, rules, and actions.
+              </p>
+            </div>
+            <div class="playground-controls" aria-label="Playground controls">
+              <label for="playground-sample">Example</label>
+              <select id="playground-sample">
+                <option value="intent">Flight intent</option>
+                <option value="noFlight">Open intent</option>
+                <option value="dynamic">Observe, infer, merge</option>
+                <option value="custom">Custom program</option>
+              </select>
+              <label class="trace-control" for="playground-trace">
+                <input id="playground-trace" type="checkbox" />
+                Trace
+              </label>
+              <button id="playground-run" type="button">Run</button>
+            </div>
+          </div>
+
+          <div class="playground-shell">
+            <div class="playground-editor">
+              <div class="panel-label">Program</div>
+              <textarea
+                id="playground-source"
+                spellcheck="false"
+                aria-label="BeliefLang program editor"
+              ></textarea>
+            </div>
+
+            <div class="playground-results" aria-live="polite">
+              <p id="playground-error" class="playground-error" role="alert" hidden></p>
+
+              <div class="result-grid">
+                <article class="result-panel">
+                  <h4>State</h4>
+                  <pre><code id="playground-state-output"></code></pre>
+                </article>
+
+                <article class="result-panel">
+                  <h4>Variables</h4>
+                  <pre><code id="playground-vars-output"></code></pre>
+                </article>
+
+                <article class="result-panel">
+                  <h4>Observations</h4>
+                  <pre><code id="playground-observations-output"></code></pre>
+                </article>
+
+                <article class="result-panel">
+                  <h4>Actions</h4>
+                  <pre><code id="playground-actions-output"></code></pre>
+                </article>
+
+                <article class="result-panel trace-panel">
+                  <h4>Trace</h4>
+                  <pre><code id="playground-trace-output"></code></pre>
+                </article>
+              </div>
+            </div>
+          </div>
         </section>
 
         <section class="section" id="syntax-one-by-one">
@@ -370,10 +440,6 @@ runtime.explainBelief("intent.book_flight")</code></pre>
           <h3>Full Example</h3>
           <pre><code class="language-bel">let message = "I need a cheap direct flight to Berlin"
 
-belief intent exclusive closed {
-  unknown: 1
-}
-
 observe user_message(message)
 infer beliefs from user_message
 
@@ -395,5 +461,6 @@ when entropy(intent) &gt; 0.5:
         </footer>
       </main>
     </div>
+    <script src="./playground.js" defer></script>
   </body>
 </html>

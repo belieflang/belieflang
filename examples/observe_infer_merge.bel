@@ -1,9 +1,5 @@
 let message = "I need a cheap direct flight to Berlin"
 
-belief intent exclusive closed {
-  unknown: 1
-}
-
 observe user_message(message)
 infer beliefs from user_message
 
