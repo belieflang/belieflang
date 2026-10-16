@@ -1,0 +1,10 @@
+let message = "Find an inexpensive hotel near the station"
+
+observe user_message(message)
+infer beliefs from user_message
+
+when confidence(intent.book_hotel) > 0.7 && confidence(user.budget_sensitive) > 0.5:
+  call search_hotels()
+
+when entropy(intent) > 0.5:
+  ask_user("Are you looking for a flight or a hotel?")

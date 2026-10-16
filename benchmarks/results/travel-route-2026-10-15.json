@@ -1,0 +1,315 @@
+{
+  "benchmark": "travel-route-before-after-v1",
+  "before": {
+    "workflow": "direct_gpt",
+    "model": "gpt-6-luna",
+    "cases": 8,
+    "correct_actions": 8,
+    "usage": {
+      "input_tokens": 913,
+      "output_tokens": 118,
+      "total_tokens": 1031
+    },
+    "median_latency_ms": 1318.5,
+    "results": [
+      {
+        "id": "flight_cheap_direct",
+        "expected_action": "search_flights",
+        "action": "search_flights",
+        "correct": true,
+        "usage": {
+          "input_tokens": 114,
+          "output_tokens": 15
+        },
+        "latency_ms": 1467
+      },
+      {
+        "id": "flight_regular",
+        "expected_action": "search_flights",
+        "action": "search_flights",
+        "correct": true,
+        "usage": {
+          "input_tokens": 115,
+          "output_tokens": 15
+        },
+        "latency_ms": 1163
+      },
+      {
+        "id": "flight_connections",
+        "expected_action": "search_flights",
+        "action": "search_flights",
+        "correct": true,
+        "usage": {
+          "input_tokens": 115,
+          "output_tokens": 15
+        },
+        "latency_ms": 1052
+      },
+      {
+        "id": "hotel_budget",
+        "expected_action": "search_hotels",
+        "action": "search_hotels",
+        "correct": true,
+        "usage": {
+          "input_tokens": 113,
+          "output_tokens": 15
+        },
+        "latency_ms": 1458
+      },
+      {
+        "id": "hotel_regular",
+        "expected_action": "search_hotels",
+        "action": "search_hotels",
+        "correct": true,
+        "usage": {
+          "input_tokens": 117,
+          "output_tokens": 15
+        },
+        "latency_ms": 1179
+      },
+      {
+        "id": "hotel_luxury",
+        "expected_action": "search_hotels",
+        "action": "search_hotels",
+        "correct": true,
+        "usage": {
+          "input_tokens": 113,
+          "output_tokens": 15
+        },
+        "latency_ms": 1605
+      },
+      {
+        "id": "unknown_train",
+        "expected_action": "ask_user",
+        "action": "ask_user",
+        "correct": true,
+        "usage": {
+          "input_tokens": 113,
+          "output_tokens": 14
+        },
+        "latency_ms": 1482
+      },
+      {
+        "id": "unknown_weather",
+        "expected_action": "ask_user",
+        "action": "ask_user",
+        "correct": true,
+        "usage": {
+          "input_tokens": 113,
+          "output_tokens": 14
+        },
+        "latency_ms": 1037
+      }
+    ]
+  },
+  "after": [
+    {
+      "workflow": "gpt_plus_belieflang",
+      "model": "gpt-6-luna",
+      "cases": 8,
+      "correct_actions": 8,
+      "usage": {
+        "input_tokens": 1329,
+        "output_tokens": 326,
+        "total_tokens": 1655
+      },
+      "median_latency_ms": 1214.5,
+      "results": [
+        {
+          "id": "flight_cheap_direct",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "correct": true,
+          "usage": {
+            "input_tokens": 166,
+            "output_tokens": 44
+          },
+          "latency_ms": 1299
+        },
+        {
+          "id": "flight_regular",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "correct": true,
+          "usage": {
+            "input_tokens": 167,
+            "output_tokens": 40
+          },
+          "latency_ms": 1459
+        },
+        {
+          "id": "flight_connections",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "correct": true,
+          "usage": {
+            "input_tokens": 167,
+            "output_tokens": 40
+          },
+          "latency_ms": 1141
+        },
+        {
+          "id": "hotel_budget",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "correct": true,
+          "usage": {
+            "input_tokens": 165,
+            "output_tokens": 42
+          },
+          "latency_ms": 1208
+        },
+        {
+          "id": "hotel_regular",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "correct": true,
+          "usage": {
+            "input_tokens": 169,
+            "output_tokens": 40
+          },
+          "latency_ms": 1102
+        },
+        {
+          "id": "hotel_luxury",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "correct": true,
+          "usage": {
+            "input_tokens": 165,
+            "output_tokens": 40
+          },
+          "latency_ms": 2431
+        },
+        {
+          "id": "unknown_train",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "correct": true,
+          "usage": {
+            "input_tokens": 165,
+            "output_tokens": 40
+          },
+          "latency_ms": 1221
+        },
+        {
+          "id": "unknown_weather",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "correct": true,
+          "usage": {
+            "input_tokens": 165,
+            "output_tokens": 40
+          },
+          "latency_ms": 1148
+        }
+      ]
+    },
+    {
+      "workflow": "jev_plus_belieflang",
+      "model": "jev-latest",
+      "cases": 8,
+      "correct_actions": 8,
+      "usage": {
+        "input_tokens": 3268,
+        "output_tokens": 636,
+        "total_tokens": 3904
+      },
+      "median_latency_ms": 233.5,
+      "results": [
+        {
+          "id": "flight_cheap_direct",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "correct": true,
+          "usage": {
+            "input_tokens": 409,
+            "output_tokens": 80
+          },
+          "latency_ms": 306
+        },
+        {
+          "id": "flight_regular",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "correct": true,
+          "usage": {
+            "input_tokens": 410,
+            "output_tokens": 80
+          },
+          "latency_ms": 241
+        },
+        {
+          "id": "flight_connections",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "correct": true,
+          "usage": {
+            "input_tokens": 409,
+            "output_tokens": 80
+          },
+          "latency_ms": 222
+        },
+        {
+          "id": "hotel_budget",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "correct": true,
+          "usage": {
+            "input_tokens": 407,
+            "output_tokens": 80
+          },
+          "latency_ms": 236
+        },
+        {
+          "id": "hotel_regular",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "correct": true,
+          "usage": {
+            "input_tokens": 412,
+            "output_tokens": 80
+          },
+          "latency_ms": 221
+        },
+        {
+          "id": "hotel_luxury",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "correct": true,
+          "usage": {
+            "input_tokens": 407,
+            "output_tokens": 80
+          },
+          "latency_ms": 229
+        },
+        {
+          "id": "unknown_train",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "correct": true,
+          "usage": {
+            "input_tokens": 407,
+            "output_tokens": 78
+          },
+          "latency_ms": 281
+        },
+        {
+          "id": "unknown_weather",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "correct": true,
+          "usage": {
+            "input_tokens": 407,
+            "output_tokens": 78
+          },
+          "latency_ms": 231
+        }
+      ]
+    }
+  ],
+  "token_ratio_to_direct": {
+    "gpt_plus_belieflang": 1.6052376333656644,
+    "jev_plus_belieflang": 3.7866149369544133
+  }
+}

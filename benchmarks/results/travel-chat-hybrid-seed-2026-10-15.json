@@ -1,0 +1,585 @@
+{
+  "benchmark": "travel-chat-strong-seed-weak-update-v1",
+  "models": {
+    "seed": "gpt-6-luna",
+    "continuation": "gpt-4.1-nano-2025-04-14"
+  },
+  "method": "Each chat starts with 5 prior messages. One strong-model call turns that prefix into a BeliefLang snapshot. The weak model then updates the snapshot for each remaining turn. The baseline sends all messages so far to the weak model on each remaining turn. Both are scored on the same continuation turns.",
+  "seed_turns_per_conversation": 5,
+  "scored_continuation_turns": 10,
+  "pricing_basis": "Standard text rates per 1M tokens checked 2026-10-15: GPT-6 Luna input $0.10, cached $0.01, cache writes $0.125, output $0.50; GPT-4.1 nano input $0.10, cached $0.025, output $0.40.",
+  "pricing_note": "Includes the strong-model seed calls and every weak-model continuation call. Estimated API model charges only; excludes local snapshot storage and taxes. The baseline does not make calls on the prefix because this benchmark begins with an existing five-message chat.",
+  "seed": {
+    "exact_match_turns": 2,
+    "calls": 2,
+    "input_tokens": 847,
+    "cached_input_tokens": 0,
+    "cache_write_tokens": 0,
+    "output_tokens": 94,
+    "total_tokens": 941,
+    "estimated_usd": 0.0001317,
+    "rows": [
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a5",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": true
+        },
+        "predicted": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": true
+        },
+        "exact_match": true,
+        "model": "gpt-6-luna",
+        "usage": {
+          "input_tokens": 433,
+          "output_tokens": 44,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00006530000000000002,
+        "latency_ms": 1797
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b5",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-6-luna",
+        "usage": {
+          "input_tokens": 414,
+          "output_tokens": 50,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000664,
+        "latency_ms": 1535
+      }
+    ]
+  },
+  "weak_full_history": {
+    "exact_match_turns": 4,
+    "calls": 10,
+    "input_tokens": 5546,
+    "cached_input_tokens": 0,
+    "cache_write_tokens": 0,
+    "output_tokens": 404,
+    "total_tokens": 5950,
+    "estimated_usd": 0.0007162000000000001,
+    "rows": [
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a6",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 483,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000647,
+        "latency_ms": 1041
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a7",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 527,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00006910000000000001,
+        "latency_ms": 859
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a8",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 571,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000735,
+        "latency_ms": 1485
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a9",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": false,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 612,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000776,
+        "latency_ms": 1136
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a10",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": false,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 653,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00008170000000000001,
+        "latency_ms": 832
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b6",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 459,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00006230000000000001,
+        "latency_ms": 894
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b7",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 495,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000659,
+        "latency_ms": 1047
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b8",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 537,
+          "output_tokens": 39,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00006930000000000002,
+        "latency_ms": 695
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b9",
+        "expected": {
+          "intent": "unknown",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 582,
+          "output_tokens": 37,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.000073,
+        "latency_ms": 908
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b10",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 627,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00007910000000000001,
+        "latency_ms": 771
+      }
+    ]
+  },
+  "strong_seed_weak_snapshot": {
+    "exact_match_turns": 8,
+    "calls": 12,
+    "input_tokens": 3995,
+    "cached_input_tokens": 0,
+    "cache_write_tokens": 0,
+    "output_tokens": 492,
+    "total_tokens": 4487,
+    "estimated_usd": 0.0006057,
+    "continuation": {
+      "calls": 10,
+      "input_tokens": 3148,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 398,
+      "total_tokens": 3546,
+      "estimated_usd": 0.0004740000000000001
+    },
+    "rows": [
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a6",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 314,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000478,
+        "latency_ms": 1138
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a7",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 316,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.000048,
+        "latency_ms": 878
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a8",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 314,
+          "output_tokens": 37,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.000046200000000000005,
+        "latency_ms": 691
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a9",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": false,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 309,
+          "output_tokens": 37,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000457,
+        "latency_ms": 1059
+      },
+      {
+        "conversation": "lisbon_trip",
+        "turn": "a10",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": false,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": false,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 309,
+          "output_tokens": 37,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000457,
+        "latency_ms": 802
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b6",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 315,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.000047900000000000006,
+        "latency_ms": 778
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b7",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 308,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000472,
+        "latency_ms": 867
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b8",
+        "expected": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_hotel",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 329,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.0000493,
+        "latency_ms": 1020
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b9",
+        "expected": {
+          "intent": "unknown",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "unknown",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 317,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00004810000000000001,
+        "latency_ms": 994
+      },
+      {
+        "conversation": "conference_trip",
+        "turn": "b10",
+        "expected": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "predicted": {
+          "intent": "book_flight",
+          "budget_sensitive": true,
+          "prefers_direct": false
+        },
+        "exact_match": true,
+        "model": "gpt-4.1-nano-2025-04-14",
+        "usage": {
+          "input_tokens": 317,
+          "output_tokens": 41,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "estimated_usd": 0.00004810000000000001,
+        "latency_ms": 704
+      }
+    ]
+  }
+}

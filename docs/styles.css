@@ -136,6 +136,7 @@ body {
 .content {
   display: grid;
   gap: 1rem;
+  min-width: 0;
 }
 
 .section {
@@ -145,6 +146,7 @@ body {
   box-shadow: var(--shadow);
   padding: 1.1rem 1.2rem;
   animation: rise-in 420ms ease both;
+  min-width: 0;
 }
 
 .content .section:nth-child(1) {
@@ -196,6 +198,73 @@ body {
 
 .hero {
   border-left: 6px solid var(--accent);
+}
+
+.hero-lead {
+  font-size: 1.15rem;
+  line-height: 1.5;
+  max-width: 68ch;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.metric {
+  display: grid;
+  align-content: start;
+  gap: 0.2rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #a9ddd5;
+  border-radius: 12px;
+  background: #eaf8f5;
+}
+
+.metric strong {
+  color: #095a53;
+  font-size: 1.65rem;
+  line-height: 1.1;
+}
+
+.metric span {
+  color: #3a554d;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 0.7rem;
+}
+
+.table-scroll table {
+  min-width: 600px;
+}
+
+.small-note {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.conclusion-grid {
+  margin-bottom: 0.9rem;
+}
+
+.conclusion-grid .card p,
+.footer p {
+  margin-bottom: 0;
+}
+
+.reference-link {
+  margin: 0.9rem 0 0;
+}
+
+.content a:not(.github-link) {
+  color: #086b63;
+  text-underline-offset: 0.15em;
 }
 
 .badge {
@@ -511,7 +580,7 @@ tbody tr:last-child td {
 
 @media (max-width: 1024px) {
   .layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .sidebar {
@@ -556,6 +625,10 @@ tbody tr:last-child td {
   }
 
   .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-grid {
     grid-template-columns: 1fr;
   }
 

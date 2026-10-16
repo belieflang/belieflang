@@ -10,7 +10,21 @@
     "build": "tsc",
     "start": "node dist/src/cli.js run examples/intent.bel",
     "test": "node --test dist/tests/*.test.js",
-    "dev": "tsx src/cli.ts run examples/intent.bel"
+    "dev": "tsx src/cli.ts run examples/intent.bel",
+    "benchmark:jev": "npm run build && node --env-file-if-exists=.env dist/src/benchmark.js jev",
+    "benchmark:chatgpt": "npm run build && node --env-file-if-exists=.env dist/src/benchmark.js chatgpt",
+    "benchmark:compare": "npm run build && node --env-file-if-exists=.env dist/src/benchmark.js both",
+    "benchmark:before-after": "npm run build && node --env-file-if-exists=.env dist/src/workflow_benchmark.js",
+    "benchmark:chat-snapshot": "npm run build && node --env-file-if-exists=.env dist/src/chat_benchmark.js",
+    "benchmark:chat-market": "npm run build && node --env-file-if-exists=.env dist/src/chat_market_benchmark.js",
+    "benchmark:chat-settled": "npm run build && node --env-file-if-exists=.env dist/src/chat_settled_benchmark.js",
+    "benchmark:weak-delta": "npm run build && node --env-file-if-exists=.env dist/src/weak_model_benchmark.js",
+    "benchmark:hybrid-seed": "npm run build && node --env-file-if-exists=.env dist/src/chat_hybrid_benchmark.js",
+    "benchmark:seed-continuation": "npm run build && node --env-file-if-exists=.env dist/src/chat_seed_benchmark.js",
+    "benchmark:chat-code": "npm run build && node --env-file-if-exists=.env dist/src/chat_code_benchmark.js",
+    "chatbot": "npm run build && node --env-file-if-exists=.env dist/src/chatbot.js",
+    "benchmark:chat-jev": "npm run build && node --env-file-if-exists=.env dist/src/jev_chat_benchmark.js",
+    "benchmark:jev-context": "npm run build && node --env-file-if-exists=.env dist/src/jev_context_benchmark.js"
   },
   "keywords": [
     "ai",

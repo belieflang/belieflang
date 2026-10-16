@@ -1,0 +1,2113 @@
+{
+  "benchmark": "travel-chat-jev-context-v5",
+  "dataset": "holdout",
+  "model": "jev-latest",
+  "method": "Two scripted 10-turn travel chats. All paths make one live Jev call per turn and include every call in usage and cost. Direct action sees all user messages and asks one of seven preference-sensitive actions. Full-history beliefs sees all user messages and asks three belief questions before BeliefLang rules dispatch a mock tool. Belief snapshot asks the same three questions from saved beliefs plus the new message. Belief delta sends previous intent plus the new message to Jev; it asks for intent and explicit changes to budget and nonstop preferences, then BeliefLang merges those changes into the saved snapshot and dispatches a mock tool. The last three paths use the same seven deterministic action rules. No travel service is contacted. The fixed intent threshold is 0.7 and preference threshold is 0.5. There are no assistant messages in this dataset. Preference labels are scored for the three belief paths only.",
+  "price_basis": "Jev published price checked 2026-10-16: $0.042 per 1M input tokens, output free. Estimates exclude local storage and taxes. jev-latest is a moving alias.",
+  "results": [
+    {
+      "flow": "direct_action",
+      "turns": 20,
+      "correct_actions": 20,
+      "exact_belief_turns": null,
+      "one_mock_tool_per_turn": true,
+      "usage": {
+        "input_tokens": 14093,
+        "output_tokens": 1799,
+        "total_tokens": 15892
+      },
+      "estimated_usd": 0.0005919060000000001,
+      "median_latency_ms": 248,
+      "rows": [
+        {
+          "conversation": "rome_trip",
+          "turn": "e1",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 597,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000025074,
+          "latency_ms": 375
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e2",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 622,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000026124000000000003,
+          "latency_ms": 233
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e3",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 651,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000027342000000000004,
+          "latency_ms": 243
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e4",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 674,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000028308000000000004,
+          "latency_ms": 234
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e5",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 697,
+            "output_tokens": 91
+          },
+          "estimated_usd": 0.000029274,
+          "latency_ms": 275
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e6",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 721,
+            "output_tokens": 88
+          },
+          "estimated_usd": 0.000030282000000000002,
+          "latency_ms": 234
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e7",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 748,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000031416,
+          "latency_ms": 283
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e8",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 773,
+            "output_tokens": 89
+          },
+          "estimated_usd": 0.000032466000000000004,
+          "latency_ms": 258
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e9",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 793,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000033306,
+          "latency_ms": 281
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e10",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 812,
+            "output_tokens": 91
+          },
+          "estimated_usd": 0.000034104,
+          "latency_ms": 280
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f1",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 599,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000025158000000000002,
+          "latency_ms": 221
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f2",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 619,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.000025998,
+          "latency_ms": 265
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f3",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 644,
+            "output_tokens": 91
+          },
+          "estimated_usd": 0.000027048000000000003,
+          "latency_ms": 349
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f4",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 663,
+            "output_tokens": 91
+          },
+          "estimated_usd": 0.000027846,
+          "latency_ms": 253
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f5",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 689,
+            "output_tokens": 89
+          },
+          "estimated_usd": 0.000028938000000000003,
+          "latency_ms": 229
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f6",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 711,
+            "output_tokens": 89
+          },
+          "estimated_usd": 0.000029862000000000003,
+          "latency_ms": 242
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f7",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 734,
+            "output_tokens": 88
+          },
+          "estimated_usd": 0.000030828000000000004,
+          "latency_ms": 224
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f8",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 756,
+            "output_tokens": 91
+          },
+          "estimated_usd": 0.000031752000000000004,
+          "latency_ms": 217
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f9",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 780,
+            "output_tokens": 91
+          },
+          "estimated_usd": 0.000032760000000000005,
+          "latency_ms": 352
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f10",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 810,
+            "output_tokens": 90
+          },
+          "estimated_usd": 0.00003402,
+          "latency_ms": 238
+        }
+      ]
+    },
+    {
+      "flow": "full_history_beliefs",
+      "turns": 20,
+      "correct_actions": 20,
+      "exact_belief_turns": 17,
+      "one_mock_tool_per_turn": true,
+      "usage": {
+        "input_tokens": 11693,
+        "output_tokens": 1596,
+        "total_tokens": 13289
+      },
+      "estimated_usd": 0.000491106,
+      "median_latency_ms": 260.5,
+      "rows": [
+        {
+          "conversation": "rome_trip",
+          "turn": "e1",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 477,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000020034,
+          "latency_ms": 271
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e2",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 502,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000021084,
+          "latency_ms": 242
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e3",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 531,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000022302000000000004,
+          "latency_ms": 231
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e4",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 554,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000023268,
+          "latency_ms": 330
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e5",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 577,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024234000000000002,
+          "latency_ms": 259
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e6",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 601,
+            "output_tokens": 78
+          },
+          "estimated_usd": 0.000025242,
+          "latency_ms": 280
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e7",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 628,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000026376,
+          "latency_ms": 227
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e8",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 653,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000027426,
+          "latency_ms": 253
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e9",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 673,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000028266000000000003,
+          "latency_ms": 231
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e10",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 692,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000029064,
+          "latency_ms": 217
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f1",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 479,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000020118000000000003,
+          "latency_ms": 265
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f2",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 499,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000020958,
+          "latency_ms": 235
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f3",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 524,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000022008000000000003,
+          "latency_ms": 305
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f4",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 543,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000022806,
+          "latency_ms": 251
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f5",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 272
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f6",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 591,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024822000000000004,
+          "latency_ms": 233
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f7",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 614,
+            "output_tokens": 78
+          },
+          "estimated_usd": 0.000025788,
+          "latency_ms": 262
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f8",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 636,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000026712000000000004,
+          "latency_ms": 290
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f9",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 660,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000027720000000000002,
+          "latency_ms": 269
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f10",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 690,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.00002898,
+          "latency_ms": 377
+        }
+      ]
+    },
+    {
+      "flow": "belief_snapshot",
+      "turns": 20,
+      "correct_actions": 17,
+      "exact_belief_turns": 15,
+      "one_mock_tool_per_turn": true,
+      "usage": {
+        "input_tokens": 11541,
+        "output_tokens": 1596,
+        "total_tokens": 13137
+      },
+      "estimated_usd": 0.00048472200000000004,
+      "median_latency_ms": 259.5,
+      "rows": [
+        {
+          "conversation": "rome_trip",
+          "turn": "e1",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 482,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000020244,
+          "latency_ms": 246
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e2",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 587,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024654,
+          "latency_ms": 231
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e3",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 591,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024822000000000004,
+          "latency_ms": 275
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e4",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 591,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024822000000000004,
+          "latency_ms": 268
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e5",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 585,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.00002457,
+          "latency_ms": 283
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e6",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 592,
+            "output_tokens": 78
+          },
+          "estimated_usd": 0.000024864,
+          "latency_ms": 233
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e7",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 589,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024738000000000003,
+          "latency_ms": 321
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e8",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 587,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024654,
+          "latency_ms": 245
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e9",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 587,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024654,
+          "latency_ms": 217
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e10",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 580,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024360000000000004,
+          "latency_ms": 251
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f1",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 484,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000020328000000000003,
+          "latency_ms": 248
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f2",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 582,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024444000000000002,
+          "latency_ms": 339
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f3",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": false,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 587,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024654,
+          "latency_ms": 280
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f4",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": false,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 581,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024402,
+          "latency_ms": 225
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f5",
+          "expected_action": "search_flights",
+          "action": "search_direct_flights",
+          "action_correct": false,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 594,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024948,
+          "latency_ms": 418
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f6",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 590,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.00002478,
+          "latency_ms": 398
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f7",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 585,
+            "output_tokens": 78
+          },
+          "estimated_usd": 0.00002457,
+          "latency_ms": 231
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f8",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": false,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 590,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.00002478,
+          "latency_ms": 231
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f9",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 585,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.00002457,
+          "latency_ms": 367
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f10",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 592,
+            "output_tokens": 80
+          },
+          "estimated_usd": 0.000024864,
+          "latency_ms": 269
+        }
+      ]
+    },
+    {
+      "flow": "belief_delta",
+      "turns": 20,
+      "correct_actions": 20,
+      "exact_belief_turns": 20,
+      "one_mock_tool_per_turn": true,
+      "usage": {
+        "input_tokens": 11380,
+        "output_tokens": 2421,
+        "total_tokens": 13801
+      },
+      "estimated_usd": 0.00047796000000000004,
+      "median_latency_ms": 241.5,
+      "rows": [
+        {
+          "conversation": "rome_trip",
+          "turn": "e1",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 564,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000023688,
+          "latency_ms": 226
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e2",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 571,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023982000000000002,
+          "latency_ms": 234
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e3",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 575,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.00002415,
+          "latency_ms": 295
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e4",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 221
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e5",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 432
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e6",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 570,
+            "output_tokens": 118
+          },
+          "estimated_usd": 0.00002394,
+          "latency_ms": 222
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e7",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 571,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023982000000000002,
+          "latency_ms": 250
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e8",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 571,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000023982000000000002,
+          "latency_ms": 309
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e9",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 566,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023772000000000002,
+          "latency_ms": 245
+        },
+        {
+          "conversation": "rome_trip",
+          "turn": "e10",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 565,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.00002373,
+          "latency_ms": 236
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f1",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 566,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023772000000000002,
+          "latency_ms": 233
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f2",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 566,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023772000000000002,
+          "latency_ms": 260
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f3",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 571,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000023982000000000002,
+          "latency_ms": 362
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f4",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 565,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.00002373,
+          "latency_ms": 383
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f5",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 572,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000024024000000000002,
+          "latency_ms": 238
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f6",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 568,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000023856000000000003,
+          "latency_ms": 229
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f7",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 118
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 228
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f8",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 566,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023772000000000002,
+          "latency_ms": 248
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f9",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 570,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.00002394,
+          "latency_ms": 307
+        },
+        {
+          "conversation": "vancouver_trip",
+          "turn": "f10",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 576,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000024192,
+          "latency_ms": 238
+        }
+      ]
+    }
+  ]
+}

@@ -15,6 +15,8 @@ pnpm-debug.log*
 .env
 .env.*
 !.env.example
+.belieflang-chat-*.json
+.belieflang-chat-*.json.tmp
 
 # macOS
 .DS_Store
@@ -22,4 +24,3 @@ pnpm-debug.log*
 # Editor files
 .vscode/
 .idea/
-

@@ -1,0 +1,7 @@
+let message = "What time does the train leave?"
+
+observe user_message(message)
+infer beliefs from user_message
+
+when confidence(intent.unknown) > 0.6:
+  ask_user("I can help with flights or hotels. Which do you need?")

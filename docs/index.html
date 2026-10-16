@@ -3,17 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BeliefLang Docs</title>
-    <meta
-      name="description"
-      content="BeliefLang language documentation: syntax, semantics, runtime behavior, and examples."
-    />
+    <title>BeliefLang — beliefs to decisions</title>
+    <meta name="description" content="BeliefLang saves the beliefs needed for decisions and turns confidence thresholds into tool calls." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -21,107 +15,84 @@
     <div class="layout">
       <aside class="sidebar">
         <div class="brand">
-          <p class="eyebrow">Language Docs</p>
+          <p class="eyebrow">Experimental language</p>
           <h1>BeliefLang</h1>
-          <p class="subtitle">
-            A small runtime for explicit uncertainty, belief updates, and deterministic rule execution.
-          </p>
-          <a
-            class="github-link"
-            href="https://github.com/belieflang/belieflang"
-            target="_blank"
-            rel="noopener noreferrer"
-            >View on GitHub</a
-          >
+          <p class="subtitle">Turn uncertain input into clear decisions and tool calls.</p>
+          <a class="github-link" href="https://github.com/belieflang/belieflang" target="_blank" rel="noopener noreferrer">View on GitHub</a>
         </div>
-
         <nav class="toc" aria-label="Table of contents">
-          <a href="#core-pitch">Core Pitch</a>
-          <a href="#quickstart">Quick Start</a>
+          <a href="#overview">How it works</a>
+          <a href="#results">Results</a>
+          <a href="#decisions">Decisions</a>
+          <a href="#quickstart">Try it</a>
           <a href="#playground">Playground</a>
-          <a href="#syntax-one-by-one">Syntax One by One</a>
-          <a href="#belief-block">Belief Block Breakdown</a>
-          <a href="#belief-modes">exclusive/open/closed/multi</a>
-          <a href="#conditions">Conditions and Rules</a>
-          <a href="#actions">Actions and Tools</a>
-          <a href="#dynamic-cycle">Observe, Infer, Merge</a>
-          <a href="#trace-provenance">Trace and Provenance</a>
-          <a href="#api">Runtime API</a>
-          <a href="#example">Full Example</a>
+          <a href="#language">Language</a>
+          <a href="#runtime">Runtime API</a>
         </nav>
       </aside>
 
       <main class="content">
-        <header class="hero section">
-          <p class="badge">Experimental</p>
-          <h2>BeliefLang Syntax, Explained Step by Step</h2>
-          <p>
-            This page explains the language in simple words, one syntax piece at a time.
-            Start from basic blocks, then move to dynamic updates like observe, infer, and merge.
-          </p>
+        <header class="hero section" id="overview">
+          <p class="badge">Beliefs → decisions</p>
+          <h2>Make a decision, then call a tool</h2>
+          <p class="hero-lead">BeliefLang keeps the scores your workflow needs. A model updates them from new input. Rules use those scores to choose an action.</p>
+          <pre><code class="language-txt">new message → belief snapshot → threshold rule → tool call</code></pre>
+          <p>Each turn starts from the saved snapshot, so the model can update the decision state without reading every earlier message again.</p>
         </header>
 
-        <section class="section" id="core-pitch">
-          <h3>Core Pitch</h3>
-          <p>
-            <strong>BeliefLang compresses natural-language reasoning into atomic belief state.</strong>
-            Instead of repeatedly sending long conversation history to an LLM,
-            BeliefLang stores intermediate reasoning as probability-weighted beliefs and executes deterministic rules over them.
-          </p>
+        <section class="section" id="results">
+          <p class="eyebrow">Live API calls · 15 October 2026</p>
+          <h3>What we measured</h3>
+          <p>Two travel chats, 20 labeled turns, using <code>gpt-6-luna</code>.</p>
+          <div class="metric-grid" aria-label="Key benchmark results">
+            <div class="metric"><strong>20/20</strong><span>turns matched the labeled beliefs with either method</span></div>
+            <div class="metric"><strong>48%</strong><span>fewer reported tokens with saved beliefs</span></div>
+            <div class="metric"><strong>29%</strong><span>lower estimated model cost with saved beliefs</span></div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>What the model reads</th><th>Label match</th><th>Tokens</th><th>Estimated cost</th></tr></thead>
+              <tbody>
+                <tr><td>Chat history</td><td>20/20</td><td>15,668</td><td>$0.001663</td></tr>
+                <tr><td>Saved beliefs + new message</td><td>20/20</td><td>8,136</td><td>$0.001175</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="small-note">The snapshot total includes the model calls that create and update it. This is a small scripted test. <a href="https://github.com/belieflang/belieflang/blob/main/docs/jev.md">See the full method, older-model tests, and other results</a>.</p>
+          <p class="small-note"><strong>Jev result:</strong> Ordinary snapshot updates missed preference changes. A change-only update with <code>jev-latest</code> matched 20/20 mock tool choices twice on new scripted chats, using 2.7% less model input than full-history Jev. On earlier longer chats it saved 17.5%. This prototype turns explicit changes into hard yes/no values. <a href="./jev.md#jev-direct-action-full-history-or-saved-beliefs">See the Jev comparison</a>.</p>
+        </section>
 
-          <h4>Typical agent flow (token heavy)</h4>
-          <pre><code class="language-txt">Step 1 LLM: parse user message
-Step 2 LLM: decide intent
-Step 3 LLM: decide tool
-Step 4 LLM: interpret result
-Step 5 LLM: decide next action</code></pre>
-
-          <h4>BeliefLang flow (state-first)</h4>
-          <pre><code class="language-txt">natural language -&gt; belief extraction
-beliefs -&gt; rules -&gt; tools</code></pre>
-
-          <h4>Architecture in one line</h4>
-          <pre><code class="language-txt">LLM for extraction.
-BeliefLang for state.
-Rules for control.
-Tools for action.</code></pre>
-
-          <h4>Why this matters</h4>
-          <ul>
-            <li>Less token usage</li>
-            <li>More deterministic execution</li>
-            <li>Better debugging with trace and provenance</li>
-            <li>Clear thresholds instead of vague prompting</li>
-            <li>Lower hallucination risk after extraction</li>
-            <li>Reusable, auditable intermediate state</li>
-          </ul>
+        <section class="section" id="decisions">
+          <h3>Use a score to make a decision</h3>
+          <p>The model estimates a score. The rule is deterministic: the same score and threshold produce the same tool call.</p>
+          <pre><code class="language-bel">when confidence(intent.book_flight) &gt; 0.9:
+  call search_flights()</code></pre>
+          <h4>Settle each field separately</h4>
+          <p>Choose a confidence threshold for each decision field. When its current value is certain enough, save it and omit that field from the next update. Keep updating uncertain fields. Reopen a settled field when new input could change it.</p>
+          <pre><code class="language-txt">intent = book_flight (0.97) → settled
+prefers_direct = uncertain (0.58) → update next turn</code></pre>
+          <p class="small-note">In a separate <code>gpt-6-luna</code> test, settled fields matched 20/20 labeled turns twice and used about 10% fewer tokens: 5,828 vs 6,494, then 5,809 vs 6,458. At a 0.90 threshold, 54 of 60 numeric field updates were omitted. <a href="./jev.md#settling-confident-fields">See the method and limits</a>.</p>
         </section>
 
         <section class="section" id="quickstart">
-          <h3>Quick Start</h3>
-          <p>Install, build, and run:</p>
-          <pre><code class="language-bash">npm install -g belieflang
+          <h3>Try it locally</h3>
+          <p>Build the project, then run an example:</p>
+          <pre><code class="language-bash">npm install
 npm run build
-bel run examples/intent.bel --trace</code></pre>
-          <p>Your first tiny BeliefLang program:</p>
-          <pre><code class="language-bel">belief intent exclusive closed {
-  book_flight: 0.8
-  unknown: 0.2
-}
-
-when confidence(intent.book_flight) &gt; 0.7:
-  ask_user("I can help you with flights.")</code></pre>
+node dist/src/cli.js run examples/intent.bel --trace</code></pre>
+          <p>With <code>OPENAI_API_KEY</code> in your environment or local <code>.env</code> file, try the chat modes:</p>
+          <pre><code class="language-bash">npm run chatbot
+CHAT_MODE=full-history npm run chatbot
+CHAT_MODE=coded npm run chatbot</code></pre>
+          <p>For benchmark commands and details, see the <a href="https://github.com/belieflang/belieflang/blob/main/README.md">README</a>.</p>
         </section>
 
         <section class="section playground-section" id="playground">
           <div class="playground-heading">
             <div>
               <p class="badge">Live</p>
-              <h3>BeliefLang Playground</h3>
-              <p>
-                Try the language in the browser with the same core syntax as the runtime:
-                beliefs, variables, observations, inference, merge, rules, and actions.
-              </p>
+              <h3>Playground</h3>
+              <p>Change the program and run it in your browser. The playground uses local example inference; live GPT and Jev calls run from the CLI.</p>
             </div>
             <div class="playground-controls" aria-label="Playground controls">
               <label for="playground-sample">Example</label>
@@ -131,334 +102,54 @@ when confidence(intent.book_flight) &gt; 0.7:
                 <option value="dynamic">Observe, infer, merge</option>
                 <option value="custom">Custom program</option>
               </select>
-              <label class="trace-control" for="playground-trace">
-                <input id="playground-trace" type="checkbox" />
-                Trace
-              </label>
+              <label class="trace-control" for="playground-trace"><input id="playground-trace" type="checkbox" />Trace</label>
               <button id="playground-run" type="button">Run</button>
             </div>
           </div>
-
           <div class="playground-shell">
             <div class="playground-editor">
               <div class="panel-label">Program</div>
-              <textarea
-                id="playground-source"
-                spellcheck="false"
-                aria-label="BeliefLang program editor"
-              ></textarea>
+              <textarea id="playground-source" spellcheck="false" aria-label="BeliefLang program editor"></textarea>
             </div>
-
             <div class="playground-results" aria-live="polite">
               <p id="playground-error" class="playground-error" role="alert" hidden></p>
-
               <div class="result-grid">
-                <article class="result-panel">
-                  <h4>State</h4>
-                  <pre><code id="playground-state-output"></code></pre>
-                </article>
-
-                <article class="result-panel">
-                  <h4>Variables</h4>
-                  <pre><code id="playground-vars-output"></code></pre>
-                </article>
-
-                <article class="result-panel">
-                  <h4>Observations</h4>
-                  <pre><code id="playground-observations-output"></code></pre>
-                </article>
-
-                <article class="result-panel">
-                  <h4>Actions</h4>
-                  <pre><code id="playground-actions-output"></code></pre>
-                </article>
-
-                <article class="result-panel trace-panel">
-                  <h4>Trace</h4>
-                  <pre><code id="playground-trace-output"></code></pre>
-                </article>
+                <article class="result-panel"><h4>State</h4><pre><code id="playground-state-output"></code></pre></article>
+                <article class="result-panel"><h4>Variables</h4><pre><code id="playground-vars-output"></code></pre></article>
+                <article class="result-panel"><h4>Observations</h4><pre><code id="playground-observations-output"></code></pre></article>
+                <article class="result-panel"><h4>Actions</h4><pre><code id="playground-actions-output"></code></pre></article>
+                <article class="result-panel trace-panel"><h4>Trace</h4><pre><code id="playground-trace-output"></code></pre></article>
               </div>
             </div>
           </div>
         </section>
 
-        <section class="section" id="syntax-one-by-one">
-          <h3>Syntax One by One</h3>
-          <p>Read this top to bottom once, and you can already write useful BeliefLang.</p>
-
-          <div class="step-list">
-            <article class="step">
-              <h4>1. Start a belief block with <span class="token">belief</span></h4>
-              <p>
-                A belief block stores uncertain state.
-                It has a name and a set of labels with numeric confidence values.
-              </p>
-              <pre><code class="language-bel">belief intent exclusive closed {
-  book_flight: 0.82
-  book_hotel: 0.12
-  unknown: 0.06
-}</code></pre>
-            </article>
-
-            <article class="step">
-              <h4>2. Use <span class="token">let</span> to create variables</h4>
-              <p>
-                Variables hold numbers, strings, booleans, or tool output objects.
-              </p>
-              <pre><code class="language-bel">let threshold = 0.7
-let message = "I need a flight"
-let flights = call search_flights()</code></pre>
-            </article>
-
-            <article class="step">
-              <h4>3. Read nested values with dot paths</h4>
-              <p>
-                Use dot notation for object fields, for example <span class="token">flights.count</span>.
-              </p>
-              <pre><code class="language-bel">when flights.count &gt; 0:
-  ask_user("I found options.")</code></pre>
-            </article>
-
-            <article class="step">
-              <h4>4. Write rules with <span class="token">when ... :</span></h4>
-              <p>
-                A rule has a condition and one action line under it.
-              </p>
-              <pre><code class="language-bel">when confidence(intent.book_flight) &gt; threshold:
-  call rank_flights()</code></pre>
-            </article>
-
-            <article class="step">
-              <h4>5. Use metrics: <span class="token">confidence(...)</span> and <span class="token">entropy(...)</span></h4>
-              <p>
-                <strong>confidence</strong> reads one label score.
-                <strong>entropy</strong> tells how uncertain a belief is.
-              </p>
-              <pre><code class="language-bel">when confidence(intent.book_flight) &gt; 0.7 || entropy(intent) &gt; 0.5:
-  ask_user("Please clarify your intent.")</code></pre>
-            </article>
-
-            <article class="step">
-              <h4>6. Add comments with <span class="token">#</span></h4>
-              <pre><code class="language-bel"># This rule runs only for strong flight intent
-when confidence(intent.book_flight) &gt; 0.7:
-  call rank_flights()</code></pre>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="belief-block">
-          <h3>Belief Block Breakdown</h3>
+        <section class="section" id="language">
+          <h3>Language basics</h3>
+          <p>Define beliefs, then act when a score passes a threshold:</p>
           <pre><code class="language-bel">belief intent exclusive closed {
   book_flight: 0.82
   book_hotel: 0.12
   unknown: 0.06
-}</code></pre>
-          <ul>
-            <li><span class="token">belief</span>: starts a belief definition</li>
-            <li><span class="token">intent</span>: belief name</li>
-            <li><span class="token">exclusive</span>: one label is treated as the winning class</li>
-            <li><span class="token">closed</span>: no hidden label outside the block</li>
-            <li><span class="token">{ ... }</span>: block body</li>
-            <li><span class="token">book_flight: 0.82</span>: label and confidence value</li>
-          </ul>
-        </section>
-
-        <section class="section" id="belief-modes">
-          <h3>What exclusive, open, closed, and multi mean</h3>
-          <div class="mode-grid">
-            <article class="card mode-card">
-              <h4><span class="token">exclusive</span></h4>
-              <p>Use this when labels are alternatives. Example: flight <em>or</em> hotel intent.</p>
-            </article>
-
-            <article class="card mode-card">
-              <h4><span class="token">multi</span></h4>
-              <p>Use this when labels are independent. Example: user can be both cheap and direct focused.</p>
-            </article>
-
-            <article class="card mode-card">
-              <h4><span class="token">closed</span></h4>
-              <p>Means your listed labels are complete. No extra hidden class exists.</p>
-            </article>
-
-            <article class="card mode-card">
-              <h4><span class="token">open</span></h4>
-              <p>Means there can be an unlisted class. Remaining mass is exposed as <span class="token">other</span>.</p>
-            </article>
-          </div>
-
-          <h4>Common combinations</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>Combination</th>
-                <th>Simple meaning</th>
-                <th>Example</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>exclusive closed</td>
-                <td>Pick one from listed labels only</td>
-                <td><span class="token">intent</span></td>
-              </tr>
-              <tr>
-                <td>exclusive open</td>
-                <td>Pick one from listed labels or unknown outside list</td>
-                <td><span class="token">destination</span></td>
-              </tr>
-              <tr>
-                <td>multi closed</td>
-                <td>Independent label strengths</td>
-                <td><span class="token">user_preferences</span></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <pre><code class="language-bel">belief destination exclusive open {
-  berlin: 0.60
-  paris: 0.25
 }
 
-# remaining 0.15 is treated as destination.other</code></pre>
-        </section>
-
-        <section class="section" id="conditions">
-          <h3>Conditions and Rules</h3>
-          <p>Conditions decide if an action should run.</p>
-          <pre><code class="language-bel">when confidence(intent.book_flight) &gt; 0.7 && (flights.count &gt; 0 || !false):
-  ask_user("I found flight options.")</code></pre>
-
-          <h4>Operators</h4>
-          <ul>
-            <li>Comparison: &gt;, &gt;=, &lt;, &lt;=, ==, !=</li>
-            <li>Boolean: &&, ||, !</li>
-            <li>Metrics: confidence(name.label), entropy(name)</li>
-          </ul>
-        </section>
-
-        <section class="section" id="actions">
-          <h3>Actions and Tools</h3>
-          <p>A rule body can run one action line.</p>
-
+when confidence(intent.book_flight) &gt; 0.7:
+  call search_flights()</code></pre>
           <div class="card-grid">
-            <article class="card">
-              <h4><span class="token">call tool()</span></h4>
-              <pre><code class="language-bel">when confidence(intent.book_flight) &gt; 0.7:
-  call rank_flights()</code></pre>
-            </article>
-
-            <article class="card">
-              <h4><span class="token">ask_user("...")</span></h4>
-              <pre><code class="language-bel">when entropy(intent) &gt; 0.5:
-  ask_user("Can you clarify your intent?")</code></pre>
-            </article>
-
-            <article class="card">
-              <h4><span class="token">let x = call tool()</span></h4>
-              <pre><code class="language-bel">let flights = call search_flights()
-
-when flights.count &gt; 0:
-  ask_user("Flights found.")</code></pre>
-            </article>
+            <article class="card"><h4><code>belief</code></h4><p>Stores scores. <code>exclusive</code> means one main answer; <code>multi</code> allows several independent scores.</p></article>
+            <article class="card"><h4><code>when</code></h4><p>Checks a condition and runs one action. Use <code>confidence(...)</code> for a score and <code>entropy(...)</code> for uncertainty.</p></article>
+            <article class="card"><h4><code>observe</code> and <code>infer</code></h4><p>Record new input and ask an inference adapter to update beliefs. <code>merge</code> applies a belief patch.</p></article>
           </div>
+          <p class="reference-link">See the <a href="https://github.com/belieflang/belieflang/blob/main/docs/semantics.md">full language reference</a> for syntax and behavior.</p>
         </section>
 
-        <section class="section" id="dynamic-cycle">
-          <h3>Observe, Infer, Merge</h3>
-          <p>
-            These three lines are the dynamic update cycle.
-          </p>
-          <pre><code class="language-bel">let message = "I need a cheap direct flight"
-
-observe user_message(message)
-infer beliefs from user_message
-
-let extracted = call extract_patch()
-merge beliefs from extracted</code></pre>
-
-          <div class="step-list compact-steps">
-            <article class="step">
-              <h4><span class="token">observe event(value)</span></h4>
-              <p>Stores an observation record and also writes the latest value into a variable named <span class="token">event</span>.</p>
-            </article>
-
-            <article class="step">
-              <h4><span class="token">infer beliefs from source</span></h4>
-              <p>Calls the inference adapter and produces a belief patch object.</p>
-            </article>
-
-            <article class="step">
-              <h4><span class="token">merge beliefs from source</span></h4>
-              <p>Combines patch values into existing beliefs. Existing labels stay unless overwritten.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="trace-provenance">
-          <h3>Trace and Provenance</h3>
-          <p>Run with --trace to inspect evaluation and actions:</p>
-          <pre><code class="language-bash">bel run examples/observe_infer_merge.bel --trace</code></pre>
-          <p>Provenance keeps a history of how each belief value was created (load, infer, merge).</p>
-          <pre><code class="language-ts">runtime.getProvenance()
-runtime.explainBelief("intent.book_flight")</code></pre>
-        </section>
-
-        <section class="section" id="api">
+        <section class="section" id="runtime">
           <h3>Runtime API</h3>
-          <div class="card-grid api-grid">
-            <article class="card">
-              <h4>State Access</h4>
-              <ul>
-                <li>getState()</li>
-                <li>getVars()</li>
-                <li>confidence(path)</li>
-                <li>entropy(beliefName)</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h4>Dynamic Data</h4>
-              <ul>
-                <li>observe(eventName, value)</li>
-                <li>infer(source)</li>
-                <li>mergeBeliefsFromRuntimeValue(patch, source)</li>
-              </ul>
-            </article>
-            <article class="card">
-              <h4>Auditability</h4>
-              <ul>
-                <li>getObservations()</li>
-                <li>getProvenance()</li>
-                <li>explainBelief(path)</li>
-              </ul>
-            </article>
-          </div>
+          <p>Read state with <code>getState()</code> or <code>confidence(path)</code>. Save and restore it with <code>getBeliefSnapshot()</code> and <code>loadBeliefSnapshot()</code>. Inspect decisions with <code>getProvenance()</code>, <code>explainBelief(path)</code>, and <code>--trace</code>.</p>
+          <p>BeliefLang can infer with GPT or Jev. The <a href="https://github.com/belieflang/belieflang/blob/main/docs/jev.md">integration and benchmark notes</a> explain both adapters.</p>
         </section>
 
-        <section class="section" id="example">
-          <h3>Full Example</h3>
-          <pre><code class="language-bel">let message = "I need a cheap direct flight to Berlin"
-
-observe user_message(message)
-infer beliefs from user_message
-
-let extracted = call extract_patch()
-merge beliefs from extracted
-
-when confidence(intent.book_flight) &gt; 0.7 && confidence(user.budget_sensitive) &gt; 0.5:
-  call rank_flights()
-
-when entropy(intent) &gt; 0.5:
-  ask_user("Can you clarify your travel intent?")</code></pre>
-        </section>
-
-        <footer class="footer">
-          <p>
-            BeliefLang is experimental and expected to change before 1.0.
-            Keep semantics explicit and tests close to policy behavior.
-          </p>
-        </footer>
+        <footer class="footer section"><p>BeliefLang is experimental. Test decision quality on your own workflows before using it to call tools.</p></footer>
       </main>
     </div>
     <script src="./playground.js" defer></script>

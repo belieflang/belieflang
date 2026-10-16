@@ -27,6 +27,15 @@ export type BeliefPatchEntry = {
 
 export type BeliefPatch = Record<string, BeliefPatchEntry | BeliefDistribution>;
 
+export type BeliefSnapshot = {
+  version: 1;
+  beliefs: Record<string, {
+    cardinality: BeliefCardinality;
+    domain: BeliefDomain;
+    values: BeliefDistribution;
+  }>;
+};
+
 export type ObservationRecord = {
   id: number;
   eventName: string;
@@ -122,6 +131,49 @@ export class BeliefRuntime {
 
   getState(): BeliefState {
     return structuredClone(this.state);
+  }
+
+  getBeliefSnapshot(): BeliefSnapshot {
+    const beliefs: BeliefSnapshot["beliefs"] = {};
+    for (const [name, values] of Object.entries(this.state)) {
+      const meta = this.beliefMeta[name];
+      beliefs[name] = {
+        cardinality: meta.cardinality,
+        domain: meta.domain,
+        values: structuredClone(values),
+      };
+    }
+    return { version: 1, beliefs };
+  }
+
+  loadBeliefSnapshot(snapshot: BeliefSnapshot): void {
+    if (Object.keys(this.state).length > 0) {
+      throw new Error("loadBeliefSnapshot() requires a fresh runtime");
+    }
+    if (snapshot?.version !== 1 || !snapshot.beliefs ||
+        typeof snapshot.beliefs !== "object" || Array.isArray(snapshot.beliefs)) {
+      throw new Error("invalid belief snapshot");
+    }
+    const staged = new BeliefRuntime({}, { now: this.now });
+    for (const [name, entry] of Object.entries(snapshot.beliefs)) {
+      if (!name || !entry || typeof entry !== "object" ||
+          !["exclusive", "multi"].includes(entry.cardinality) ||
+          !["open", "closed"].includes(entry.domain) ||
+          !entry.values || typeof entry.values !== "object" || Array.isArray(entry.values)) {
+        throw new Error(`invalid belief snapshot entry ${name}`);
+      }
+      staged.loadBelief({
+        kind: "belief",
+        name,
+        cardinality: entry.cardinality,
+        domain: entry.domain,
+        values: entry.values,
+      });
+    }
+    this.state = staged.state;
+    this.beliefMeta = staged.beliefMeta;
+    this.provenance = staged.provenance;
+    this.nextProvenanceId = staged.nextProvenanceId;
   }
 
   getVars(): Record<string, RuntimeValue> {

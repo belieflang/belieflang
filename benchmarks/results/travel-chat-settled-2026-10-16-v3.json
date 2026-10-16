@@ -1,0 +1,797 @@
+{
+  "benchmark": "travel-chat-settled-v3",
+  "model": "gpt-6-luna",
+  "threshold": 0.9,
+  "method": "Fresh 20-turn API runs. Baseline updates five scores each turn. Selective updates uncertain fields and accepts explicit categorical changes to settled fields; each field is settled when its most likely value reaches the threshold. Both include the first snapshot-creation call. Model reported tokens only; no tool calls or local storage costs measured.",
+  "instructions": {
+    "baseline": "Maintain current beliefs for a travel-support conversation. Each input JSON has new_message and previous_beliefs containing the saved belief values. Return probabilities for the current primary request: book_flight, book_hotel, or unknown if it is neither. These three probabilities should sum to 1. Return independent probabilities for budget_sensitive (prefers a low price) and prefers_direct (prefers a nonstop flight). The latest explicit change overrides older statements; otherwise preferences persist. Base the result only on the supplied context.",
+    "selective": "Track the current request: book_flight, book_hotel, or unknown for any other request. Also track budget_sensitive (low price) and prefers_direct (nonstop flight). Input has a new_message and previous_state with settled values and uncertain scores. Return scores only for uncertain fields required by the output schema. In changes, report an explicit new value only when it differs from a settled value. Otherwise keep saved values. The latest explicit request wins. Intent scores sum to 1. Use only supplied input."
+  },
+  "results": [
+    {
+      "name": "full_snapshot",
+      "turns": 20,
+      "exact_match_turns": 20,
+      "input_tokens": 5672,
+      "output_tokens": 822,
+      "total_tokens": 6494,
+      "omitted_probability_updates": 0,
+      "rows": [
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a1",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 235,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a2",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 297,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a3",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 295,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a4",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 295,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a5",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 294,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a6",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 296,
+            "output_tokens": 42,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a7",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 290,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a8",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 288,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a9",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a10",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b1",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 233,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b2",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 287,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b3",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b4",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 284,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b5",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 291,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b6",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 287,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b7",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 280,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b8",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b9",
+          "predicted": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b10",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "settled_fields",
+      "turns": 20,
+      "exact_match_turns": 20,
+      "input_tokens": 5256,
+      "output_tokens": 572,
+      "total_tokens": 5828,
+      "omitted_probability_updates": 54,
+      "rows": [
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a1",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 291,
+            "output_tokens": 74,
+            "cached_input_tokens": 0
+          },
+          "active": [
+            "intent",
+            "budget_sensitive",
+            "prefers_direct"
+          ],
+          "changes": [],
+          "omitted_probability_updates": 0
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a2",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 265,
+            "output_tokens": 15,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a3",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 263,
+            "output_tokens": 15,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a4",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 263,
+            "output_tokens": 26,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "intent",
+              "value": "book_hotel"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a5",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 262,
+            "output_tokens": 15,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a6",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 264,
+            "output_tokens": 36,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "intent",
+              "value": "book_flight"
+            },
+            {
+              "field": "prefers_direct",
+              "value": "false"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a7",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 260,
+            "output_tokens": 35,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "budget_sensitive",
+              "value": "true"
+            },
+            {
+              "field": "prefers_direct",
+              "value": "false"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a8",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 260,
+            "output_tokens": 26,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "intent",
+              "value": "book_hotel"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a9",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 257,
+            "output_tokens": 25,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "budget_sensitive",
+              "value": "false"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a10",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 257,
+            "output_tokens": 25,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "budget_sensitive",
+              "value": "false"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b1",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 64,
+            "cached_input_tokens": 0
+          },
+          "active": [
+            "intent",
+            "budget_sensitive",
+            "prefers_direct"
+          ],
+          "changes": [],
+          "omitted_probability_updates": 0
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b2",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 259,
+            "output_tokens": 15,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b3",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 258,
+            "output_tokens": 36,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "intent",
+              "value": "book_flight"
+            },
+            {
+              "field": "prefers_direct",
+              "value": "true"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b4",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 256,
+            "output_tokens": 15,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b5",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 263,
+            "output_tokens": 35,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "budget_sensitive",
+              "value": "true"
+            },
+            {
+              "field": "prefers_direct",
+              "value": "false"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b6",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 259,
+            "output_tokens": 15,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b7",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 252,
+            "output_tokens": 35,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "intent",
+              "value": "book_hotel"
+            },
+            {
+              "field": "budget_sensitive",
+              "value": "true"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b8",
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 258,
+            "output_tokens": 15,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b9",
+          "predicted": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 261,
+            "output_tokens": 24,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "intent",
+              "value": "unknown"
+            }
+          ],
+          "omitted_probability_updates": 3
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b10",
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "usage": {
+            "input_tokens": 259,
+            "output_tokens": 26,
+            "cached_input_tokens": 0
+          },
+          "active": [],
+          "changes": [
+            {
+              "field": "intent",
+              "value": "book_flight"
+            }
+          ],
+          "omitted_probability_updates": 3
+        }
+      ]
+    }
+  ]
+}

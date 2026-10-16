@@ -1,0 +1,565 @@
+{
+  "benchmark": "travel-chat-jev-context-v5",
+  "dataset": "fresh",
+  "model": "jev-latest",
+  "method": "Two scripted 10-turn travel chats. All paths make one live Jev call per turn and include every call in usage and cost. Direct action sees all user messages and asks one of seven preference-sensitive actions. Full-history beliefs sees all user messages and asks three belief questions before BeliefLang rules dispatch a mock tool. Belief snapshot asks the same three questions from saved beliefs plus the new message. Belief delta sends previous intent plus the new message to Jev; it asks for intent and explicit changes to budget and nonstop preferences, then BeliefLang merges those changes into the saved snapshot and dispatches a mock tool. The last three paths use the same seven deterministic action rules. No travel service is contacted. The fixed intent threshold is 0.7 and preference threshold is 0.5. There are no assistant messages in this dataset. Preference labels are scored for the three belief paths only.",
+  "price_basis": "Jev published price checked 2026-10-16: $0.042 per 1M input tokens, output free. Estimates exclude local storage and taxes. jev-latest is a moving alias.",
+  "results": [
+    {
+      "flow": "belief_delta",
+      "turns": 20,
+      "correct_actions": 20,
+      "exact_belief_turns": 20,
+      "one_mock_tool_per_turn": true,
+      "usage": {
+        "input_tokens": 11423,
+        "output_tokens": 2413,
+        "total_tokens": 13836
+      },
+      "estimated_usd": 0.000479766,
+      "median_latency_ms": 256,
+      "rows": [
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c1",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 565,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.00002373,
+          "latency_ms": 312
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c2",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 572,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000024024000000000002,
+          "latency_ms": 242
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c3",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 572,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000024024000000000002,
+          "latency_ms": 264
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c4",
+          "expected_action": "search_budget_direct_flights",
+          "action": "search_budget_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 120
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 437
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c5",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 574,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000024108,
+          "latency_ms": 222
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c6",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 572,
+            "output_tokens": 120
+          },
+          "estimated_usd": 0.000024024000000000002,
+          "latency_ms": 289
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c7",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 571,
+            "output_tokens": 118
+          },
+          "estimated_usd": 0.000023982000000000002,
+          "latency_ms": 341
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c8",
+          "expected_action": "search_flights",
+          "action": "search_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_flights"
+          ],
+          "usage": {
+            "input_tokens": 572,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000024024000000000002,
+          "latency_ms": 479
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c9",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 574,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000024108,
+          "latency_ms": 266
+        },
+        {
+          "conversation": "tokyo_trip",
+          "turn": "c10",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 575,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.00002415,
+          "latency_ms": 244
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d1",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 570,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.00002394,
+          "latency_ms": 294
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d2",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 120
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 229
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d3",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 232
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d4",
+          "expected_action": "search_budget_hotels",
+          "action": "search_budget_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_hotels"
+          ],
+          "usage": {
+            "input_tokens": 566,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023772000000000002,
+          "latency_ms": 232
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d5",
+          "expected_action": "search_budget_flights",
+          "action": "search_budget_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_budget_flights"
+          ],
+          "usage": {
+            "input_tokens": 571,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000023982000000000002,
+          "latency_ms": 224
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d6",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 573,
+            "output_tokens": 118
+          },
+          "estimated_usd": 0.000024066000000000003,
+          "latency_ms": 246
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d7",
+          "expected_action": "search_hotels",
+          "action": "search_hotels",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted_beliefs": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_hotels"
+          ],
+          "usage": {
+            "input_tokens": 569,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.000023898000000000004,
+          "latency_ms": 246
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d8",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 573,
+            "output_tokens": 122
+          },
+          "estimated_usd": 0.000024066000000000003,
+          "latency_ms": 248
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d9",
+          "expected_action": "search_direct_flights",
+          "action": "search_direct_flights",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "search_direct_flights"
+          ],
+          "usage": {
+            "input_tokens": 570,
+            "output_tokens": 121
+          },
+          "estimated_usd": 0.00002394,
+          "latency_ms": 301
+        },
+        {
+          "conversation": "oslo_trip",
+          "turn": "d10",
+          "expected_action": "ask_user",
+          "action": "ask_user",
+          "action_correct": true,
+          "expected_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted_beliefs": {
+            "intent": "unknown",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "beliefs_exact": true,
+          "tool_calls": [
+            "ask_user"
+          ],
+          "usage": {
+            "input_tokens": 577,
+            "output_tokens": 118
+          },
+          "estimated_usd": 0.000024234000000000002,
+          "latency_ms": 274
+        }
+      ]
+    }
+  ]
+}

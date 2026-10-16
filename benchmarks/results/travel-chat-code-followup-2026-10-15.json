@@ -1,0 +1,1553 @@
+{
+  "benchmark": "travel-chat-code-v1",
+  "model": "gpt-6-luna",
+  "results": [
+    {
+      "variant": "dominant_4",
+      "code_characters": 4,
+      "exact_match_turns": 20,
+      "turns": 20,
+      "input_tokens": 5665,
+      "output_tokens": 999,
+      "total_tokens": 6664,
+      "estimated_usd": 0.0010659999999999999,
+      "max_decode_error": 0.07142857142857145,
+      "probe_max_decode_error": 0.22714285714285712,
+      "wrong_turns": [],
+      "rows": [
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a1",
+          "code": "Fzyz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0014285714285714457,
+          "usage": {
+            "input_tokens": 282,
+            "output_tokens": 42,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000492,
+          "latency_ms": 1925
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a2",
+          "code": "Fzzz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000489,
+          "latency_ms": 1476
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a3",
+          "code": "Fzzz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1301
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a4",
+          "code": "Hrzz",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 2.857147851642594e-11,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 55,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000561,
+          "latency_ms": 1585
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a5",
+          "code": "Hzzz",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000485,
+          "latency_ms": 1274
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a6",
+          "code": "Fzz0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 287,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048700000000000005,
+          "latency_ms": 1340
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a7",
+          "code": "Fzz0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 284,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048400000000000004,
+          "latency_ms": 1217
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a8",
+          "code": "Hzz0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 284,
+            "output_tokens": 50,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000053400000000000004,
+          "latency_ms": 1403
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a9",
+          "code": "Hy00",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0007936507666448378,
+          "usage": {
+            "input_tokens": 281,
+            "output_tokens": 50,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000531,
+          "latency_ms": 1770
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a10",
+          "code": "Hv00",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 7.428579973378646e-11,
+          "usage": {
+            "input_tokens": 280,
+            "output_tokens": 55,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000555,
+          "latency_ms": 1708
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b1",
+          "code": "Hz00",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 280,
+            "output_tokens": 50,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000053,
+          "latency_ms": 1624
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b2",
+          "code": "Hy00",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0007936507936509019,
+          "usage": {
+            "input_tokens": 282,
+            "output_tokens": 54,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000552,
+          "latency_ms": 1750
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b3",
+          "code": "Fk0z",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 2.857136749412348e-11,
+          "usage": {
+            "input_tokens": 281,
+            "output_tokens": 55,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000556,
+          "latency_ms": 1515
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b4",
+          "code": "Fk0z",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 2.857136749412348e-11,
+          "usage": {
+            "input_tokens": 280,
+            "output_tokens": 55,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000555,
+          "latency_ms": 1565
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b5",
+          "code": "Fkz0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 2.857136749412348e-11,
+          "usage": {
+            "input_tokens": 287,
+            "output_tokens": 55,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000056200000000000004,
+          "latency_ms": 1582
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b6",
+          "code": "Fkz0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 2.857136749412348e-11,
+          "usage": {
+            "input_tokens": 283,
+            "output_tokens": 55,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000055799999999999994,
+          "latency_ms": 1566
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b7",
+          "code": "Huz0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0.07142857142857145,
+          "usage": {
+            "input_tokens": 276,
+            "output_tokens": 54,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000546,
+          "latency_ms": 1759
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b8",
+          "code": "Hzt0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 2.857136749412348e-11,
+          "usage": {
+            "input_tokens": 282,
+            "output_tokens": 53,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000547,
+          "latency_ms": 1481
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b9",
+          "code": "Uyz0",
+          "expected": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 5.204170427930421e-18,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 61,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000059,
+          "latency_ms": 1852
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b10",
+          "code": "Fyz0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 2.857136749412348e-11,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 55,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000056,
+          "latency_ms": 2034
+        }
+      ]
+    },
+    {
+      "variant": "labeled_8",
+      "code_characters": 8,
+      "exact_match_turns": 19,
+      "turns": 20,
+      "input_tokens": 5679,
+      "output_tokens": 848,
+      "total_tokens": 6527,
+      "estimated_usd": 0.0009919,
+      "max_decode_error": 0.01857142857142858,
+      "probe_max_decode_error": 0.015714285714285736,
+      "wrong_turns": [
+        "b9"
+      ],
+      "rows": [
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a1",
+          "code": "FyH0BwDx",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.01857142857142858,
+          "usage": {
+            "input_tokens": 279,
+            "output_tokens": 50,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000052900000000000005,
+          "latency_ms": 1365
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a2",
+          "code": "FyH0BwDx",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0004285714285714448,
+          "usage": {
+            "input_tokens": 288,
+            "output_tokens": 48,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000052799999999999996,
+          "latency_ms": 1290
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a3",
+          "code": "FzH0BzDz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1412
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a4",
+          "code": "F0HzBzDz",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 288,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000488,
+          "latency_ms": 1208
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a5",
+          "code": "F0HzBzDz",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1079
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a6",
+          "code": "FzH0BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 288,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000488,
+          "latency_ms": 1101
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a7",
+          "code": "FzH0BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1132
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a8",
+          "code": "F0HzBzD0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1084
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a9",
+          "code": "F0HzB0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 282,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048200000000000006,
+          "latency_ms": 1141
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a10",
+          "code": "F0HzB0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 282,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048200000000000006,
+          "latency_ms": 1610
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b1",
+          "code": "F0HzB0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 277,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000477,
+          "latency_ms": 1402
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b2",
+          "code": "F0HzB0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 284,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048400000000000004,
+          "latency_ms": 1218
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b3",
+          "code": "FqH9B0Dz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0071428571428571175,
+          "usage": {
+            "input_tokens": 283,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000050299999999999996,
+          "latency_ms": 1187
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b4",
+          "code": "FpHaB0Dz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.006714285714285673,
+          "usage": {
+            "input_tokens": 281,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000501,
+          "latency_ms": 1582
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b5",
+          "code": "FqH9BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0071428571428571175,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000050600000000000003,
+          "latency_ms": 1616
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b6",
+          "code": "FwH3BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0032857142857142807,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000505,
+          "latency_ms": 1417
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b7",
+          "code": "F0HzBzD0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 277,
+            "output_tokens": 50,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000527,
+          "latency_ms": 1293
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b8",
+          "code": "F0HzBzD0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 283,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048299999999999995,
+          "latency_ms": 1279
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b9",
+          "code": "F0HiBzD0",
+          "expected": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": false,
+          "max_decode_error": 0.014285714285714235,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 44,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000050600000000000003,
+          "latency_ms": 1209
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b10",
+          "code": "FzH0BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1074
+        }
+      ]
+    },
+    {
+      "variant": "labeled_10",
+      "code_characters": 10,
+      "exact_match_turns": 20,
+      "turns": 20,
+      "input_tokens": 5737,
+      "output_tokens": 848,
+      "total_tokens": 6585,
+      "estimated_usd": 0.0009977,
+      "max_decode_error": 0.013571428571428571,
+      "probe_max_decode_error": 0.014285714285714277,
+      "wrong_turns": [],
+      "rows": [
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a1",
+          "code": "FyH0U1BuDx",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.013571428571428571,
+          "usage": {
+            "input_tokens": 280,
+            "output_tokens": 50,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000053,
+          "latency_ms": 1753
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a2",
+          "code": "FyH0U1BxDx",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0036866359285714356,
+          "usage": {
+            "input_tokens": 291,
+            "output_tokens": 60,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000591,
+          "latency_ms": 1491
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a3",
+          "code": "FxH1U1BzDz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0028571428571428914,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 46,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.00005190000000000001,
+          "latency_ms": 1423
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a4",
+          "code": "F0HzU0BzDz",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 290,
+            "output_tokens": 50,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000054,
+          "latency_ms": 1194
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a5",
+          "code": "F0HzU0BzDz",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000489,
+          "latency_ms": 1215
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a6",
+          "code": "FzH0U0BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 291,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000491,
+          "latency_ms": 1131
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a7",
+          "code": "FzH0U0BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000489,
+          "latency_ms": 1119
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a8",
+          "code": "F0HzU0BzD0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000489,
+          "latency_ms": 1078
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a9",
+          "code": "F0HzU0B0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000485,
+          "latency_ms": 1332
+        },
+        {
+          "conversation": "lisbon_trip",
+          "turn": "a10",
+          "code": "F0HzU0B0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 285,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000485,
+          "latency_ms": 1210
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b1",
+          "code": "F0HzU0B0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 278,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000047799999999999996,
+          "latency_ms": 1372
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b2",
+          "code": "F0HzU0B0D0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": false,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 287,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048700000000000005,
+          "latency_ms": 1386
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b3",
+          "code": "FzH0U0B0Dz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1063
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b4",
+          "code": "FzH0U0B0Dz",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": false,
+            "prefers_direct": true
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 284,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048400000000000004,
+          "latency_ms": 1128
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b5",
+          "code": "FzH0U0BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 291,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000491,
+          "latency_ms": 1211
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b6",
+          "code": "FzH0U0BzD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 288,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000488,
+          "latency_ms": 1118
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b7",
+          "code": "F0HzU0BzD0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 281,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.000048100000000000004,
+          "latency_ms": 1290
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b8",
+          "code": "F0HzU0BzD0",
+          "expected": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_hotel",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 286,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000486,
+          "latency_ms": 1313
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b9",
+          "code": "F0H0UzBzD0",
+          "expected": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "unknown",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 40,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.0000489,
+          "latency_ms": 1231
+        },
+        {
+          "conversation": "conference_trip",
+          "turn": "b10",
+          "code": "FzH0U0ByD0",
+          "expected": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "predicted": {
+            "intent": "book_flight",
+            "budget_sensitive": true,
+            "prefers_direct": false
+          },
+          "exact_match": true,
+          "max_decode_error": 0.0014285714285714457,
+          "usage": {
+            "input_tokens": 289,
+            "output_tokens": 42,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "estimated_usd": 0.00004990000000000001,
+          "latency_ms": 1362
+        }
+      ]
+    }
+  ]
+}

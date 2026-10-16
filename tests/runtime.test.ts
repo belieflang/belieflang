@@ -282,3 +282,25 @@ when confidence(intent.book_flight) > 0.7:
   assert.equal(rankCalls, 1);
   assert.equal(runtime.confidence("intent.book_flight"), 0.95);
 });
+
+test("belief snapshots restore distributions and open mass without sharing mutable state", () => {
+  const original = new BeliefRuntime();
+  original.loadBelief({
+    kind: "belief", name: "destination", cardinality: "exclusive", domain: "open",
+    values: { berlin: 0.6, paris: 0.2 },
+  });
+  original.loadBelief({
+    kind: "belief", name: "user", cardinality: "multi", domain: "closed",
+    values: { budget_sensitive: 0.8 },
+  });
+
+  const snapshot = original.getBeliefSnapshot();
+  const restored = new BeliefRuntime();
+  restored.loadBeliefSnapshot(JSON.parse(JSON.stringify(snapshot)));
+  assert.equal(restored.confidence("destination.berlin"), 0.6);
+  assert.ok(Math.abs(restored.confidence("destination.other") - 0.2) < 1e-9);
+  assert.equal(restored.confidence("user.budget_sensitive"), 0.8);
+  snapshot.beliefs.destination.values.berlin = 0;
+  assert.equal(restored.confidence("destination.berlin"), 0.6);
+  assert.equal(original.confidence("destination.berlin"), 0.6);
+});

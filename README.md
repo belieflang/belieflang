@@ -1,55 +1,32 @@
 # BeliefLang
 
-## Status
+BeliefLang turns model-estimated beliefs into decisions and tool calls. It saves the scores a workflow needs, then applies the same rules each time.
 
-BeliefLang is experimental and under active development.
-Breaking changes are expected before 1.0.
+## When it helps
 
-BeliefLang is an experimental language runtime for AI agents and uncertain systems.
+A chatbot may need the same few labels across many turns: current intent, budget preference, or whether a direct flight matters. BeliefLang saves their scores as a belief snapshot. The next model call starts from that snapshot and the new message.
 
-Instead of treating state as fixed values, BeliefLang represents state as probability distributions and executes actions when confidence or uncertainty crosses a threshold.
+Rules use the scores to decide what to do. For example, when flight intent passes a chosen threshold, the app can call `search_flights()`.
 
-## Core pitch
+### Settled labels
 
-BeliefLang compresses natural-language reasoning into atomic belief state.
+A tested prototype sets a confidence threshold for each decision field. Once a field is sufficiently certain, it saves the value and asks only for explicit changes to that field; uncertain fields keep getting probability updates. With a 0.90 threshold, it omitted 54 of 60 numeric field updates across the 20-turn test. It is available as a benchmark, not yet as an interactive chatbot mode.
 
-Instead of repeatedly sending long conversation history to an LLM, BeliefLang stores intermediate reasoning as probability-weighted beliefs and executes deterministic rules over them.
+## What we measured
 
-Architecture:
+| Test | Result |
+| --- | --- |
+| 20-turn chat with `gpt-6-luna` | Full history and saved beliefs both scored 20/20. Saved beliefs used 8,136 instead of 15,668 tokens (48% fewer), with about 29% lower estimated model cost. |
+| Settled fields with `gpt-6-luna` | 20/20 in two runs. Selective updates used 5,828 vs 6,494 tokens, then 5,809 vs 6,458 tokens, compared with updating every field. |
+| Jev context and tool choices (`jev-latest`) | An ordinary snapshot missed preference changes (19/20, then 18/20 actions on fresh chats). A change-only snapshot reached 20/20 on both runs of new held-out chats, using 2.7% less Jev input than full history; earlier longer chats saved 17.5%. |
+| One-step routing | Direct GPT was cheaper than GPT plus BeliefLang. Both scored 8/8. |
+| Smaller model (`gpt-4.1-nano-2025-04-14`) | Snapshot updates often used fewer tokens, but accuracy varied between runs. |
 
-```txt
-LLM for extraction.
-BeliefLang for state.
-Rules for control.
-Tools for action.
-```
+These are small scripted tests of decisions and tool routing. See the [full method, hybrid-model runs, and codec results](docs/jev.md).
 
-Typical agent flow (token heavy):
+The token and model-cost totals include the model call that creates the first belief snapshot, every update call, its output, and the saved beliefs sent back as input. Local snapshot serialization and storage are outside the dollar estimate. The main chat comparisons start fresh; a separate backfill from an existing conversation is also recorded in the method notes.
 
-```txt
-Step 1 LLM: parse user message
-Step 2 LLM: decide intent
-Step 3 LLM: decide tool
-Step 4 LLM: interpret result
-Step 5 LLM: decide next action
-```
-
-BeliefLang flow:
-
-```txt
-natural language -> belief extraction
-beliefs -> rules -> tools
-```
-
-Why this is useful:
-
-- less token usage
-- more deterministic execution
-- better debugging
-- clear thresholds
-- lower hallucination risk
-- reusable state
-- auditable decisions
+## Tiny example
 
 ```bel
 belief intent exclusive closed {
@@ -58,44 +35,9 @@ belief intent exclusive closed {
   unknown: 0.06
 }
 
-belief user multi closed {
-  budget_sensitive: 0.91
-  prefers_direct: 0.84
-}
-
-when confidence(intent.book_flight) > 0.7 && user.prefers_direct > 0.5:
-  call search_flights()
-
-when entropy(intent) > 0.4 || confidence(intent.other) > 0.1:
-  ask_user("What exactly do you want to book?")
-```
-
-With dynamic updates:
-
-```bel
-let message = "I need a cheap direct flight"
-
-observe user_message(message)
-infer beliefs from user_message
-
-let extracted = call extract_patch()
-merge beliefs from extracted
-
 when confidence(intent.book_flight) > 0.7:
-  call rank_flights()
+  call search_flights()
 ```
-
-## Why
-
-Current AI systems repeatedly pass large natural-language context into LLMs. That is expensive and brittle.
-
-BeliefLang explores a smaller execution model:
-
-```txt
-natural language -> belief state -> rules -> tools -> observations -> updated belief state
-```
-
-The goal is to make uncertain state explicit, inspectable, and executable.
 
 ## Install
 
@@ -121,6 +63,45 @@ During local development:
 ```bash
 npm run dev
 ```
+
+## Jev and ChatGPT inference
+
+BeliefLang can use TypeSafe's Jev model to infer beliefs from text. Set `TYPESAFE_API_KEY`, then run:
+
+```bash
+npm run build
+node --env-file-if-exists=.env dist/src/cli.js run examples/jev_intent.bel --engine jev --usage
+npm run benchmark:jev
+```
+
+You can also use an OpenAI GPT model with `OPENAI_API_KEY`:
+
+```bash
+node --env-file-if-exists=.env dist/src/cli.js run examples/chatgpt_hotel.bel --engine chatgpt --usage --trace
+node --env-file-if-exists=.env dist/src/cli.js run examples/chatgpt_unknown.bel --engine chatgpt --usage
+npm run benchmark:chatgpt
+```
+
+Set both API keys and run `npm run benchmark:compare` to measure Jev and GPT on the same cases. The benchmark reports provider token usage and decision accuracy. See [the integration plan and benchmark method](docs/jev.md).
+
+For a direct GPT routing baseline versus the current BeliefLang workflow, run `npm run benchmark:before-after`. On the eight-case one-step routing test, direct GPT used fewer reported tokens than either BeliefLang path; see [the recorded results](benchmarks/results/travel-route-2026-10-15.json). This benchmark does not test whether reusing beliefs across multiple decisions saves tokens.
+
+For a multi-turn chat that reuses saved beliefs, run `npm run chatbot` with GPT or `CHAT_ENGINE=jev npm run chatbot` with Jev. Each new message is sent with the prior belief snapshot, and the updated snapshot is saved locally. For a live GPT baseline with your own messages, run `CHAT_MODE=full-history npm run chatbot`. It makes a real API call on each turn and resends the complete conversation so far. Each mode saves its state in a separate ignored file and prints provider token usage per turn. Run `npm run benchmark:chat-snapshot` to compare the two GPT context strategies on labeled scripted conversations, or `npm run benchmark:chat-jev` to test Jev snapshot updates. In the [20-turn GPT comparison](benchmarks/results/travel-chat-snapshot-2026-10-15.json), the snapshot path used 29.5% fewer reported tokens with the same 20/20 exact matches on the labeled fields. See [the limits of that result](docs/jev.md).
+
+To create the first snapshot with GPT-6 Luna and continue with Jev, set both API keys and run `CHAT_ENGINE=jev CHAT_SEED_MODEL=gpt-6-luna npm run chatbot`. For GPT-4.1 nano updates, run `OPENAI_MODEL=gpt-4.1-nano-2025-04-14 CHAT_SEED_MODEL=gpt-6-luna npm run chatbot`. The first message uses the seed model; later messages use the chosen update engine. Run `npm run benchmark:seed-continuation` to compare these paths with single-engine baselines. In [two 20-turn runs](docs/jev.md#strong-seed-then-cheap-updates), Jev alone scored 20/20 twice at about $0.000504 estimated model cost per run. GPT-6 Luna then Jev scored 20/20 and 18/20 at about $0.000556 and $0.000557, including the seed calls. The stronger seed did not reliably improve this small test.
+
+Run `npm run benchmark:chat-market` for a second live comparison: provider-managed history with prompt caching, forced provider compaction, a BeliefLang JSON snapshot, and a five-character encoded snapshot. It records provider cache usage, labeled accuracy, latency, and estimated GPT-6 Luna model charges. The [recorded run](benchmarks/results/travel-chat-market-2026-10-15.json) and [method notes](docs/jev.md) show the accuracy tradeoff of the encoded state.
+
+Run `npm run benchmark:chat-settled` to compare a fresh full-snapshot baseline with the 0.90 settled-field policy. The [two recorded runs](docs/jev.md#settling-confident-fields) include the first model call that creates the snapshot and report every turn's provider tokens and label match.
+
+Run `npm run benchmark:jev-context` to compare direct Jev routing, full-history Jev with BeliefLang rules, ordinary saved beliefs, and change-only saved beliefs. Add `-- --fresh` or `-- --holdout` for separate 20-turn sets. Every path makes real Jev calls and dispatches local mock tools. The [Jev results and limits](docs/jev.md#jev-direct-action-full-history-or-saved-beliefs) show both the ordinary snapshot misses and the compact change-only improvement.
+Run `CHAT_ENGINE=jev JEV_UPDATE_MODE=delta npm run chatbot` to try the compact change-only Jev updater interactively. It saves a separate `.belieflang-chat-jev-delta.json` file. Explicit preference changes become hard 0/1 values; use the mode as an experimental demo.
+
+To repeat the older-model test with provider-held history and saved beliefs, run `OPENAI_MODEL=gpt-4.1-nano-2025-04-14 CHAT_BENCHMARK_PROMPT=focused npm run benchmark:chat-market -- provider_history belief_snapshot`. Run `npm run benchmark:weak-delta` to try a separate design in which the model reports only changes and BeliefLang preserves the other fields. See the [older-model results and limits](docs/jev.md#older-model-accuracy-check).
+
+Run `npm run benchmark:hybrid-seed` to compare a GPT-6 Luna seed, a GPT-4.1 nano seed, and nano reading full history from an existing five-message chat. The [hybrid results](docs/jev.md#strong-model-snapshot-weak-model-updates) include the seed calls in the token and cost totals.
+
+Run `CHAT_MODE=coded npm run chatbot` to try the selected ten-character encoded snapshot interactively. It persists only the five quantized belief values in `.belieflang-chat-chatgpt-coded.json`. Run `npm run benchmark:chat-code` to compare all codec candidates, or `npm run benchmark:chat-code -- labeled_10` for the selected format. The [codec sweep](docs/jev.md) retains the shorter one-error result alongside the passing format.
 
 ## Current features
 
