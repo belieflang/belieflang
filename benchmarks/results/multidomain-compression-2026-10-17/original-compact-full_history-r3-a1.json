@@ -1,0 +1,720 @@
+{
+  "benchmark": "multidomain-beliefs-v1",
+  "status": "failed",
+  "created_at": "2026-10-17T20:55:13.444Z",
+  "updated_at": "2026-10-17T20:57:29.406Z",
+  "model": "gpt-6-luna",
+  "prompt_variant": "compact",
+  "suite": "original",
+  "reasoning_effort": "none",
+  "node_version": "v25.1.0",
+  "fixtures": {
+    "conversations": 10,
+    "turns": 100,
+    "domains": [
+      "travel",
+      "shopping",
+      "support",
+      "planning",
+      "writing"
+    ]
+  },
+  "fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+  "implementation_sha256": "3776ce0bc136900674bb020bac10222fbe3ef257b65867cb62e2a318e904c447",
+  "runs": 1,
+  "workflows": [
+    "full_history"
+  ],
+  "workflow_order_by_repetition": [
+    [
+      "full_history"
+    ]
+  ],
+  "expected_calls": 100,
+  "completed_calls": 13,
+  "pricing_usd_per_million": {
+    "input": 0.1,
+    "cached_input": 0.01,
+    "cache_write": 0.125,
+    "output": 0.5,
+    "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+  },
+  "instructions_by_domain": {
+    "travel": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: book_flight (find or book a flight); book_hotel (find or book a hotel); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for budget_sensitive (the traveler currently prioritizes low prices); prefers_direct (the traveler currently prefers nonstop flights). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+    "shopping": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: shop_phone (choose or buy a phone); shop_laptop (choose or buy a laptop); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for budget_sensitive (the buyer currently prioritizes low prices); prefers_new (the buyer currently requires a new, not used or refurbished, device). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+    "support": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: debug_api (troubleshoot an API/service); debug_database (troubleshoot a database/query); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for urgent (the incident currently requires urgent handling); allow_restart (the user currently permits a service restart as a remedial action). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+    "planning": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: schedule_meeting (schedule or reschedule a meeting); prepare_report (prepare or revise a report); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for deadline_flexible (the deadline can currently move); delegate_ok (the user currently permits delegating work to teammates). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+    "writing": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: draft_email (draft an email); draft_message (draft a chat/direct message); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for concise (the user currently prefers concise writing); formal (the user currently prefers formal tone). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON."
+  },
+  "methodology": "Synthetic labeled conversations; identical domain instructions/schema across paths. Full history resends user messages only; provider history retains model outputs too. Snapshot sends only BeliefRuntime state and latest message. Every creation/update call counted. Latency includes response body, parsing and runtime infer merge, excludes local snapshot load/save and report writes. Serial calls, rotating workflow order, no retries, 120s request timeout. Cache reads/writes are disjoint subsets of input; absent cache fields treated as zero. Cost uses explicit supplied rates only; excludes storage, serialization, taxes and failed/unreported calls. Partial reports must not be used for workflow comparisons.",
+  "results": {
+    "full_history": {
+      "turns": 13,
+      "exact_match_turns": 13,
+      "exact_match_rate": 1,
+      "intent_correct": 13,
+      "intent_accuracy": 1,
+      "preference_fields_correct": 26,
+      "preference_fields_total": 26,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 4467,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 590,
+        "total_tokens": 5057
+      },
+      "median_latency_ms": 1128,
+      "p95_latency_ms": 1917,
+      "estimated_usd": 0.0007417
+    }
+  },
+  "by_domain": {
+    "travel": {
+      "full_history": {
+        "turns": 13,
+        "exact_match_turns": 13,
+        "exact_match_rate": 1,
+        "intent_correct": 13,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 26,
+        "preference_fields_total": 26,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 4467,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 590,
+          "total_tokens": 5057
+        },
+        "median_latency_ms": 1128,
+        "p95_latency_ms": 1917,
+        "estimated_usd": 0.0007417
+      }
+    },
+    "shopping": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    },
+    "support": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    },
+    "planning": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    },
+    "writing": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    }
+  },
+  "by_repetition": {
+    "1": {
+      "full_history": {
+        "turns": 13,
+        "exact_match_turns": 13,
+        "exact_match_rate": 1,
+        "intent_correct": 13,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 26,
+        "preference_fields_total": 26,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 4467,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 590,
+          "total_tokens": 5057
+        },
+        "median_latency_ms": 1128,
+        "p95_latency_ms": 1917,
+        "estimated_usd": 0.0007417
+      }
+    }
+  },
+  "comparisons": {},
+  "error": "full_history repetition 1 travel_osaka turn 4: The operation was aborted due to timeout",
+  "failure_note": "Failed request may have incurred charges absent from reported usage; remaining calls were not attempted.",
+  "rows": [
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 1,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 262,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 304
+      },
+      "estimated_usd": 0.0000472,
+      "latency_ms": 1504
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 2,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 284,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 326
+      },
+      "estimated_usd": 0.00004940000000000001,
+      "latency_ms": 1111
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 3,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0.98,
+          "book_hotel": 0.01,
+          "unknown": 0.01
+        },
+        "user": {
+          "budget_sensitive": 0.99,
+          "prefers_direct": 0.99
+        }
+      },
+      "usage": {
+        "input_tokens": 306,
+        "output_tokens": 52,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 358
+      },
+      "estimated_usd": 0.0000566,
+      "latency_ms": 1224
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 4,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0.02,
+          "book_hotel": 0.97,
+          "unknown": 0.01
+        },
+        "user": {
+          "budget_sensitive": 0.99,
+          "prefers_direct": 0.99
+        }
+      },
+      "usage": {
+        "input_tokens": 330,
+        "output_tokens": 52,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 382
+      },
+      "estimated_usd": 0.000059,
+      "latency_ms": 1270
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 5,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0.01,
+          "book_hotel": 0.98,
+          "unknown": 0.01
+        },
+        "user": {
+          "budget_sensitive": 0.99,
+          "prefers_direct": 0.98
+        }
+      },
+      "usage": {
+        "input_tokens": 352,
+        "output_tokens": 52,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 404
+      },
+      "estimated_usd": 0.0000612,
+      "latency_ms": 1288
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 6,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0.99,
+          "book_hotel": 0.005,
+          "unknown": 0.005
+        },
+        "user": {
+          "budget_sensitive": 0.99,
+          "prefers_direct": 0.01
+        }
+      },
+      "usage": {
+        "input_tokens": 373,
+        "output_tokens": 52,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 425
+      },
+      "estimated_usd": 0.00006330000000000001,
+      "latency_ms": 1175
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 7,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0.99,
+          "prefers_direct": 0.01
+        }
+      },
+      "usage": {
+        "input_tokens": 391,
+        "output_tokens": 46,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 437
+      },
+      "estimated_usd": 0.0000621,
+      "latency_ms": 1068
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 8,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 412,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 454
+      },
+      "estimated_usd": 0.00006220000000000001,
+      "latency_ms": 1917
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 9,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 436,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 478
+      },
+      "estimated_usd": 0.0000646,
+      "latency_ms": 1115
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 10,
+      "expected": {
+        "intent": "unknown",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "unknown",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 0,
+          "unknown": 1
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 460,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 502
+      },
+      "estimated_usd": 0.000067,
+      "latency_ms": 1128
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_osaka",
+      "domain": "travel",
+      "turn": 1,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 265,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 307
+      },
+      "estimated_usd": 0.0000475,
+      "latency_ms": 1054
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_osaka",
+      "domain": "travel",
+      "turn": 2,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 287,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 329
+      },
+      "estimated_usd": 0.0000497,
+      "latency_ms": 1084
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_osaka",
+      "domain": "travel",
+      "turn": 3,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 309,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 351
+      },
+      "estimated_usd": 0.00005190000000000001,
+      "latency_ms": 969
+    }
+  ]
+}

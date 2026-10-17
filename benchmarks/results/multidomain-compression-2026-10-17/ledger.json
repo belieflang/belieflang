@@ -1,0 +1,176 @@
+{
+  "status": "completed",
+  "updated_at": "2026-10-17T21:05:26.019Z",
+  "completed_passes": 15,
+  "expected_passes": 15,
+  "resumptions": [
+    {
+      "created_at": "2026-10-17T20:57:36.961Z",
+      "previous_error": "full_history repetition 1 travel_osaka turn 4: The operation was aborted due to timeout",
+      "policy": "Explicit resume after a stopped experiment. Reuse complete whole passes; restart incomplete passes from their first turn. Frozen inputs and inference implementation unchanged. Prior attempts preserved."
+    }
+  ],
+  "attempts": [
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 1,
+      "file": "original-compact-full_history-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 1,
+      "file": "original-compact-provider_history-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 1,
+      "file": "original-compact-belief_snapshot-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 2,
+      "file": "original-compact-provider_history-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 2,
+      "file": "original-compact-belief_snapshot-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 2,
+      "file": "original-compact-full_history-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 3,
+      "file": "original-compact-belief_snapshot-r3-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 3,
+      "file": "original-compact-full_history-r3-a1.json",
+      "attempt": 1,
+      "status": "failed",
+      "completed_calls": 13,
+      "error": "full_history repetition 1 travel_osaka turn 4: The operation was aborted due to timeout"
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 3,
+      "file": "original-compact-full_history-r3-a2.json",
+      "attempt": 2,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 3,
+      "file": "original-compact-provider_history-r3-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 1,
+      "file": "holdout-continuity-belief_snapshot-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 30
+    },
+    {
+      "suite": "holdout",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 1,
+      "file": "holdout-compact-belief_snapshot-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 30
+    },
+    {
+      "suite": "holdout",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 2,
+      "file": "holdout-compact-belief_snapshot-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 30
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 2,
+      "file": "holdout-continuity-belief_snapshot-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 30
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 3,
+      "file": "holdout-continuity-belief_snapshot-r3-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 30
+    },
+    {
+      "suite": "holdout",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 3,
+      "file": "holdout-compact-belief_snapshot-r3-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 30
+    }
+  ]
+}

@@ -1,0 +1,821 @@
+{
+  "benchmark": "multidomain-beliefs-v1",
+  "status": "completed_with_workflow_restart",
+  "created_at": "2026-10-17T21:05:25.956Z",
+  "model": "gpt-6-luna",
+  "prompt_variant": "compact",
+  "suite": "original",
+  "fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+  "implementation_sha256": "3776ce0bc136900674bb020bac10222fbe3ef257b65867cb62e2a318e904c447",
+  "pricing_usd_per_million": {
+    "input": 0.1,
+    "cached_input": 0.01,
+    "cache_write": 0.125,
+    "output": 0.5,
+    "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+  },
+  "runs": 3,
+  "workflows": [
+    "full_history",
+    "provider_history",
+    "belief_snapshot"
+  ],
+  "completed_calls": 900,
+  "expected_calls": 900,
+  "methodology": "Three complete passes per workflow, selected by the explicit provenance manifest. Failed workflow prefixes discarded from scored comparisons; their usage remains in execution_accounting. No turn-level cherry-picking or imputation. Source statuses and the execution ledger disclose any workflow restarts. Failed request usage may be unavailable, so execution cost can be a lower bound. See raw reports for prompts, timing, order, and per-turn data.",
+  "provenance": {
+    "sources": [
+      {
+        "file": "original-compact-full_history-r1-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-provider_history-r1-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-belief_snapshot-r1-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-provider_history-r2-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-belief_snapshot-r2-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-full_history-r2-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-belief_snapshot-r3-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-full_history-r3-a1.json",
+        "failed_requests_with_unreported_usage": 1
+      },
+      {
+        "file": "original-compact-full_history-r3-a2.json",
+        "failed_requests_with_unreported_usage": 0
+      },
+      {
+        "file": "original-compact-provider_history-r3-a1.json",
+        "failed_requests_with_unreported_usage": 0
+      }
+    ],
+    "selections": [
+      {
+        "source": 0,
+        "repetition": 1,
+        "as_repetition": 1,
+        "workflow": "full_history"
+      },
+      {
+        "source": 1,
+        "repetition": 1,
+        "as_repetition": 1,
+        "workflow": "provider_history"
+      },
+      {
+        "source": 2,
+        "repetition": 1,
+        "as_repetition": 1,
+        "workflow": "belief_snapshot"
+      },
+      {
+        "source": 3,
+        "repetition": 1,
+        "as_repetition": 2,
+        "workflow": "provider_history"
+      },
+      {
+        "source": 4,
+        "repetition": 1,
+        "as_repetition": 2,
+        "workflow": "belief_snapshot"
+      },
+      {
+        "source": 5,
+        "repetition": 1,
+        "as_repetition": 2,
+        "workflow": "full_history"
+      },
+      {
+        "source": 6,
+        "repetition": 1,
+        "as_repetition": 3,
+        "workflow": "belief_snapshot"
+      },
+      {
+        "source": 8,
+        "repetition": 1,
+        "as_repetition": 3,
+        "workflow": "full_history"
+      },
+      {
+        "source": 9,
+        "repetition": 1,
+        "as_repetition": 3,
+        "workflow": "provider_history"
+      }
+    ]
+  },
+  "source_statuses": [
+    {
+      "file": "original-compact-full_history-r1-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-provider_history-r1-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-belief_snapshot-r1-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-provider_history-r2-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-belief_snapshot-r2-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-full_history-r2-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-belief_snapshot-r3-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-full_history-r3-a1.json",
+      "status": "failed",
+      "completed_calls": 13,
+      "error": "full_history repetition 1 travel_osaka turn 4: The operation was aborted due to timeout"
+    },
+    {
+      "file": "original-compact-full_history-r3-a2.json",
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "file": "original-compact-provider_history-r3-a1.json",
+      "status": "completed",
+      "completed_calls": 100
+    }
+  ],
+  "execution_accounting": {
+    "scored_calls": 900,
+    "recorded_successful_calls": 913,
+    "discarded_successful_calls": 13,
+    "failed_requests_with_unreported_usage": 1,
+    "total_attempted_calls": 914,
+    "all_recorded_calls": {
+      "turns": 913,
+      "usage": {
+        "input_tokens": 365236,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 38148,
+        "total_tokens": 403384
+      },
+      "estimated_usd": 0.05559759999999997
+    },
+    "discarded_recorded_calls": {
+      "turns": 13,
+      "usage": {
+        "input_tokens": 4467,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 590,
+        "total_tokens": 5057
+      },
+      "estimated_usd": 0.0007417
+    },
+    "cost_note": "All-attempt cost includes discarded successful calls; excludes unknown charges for failed requests. Workflow comparison costs use only complete selected passes."
+  },
+  "results": {
+    "full_history": {
+      "turns": 300,
+      "exact_match_turns": 295,
+      "exact_match_rate": 0.9833333333333333,
+      "intent_correct": 299,
+      "intent_accuracy": 0.9966666666666667,
+      "preference_fields_correct": 596,
+      "preference_fields_total": 600,
+      "preference_accuracy": 0.9933333333333333,
+      "usage": {
+        "input_tokens": 102336,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 12938,
+        "total_tokens": 115274
+      },
+      "median_latency_ms": 1191,
+      "p95_latency_ms": 1596,
+      "estimated_usd": 0.016702600000000005
+    },
+    "provider_history": {
+      "turns": 300,
+      "exact_match_turns": 300,
+      "exact_match_rate": 1,
+      "intent_correct": 300,
+      "intent_accuracy": 1,
+      "preference_fields_correct": 600,
+      "preference_fields_total": 600,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 165928,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 12336,
+        "total_tokens": 178264
+      },
+      "median_latency_ms": 1163,
+      "p95_latency_ms": 1636,
+      "estimated_usd": 0.022760800000000008
+    },
+    "belief_snapshot": {
+      "turns": 300,
+      "exact_match_turns": 299,
+      "exact_match_rate": 0.9966666666666667,
+      "intent_correct": 299,
+      "intent_accuracy": 0.9966666666666667,
+      "preference_fields_correct": 600,
+      "preference_fields_total": 600,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 92505,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 12284,
+        "total_tokens": 104789
+      },
+      "median_latency_ms": 1072.5,
+      "p95_latency_ms": 1436,
+      "estimated_usd": 0.015392499999999996
+    }
+  },
+  "by_domain": {
+    "travel": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 21639,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2680,
+          "total_tokens": 24319
+        },
+        "median_latency_ms": 1261,
+        "p95_latency_ms": 1721,
+        "estimated_usd": 0.0035039000000000003
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 35527,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2724,
+          "total_tokens": 38251
+        },
+        "median_latency_ms": 1164,
+        "p95_latency_ms": 1586,
+        "estimated_usd": 0.0049146999999999975
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 18937,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2630,
+          "total_tokens": 21567
+        },
+        "median_latency_ms": 1138.5,
+        "p95_latency_ms": 1460,
+        "estimated_usd": 0.0032086999999999997
+      }
+    },
+    "shopping": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 20916,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2564,
+          "total_tokens": 23480
+        },
+        "median_latency_ms": 1219,
+        "p95_latency_ms": 1552,
+        "estimated_usd": 0.0033736000000000013
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 33606,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2460,
+          "total_tokens": 36066
+        },
+        "median_latency_ms": 1205.5,
+        "p95_latency_ms": 1637,
+        "estimated_usd": 0.0045906
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 59,
+        "exact_match_rate": 0.9833333333333333,
+        "intent_correct": 59,
+        "intent_accuracy": 0.9833333333333333,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 18910,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2488,
+          "total_tokens": 21398
+        },
+        "median_latency_ms": 1084,
+        "p95_latency_ms": 1549,
+        "estimated_usd": 0.0031350000000000006
+      }
+    },
+    "support": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 57,
+        "exact_match_rate": 0.95,
+        "intent_correct": 59,
+        "intent_accuracy": 0.9833333333333333,
+        "preference_fields_correct": 118,
+        "preference_fields_total": 120,
+        "preference_accuracy": 0.9833333333333333,
+        "usage": {
+          "input_tokens": 20328,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2535,
+          "total_tokens": 22863
+        },
+        "median_latency_ms": 1211.5,
+        "p95_latency_ms": 1692,
+        "estimated_usd": 0.0033003000000000012
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 32208,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2280,
+          "total_tokens": 34488
+        },
+        "median_latency_ms": 1155,
+        "p95_latency_ms": 1778,
+        "estimated_usd": 0.0043608000000000015
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 18375,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2356,
+          "total_tokens": 20731
+        },
+        "median_latency_ms": 1109.5,
+        "p95_latency_ms": 1528,
+        "estimated_usd": 0.0030155
+      }
+    },
+    "planning": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 59,
+        "exact_match_rate": 0.9833333333333333,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 119,
+        "preference_fields_total": 120,
+        "preference_accuracy": 0.9916666666666667,
+        "usage": {
+          "input_tokens": 20247,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2548,
+          "total_tokens": 22795
+        },
+        "median_latency_ms": 1120,
+        "p95_latency_ms": 1414,
+        "estimated_usd": 0.0032986999999999995
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 32937,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2460,
+          "total_tokens": 35397
+        },
+        "median_latency_ms": 1138,
+        "p95_latency_ms": 1518,
+        "estimated_usd": 0.004523699999999999
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 18582,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2460,
+          "total_tokens": 21042
+        },
+        "median_latency_ms": 1038.5,
+        "p95_latency_ms": 1223,
+        "estimated_usd": 0.0030882
+      }
+    },
+    "writing": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 59,
+        "exact_match_rate": 0.9833333333333333,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 119,
+        "preference_fields_total": 120,
+        "preference_accuracy": 0.9916666666666667,
+        "usage": {
+          "input_tokens": 19206,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2611,
+          "total_tokens": 21817
+        },
+        "median_latency_ms": 1141,
+        "p95_latency_ms": 1359,
+        "estimated_usd": 0.0032261000000000004
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 31650,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2412,
+          "total_tokens": 34062
+        },
+        "median_latency_ms": 1147,
+        "p95_latency_ms": 1514,
+        "estimated_usd": 0.004371000000000001
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 17701,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2350,
+          "total_tokens": 20051
+        },
+        "median_latency_ms": 977.5,
+        "p95_latency_ms": 1394,
+        "estimated_usd": 0.0029451000000000013
+      }
+    }
+  },
+  "by_repetition": {
+    "1": {
+      "full_history": {
+        "turns": 100,
+        "exact_match_turns": 98,
+        "exact_match_rate": 0.98,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 198,
+        "preference_fields_total": 200,
+        "preference_accuracy": 0.99,
+        "usage": {
+          "input_tokens": 34112,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4352,
+          "total_tokens": 38464
+        },
+        "median_latency_ms": 1224.5,
+        "p95_latency_ms": 1721,
+        "estimated_usd": 0.0055872000000000005
+      },
+      "provider_history": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 55470,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4144,
+          "total_tokens": 59614
+        },
+        "median_latency_ms": 1188.5,
+        "p95_latency_ms": 1638,
+        "estimated_usd": 0.007619000000000002
+      },
+      "belief_snapshot": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 30793,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4102,
+          "total_tokens": 34895
+        },
+        "median_latency_ms": 1095.5,
+        "p95_latency_ms": 1634,
+        "estimated_usd": 0.005130300000000001
+      }
+    },
+    "2": {
+      "full_history": {
+        "turns": 100,
+        "exact_match_turns": 98,
+        "exact_match_rate": 0.98,
+        "intent_correct": 99,
+        "intent_accuracy": 0.99,
+        "preference_fields_correct": 199,
+        "preference_fields_total": 200,
+        "preference_accuracy": 0.995,
+        "usage": {
+          "input_tokens": 34112,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4295,
+          "total_tokens": 38407
+        },
+        "median_latency_ms": 1166,
+        "p95_latency_ms": 1558,
+        "estimated_usd": 0.005558700000000002
+      },
+      "provider_history": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 55016,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4052,
+          "total_tokens": 59068
+        },
+        "median_latency_ms": 1129,
+        "p95_latency_ms": 1464,
+        "estimated_usd": 0.007527600000000003
+      },
+      "belief_snapshot": {
+        "turns": 100,
+        "exact_match_turns": 99,
+        "exact_match_rate": 0.99,
+        "intent_correct": 99,
+        "intent_accuracy": 0.99,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 30829,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4062,
+          "total_tokens": 34891
+        },
+        "median_latency_ms": 1039.5,
+        "p95_latency_ms": 1386,
+        "estimated_usd": 0.005113899999999999
+      }
+    },
+    "3": {
+      "full_history": {
+        "turns": 100,
+        "exact_match_turns": 99,
+        "exact_match_rate": 0.99,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 199,
+        "preference_fields_total": 200,
+        "preference_accuracy": 0.995,
+        "usage": {
+          "input_tokens": 34112,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4291,
+          "total_tokens": 38403
+        },
+        "median_latency_ms": 1154,
+        "p95_latency_ms": 1537,
+        "estimated_usd": 0.005556700000000001
+      },
+      "provider_history": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 55442,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4140,
+          "total_tokens": 59582
+        },
+        "median_latency_ms": 1179,
+        "p95_latency_ms": 1742,
+        "estimated_usd": 0.007614200000000002
+      },
+      "belief_snapshot": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 30883,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4120,
+          "total_tokens": 35003
+        },
+        "median_latency_ms": 1074.5,
+        "p95_latency_ms": 1325,
+        "estimated_usd": 0.0051483
+      }
+    }
+  },
+  "comparisons": {
+    "snapshot_vs_full_history_token_reduction_percent": 9.095719763346466,
+    "snapshot_vs_full_history_accuracy_change_percentage_points": 1.333333333333342,
+    "snapshot_vs_full_history_cost_reduction_percent": 7.84368900650203,
+    "snapshot_vs_provider_history_token_reduction_percent": 41.21695911681551,
+    "snapshot_vs_provider_history_accuracy_change_percentage_points": -0.33333333333332993,
+    "snapshot_vs_provider_history_cost_reduction_percent": 32.37276369899129
+  },
+  "source_sha256": [
+    {
+      "file": "original-compact-full_history-r1-a1.json",
+      "sha256": "30a589eaac693f9e151b6a28891f4b0a31708c59d77cbf05d4206250296ce0dd"
+    },
+    {
+      "file": "original-compact-provider_history-r1-a1.json",
+      "sha256": "944c8138f60c00fc5befeddb3ef3ad91589d3be8090179b18e7a3211c464f4fa"
+    },
+    {
+      "file": "original-compact-belief_snapshot-r1-a1.json",
+      "sha256": "7946782f7b6598f690725dbf7629144133f7ee54da77724d2161b56f7cdd2d08"
+    },
+    {
+      "file": "original-compact-provider_history-r2-a1.json",
+      "sha256": "b43abbe15fe366315aca05dd1c00d136ffe970ee12ad85969572e09afb83bbf2"
+    },
+    {
+      "file": "original-compact-belief_snapshot-r2-a1.json",
+      "sha256": "8ebeeee2f3804cb4bf832f98663001b6ef6389e08b6dd94a3b2e1ca97d426df0"
+    },
+    {
+      "file": "original-compact-full_history-r2-a1.json",
+      "sha256": "14d47b44cb86af2574a46012f26a93eed88184f92b1c538bb21aa0cea4e3c73f"
+    },
+    {
+      "file": "original-compact-belief_snapshot-r3-a1.json",
+      "sha256": "2f7e944f24156db5e35ca85ae7cf7e64a31d31e1ad3b2ecf358383bd68ce731a"
+    },
+    {
+      "file": "original-compact-full_history-r3-a1.json",
+      "sha256": "05c37e03fa03eca253332fda7b7c7d1219f46718b8cfe947a2ce091cf9d06a82"
+    },
+    {
+      "file": "original-compact-full_history-r3-a2.json",
+      "sha256": "86537554cb0fe3ced827f06c9f180f96107f7206060025ab1d01f5d228923dcf"
+    },
+    {
+      "file": "original-compact-provider_history-r3-a1.json",
+      "sha256": "651b3090e4ed2967c9448b7a10fd42e746adc626d6a1b156da64717fb695eeb2"
+    }
+  ]
+}

@@ -76,5 +76,30 @@ globalThis.fetch = async (_url, init) => {
     const preserved = JSON.parse(await readFile(join(stopped, "ledger-before-resume-1.json"), "utf8"));
     assert.equal(preserved.status, "failed");
     assert.equal(preserved.attempts.length, 1);
+    const compactOutput = join(directory, "compact");
+    const compact = spawnSync(process.execPath, ["dist/src/multidomain_experiment.js", compactOutput, "--candidate", "compact"], {
+      env, encoding: "utf8", timeout: 30_000,
+    });
+    assert.equal(compact.status, 0, compact.stderr);
+    const compactRead = async (file: string) => JSON.parse(await readFile(join(compactOutput, file), "utf8"));
+    const compactPlan = await compactRead("plan.json");
+    assert.deepEqual(Object.keys(compactPlan.prompts_by_variant), ["continuity", "compact"]);
+    assert.equal(compactPlan.model, "mock-model");
+    assert.equal(compactPlan.passes.slice(0, 9).every((p: { prompt: string }) => p.prompt === "compact"), true);
+    assert.deepEqual(compactPlan.passes.slice(9).map((p: { prompt: string }) => p.prompt),
+      ["continuity", "compact", "compact", "continuity", "continuity", "compact"]);
+    assert.equal((await compactRead("summary.json")).prompt_variant, "compact");
+    const compactFresh = await compactRead("holdout-summary.json");
+    assert.equal(compactFresh.results.compact.turns, 90);
+    assert.equal(compactFresh.results.continuity.turns, 90);
+    assert.equal(compactFresh.results.original, undefined);
+    assert.equal(compactFresh.experiment_execution_accounting.total_attempted_calls, 1080);
+    for (const args of [["--candidate"], ["--candidate", "bad"], ["--resume", "--resume"]]) {
+      const invalid = spawnSync(process.execPath, ["dist/src/multidomain_experiment.js", join(directory, "invalid"), ...args], {
+        env, encoding: "utf8", timeout: 30_000,
+      });
+      assert.equal(invalid.status, 1);
+      assert.match(invalid.stderr, /invalid experiment argument|duplicate argument/);
+    }
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

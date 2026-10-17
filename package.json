@@ -29,7 +29,8 @@
     "benchmark:multidomain:validate": "npm run benchmark:multidomain -- --validate",
     "benchmark:multidomain:report": "npm run build && node dist/src/multidomain_report.js",
     "benchmark:multidomain:experiment": "npm run build && node --env-file-if-exists=.env dist/src/multidomain_experiment.js",
-    "benchmark:multidomain:continuity": "npm run benchmark:multidomain -- --prompt continuity"
+    "benchmark:multidomain:continuity": "npm run benchmark:multidomain -- --prompt continuity",
+    "benchmark:multidomain:compact": "npm run benchmark:multidomain -- --prompt compact"
   },
   "keywords": [
     "ai",

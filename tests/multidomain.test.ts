@@ -45,7 +45,7 @@ test("pricing separates uncached input, cache reads, cache writes and output", (
 });
 
 test("all strategies use common schemas, isolate conversations and avoid leaking labels/history into snapshots", async () => {
-  for (const cases of [conversations, holdoutConversations]) for (const prompt of ["original", "continuity"] as const) for (const workflow of WORKFLOWS) {
+  for (const cases of [conversations, holdoutConversations]) for (const prompt of ["original", "continuity", "compact"] as const) for (const workflow of WORKFLOWS) {
     const turnsPerConversation = cases[0].turns.length;
     const totalTurns = cases.length * turnsPerConversation;
     let call = 0;
@@ -148,6 +148,9 @@ test("continuity prompt preserves the recorded original variant and selects expl
   const baseline = JSON.parse(await readFile("benchmarks/results/multidomain-2026-10-17-attempt-1-failed.json", "utf8"));
   for (const [key, domain] of Object.entries(domains)) {
     assert.equal(instructions(domain, "original"), baseline.instructions_by_domain[key]);
+    const compact = instructions(domain, "compact");
+    assert.ok(compact.length < instructions(domain, "continuity").length * 0.7);
+    assert.equal(parseArgs(["--prompt", "compact"]).prompt, "compact");
   }
   assert.match(continuity, /Intent persists across follow-up/);
   assert.match(continuity, /standalone unrelated request or explicit pause/);

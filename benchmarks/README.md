@@ -98,3 +98,21 @@ to reuse complete passes and restart the incomplete pass. Resume rejects changes
 to frozen inputs, model, pricing or inference implementation and retains the
 stopped ledger, failed prefix, and total overhead. It requires a failed experiment;
 it cannot overwrite a completed experiment or attach to an active one.
+
+## Prompt compression
+
+`--prompt compact` expresses the continuity rules with shorter instructions.
+It is experimental: recorded snapshot cost fell 17.99% versus the longer prompt,
+but accuracy fell from 300/300 to 299/300, failing the no-regression rule.
+Run the frozen three-repetition experiment with:
+
+```bash
+npm run benchmark:multidomain:experiment -- \
+  benchmarks/results/multidomain-compression-local --candidate compact
+```
+
+It compares all three workflows on the original suite, plus continuity versus
+compact snapshots on the reused synthetic regression suite (1,080 scored calls).
+Append `--resume` after inspecting a stopped run; preserve `--candidate compact`.
+For a single condition, use `npm run benchmark:multidomain:compact -- --runs 3`.
+See [the frozen methodology and findings](../docs/multidomain-compression.md).

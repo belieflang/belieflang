@@ -1,0 +1,1381 @@
+{
+  "benchmark": "multidomain-beliefs-v1",
+  "status": "completed",
+  "created_at": "2026-10-17T21:04:16.257Z",
+  "updated_at": "2026-10-17T21:04:53.545Z",
+  "model": "gpt-6-luna",
+  "prompt_variant": "continuity",
+  "suite": "holdout",
+  "reasoning_effort": "none",
+  "node_version": "v25.1.0",
+  "fixtures": {
+    "conversations": 5,
+    "turns": 30,
+    "domains": [
+      "travel",
+      "shopping",
+      "support",
+      "planning",
+      "writing"
+    ]
+  },
+  "fixture_sha256": "3c96707e7f515dbe455c2028588ec922ef1a8c9ca616e68943bb24dab79b8d79",
+  "implementation_sha256": "3776ce0bc136900674bb020bac10222fbe3ef257b65867cb62e2a318e904c447",
+  "runs": 1,
+  "workflows": [
+    "belief_snapshot"
+  ],
+  "workflow_order_by_repetition": [
+    [
+      "belief_snapshot"
+    ]
+  ],
+  "expected_calls": 30,
+  "completed_calls": 30,
+  "pricing_usd_per_million": {
+    "input": 0.1,
+    "cached_input": 0.01,
+    "cache_write": 0.125,
+    "output": 0.5,
+    "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+  },
+  "instructions_by_domain": {
+    "travel": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: book_flight (find or book a flight); book_hotel (find or book a hotel); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for budget_sensitive (the traveler currently prioritizes low prices); prefers_direct (the traveler currently prefers nonstop flights). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "shopping": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: shop_phone (choose or buy a phone); shop_laptop (choose or buy a laptop); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for budget_sensitive (the buyer currently prioritizes low prices); prefers_new (the buyer currently requires a new, not used or refurbished, device). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "support": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: debug_api (troubleshoot an API/service); debug_database (troubleshoot a database/query); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for urgent (the incident currently requires urgent handling); allow_restart (the user currently permits a service restart as a remedial action). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "planning": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: schedule_meeting (schedule or reschedule a meeting); prepare_report (prepare or revise a report); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for deadline_flexible (the deadline can currently move); delegate_ok (the user currently permits delegating work to teammates). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "writing": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: draft_email (draft an email); draft_message (draft a chat/direct message); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for concise (the user currently prefers concise writing); formal (the user currently prefers formal tone). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown."
+  },
+  "methodology": "Synthetic labeled conversations; identical domain instructions/schema across paths. Full history resends user messages only; provider history retains model outputs too. Snapshot sends only BeliefRuntime state and latest message. Every creation/update call counted. Latency includes response body, parsing and runtime infer merge, excludes local snapshot load/save and report writes. Serial calls, rotating workflow order, no retries, 120s request timeout. Cache reads/writes are disjoint subsets of input; absent cache fields treated as zero. Cost uses explicit supplied rates only; excludes storage, serialization, taxes and failed/unreported calls. Partial reports must not be used for workflow comparisons.",
+  "results": {
+    "belief_snapshot": {
+      "turns": 30,
+      "exact_match_turns": 30,
+      "exact_match_rate": 1,
+      "intent_correct": 30,
+      "intent_accuracy": 1,
+      "preference_fields_correct": 60,
+      "preference_fields_total": 60,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 12621,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 1204,
+        "total_tokens": 13825
+      },
+      "median_latency_ms": 1228,
+      "p95_latency_ms": 1494,
+      "estimated_usd": 0.0018640999999999998
+    }
+  },
+  "by_domain": {
+    "travel": {
+      "belief_snapshot": {
+        "turns": 6,
+        "exact_match_turns": 6,
+        "exact_match_rate": 1,
+        "intent_correct": 6,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 12,
+        "preference_fields_total": 12,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 2543,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 252,
+          "total_tokens": 2795
+        },
+        "median_latency_ms": 1346,
+        "p95_latency_ms": 1652,
+        "estimated_usd": 0.0003803000000000001
+      }
+    },
+    "shopping": {
+      "belief_snapshot": {
+        "turns": 6,
+        "exact_match_turns": 6,
+        "exact_match_rate": 1,
+        "intent_correct": 6,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 12,
+        "preference_fields_total": 12,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 2555,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 246,
+          "total_tokens": 2801
+        },
+        "median_latency_ms": 1079.5,
+        "p95_latency_ms": 1181,
+        "estimated_usd": 0.00037849999999999993
+      }
+    },
+    "support": {
+      "belief_snapshot": {
+        "turns": 6,
+        "exact_match_turns": 6,
+        "exact_match_rate": 1,
+        "intent_correct": 6,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 12,
+        "preference_fields_total": 12,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 2520,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 232,
+          "total_tokens": 2752
+        },
+        "median_latency_ms": 1350,
+        "p95_latency_ms": 1471,
+        "estimated_usd": 0.000368
+      }
+    },
+    "planning": {
+      "belief_snapshot": {
+        "turns": 6,
+        "exact_match_turns": 6,
+        "exact_match_rate": 1,
+        "intent_correct": 6,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 12,
+        "preference_fields_total": 12,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 2548,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 246,
+          "total_tokens": 2794
+        },
+        "median_latency_ms": 1269,
+        "p95_latency_ms": 1438,
+        "estimated_usd": 0.00037779999999999997
+      }
+    },
+    "writing": {
+      "belief_snapshot": {
+        "turns": 6,
+        "exact_match_turns": 6,
+        "exact_match_rate": 1,
+        "intent_correct": 6,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 12,
+        "preference_fields_total": 12,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 2455,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 228,
+          "total_tokens": 2683
+        },
+        "median_latency_ms": 1105,
+        "p95_latency_ms": 1494,
+        "estimated_usd": 0.0003595
+      }
+    }
+  },
+  "by_repetition": {
+    "1": {
+      "belief_snapshot": {
+        "turns": 30,
+        "exact_match_turns": 30,
+        "exact_match_rate": 1,
+        "intent_correct": 30,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 60,
+        "preference_fields_total": 60,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 12621,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 1204,
+          "total_tokens": 13825
+        },
+        "median_latency_ms": 1228,
+        "p95_latency_ms": 1494,
+        "estimated_usd": 0.0018640999999999998
+      }
+    }
+  },
+  "comparisons": {},
+  "rows": [
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_travel_bergen",
+      "domain": "travel",
+      "turn": 1,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": false,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 388,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 430
+      },
+      "estimated_usd": 0.000059800000000000003,
+      "latency_ms": 1353
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_travel_bergen",
+      "domain": "travel",
+      "turn": 2,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 430,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 472
+      },
+      "estimated_usd": 0.000064,
+      "latency_ms": 1281
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_travel_bergen",
+      "domain": "travel",
+      "turn": 3,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 433,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 475
+      },
+      "estimated_usd": 0.00006430000000000002,
+      "latency_ms": 1232
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_travel_bergen",
+      "domain": "travel",
+      "turn": 4,
+      "expected": {
+        "intent": "unknown",
+        "budget_sensitive": false,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "unknown",
+        "budget_sensitive": false,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 0,
+          "unknown": 1
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 436,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 478
+      },
+      "estimated_usd": 0.0000646,
+      "latency_ms": 1339
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_travel_bergen",
+      "domain": "travel",
+      "turn": 5,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 428,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 470
+      },
+      "estimated_usd": 0.0000638,
+      "latency_ms": 1652
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_travel_bergen",
+      "domain": "travel",
+      "turn": 6,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 428,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 470
+      },
+      "estimated_usd": 0.0000638,
+      "latency_ms": 1417
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_shopping_fieldwork",
+      "domain": "shopping",
+      "turn": 1,
+      "expected": {
+        "intent": "shop_phone",
+        "budget_sensitive": true,
+        "prefers_new": false
+      },
+      "predicted": {
+        "intent": "shop_phone",
+        "budget_sensitive": true,
+        "prefers_new": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "shop_phone": 1,
+          "shop_laptop": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_new": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 385,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 426
+      },
+      "estimated_usd": 0.000059,
+      "latency_ms": 1089
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_shopping_fieldwork",
+      "domain": "shopping",
+      "turn": 2,
+      "expected": {
+        "intent": "shop_phone",
+        "budget_sensitive": true,
+        "prefers_new": true
+      },
+      "predicted": {
+        "intent": "shop_phone",
+        "budget_sensitive": true,
+        "prefers_new": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "shop_phone": 1,
+          "shop_laptop": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_new": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 435,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 476
+      },
+      "estimated_usd": 0.000064,
+      "latency_ms": 1031
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_shopping_fieldwork",
+      "domain": "shopping",
+      "turn": 3,
+      "expected": {
+        "intent": "unknown",
+        "budget_sensitive": true,
+        "prefers_new": true
+      },
+      "predicted": {
+        "intent": "unknown",
+        "budget_sensitive": true,
+        "prefers_new": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "shop_phone": 0,
+          "shop_laptop": 0,
+          "unknown": 1
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_new": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 437,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 478
+      },
+      "estimated_usd": 0.0000642,
+      "latency_ms": 1048
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_shopping_fieldwork",
+      "domain": "shopping",
+      "turn": 4,
+      "expected": {
+        "intent": "shop_laptop",
+        "budget_sensitive": true,
+        "prefers_new": true
+      },
+      "predicted": {
+        "intent": "shop_laptop",
+        "budget_sensitive": true,
+        "prefers_new": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "shop_phone": 0,
+          "shop_laptop": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_new": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 435,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 476
+      },
+      "estimated_usd": 0.000064,
+      "latency_ms": 1181
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_shopping_fieldwork",
+      "domain": "shopping",
+      "turn": 5,
+      "expected": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": true
+      },
+      "predicted": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "shop_phone": 0,
+          "shop_laptop": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_new": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 431,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 472
+      },
+      "estimated_usd": 0.0000636,
+      "latency_ms": 1070
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_shopping_fieldwork",
+      "domain": "shopping",
+      "turn": 6,
+      "expected": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "predicted": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "shop_phone": 0,
+          "shop_laptop": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_new": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 432,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 473
+      },
+      "estimated_usd": 0.0000637,
+      "latency_ms": 1172
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_support_inventory",
+      "domain": "support",
+      "turn": 1,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": false,
+        "allow_restart": false
+      },
+      "predicted": {
+        "intent": "debug_database",
+        "urgent": false,
+        "allow_restart": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "debug_api": 0,
+          "debug_database": 1,
+          "unknown": 0
+        },
+        "user": {
+          "urgent": 0,
+          "allow_restart": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 381,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 419
+      },
+      "estimated_usd": 0.0000571,
+      "latency_ms": 1112
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_support_inventory",
+      "domain": "support",
+      "turn": 2,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "predicted": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "debug_api": 0,
+          "debug_database": 1,
+          "unknown": 0
+        },
+        "user": {
+          "urgent": 1,
+          "allow_restart": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 426,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 464
+      },
+      "estimated_usd": 0.0000616,
+      "latency_ms": 1471
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_support_inventory",
+      "domain": "support",
+      "turn": 3,
+      "expected": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "predicted": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "debug_api": 0,
+          "debug_database": 0,
+          "unknown": 1
+        },
+        "user": {
+          "urgent": 1,
+          "allow_restart": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 431,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 469
+      },
+      "estimated_usd": 0.0000621,
+      "latency_ms": 1271
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_support_inventory",
+      "domain": "support",
+      "turn": 4,
+      "expected": {
+        "intent": "debug_api",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "predicted": {
+        "intent": "debug_api",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "debug_api": 1,
+          "debug_database": 0,
+          "unknown": 0
+        },
+        "user": {
+          "urgent": 1,
+          "allow_restart": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 432,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 470
+      },
+      "estimated_usd": 0.00006220000000000001,
+      "latency_ms": 1378
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_support_inventory",
+      "domain": "support",
+      "turn": 5,
+      "expected": {
+        "intent": "debug_api",
+        "urgent": false,
+        "allow_restart": true
+      },
+      "predicted": {
+        "intent": "debug_api",
+        "urgent": false,
+        "allow_restart": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "debug_api": 1,
+          "debug_database": 0,
+          "unknown": 0
+        },
+        "user": {
+          "urgent": 0.01,
+          "allow_restart": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 424,
+        "output_tokens": 40,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 464
+      },
+      "estimated_usd": 0.00006240000000000001,
+      "latency_ms": 1337
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_support_inventory",
+      "domain": "support",
+      "turn": 6,
+      "expected": {
+        "intent": "debug_api",
+        "urgent": false,
+        "allow_restart": false
+      },
+      "predicted": {
+        "intent": "debug_api",
+        "urgent": false,
+        "allow_restart": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "debug_api": 1,
+          "debug_database": 0,
+          "unknown": 0
+        },
+        "user": {
+          "urgent": 0.01,
+          "allow_restart": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 426,
+        "output_tokens": 40,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 466
+      },
+      "estimated_usd": 0.0000626,
+      "latency_ms": 1363
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_planning_museum",
+      "domain": "planning",
+      "turn": 1,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": false,
+        "delegate_ok": false
+      },
+      "predicted": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": false,
+        "delegate_ok": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "schedule_meeting": 1,
+          "prepare_report": 0,
+          "unknown": 0
+        },
+        "user": {
+          "deadline_flexible": 0,
+          "delegate_ok": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 383,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 424
+      },
+      "estimated_usd": 0.000058800000000000006,
+      "latency_ms": 1153
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_planning_museum",
+      "domain": "planning",
+      "turn": 2,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "predicted": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "schedule_meeting": 1,
+          "prepare_report": 0,
+          "unknown": 0
+        },
+        "user": {
+          "deadline_flexible": 1,
+          "delegate_ok": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 430,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 471
+      },
+      "estimated_usd": 0.0000635,
+      "latency_ms": 1438
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_planning_museum",
+      "domain": "planning",
+      "turn": 3,
+      "expected": {
+        "intent": "prepare_report",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "predicted": {
+        "intent": "prepare_report",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "schedule_meeting": 0,
+          "prepare_report": 1,
+          "unknown": 0
+        },
+        "user": {
+          "deadline_flexible": 1,
+          "delegate_ok": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 430,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 471
+      },
+      "estimated_usd": 0.0000635,
+      "latency_ms": 1314
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_planning_museum",
+      "domain": "planning",
+      "turn": 4,
+      "expected": {
+        "intent": "prepare_report",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "predicted": {
+        "intent": "prepare_report",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "schedule_meeting": 0,
+          "prepare_report": 1,
+          "unknown": 0
+        },
+        "user": {
+          "deadline_flexible": 1,
+          "delegate_ok": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 433,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 474
+      },
+      "estimated_usd": 0.0000638,
+      "latency_ms": 1097
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_planning_museum",
+      "domain": "planning",
+      "turn": 5,
+      "expected": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "predicted": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "schedule_meeting": 0,
+          "prepare_report": 0,
+          "unknown": 1
+        },
+        "user": {
+          "deadline_flexible": 1,
+          "delegate_ok": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 435,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 476
+      },
+      "estimated_usd": 0.000064,
+      "latency_ms": 1224
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_planning_museum",
+      "domain": "planning",
+      "turn": 6,
+      "expected": {
+        "intent": "prepare_report",
+        "deadline_flexible": false,
+        "delegate_ok": false
+      },
+      "predicted": {
+        "intent": "prepare_report",
+        "deadline_flexible": false,
+        "delegate_ok": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "schedule_meeting": 0,
+          "prepare_report": 1,
+          "unknown": 0
+        },
+        "user": {
+          "deadline_flexible": 0,
+          "delegate_ok": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 437,
+        "output_tokens": 41,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 478
+      },
+      "estimated_usd": 0.0000642,
+      "latency_ms": 1363
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_writing_volunteers",
+      "domain": "writing",
+      "turn": 1,
+      "expected": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "predicted": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "draft_email": 0,
+          "draft_message": 1,
+          "unknown": 0
+        },
+        "user": {
+          "concise": 0,
+          "formal": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 370,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 408
+      },
+      "estimated_usd": 0.000056,
+      "latency_ms": 1494
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_writing_volunteers",
+      "domain": "writing",
+      "turn": 2,
+      "expected": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": true
+      },
+      "predicted": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "draft_email": 0,
+          "draft_message": 1,
+          "unknown": 0
+        },
+        "user": {
+          "concise": 1,
+          "formal": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 411,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 449
+      },
+      "estimated_usd": 0.000060100000000000004,
+      "latency_ms": 1161
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_writing_volunteers",
+      "domain": "writing",
+      "turn": 3,
+      "expected": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "predicted": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "draft_email": 1,
+          "draft_message": 0,
+          "unknown": 0
+        },
+        "user": {
+          "concise": 1,
+          "formal": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 417,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 455
+      },
+      "estimated_usd": 0.000060700000000000005,
+      "latency_ms": 1049
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_writing_volunteers",
+      "domain": "writing",
+      "turn": 4,
+      "expected": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": false
+      },
+      "predicted": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "draft_email": 1,
+          "draft_message": 0,
+          "unknown": 0
+        },
+        "user": {
+          "concise": 1,
+          "formal": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 411,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 449
+      },
+      "estimated_usd": 0.000060100000000000004,
+      "latency_ms": 946
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_writing_volunteers",
+      "domain": "writing",
+      "turn": 5,
+      "expected": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": false
+      },
+      "predicted": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "draft_email": 0,
+          "draft_message": 0,
+          "unknown": 1
+        },
+        "user": {
+          "concise": 0,
+          "formal": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 429,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 467
+      },
+      "estimated_usd": 0.0000619,
+      "latency_ms": 1212
+    },
+    {
+      "repetition": 1,
+      "workflow": "belief_snapshot",
+      "conversation": "holdout_writing_volunteers",
+      "domain": "writing",
+      "turn": 6,
+      "expected": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": true
+      },
+      "predicted": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "draft_email": 0,
+          "draft_message": 1,
+          "unknown": 0
+        },
+        "user": {
+          "concise": 0,
+          "formal": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 417,
+        "output_tokens": 38,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 455
+      },
+      "estimated_usd": 0.000060700000000000005,
+      "latency_ms": 956
+    }
+  ]
+}

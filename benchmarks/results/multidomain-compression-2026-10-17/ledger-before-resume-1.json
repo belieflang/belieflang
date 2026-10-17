@@ -1,0 +1,91 @@
+{
+  "status": "failed",
+  "updated_at": "2026-10-17T20:57:29.484Z",
+  "completed_passes": 7,
+  "expected_passes": 15,
+  "resumptions": [],
+  "attempts": [
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 1,
+      "file": "original-compact-full_history-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 1,
+      "file": "original-compact-provider_history-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 1,
+      "file": "original-compact-belief_snapshot-r1-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 2,
+      "file": "original-compact-provider_history-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 2,
+      "file": "original-compact-belief_snapshot-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 2,
+      "file": "original-compact-full_history-r2-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 3,
+      "file": "original-compact-belief_snapshot-r3-a1.json",
+      "attempt": 1,
+      "status": "completed",
+      "completed_calls": 100
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 3,
+      "file": "original-compact-full_history-r3-a1.json",
+      "attempt": 1,
+      "status": "failed",
+      "completed_calls": 13,
+      "error": "full_history repetition 1 travel_osaka turn 4: The operation was aborted due to timeout"
+    }
+  ],
+  "error": "full_history repetition 1 travel_osaka turn 4: The operation was aborted due to timeout"
+}

@@ -10,7 +10,7 @@ import type { BeliefState } from "./ast.js";
 
 export const WORKFLOWS = ["full_history", "provider_history", "belief_snapshot"] as const;
 export type Workflow = typeof WORKFLOWS[number];
-export const PROMPTS = ["original", "continuity"] as const;
+export const PROMPTS = ["original", "continuity", "compact"] as const;
 export type PromptVariant = typeof PROMPTS[number];
 export type Suite = "original" | "holdout";
 export type Options = { prompt: PromptVariant; suite: Suite; runs: number; workflows: Workflow[]; validate: boolean; output?: string };
@@ -46,12 +46,15 @@ export function parseArgs(argv: string[]): Options {
       opts.workflows.some(w => !WORKFLOWS.includes(w))) {
     throw new Error(`--workflows must list unique choices of ${WORKFLOWS.join(",")}`);
   }
-  if (!PROMPTS.includes(opts.prompt)) throw new Error("--prompt must be original or continuity");
+  if (!PROMPTS.includes(opts.prompt)) throw new Error(`--prompt must be ${PROMPTS.join(", ")}`);
   if (!["original", "holdout"].includes(opts.suite)) throw new Error("--suite must be original or holdout");
   return opts;
 }
 
 export function instructions(domain: Domain, variant: PromptVariant = "original"): string {
+  if (variant === "compact") {
+    return `Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: ${domain.intents.map((k, i) => `${k} (${domain.descriptions[i]})`).join("; ")}. Return intent probabilities summing to 1 and independent probabilities for ${domain.flags.map((k, i) => `${k} (${domain.flagDescriptions[i]})`).join("; ")}. Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.`;
+  }
   const original = `Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the CURRENT primary request: ${domain.intents.map((k, i) => `${k} (${domain.descriptions[i]})`).join("; ")}. Those intent probabilities must sum to one. Also produce probabilities for ${domain.flags.map((k, i) => `${k} (${domain.flagDescriptions[i]})`).join("; ")}. Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation.`;
   if (variant === "original") return original;
   return original.replace("the CURRENT primary request", "the task active in this turn") +
