@@ -118,6 +118,13 @@ It remains available as an explicitly selected experimental variant; it does not
 replace the continuity alias or change the default prompt. No further candidate
 was tuned after inspecting these outcomes.
 
+That verdict applies to the original strict rule. The user subsequently clarified
+that a small accuracy loss can be worthwhile if it reduces cost. See the
+[accuracy-target comparison and next evaluation plan](multidomain-tradeoffs.md):
+it allows both BeliefLang and full history to choose cheaper configurations at
+the same minimum quality target. Compact snapshots meet a 99.5% **observed**
+target in this dataset; that does not establish true 99.5% accuracy.
+
 The single snapshot miss was `shopping_cameras`, turn 10, in repetition 2:
 
 > Please explain what OLED burn-in means, not a purchase recommendation. Don't revise my buying preferences.

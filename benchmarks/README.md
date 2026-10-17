@@ -116,3 +116,9 @@ compact snapshots on the reused synthetic regression suite (1,080 scored calls).
 Append `--resume` after inspecting a stopped run; preserve `--candidate compact`.
 For a single condition, use `npm run benchmark:multidomain:compact -- --runs 3`.
 See [the frozen methodology and findings](../docs/multidomain-compression.md).
+
+See [accuracy and cost tradeoffs](../docs/multidomain-tradeoffs.md) for the
+descriptive comparison at minimum observed accuracy targets of 100%, 99.5%, 99%,
+98% and 95%, and the plan for a larger evaluation that optimizes both full history
+and BeliefLang. The saved target comparison reuses existing results; it is not a
+new live run or an independent accuracy validation.

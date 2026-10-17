@@ -96,6 +96,8 @@ The [task-continuity follow-up](docs/multidomain-continuity.md) tests `--prompt 
 
 The [prompt-compression experiment](docs/multidomain-compression.md) tests `--prompt compact` across all three history methods and reruns the existing synthetic cases as regression data. Compact snapshots cost 17.99% less than the longer continuity snapshot, but scored 299/300 instead of 300/300 on the original suite. They scored 90/90 on the reused synthetic suite. This opt-in experimental variant failed the strict no-regression acceptance rule.
 
+The [accuracy and cost tradeoff analysis](docs/multidomain-tradeoffs.md) allows both full history and BeliefLang to select their cheapest tested configuration above a minimum observed accuracy target. At a 99.5% target, compact BeliefLang scored 99.67% with 12.76% lower cost and 17.17% fewer total tokens than the cheapest qualifying tested full-history configuration. These are historical development results; the larger independent evaluation is planned, not yet run.
+
 Run `npm run benchmark:chat-market` for a second live comparison: provider-managed history with prompt caching, forced provider compaction, a BeliefLang JSON snapshot, and a five-character encoded snapshot. It records provider cache usage, labeled accuracy, latency, and estimated GPT-6 Luna model charges. The [recorded run](benchmarks/results/travel-chat-market-2026-10-15.json) and [method notes](docs/jev.md) show the accuracy tradeoff of the encoded state.
 
 Run `npm run benchmark:chat-settled` to compare a fresh full-snapshot baseline with the 0.90 settled-field policy. The [two recorded runs](docs/jev.md#settling-confident-fields) include the first model call that creates the snapshot and report every turn's provider tokens and label match.
