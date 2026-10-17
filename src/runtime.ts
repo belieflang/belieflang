@@ -36,6 +36,30 @@ export type BeliefSnapshot = {
   }>;
 };
 
+/** Typed, source-tracked factual state for long-horizon applications. */
+export type FactType = "string" | "number" | "boolean";
+export type FactDeclaration = FactType | { type: FactType; enum?: readonly string[] };
+export type FactSchema = Record<string, FactDeclaration>;
+export type FactRecord = {
+  type: FactType;
+  value?: string | number | boolean;
+  confidence: number;
+  sourceTurn: number;
+  status: "active" | "cleared";
+};
+export type FactPatchEntry = {
+  operation: "set" | "clear";
+  value?: string | number | boolean;
+  confidence: number;
+  sourceTurn: number;
+};
+export type LongHorizonSnapshot = {
+  version: 2;
+  beliefs: BeliefSnapshot["beliefs"];
+  factSchema: FactSchema;
+  facts: Record<string, FactRecord>;
+};
+
 export type ObservationRecord = {
   id: number;
   eventName: string;
@@ -84,6 +108,8 @@ const EPSILON = 1e-9;
 
 export class BeliefRuntime {
   private state: BeliefState = {};
+  private factSchema: FactSchema = {};
+  private facts: Record<string, FactRecord> = {};
   private vars: Record<string, RuntimeValue> = {};
   private beliefMeta: Record<string, BeliefMeta> = {};
   private observations: ObservationRecord[] = [];
@@ -144,6 +170,78 @@ export class BeliefRuntime {
       };
     }
     return { version: 1, beliefs };
+  }
+
+  declareFacts(schema: FactSchema): void {
+    if (Object.keys(this.factSchema).length || Object.keys(this.facts).length) {
+      throw new Error("declareFacts() requires an undeclared fact store");
+    }
+    if (!schema || typeof schema !== "object" || Array.isArray(schema) || !Object.keys(schema).length) {
+      throw new Error("fact schema must be a nonempty object");
+    }
+    for (const [name, type] of Object.entries(schema)) {
+      const valueType = typeof type === "string" ? type : type?.type;
+      if (!/^[a-z][a-z0-9_]*$/.test(name) || !["string", "number", "boolean"].includes(valueType ?? "") ||
+          (typeof type !== "string" && type.enum !== undefined && (valueType !== "string" ||
+            !Array.isArray(type.enum) || !type.enum.length || type.enum.some(x => typeof x !== "string" || !x)))) {
+        throw new Error(`invalid fact declaration ${name}`);
+      }
+    }
+    this.factSchema = structuredClone(schema);
+  }
+
+  getFacts(): Record<string, FactRecord> {
+    return structuredClone(this.facts);
+  }
+
+  getLongHorizonSnapshot(): LongHorizonSnapshot {
+    return { version: 2, beliefs: this.getBeliefSnapshot().beliefs,
+      factSchema: structuredClone(this.factSchema), facts: this.getFacts() };
+  }
+
+  loadLongHorizonSnapshot(snapshot: LongHorizonSnapshot): void {
+    if (Object.keys(this.state).length || Object.keys(this.factSchema).length || Object.keys(this.facts).length) {
+      throw new Error("loadLongHorizonSnapshot() requires a fresh runtime");
+    }
+    if (!snapshot || snapshot.version !== 2 || !snapshot.beliefs || !snapshot.factSchema || !snapshot.facts) {
+      throw new Error("invalid long-horizon snapshot");
+    }
+    this.declareFacts(snapshot.factSchema);
+    this.loadBeliefSnapshot({ version: 1, beliefs: snapshot.beliefs });
+    this.mergeFactPatch(Object.fromEntries(Object.entries(snapshot.facts).map(([name, record]) => [name, {
+      operation: record.status === "cleared" ? "clear" : "set",
+      ...(record.value !== undefined ? { value: record.value } : {}),
+      confidence: record.confidence, sourceTurn: record.sourceTurn,
+    }])) as Record<string, FactPatchEntry>);
+  }
+
+  mergeFactPatch(patch: Record<string, FactPatchEntry>): void {
+    if (!patch || typeof patch !== "object" || Array.isArray(patch)) throw new Error("invalid fact patch");
+    const staged = structuredClone(this.facts);
+    for (const [name, entry] of Object.entries(patch)) {
+      const declaration = this.factSchema[name];
+      const type = typeof declaration === "string" ? declaration : declaration?.type;
+      if (!type || !entry || !["set", "clear"].includes(entry.operation) ||
+          !Number.isFinite(entry.confidence) || entry.confidence < 0 || entry.confidence > 1 ||
+          !Number.isSafeInteger(entry.sourceTurn) || entry.sourceTurn < 1) {
+        throw new Error(`invalid fact patch for ${name}`);
+      }
+      if (entry.operation === "set" && (typeof entry.value !== type ||
+          (typeof entry.value === "number" && !Number.isFinite(entry.value)))) {
+        throw new Error(`fact ${name} must have type ${type}`);
+      }
+      if (entry.operation === "set" && typeof declaration !== "string" && declaration.enum &&
+          !declaration.enum.includes(entry.value as string)) {
+        throw new Error(`fact ${name} must be one of ${declaration.enum.join(", ")}`);
+      }
+      if (entry.operation === "clear") {
+        staged[name] = { type, confidence: entry.confidence, sourceTurn: entry.sourceTurn, status: "cleared" };
+      } else {
+        staged[name] = { type, value: entry.value as string | number | boolean, confidence: entry.confidence,
+          sourceTurn: entry.sourceTurn, status: "active" };
+      }
+    }
+    this.facts = staged;
   }
 
   loadBeliefSnapshot(snapshot: BeliefSnapshot): void {

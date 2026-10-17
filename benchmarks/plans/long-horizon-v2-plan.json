@@ -1,0 +1,97 @@
+{
+  "benchmark": "belieflang-long-horizon-v2",
+  "frozen_at": "2026-10-17T22:03:52.004Z",
+  "status": "frozen_before_final_evaluation",
+  "fixture_validation": {
+    "conversations": 10,
+    "domains": 5,
+    "turns": 200,
+    "checkpoints": 40
+  },
+  "fixture_sha256": "6f07687f7a4ff5af31b605f6260852a51dc742d7651adb93dc917ee3518d07d8",
+  "configuration_sha256": "fe5d97b0e78c6f1953522cac5f2eefb1c7c7554d9a9a5705fead9f9140dc279f",
+  "source_sha256": {
+    "src/long_horizon_cases.ts": "871b047751fbda60cc0469d5513a8a417ab23d239f699deee51ada21100aadcd",
+    "src/long_horizon_benchmark.ts": "8d6032c584eea598365503dbe8359c8c04fdb52f2e9367119477dac1694ae8a1",
+    "src/runtime.ts": "8c1d76830434b301cc4a0fefc3ec8cbc7d28484ec9aae848d5e763066e4bfc0d",
+    "tests/long_horizon_benchmark.test.ts": "07e75f91da9e4f40f27fb44885382071bd10ff2fd029b8fe05c24b30442f228a",
+    "package.json": "eb13553a13e6ccaaebf340848334fc66f2991a89890b27422f0b9c0a0d986216"
+  },
+  "config": {
+    "model": "gpt-6-luna",
+    "methods": [
+      "full_history",
+      "rolling_summary",
+      "belieflang"
+    ],
+    "max_output_tokens": 512,
+    "reasoning_effort": "none",
+    "pricing": {
+      "input": 0.1,
+      "cached_input": 0.01,
+      "cache_write": 0.125,
+      "output": 0.5
+    },
+    "budget_cap_usd": 4.97,
+    "pilot": false,
+    "version": 1
+  },
+  "calls_planned": 600,
+  "checkpoints": 40,
+  "accuracy_tolerance_for_break_even": 0.05,
+  "scoring": {
+    "exact_recall": "normalized case-insensitive exact string or exact scalar; numeric questions use JSON numbers; enum answers are constrained by schema",
+    "state": "checkpoint expected-state facts compared exactly by declared slot; unrecorded facts are wrong",
+    "critical": "checkpoint misses for dates, budgets, exclusions, cancellation/task status, incident identifiers, permissions, and safety limits",
+    "unsupported": "non-null incorrect answer at a labeled checkpoint",
+    "confidence": "Brier score for present facts only; missing facts counted separately"
+  },
+  "pilots": [
+    {
+      "file": "long-horizon-v2-pilot-2026-10-17.json",
+      "calls": 30,
+      "estimated_usd": 0.0024795,
+      "note": "Initial feasibility pilot; scoring bug later corrected."
+    },
+    {
+      "file": "long-horizon-v2-pilot-corrected-2026-10-17.json",
+      "calls": 30,
+      "estimated_usd": 0.0025381,
+      "note": "Reran after numeric answer and checkpoint-state fixes."
+    },
+    {
+      "file": "long-horizon-v2-pilot-cancellation-2026-10-17.json",
+      "calls": 30,
+      "estimated_usd": 0.0032344,
+      "note": "Found task_status prose values and an ambiguous cancellation checkpoint."
+    },
+    {
+      "file": "long-horizon-v2-pilot-enum-2026-10-17.json",
+      "calls": 30,
+      "estimated_usd": 0.00485605,
+      "note": "Validated categorical status schema; exposed answer formatting issue."
+    },
+    {
+      "file": "long-horizon-v2-pilot-field-schema-2026-10-17.json",
+      "calls": 30,
+      "estimated_usd": 0.004812125,
+      "note": "Validated typed answers and cancellation status; checkpoint timing refined."
+    },
+    {
+      "file": "long-horizon-v2-pilot-frozen-candidates-2026-10-17.json",
+      "calls": 30,
+      "estimated_usd": 0.00399874,
+      "note": "Final 30-call pilot on the frozen cancellation checkpoint; all six answers correct."
+    }
+  ],
+  "prior_pilot_calls": 180,
+  "prior_pilot_estimated_spend_usd": 0.021918915,
+  "remaining_authorized_spend_usd": 4.978081085,
+  "run_budget_cap_usd": 4.97,
+  "pricing_source": "https://developers.openai.com/api/docs/pricing",
+  "notes": [
+    "One complete final evaluation repetition, no prompt or fixture changes after freeze.",
+    "All pilot attempts and costs are included in the $5 authorization, including superseded pilot metrics.",
+    "No API credentials or provider response identifiers are included."
+  ]
+}
