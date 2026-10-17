@@ -1,0 +1,18 @@
+{
+  "sources": [
+    { "file": "multidomain-2026-10-17-attempt-1-failed.json", "failed_requests_with_unreported_usage": 1 },
+    { "file": "multidomain-2026-10-17-attempt-2-failed.json", "failed_requests_with_unreported_usage": 1 },
+    { "file": "multidomain-2026-10-17-recovery.json", "failed_requests_with_unreported_usage": 0 }
+  ],
+  "selections": [
+    { "source": 1, "repetition": 1, "as_repetition": 1, "workflow": "full_history" },
+    { "source": 1, "repetition": 1, "as_repetition": 1, "workflow": "provider_history" },
+    { "source": 1, "repetition": 1, "as_repetition": 1, "workflow": "belief_snapshot" },
+    { "source": 1, "repetition": 2, "as_repetition": 2, "workflow": "full_history" },
+    { "source": 1, "repetition": 2, "as_repetition": 2, "workflow": "provider_history" },
+    { "source": 1, "repetition": 2, "as_repetition": 2, "workflow": "belief_snapshot" },
+    { "source": 2, "repetition": 1, "as_repetition": 3, "workflow": "full_history" },
+    { "source": 2, "repetition": 1, "as_repetition": 3, "workflow": "provider_history" },
+    { "source": 1, "repetition": 3, "as_repetition": 3, "workflow": "belief_snapshot" }
+  ]
+}

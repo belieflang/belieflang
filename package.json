@@ -24,7 +24,10 @@
     "benchmark:chat-code": "npm run build && node --env-file-if-exists=.env dist/src/chat_code_benchmark.js",
     "chatbot": "npm run build && node --env-file-if-exists=.env dist/src/chatbot.js",
     "benchmark:chat-jev": "npm run build && node --env-file-if-exists=.env dist/src/jev_chat_benchmark.js",
-    "benchmark:jev-context": "npm run build && node --env-file-if-exists=.env dist/src/jev_context_benchmark.js"
+    "benchmark:jev-context": "npm run build && node --env-file-if-exists=.env dist/src/jev_context_benchmark.js",
+    "benchmark:multidomain": "npm run build && node --env-file-if-exists=.env dist/src/multidomain_benchmark.js",
+    "benchmark:multidomain:validate": "npm run benchmark:multidomain -- --validate",
+    "benchmark:multidomain:report": "npm run build && node dist/src/multidomain_report.js"
   },
   "keywords": [
     "ai",

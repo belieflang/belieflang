@@ -92,3 +92,20 @@ test("OpenAI reports cache usage and compaction when continuing a stored respons
   assert.equal(responseId, "resp_current");
   assert.equal(compactionItems, 1);
 });
+
+test("OpenAI custom domain rejects invalid distributions, fields and cache accounting", async () => {
+  for (const [output, details, pattern] of [
+    [{ intent: { api: 0.9, database: 0.9, unknown: 0 }, urgent: 1, restart: 0 }, {}, /sum to 1/],
+    [{ intent: { api: 1, database: 0, unknown: 0 }, urgent: 1, restart: 0, extra: 1 }, {}, /unexpected/],
+    [{ intent: { api: 1, database: 0, unknown: 0 }, urgent: 1, restart: 0 }, { cached_tokens: 9, cache_write_tokens: 9 }, /exceed input/],
+    [{ intent: { api: 1, database: 0, unknown: 0 }, urgent: 1, restart: 0 }, { cached_tokens: -1 }, /token count/],
+  ] as const) {
+    const infer = createOpenAIInferAdapter({ apiKey: "test", beliefFields: { intents: ["api", "database", "unknown"], flags: ["urgent", "restart"] },
+      fetchImpl: async () => new Response(JSON.stringify({ status: "completed",
+        output: [{ type: "message", content: [{ type: "output_text", text: JSON.stringify(output) }] }],
+        usage: { input_tokens: 10, output_tokens: 2, input_tokens_details: details },
+      })),
+    });
+    await assert.rejects(Promise.resolve(infer("test", { observations: [], state: {}, vars: {} })), pattern);
+  }
+});
