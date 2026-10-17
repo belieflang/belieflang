@@ -8,7 +8,7 @@ import { conversations, domains } from "./multidomain_cases.js";
 import { summarize, WORKFLOWS, type Row, type Workflow, type Pricing } from "./multidomain_benchmark.js";
 
 export type SourceReport = {
-  benchmark: string; status: string; model: string; fixture_sha256: string; implementation_sha256: string;
+  benchmark: string; status: string; model: string; prompt_variant?: string; suite?: string; fixture_sha256: string; implementation_sha256: string;
   pricing_usd_per_million: Pricing | null; completed_calls: number; rows: Row[]; error?: string;
 };
 export type Selection = { source: number; repetition: number; as_repetition: number; workflow: Workflow };
@@ -28,6 +28,8 @@ export function assembleReport(manifest: Manifest, sources: SourceReport[]) {
     return sum + n;
   }, 0);
   for (const source of sources) {
+    if ((source.suite ?? "original") !== "original") throw new Error("recovery assembler supports the original suite only");
+    if ((source.prompt_variant ?? "original") !== (first.prompt_variant ?? "original")) throw new Error("inconsistent source prompt_variant");
     if (!["completed", "failed"].includes(source.status) || source.benchmark !== "multidomain-beliefs-v1" ||
         source.completed_calls !== source.rows.length) throw new Error("invalid or unfinished source report");
     for (const key of ["model", "fixture_sha256", "implementation_sha256", "pricing_usd_per_million"] as const) {
@@ -76,11 +78,11 @@ export function assembleReport(manifest: Manifest, sources: SourceReport[]) {
     }
   }
   return {
-    benchmark: "multidomain-beliefs-v1", status: "completed_with_workflow_restart", created_at: new Date().toISOString(),
-    model: first.model, fixture_sha256: first.fixture_sha256, implementation_sha256: first.implementation_sha256,
+    benchmark: "multidomain-beliefs-v1", status: sources.some(s => s.status === "failed") ? "completed_with_workflow_restart" : "completed", created_at: new Date().toISOString(),
+    model: first.model, prompt_variant: first.prompt_variant ?? "original", suite: "original", fixture_sha256: first.fixture_sha256, implementation_sha256: first.implementation_sha256,
     pricing_usd_per_million: first.pricing_usd_per_million, runs: 3, workflows: WORKFLOWS,
     completed_calls: selected.length, expected_calls: 900,
-    methodology: "Three complete passes per workflow, selected by the explicit provenance manifest. Failed workflow prefixes discarded from scored comparisons; their usage remains in execution_accounting. No turn-level cherry-picking or imputation. One final full-history pass was restarted from the first turn after malformed JSON; the remaining provider pass then ran. This is a recovered experiment, not an uninterrupted 900-call run. Failed request usage was not captured, so execution cost is a lower bound. See raw reports for prompts, timing, order, and per-turn data.",
+    methodology: "Three complete passes per workflow, selected by the explicit provenance manifest. Failed workflow prefixes discarded from scored comparisons; their usage remains in execution_accounting. No turn-level cherry-picking or imputation. Source statuses and the execution ledger disclose any workflow restarts. Failed request usage may be unavailable, so execution cost can be a lower bound. See raw reports for prompts, timing, order, and per-turn data.",
     provenance: manifest,
     source_statuses: sources.map((source, index) => ({ file: manifest.sources[index].file, status: source.status,
       completed_calls: source.completed_calls, ...(source.error ? { error: source.error } : {}) })),

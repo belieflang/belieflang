@@ -1,0 +1,166 @@
+{
+  "purpose": "Diagnostic calls, not scored benchmark turns. Captured Responses API payload to inspect malformed output.",
+  "probes": [
+    {
+      "probe": 1,
+      "conversation": "travel_osaka",
+      "turn": 5,
+      "input": "{\"messages\":[\"I'm arranging a hotel for a week in Osaka. Work covers the bill, so cost isn't a concern. I don't care about nonstop flights.\",\"Please narrow the hotels to somewhere near Umeda with an early breakfast. This is still a lodging request.\",\"Switch to flights from Rio to Kansai. I'd prefer a nonstop itinerary if one exists, regardless of price.\",\"Tell me which airports and airlines to consider when booking that flight. The nonstop requirement still matters.\",\"My travel budget was cut unexpectedly: low price is now a priority. Keep searching for flights, with nonstop preferred.\"]}",
+      "prompt_variant": "continuity",
+      "error": null,
+      "response": {
+        "id": "resp_00b65feb089a24b7016ad3cecc344887d286a630f8115d094f",
+        "object": "response",
+        "created_at": 1792265932,
+        "status": "completed",
+        "access_programs": null,
+        "background": false,
+        "billing": {
+          "payer": "developer"
+        },
+        "completed_at": 1792265933,
+        "error": null,
+        "frequency_penalty": 0,
+        "incomplete_details": null,
+        "instructions": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: book_flight (find or book a flight); book_hotel (find or book a hotel); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for budget_sensitive (the traveler currently prioritizes low prices); prefers_direct (the traveler currently prefers nonstop flights). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+        "max_output_tokens": null,
+        "max_tool_calls": null,
+        "model": "gpt-6-luna",
+        "moderation": null,
+        "output": [
+          {
+            "id": "msg_00b65feb089a24b7016ad3ceccdd1487d2a388bfa2db153053",
+            "type": "message",
+            "status": "completed",
+            "content": [
+              {
+                "type": "output_text",
+                "annotations": [],
+                "logprobs": [],
+                "text": "{\"intent\":{\"book_flight\":1,\"book_hotel\":0,\"unknown\":0},\"budget_sensitive\":1,\"prefers_direct\":1}"
+              }
+            ],
+            "phase": "final_answer",
+            "role": "assistant"
+          }
+        ],
+        "parallel_tool_calls": true,
+        "presence_penalty": 0,
+        "previous_response_id": null,
+        "prompt_cache_key": null,
+        "prompt_cache_retention": "24h",
+        "reasoning": {
+          "context": "all_turns",
+          "effort": "none",
+          "mode": "standard",
+          "summary": null
+        },
+        "safety_identifier": null,
+        "service_tier": "default",
+        "store": false,
+        "temperature": 1,
+        "text": {
+          "format": {
+            "type": "json_schema",
+            "description": null,
+            "name": "multidomain_beliefs",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "intent": {
+                  "type": "object",
+                  "properties": {
+                    "book_flight": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "book_hotel": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "unknown": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "book_flight",
+                    "book_hotel",
+                    "unknown"
+                  ],
+                  "additionalProperties": false
+                },
+                "budget_sensitive": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "prefers_direct": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "intent",
+                "budget_sensitive",
+                "prefers_direct"
+              ],
+              "additionalProperties": false
+            },
+            "strict": true
+          },
+          "verbosity": "medium"
+        },
+        "tool_choice": "auto",
+        "tool_usage": {
+          "image_gen": {
+            "input_tokens": 0,
+            "input_tokens_details": {
+              "image_tokens": 0,
+              "text_tokens": 0
+            },
+            "output_tokens": 0,
+            "output_tokens_details": {
+              "image_tokens": 0,
+              "text_tokens": 0
+            },
+            "total_tokens": 0
+          },
+          "web_search": {
+            "num_requests": 0
+          }
+        },
+        "tools": [],
+        "top_logprobs": 0,
+        "top_p": 0.98,
+        "truncation": "disabled",
+        "usage": {
+          "input_tokens": 468,
+          "input_tokens_details": {
+            "cache_write_tokens": 0,
+            "cached_tokens": 0
+          },
+          "output_tokens": 42,
+          "output_tokens_details": {
+            "reasoning_tokens": 0
+          },
+          "total_tokens": 510
+        },
+        "user": null,
+        "metadata": {}
+      }
+    },
+    {
+      "probe": 2,
+      "conversation": "travel_osaka",
+      "turn": 5,
+      "input": "{\"messages\":[\"I'm arranging a hotel for a week in Osaka. Work covers the bill, so cost isn't a concern. I don't care about nonstop flights.\",\"Please narrow the hotels to somewhere near Umeda with an early breakfast. This is still a lodging request.\",\"Switch to flights from Rio to Kansai. I'd prefer a nonstop itinerary if one exists, regardless of price.\",\"Tell me which airports and airlines to consider when booking that flight. The nonstop requirement still matters.\",\"My travel budget was cut unexpectedly: low price is now a priority. Keep searching for flights, with nonstop preferred.\"]}",
+      "prompt_variant": "continuity",
+      "error": "The operation was aborted due to timeout"
+    }
+  ]
+}

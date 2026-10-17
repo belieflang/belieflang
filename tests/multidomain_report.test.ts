@@ -62,6 +62,12 @@ test("recovered reports reject partial, duplicate, unfinished and inconsistent s
   const inconsistent = structuredClone(sources);
   inconsistent[2].model = "different-model";
   assert.throws(() => assembleReport(manifest, inconsistent), /inconsistent source model/);
+  const mixedPrompt = structuredClone(sources);
+  mixedPrompt[2].prompt_variant = "continuity";
+  assert.throws(() => assembleReport(manifest, mixedPrompt), /inconsistent source prompt_variant/);
+  const mixedSuite = structuredClone(sources);
+  mixedSuite[2].suite = "holdout";
+  assert.throws(() => assembleReport(manifest, mixedSuite), /original suite only/);
   const running = structuredClone(sources);
   running[2].status = "running";
   assert.throws(() => assembleReport(manifest, running), /unfinished/);

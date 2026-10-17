@@ -1,0 +1,1196 @@
+{
+  "benchmark": "multidomain-continuity-comparison-v1",
+  "created_at": "2026-10-17T20:11:22.551Z",
+  "historical_reference": "../multidomain-2026-10-17-summary.json",
+  "candidate": "summary.json",
+  "fresh_comparison": "holdout-summary.json",
+  "methodology": "Historical original-prompt scores are development references; candidate uses the corrected final-answer parser. Fresh original-vs-continuity snapshot conditions both use the same corrected parser and frozen new cases. No post-result tuning.",
+  "baseline_full_history": {
+    "turns": 300,
+    "exact_match_turns": 300,
+    "exact_match_rate": 1,
+    "intent_correct": 300,
+    "intent_accuracy": 1,
+    "preference_fields_correct": 600,
+    "preference_fields_total": 600,
+    "preference_accuracy": 1,
+    "usage": {
+      "input_tokens": 114036,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 12479,
+      "total_tokens": 126515
+    },
+    "median_latency_ms": 1200.5,
+    "p95_latency_ms": 1678,
+    "estimated_usd": 0.0176431
+  },
+  "baseline_snapshot": {
+    "turns": 300,
+    "exact_match_turns": 266,
+    "exact_match_rate": 0.8866666666666667,
+    "intent_correct": 266,
+    "intent_accuracy": 0.8866666666666667,
+    "preference_fields_correct": 600,
+    "preference_fields_total": 600,
+    "preference_accuracy": 1,
+    "usage": {
+      "input_tokens": 104049,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 12048,
+      "total_tokens": 116097
+    },
+    "median_latency_ms": 1092,
+    "p95_latency_ms": 1639,
+    "estimated_usd": 0.0164289
+  },
+  "candidate_snapshot": {
+    "turns": 300,
+    "exact_match_turns": 300,
+    "exact_match_rate": 1,
+    "intent_correct": 300,
+    "intent_accuracy": 1,
+    "preference_fields_correct": 600,
+    "preference_fields_total": 600,
+    "preference_accuracy": 1,
+    "usage": {
+      "input_tokens": 127411,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 12056,
+      "total_tokens": 139467
+    },
+    "median_latency_ms": 1215,
+    "p95_latency_ms": 1664,
+    "estimated_usd": 0.018769099999999986
+  },
+  "snapshot_accuracy_gain_percentage_points": 11.333333333333329,
+  "previously_failed_turns": 34,
+  "previously_failed_turns_now_correct": 34,
+  "new_regressions": [],
+  "development_case_changes": [
+    {
+      "repetition": 1,
+      "conversation": "travel_milan",
+      "turn": 3,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "before": {
+        "intent": "unknown",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "after": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "shopping_student",
+      "turn": 9,
+      "expected": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "before": {
+        "intent": "unknown",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "after": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "support_billing",
+      "turn": 5,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "before": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "after": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "support_billing",
+      "turn": 6,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "before": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "after": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "planning_finance",
+      "turn": 5,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "before": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "after": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "planning_finance",
+      "turn": 6,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "before": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "after": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "writing_client",
+      "turn": 5,
+      "expected": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "writing_client",
+      "turn": 6,
+      "expected": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "writing_client",
+      "turn": 9,
+      "expected": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": true
+      },
+      "after": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "writing_recruiter",
+      "turn": 5,
+      "expected": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": true
+      },
+      "after": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "writing_recruiter",
+      "turn": 6,
+      "expected": {
+        "intent": "draft_email",
+        "concise": false,
+        "formal": true
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": true
+      },
+      "after": {
+        "intent": "draft_email",
+        "concise": false,
+        "formal": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 1,
+      "conversation": "writing_recruiter",
+      "turn": 8,
+      "expected": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "travel_milan",
+      "turn": 3,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "before": {
+        "intent": "unknown",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "after": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "shopping_student",
+      "turn": 9,
+      "expected": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "before": {
+        "intent": "unknown",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "after": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "support_billing",
+      "turn": 5,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "before": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "after": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "support_billing",
+      "turn": 6,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "before": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "after": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "planning_finance",
+      "turn": 5,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "before": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "after": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "planning_finance",
+      "turn": 6,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "before": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "after": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "writing_client",
+      "turn": 5,
+      "expected": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "writing_client",
+      "turn": 6,
+      "expected": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "writing_client",
+      "turn": 9,
+      "expected": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": true
+      },
+      "after": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 2,
+      "conversation": "writing_recruiter",
+      "turn": 8,
+      "expected": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "travel_milan",
+      "turn": 3,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "before": {
+        "intent": "unknown",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "after": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "shopping_student",
+      "turn": 9,
+      "expected": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "before": {
+        "intent": "unknown",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "after": {
+        "intent": "shop_laptop",
+        "budget_sensitive": false,
+        "prefers_new": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "support_auth",
+      "turn": 5,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "before": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "after": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "support_billing",
+      "turn": 5,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "before": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "after": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "support_billing",
+      "turn": 6,
+      "expected": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "before": {
+        "intent": "unknown",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "after": {
+        "intent": "debug_database",
+        "urgent": true,
+        "allow_restart": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "planning_finance",
+      "turn": 5,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "before": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "after": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "planning_finance",
+      "turn": 6,
+      "expected": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "before": {
+        "intent": "unknown",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "after": {
+        "intent": "schedule_meeting",
+        "deadline_flexible": true,
+        "delegate_ok": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "writing_client",
+      "turn": 5,
+      "expected": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": true,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "writing_client",
+      "turn": 6,
+      "expected": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": false
+      },
+      "after": {
+        "intent": "draft_message",
+        "concise": false,
+        "formal": false
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "writing_client",
+      "turn": 9,
+      "expected": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": true
+      },
+      "after": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "writing_recruiter",
+      "turn": 5,
+      "expected": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": true,
+        "formal": true
+      },
+      "after": {
+        "intent": "draft_email",
+        "concise": true,
+        "formal": true
+      },
+      "fixed": true
+    },
+    {
+      "repetition": 3,
+      "conversation": "writing_recruiter",
+      "turn": 6,
+      "expected": {
+        "intent": "draft_email",
+        "concise": false,
+        "formal": true
+      },
+      "before": {
+        "intent": "unknown",
+        "concise": false,
+        "formal": true
+      },
+      "after": {
+        "intent": "draft_email",
+        "concise": false,
+        "formal": true
+      },
+      "fixed": true
+    }
+  ],
+  "original_suite_unrelated": {
+    "baseline": {
+      "turns": 30,
+      "correct": 30
+    },
+    "candidate": {
+      "turns": 30,
+      "correct": 30
+    }
+  },
+  "fresh_results": {
+    "original": {
+      "turns": 90,
+      "exact_match_turns": 77,
+      "exact_match_rate": 0.8555555555555555,
+      "intent_correct": 77,
+      "intent_accuracy": 0.8555555555555555,
+      "preference_fields_correct": 180,
+      "preference_fields_total": 180,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 30857,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 3700,
+        "total_tokens": 34557
+      },
+      "median_latency_ms": 1166,
+      "p95_latency_ms": 2013,
+      "estimated_usd": 0.004935699999999999,
+      "unrelated_turns": 15,
+      "unrelated_correct": 15,
+      "by_repetition": {
+        "1": {
+          "turns": 30,
+          "exact_match_turns": 25,
+          "exact_match_rate": 0.8333333333333334,
+          "intent_correct": 25,
+          "intent_accuracy": 0.8333333333333334,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 10283,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1204,
+            "total_tokens": 11487
+          },
+          "median_latency_ms": 1286,
+          "p95_latency_ms": 1504,
+          "estimated_usd": 0.0016303000000000001
+        },
+        "2": {
+          "turns": 30,
+          "exact_match_turns": 26,
+          "exact_match_rate": 0.8666666666666667,
+          "intent_correct": 26,
+          "intent_accuracy": 0.8666666666666667,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 10279,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1280,
+            "total_tokens": 11559
+          },
+          "median_latency_ms": 1109,
+          "p95_latency_ms": 2282,
+          "estimated_usd": 0.0016679000000000002
+        },
+        "3": {
+          "turns": 30,
+          "exact_match_turns": 26,
+          "exact_match_rate": 0.8666666666666667,
+          "intent_correct": 26,
+          "intent_accuracy": 0.8666666666666667,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 10295,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1216,
+            "total_tokens": 11511
+          },
+          "median_latency_ms": 1103.5,
+          "p95_latency_ms": 2299,
+          "estimated_usd": 0.0016375000000000003
+        }
+      },
+      "by_domain": {
+        "travel": {
+          "turns": 18,
+          "exact_match_turns": 17,
+          "exact_match_rate": 0.9444444444444444,
+          "intent_correct": 17,
+          "intent_accuracy": 0.9444444444444444,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6225,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 756,
+            "total_tokens": 6981
+          },
+          "median_latency_ms": 1280,
+          "p95_latency_ms": 2013,
+          "estimated_usd": 0.0010004999999999997
+        },
+        "shopping": {
+          "turns": 18,
+          "exact_match_turns": 17,
+          "exact_match_rate": 0.9444444444444444,
+          "intent_correct": 17,
+          "intent_accuracy": 0.9444444444444444,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6277,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 834,
+            "total_tokens": 7111
+          },
+          "median_latency_ms": 1188.5,
+          "p95_latency_ms": 2299,
+          "estimated_usd": 0.0010447
+        },
+        "support": {
+          "turns": 18,
+          "exact_match_turns": 15,
+          "exact_match_rate": 0.8333333333333334,
+          "intent_correct": 15,
+          "intent_accuracy": 0.8333333333333334,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6154,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 688,
+            "total_tokens": 6842
+          },
+          "median_latency_ms": 1125.5,
+          "p95_latency_ms": 4120,
+          "estimated_usd": 0.0009594
+        },
+        "planning": {
+          "turns": 18,
+          "exact_match_turns": 15,
+          "exact_match_rate": 0.8333333333333334,
+          "intent_correct": 15,
+          "intent_accuracy": 0.8333333333333334,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6240,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 738,
+            "total_tokens": 6978
+          },
+          "median_latency_ms": 1081.5,
+          "p95_latency_ms": 1333,
+          "estimated_usd": 0.000993
+        },
+        "writing": {
+          "turns": 18,
+          "exact_match_turns": 13,
+          "exact_match_rate": 0.7222222222222222,
+          "intent_correct": 13,
+          "intent_accuracy": 0.7222222222222222,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 5961,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 684,
+            "total_tokens": 6645
+          },
+          "median_latency_ms": 1077.5,
+          "p95_latency_ms": 2314,
+          "estimated_usd": 0.0009381
+        }
+      }
+    },
+    "continuity": {
+      "turns": 90,
+      "exact_match_turns": 90,
+      "exact_match_rate": 1,
+      "intent_correct": 90,
+      "intent_accuracy": 1,
+      "preference_fields_correct": 180,
+      "preference_fields_total": 180,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 37879,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 3628,
+        "total_tokens": 41507
+      },
+      "median_latency_ms": 1188,
+      "p95_latency_ms": 1527,
+      "estimated_usd": 0.005601900000000002,
+      "unrelated_turns": 15,
+      "unrelated_correct": 15,
+      "by_repetition": {
+        "1": {
+          "turns": 30,
+          "exact_match_turns": 30,
+          "exact_match_rate": 1,
+          "intent_correct": 30,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 12641,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1222,
+            "total_tokens": 13863
+          },
+          "median_latency_ms": 1226.5,
+          "p95_latency_ms": 1734,
+          "estimated_usd": 0.0018750999999999998
+        },
+        "2": {
+          "turns": 30,
+          "exact_match_turns": 30,
+          "exact_match_rate": 1,
+          "intent_correct": 30,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 12619,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1206,
+            "total_tokens": 13825
+          },
+          "median_latency_ms": 1148,
+          "p95_latency_ms": 1523,
+          "estimated_usd": 0.0018649
+        },
+        "3": {
+          "turns": 30,
+          "exact_match_turns": 30,
+          "exact_match_rate": 1,
+          "intent_correct": 30,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 12619,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1200,
+            "total_tokens": 13819
+          },
+          "median_latency_ms": 1169.5,
+          "p95_latency_ms": 1406,
+          "estimated_usd": 0.0018619
+        }
+      },
+      "by_domain": {
+        "travel": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7629,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 756,
+            "total_tokens": 8385
+          },
+          "median_latency_ms": 1252,
+          "p95_latency_ms": 3959,
+          "estimated_usd": 0.0011409
+        },
+        "shopping": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7687,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 766,
+            "total_tokens": 8453
+          },
+          "median_latency_ms": 1167,
+          "p95_latency_ms": 1734,
+          "estimated_usd": 0.0011517000000000003
+        },
+        "support": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7554,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 684,
+            "total_tokens": 8238
+          },
+          "median_latency_ms": 1145.5,
+          "p95_latency_ms": 1400,
+          "estimated_usd": 0.0010974000000000001
+        },
+        "planning": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7644,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 738,
+            "total_tokens": 8382
+          },
+          "median_latency_ms": 1269.5,
+          "p95_latency_ms": 1730,
+          "estimated_usd": 0.0011334
+        },
+        "writing": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7365,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 684,
+            "total_tokens": 8049
+          },
+          "median_latency_ms": 1045,
+          "p95_latency_ms": 1367,
+          "estimated_usd": 0.0010784999999999998
+        }
+      }
+    }
+  },
+  "followup_execution_accounting": {
+    "scored_calls": 1080,
+    "requests_with_recorded_usage": 1124,
+    "requests_with_unreported_usage": 5,
+    "total_attempted_requests": 1129,
+    "pre_fix_attempted_requests": 30,
+    "diagnostic_requests": 4,
+    "usage": {
+      "input_tokens": 553348,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 46521,
+      "total_tokens": 599869
+    },
+    "estimated_usd_lower_bound": 0.0785953,
+    "pricing_usd_per_million": {
+      "input": 0.1,
+      "cached_input": 0.01,
+      "cache_write": 0.125,
+      "output": 0.5,
+      "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+    },
+    "note": "Includes scored experiment, all pre-fix failed prefixes, and all diagnostic calls. Unreported usage cannot be priced; old v1 baseline experiment costs are separate."
+  }
+}

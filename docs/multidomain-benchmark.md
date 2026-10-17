@@ -160,7 +160,7 @@ retry of the failed turn. Both attempts are retained to disclose the execution
 failure and avoid presenting only favorable outcomes.
 
 The [second attempt](../benchmarks/results/multidomain-2026-10-17-attempt-2-failed.json)
-also stopped on malformed JSON: `full_history`, repetition 3, `travel_osaka`
+also stopped on an adapter-reported invalid-JSON error: `full_history`, repetition 3, `travel_osaka`
 turn 5. It preserved 714 completed calls: two complete passes of every workflow,
 a third complete snapshot pass, and an incomplete 14-turn full-history prefix.
 The failed 15th call was not scored. Neither failed output was retained by the
@@ -243,7 +243,7 @@ failures also occurred on that workflow and are not included in its 300 scored
 turns. These outcomes do not support an accuracy-equivalence claim for snapshots.
 
 **Execution overhead and blockers:** there were 943 actual requests: 941 with
-recorded successful-turn usage and two malformed-output failures with unavailable
+recorded successful-turn usage and two adapter-reported invalid-JSON failures with unavailable
 usage. Of those successful turns, 41 belong to discarded prefixes (27 from the
 first attempt and 14 from the incomplete final full-history pass). They add
 17,664 reported tokens and $0.0024876 estimated charges. All recorded successful
@@ -251,3 +251,7 @@ calls together used 448,782 tokens and cost an estimated **$0.0602358**, a lower
 bound on the experiment cost because the two failed requests may have incurred
 additional charges. The 900 selected calls alone cost $0.0577482. No failed request
 was repaired, imputed, or silently counted as a completed prediction.
+
+The [task-continuity follow-up](multidomain-continuity.md) investigates these
+incorrect `unknown` predictions with an explicit prompt variant and fresh
+synthetic conversations. Original data and recorded results are preserved.

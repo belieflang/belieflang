@@ -104,10 +104,14 @@ export function createOpenAIInferAdapter(options: OpenAIOptions): InferBeliefsAd
     if (!Array.isArray(data.output)) throw new Error("OpenAI response has no output array");
     options.onCompactionItems?.(data.output.filter((item) =>
       typeof item === "object" && item !== null && (item as Record<string, unknown>).type === "compaction").length);
+    const messages = data.output.map(item => record(item, "output item")).filter(item => item.type === "message");
+    const finalMessages = messages.filter(item => item.phase === "final_answer");
+    // Commentary is an intermediate update, not part of the structured final answer.
+    // Older Responses payloads omit phase; retain that single-message format.
+    const answerMessages = finalMessages.length ? finalMessages : messages.filter(item => item.phase == null);
+    if (answerMessages.length !== 1) throw new Error("OpenAI response must have exactly one final answer message");
     const textParts: string[] = [];
-    for (const item of data.output) {
-      const output = record(item, "output item");
-      if (output.type !== "message") continue;
+    for (const output of answerMessages) {
       if (!Array.isArray(output.content)) throw new Error("OpenAI message has no content array");
       for (const part of output.content) {
         const content = record(part, "message content");

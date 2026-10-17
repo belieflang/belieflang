@@ -1,0 +1,525 @@
+{
+  "benchmark": "multidomain-beliefs-v1",
+  "status": "failed",
+  "created_at": "2026-10-17T19:38:16.896Z",
+  "updated_at": "2026-10-17T19:38:31.597Z",
+  "model": "gpt-6-luna",
+  "prompt_variant": "continuity",
+  "suite": "original",
+  "reasoning_effort": "none",
+  "node_version": "v25.1.0",
+  "fixtures": {
+    "conversations": 10,
+    "turns": 100,
+    "domains": [
+      "travel",
+      "shopping",
+      "support",
+      "planning",
+      "writing"
+    ]
+  },
+  "fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+  "implementation_sha256": "7f94ad097dc46e5b6021b794f81844773dcb26a9a94b8b487248945d04dd15c9",
+  "runs": 1,
+  "workflows": [
+    "full_history"
+  ],
+  "workflow_order_by_repetition": [
+    [
+      "full_history"
+    ]
+  ],
+  "expected_calls": 100,
+  "completed_calls": 8,
+  "pricing_usd_per_million": {
+    "input": 0.1,
+    "cached_input": 0.01,
+    "cache_write": 0.125,
+    "output": 0.5,
+    "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+  },
+  "instructions_by_domain": {
+    "travel": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: book_flight (find or book a flight); book_hotel (find or book a hotel); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for budget_sensitive (the traveler currently prioritizes low prices); prefers_direct (the traveler currently prefers nonstop flights). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "shopping": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: shop_phone (choose or buy a phone); shop_laptop (choose or buy a laptop); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for budget_sensitive (the buyer currently prioritizes low prices); prefers_new (the buyer currently requires a new, not used or refurbished, device). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "support": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: debug_api (troubleshoot an API/service); debug_database (troubleshoot a database/query); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for urgent (the incident currently requires urgent handling); allow_restart (the user currently permits a service restart as a remedial action). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "planning": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: schedule_meeting (schedule or reschedule a meeting); prepare_report (prepare or revise a report); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for deadline_flexible (the deadline can currently move); delegate_ok (the user currently permits delegating work to teammates). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+    "writing": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: draft_email (draft an email); draft_message (draft a chat/direct message); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for concise (the user currently prefers concise writing); formal (the user currently prefers formal tone). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown."
+  },
+  "methodology": "Synthetic labeled conversations; identical domain instructions/schema across paths. Full history resends user messages only; provider history retains model outputs too. Snapshot sends only BeliefRuntime state and latest message. Every creation/update call counted. Latency includes response body, parsing and runtime infer merge, excludes local snapshot load/save and report writes. Serial calls, rotating workflow order, no retries, 120s request timeout. Cache reads/writes are disjoint subsets of input; absent cache fields treated as zero. Cost uses explicit supplied rates only; excludes storage, serialization, taxes and failed/unreported calls. Partial reports must not be used for workflow comparisons.",
+  "results": {
+    "full_history": {
+      "turns": 8,
+      "exact_match_turns": 8,
+      "exact_match_rate": 1,
+      "intent_correct": 8,
+      "intent_accuracy": 1,
+      "preference_fields_correct": 16,
+      "preference_fields_total": 16,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 3646,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 356,
+        "total_tokens": 4002
+      },
+      "median_latency_ms": 1408.5,
+      "p95_latency_ms": 2279,
+      "estimated_usd": 0.0005426000000000001
+    }
+  },
+  "by_domain": {
+    "travel": {
+      "full_history": {
+        "turns": 8,
+        "exact_match_turns": 8,
+        "exact_match_rate": 1,
+        "intent_correct": 8,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 16,
+        "preference_fields_total": 16,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 3646,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 356,
+          "total_tokens": 4002
+        },
+        "median_latency_ms": 1408.5,
+        "p95_latency_ms": 2279,
+        "estimated_usd": 0.0005426000000000001
+      }
+    },
+    "shopping": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    },
+    "support": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    },
+    "planning": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    },
+    "writing": {
+      "full_history": {
+        "turns": 0,
+        "exact_match_turns": 0,
+        "exact_match_rate": null,
+        "intent_correct": 0,
+        "intent_accuracy": null,
+        "preference_fields_correct": 0,
+        "preference_fields_total": 0,
+        "preference_accuracy": null,
+        "usage": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0
+        },
+        "median_latency_ms": null,
+        "p95_latency_ms": null,
+        "estimated_usd": null
+      }
+    }
+  },
+  "by_repetition": {
+    "1": {
+      "full_history": {
+        "turns": 8,
+        "exact_match_turns": 8,
+        "exact_match_rate": 1,
+        "intent_correct": 8,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 16,
+        "preference_fields_total": 16,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 3646,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 356,
+          "total_tokens": 4002
+        },
+        "median_latency_ms": 1408.5,
+        "p95_latency_ms": 2279,
+        "estimated_usd": 0.0005426000000000001
+      }
+    }
+  },
+  "comparisons": {},
+  "error": "full_history repetition 1 travel_milan turn 9: OpenAI returned invalid JSON",
+  "failure_note": "Failed request may have incurred charges absent from reported usage; remaining calls were not attempted.",
+  "rows": [
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 1,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 379,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 421
+      },
+      "estimated_usd": 0.0000589,
+      "latency_ms": 1480
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 2,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 401,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 443
+      },
+      "estimated_usd": 0.00006110000000000001,
+      "latency_ms": 1238
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 3,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0.99,
+          "book_hotel": 0.005,
+          "unknown": 0.005
+        },
+        "user": {
+          "budget_sensitive": 0.99,
+          "prefers_direct": 0.99
+        }
+      },
+      "usage": {
+        "input_tokens": 423,
+        "output_tokens": 52,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 475
+      },
+      "estimated_usd": 0.0000683,
+      "latency_ms": 2279
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 4,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 447,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 489
+      },
+      "estimated_usd": 0.0000657,
+      "latency_ms": 1434
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 5,
+      "expected": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "predicted": {
+        "intent": "book_hotel",
+        "budget_sensitive": true,
+        "prefers_direct": true
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0,
+          "book_hotel": 1,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 1
+        }
+      },
+      "usage": {
+        "input_tokens": 469,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 511
+      },
+      "estimated_usd": 0.00006790000000000001,
+      "latency_ms": 1736
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 6,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 0.99,
+          "book_hotel": 0.005,
+          "unknown": 0.005
+        },
+        "user": {
+          "budget_sensitive": 0.99,
+          "prefers_direct": 0.01
+        }
+      },
+      "usage": {
+        "input_tokens": 490,
+        "output_tokens": 52,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 542
+      },
+      "estimated_usd": 0.000075,
+      "latency_ms": 1383
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 7,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": true,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 1,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 508,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 550
+      },
+      "estimated_usd": 0.00007180000000000001,
+      "latency_ms": 1179
+    },
+    {
+      "repetition": 1,
+      "workflow": "full_history",
+      "conversation": "travel_milan",
+      "domain": "travel",
+      "turn": 8,
+      "expected": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "predicted": {
+        "intent": "book_flight",
+        "budget_sensitive": false,
+        "prefers_direct": false
+      },
+      "exact_match": true,
+      "flag_correct": 2,
+      "beliefs": {
+        "intent": {
+          "book_flight": 1,
+          "book_hotel": 0,
+          "unknown": 0
+        },
+        "user": {
+          "budget_sensitive": 0,
+          "prefers_direct": 0
+        }
+      },
+      "usage": {
+        "input_tokens": 529,
+        "output_tokens": 42,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "total_tokens": 571
+      },
+      "estimated_usd": 0.00007390000000000001,
+      "latency_ms": 1382
+    }
+  ]
+}

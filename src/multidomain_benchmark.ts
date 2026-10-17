@@ -2,14 +2,18 @@ import { createHash } from "node:crypto";
 import { mkdir, readFile, rename, writeFile } from "node:fs/promises";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { conversations, domains, labelFor, validateFixtures, type Domain, type Prediction } from "./multidomain_cases.js";
+import { conversations, domains, labelFor, validateFixtures, type Conversation, type Domain, type Prediction } from "./multidomain_cases.js";
+import { holdoutConversations, validateHoldout } from "./multidomain_holdout.js";
 import { createOpenAIInferAdapter, type OpenAIUsage } from "./openai.js";
 import { BeliefRuntime, type BeliefSnapshot } from "./runtime.js";
 import type { BeliefState } from "./ast.js";
 
 export const WORKFLOWS = ["full_history", "provider_history", "belief_snapshot"] as const;
 export type Workflow = typeof WORKFLOWS[number];
-export type Options = { runs: number; workflows: Workflow[]; validate: boolean; output?: string };
+export const PROMPTS = ["original", "continuity"] as const;
+export type PromptVariant = typeof PROMPTS[number];
+export type Suite = "original" | "holdout";
+export type Options = { prompt: PromptVariant; suite: Suite; runs: number; workflows: Workflow[]; validate: boolean; output?: string };
 export type Pricing = { input: number; cached_input: number; cache_write: number; output: number; source: string };
 export type Usage = Required<Pick<OpenAIUsage, "input_tokens" | "output_tokens" | "cached_input_tokens" | "cache_write_tokens">> & { total_tokens: number };
 export type Row = {
@@ -19,7 +23,7 @@ export type Row = {
 };
 
 export function parseArgs(argv: string[]): Options {
-  const opts: Options = { runs: 1, workflows: [...WORKFLOWS], validate: false };
+  const opts: Options = { prompt: "original", suite: "original", runs: 1, workflows: [...WORKFLOWS], validate: false };
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i];
     const value = () => {
@@ -29,6 +33,8 @@ export function parseArgs(argv: string[]): Options {
     };
     if (arg === "--validate") opts.validate = true;
     else if (arg === "--runs") opts.runs = Number(value());
+    else if (arg === "--prompt") opts.prompt = value() as PromptVariant;
+    else if (arg === "--suite") opts.suite = value() as Suite;
     else if (arg === "--output") opts.output = value();
     else if (arg === "--workflows") opts.workflows = value().split(",") as Workflow[];
     else throw new Error(`unknown argument: ${arg}`);
@@ -40,11 +46,16 @@ export function parseArgs(argv: string[]): Options {
       opts.workflows.some(w => !WORKFLOWS.includes(w))) {
     throw new Error(`--workflows must list unique choices of ${WORKFLOWS.join(",")}`);
   }
+  if (!PROMPTS.includes(opts.prompt)) throw new Error("--prompt must be original or continuity");
+  if (!["original", "holdout"].includes(opts.suite)) throw new Error("--suite must be original or holdout");
   return opts;
 }
 
-export function instructions(domain: Domain): string {
-  return `Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the CURRENT primary request: ${domain.intents.map((k, i) => `${k} (${domain.descriptions[i]})`).join("; ")}. Those intent probabilities must sum to one. Also produce probabilities for ${domain.flags.map((k, i) => `${k} (${domain.flagDescriptions[i]})`).join("; ")}. Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation.`;
+export function instructions(domain: Domain, variant: PromptVariant = "original"): string {
+  const original = `Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the CURRENT primary request: ${domain.intents.map((k, i) => `${k} (${domain.descriptions[i]})`).join("; ")}. Those intent probabilities must sum to one. Also produce probabilities for ${domain.flags.map((k, i) => `${k} (${domain.flagDescriptions[i]})`).join("; ")}. Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation.`;
+  if (variant === "original") return original;
+  return original.replace("the CURRENT primary request", "the task active in this turn") +
+    " Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.";
 }
 
 export function predict(state: BeliefState, domain: Domain): Prediction {
@@ -99,11 +110,12 @@ export function workflowOrder(workflows: Workflow[], repetition: number): Workfl
 
 type RunOptions = {
   apiKey: string; model: string; pricing: Pricing | null; rows: Row[];
+  prompt?: PromptVariant; cases?: Conversation[];
   fetchImpl?: typeof fetch; onRow?: (row: Row) => Promise<void>;
   progress?: (message: string) => void;
 };
 export async function runWorkflow(workflow: Workflow, repetition: number, options: RunOptions): Promise<void> {
-  for (const conversation of conversations) {
+  for (const conversation of options.cases ?? conversations) {
     const domain = domains[conversation.domain];
     const history: string[] = [];
     let previousResponseId: string | undefined;
@@ -117,7 +129,7 @@ export async function runWorkflow(workflow: Workflow, repetition: number, option
       let usage: OpenAIUsage | undefined;
       let responseId: string | undefined;
       const adapter = createOpenAIInferAdapter({
-        apiKey: options.apiKey, model: options.model, instructions: instructions(domain),
+        apiKey: options.apiKey, model: options.model, instructions: instructions(domain, options.prompt),
         beliefFields: domain, store: workflow === "provider_history",
         ...(workflow === "provider_history" ? { previousResponseId, onResponseId: (id: string) => { responseId = id; } } : {}),
         onUsage: value => { usage = value; }, fetchImpl: options.fetchImpl, requestTimeoutMs: 120_000,
@@ -152,15 +164,16 @@ export async function runWorkflow(workflow: Workflow, repetition: number, option
     }
     const matches = options.rows.filter(r => r.repetition === repetition && r.workflow === workflow &&
       r.conversation === conversation.id && r.exact_match).length;
-    options.progress?.(`${workflow} repetition ${repetition} ${conversation.id}: ${matches}/10 exact`);
+    options.progress?.(`${workflow} repetition ${repetition} ${conversation.id}: ${matches}/${conversation.turns.length} exact`);
   }
 }
 
 export async function main(argv = process.argv.slice(2)): Promise<void> {
   const args = parseArgs(argv);
-  const fixture = validateFixtures();
+  const cases = args.suite === "original" ? conversations : holdoutConversations;
+  const fixture = args.suite === "original" ? validateFixtures() : validateHoldout();
   if (args.validate) {
-    console.log(JSON.stringify({ validated: true, ...fixture }, null, 2));
+    console.log(JSON.stringify({ validated: true, suite: args.suite, prompt_variant: args.prompt, ...fixture }, null, 2));
     return;
   }
   const model = process.env.OPENAI_MODEL ?? "gpt-6-luna";
@@ -168,10 +181,10 @@ export async function main(argv = process.argv.slice(2)): Promise<void> {
   const output = args.output ?? `benchmarks/results/multidomain-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
   const createdAt = new Date().toISOString();
   const rows: Row[] = [];
-  const fixtureHash = createHash("sha256").update(JSON.stringify({ domains, conversations })).digest("hex");
+  const fixtureHash = createHash("sha256").update(JSON.stringify({ domains, conversations: cases })).digest("hex");
   // Identify the implementation used even before the eventual commit is created.
   const implementationHash = createHash("sha256");
-  for (const file of ["multidomain_benchmark.js", "multidomain_cases.js", "openai.js", "runtime.js"]) {
+  for (const file of ["multidomain_benchmark.js", "multidomain_cases.js", "multidomain_holdout.js", "openai.js", "runtime.js"]) {
     implementationHash.update(await readFile(new URL(file, import.meta.url)));
   }
   const implementationSha256 = implementationHash.digest("hex");
@@ -194,13 +207,13 @@ export async function main(argv = process.argv.slice(2)): Promise<void> {
     }
     return {
       benchmark: "multidomain-beliefs-v1", status, created_at: createdAt, updated_at: new Date().toISOString(),
-      model, reasoning_effort: model === "gpt-6-luna" ? "none" : "provider default", node_version: process.version,
+      model, prompt_variant: args.prompt, suite: args.suite, reasoning_effort: model === "gpt-6-luna" ? "none" : "provider default", node_version: process.version,
       fixtures: fixture, fixture_sha256: fixtureHash, implementation_sha256: implementationSha256,
       runs: args.runs, workflows: args.workflows,
       workflow_order_by_repetition: Array.from({ length: args.runs }, (_, i) => workflowOrder(args.workflows, i + 1)),
       expected_calls: fixture.turns * args.runs * args.workflows.length, completed_calls: rows.length,
       pricing_usd_per_million: pricing,
-      instructions_by_domain: Object.fromEntries(Object.entries(domains).map(([k, d]) => [k, instructions(d)])),
+      instructions_by_domain: Object.fromEntries(Object.entries(domains).map(([k, d]) => [k, instructions(d, args.prompt)])),
       methodology: "Synthetic labeled conversations; identical domain instructions/schema across paths. Full history resends user messages only; provider history retains model outputs too. Snapshot sends only BeliefRuntime state and latest message. Every creation/update call counted. Latency includes response body, parsing and runtime infer merge, excludes local snapshot load/save and report writes. Serial calls, rotating workflow order, no retries, 120s request timeout. Cache reads/writes are disjoint subsets of input; absent cache fields treated as zero. Cost uses explicit supplied rates only; excludes storage, serialization, taxes and failed/unreported calls. Partial reports must not be used for workflow comparisons.",
       results, by_domain: Object.fromEntries(Object.keys(domains).map(d => [d, group(rows.filter(r => r.domain === d))])),
       by_repetition: Object.fromEntries(Array.from({ length: args.runs }, (_, i) => [String(i + 1), group(rows.filter(r => r.repetition === i + 1))])),
@@ -218,7 +231,7 @@ export async function main(argv = process.argv.slice(2)): Promise<void> {
     if (!apiKey) throw new Error("OPENAI_API_KEY missing; use --validate for offline fixture validation");
     for (let repetition = 1; repetition <= args.runs; repetition++) {
       for (const workflow of workflowOrder(args.workflows, repetition)) {
-        await runWorkflow(workflow, repetition, { apiKey, model, pricing, rows,
+        await runWorkflow(workflow, repetition, { apiKey, model, pricing, rows, prompt: args.prompt, cases,
           onRow: async () => { await save("running"); }, progress: message => console.error(message) });
       }
     }

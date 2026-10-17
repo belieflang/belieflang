@@ -75,3 +75,26 @@ and records source hashes. Summary workflow costs use the 900 selected calls;
 `execution_accounting` additionally includes discarded successful prefixes and
 explicitly flags unknown usage for failed requests. The recovered summary is
 labeled `completed_with_workflow_restart`, not an uninterrupted execution.
+
+## Task continuity follow-up
+
+Run `npm run benchmark:multidomain:continuity` for the tested candidate.
+`--prompt original` retains the recorded v1 instructions; `--prompt continuity`
+explicitly distinguishes active-task updates from unrelated requests. Both work
+with all three workflows. `--suite holdout` selects five new six-turn synthetic
+conversations instead of the original ten ten-turn conversations.
+
+```bash
+npm run benchmark:multidomain -- --validate --prompt continuity --suite holdout
+npm run benchmark:multidomain:experiment -- benchmarks/results/multidomain-continuity-local
+```
+
+The full experiment plans 1,080 scored calls and requires a new output directory.
+Its frozen plan, pass-level attempts, ledger, failed prefixes and accounting are
+preserved. See [design, limits and findings](../docs/multidomain-continuity.md).
+
+After inspecting a stopped experiment, append `--resume` to its experiment command
+to reuse complete passes and restart the incomplete pass. Resume rejects changes
+to frozen inputs, model, pricing or inference implementation and retains the
+stopped ledger, failed prefix, and total overhead. It requires a failed experiment;
+it cannot overwrite a completed experiment or attach to an active one.
