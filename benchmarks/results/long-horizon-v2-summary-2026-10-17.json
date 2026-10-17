@@ -1,0 +1,813 @@
+{
+  "benchmark": "belieflang-long-horizon-v2",
+  "evaluation_status": "completed",
+  "evaluated_at": "2026-10-17T22:23:21.130Z",
+  "frozen_plan": "/Users/heyjoe/Desktop/Projects/belieflang/belieflang/benchmarks/plans/long-horizon-v2-plan.json",
+  "fixture_sha256": "6f07687f7a4ff5af31b605f6260852a51dc742d7651adb93dc917ee3518d07d8",
+  "configuration_sha256": "fe5d97b0e78c6f1953522cac5f2eefb1c7c7554d9a9a5705fead9f9140dc279f",
+  "model": "gpt-6-luna",
+  "methods": {
+    "full_history": {
+      "turns": 200,
+      "checkpoints": 40,
+      "correct_answers": 38,
+      "factual_recall_accuracy": 0.95,
+      "facts_correct": 219,
+      "facts_scored": 267,
+      "fact_retention_accuracy": 0.8202247191011236,
+      "critical_failures": 0,
+      "unsupported_answers": 2,
+      "confidence_brier_score": 0.1410866666666667,
+      "confidence_predictions_scored": 255,
+      "usage": {
+        "input_tokens": 210436,
+        "output_tokens": 27939,
+        "cached_input_tokens": 1028,
+        "cache_write_tokens": 132852
+      },
+      "total_tokens": 238375,
+      "estimated_usd": 0.03824188,
+      "cost_per_correct_answer": 0.0010063652631578947,
+      "median_latency_ms": 2051,
+      "p95_latency_ms": 2695,
+      "median_context_chars": 6166,
+      "max_snapshot_chars": 0,
+      "attempted_calls": 200,
+      "successful_calls": 200,
+      "failed_calls": 0,
+      "failed_call_cost_reserve_usd": 0,
+      "estimated_usd_including_failures": 0.03824188,
+      "cost_per_correct_answer_including_failures": 0.0010063652631578947
+    },
+    "rolling_summary": {
+      "turns": 200,
+      "checkpoints": 40,
+      "correct_answers": 36,
+      "factual_recall_accuracy": 0.9,
+      "facts_correct": 203,
+      "facts_scored": 267,
+      "fact_retention_accuracy": 0.7602996254681648,
+      "critical_failures": 3,
+      "unsupported_answers": 3,
+      "confidence_brier_score": 0.20181568627450985,
+      "confidence_predictions_scored": 255,
+      "usage": {
+        "input_tokens": 204871,
+        "output_tokens": 22732,
+        "cached_input_tokens": 1149,
+        "cache_write_tokens": 86310
+      },
+      "total_tokens": 227603,
+      "estimated_usd": 0.033907439999999976,
+      "cost_per_correct_answer": 0.0009418733333333327,
+      "median_latency_ms": 1873,
+      "p95_latency_ms": 2663,
+      "median_context_chars": 6060,
+      "max_snapshot_chars": 0,
+      "attempted_calls": 202,
+      "successful_calls": 200,
+      "failed_calls": 2,
+      "failed_call_cost_reserve_usd": 0.00387275,
+      "estimated_usd_including_failures": 0.03778018999999998,
+      "cost_per_correct_answer_including_failures": 0.0010494497222222215
+    },
+    "belieflang": {
+      "turns": 200,
+      "checkpoints": 40,
+      "correct_answers": 37,
+      "factual_recall_accuracy": 0.925,
+      "facts_correct": 207,
+      "facts_scored": 267,
+      "fact_retention_accuracy": 0.7752808988764045,
+      "critical_failures": 1,
+      "unsupported_answers": 2,
+      "confidence_brier_score": 0.1599080971659919,
+      "confidence_predictions_scored": 247,
+      "usage": {
+        "input_tokens": 235886,
+        "output_tokens": 7765,
+        "cached_input_tokens": 6737,
+        "cache_write_tokens": 220466
+      },
+      "total_tokens": 243651,
+      "estimated_usd": 0.03237642000000002,
+      "cost_per_correct_answer": 0.0008750383783783788,
+      "median_latency_ms": 1405,
+      "p95_latency_ms": 1877,
+      "median_context_chars": 6599,
+      "max_snapshot_chars": 1096,
+      "attempted_calls": 200,
+      "successful_calls": 200,
+      "failed_calls": 0,
+      "failed_call_cost_reserve_usd": 0,
+      "estimated_usd_including_failures": 0.03237642000000002,
+      "cost_per_correct_answer_including_failures": 0.0008750383783783788
+    }
+  },
+  "by_domain_recall": {
+    "travel": {
+      "full_history": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      },
+      "rolling_summary": {
+        "correct": 6,
+        "checkpoints": 8,
+        "accuracy": 0.75
+      },
+      "belieflang": {
+        "correct": 7,
+        "checkpoints": 8,
+        "accuracy": 0.875
+      }
+    },
+    "planning": {
+      "full_history": {
+        "correct": 7,
+        "checkpoints": 8,
+        "accuracy": 0.875
+      },
+      "rolling_summary": {
+        "correct": 6,
+        "checkpoints": 8,
+        "accuracy": 0.75
+      },
+      "belieflang": {
+        "correct": 7,
+        "checkpoints": 8,
+        "accuracy": 0.875
+      }
+    },
+    "shopping": {
+      "full_history": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      },
+      "rolling_summary": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      },
+      "belieflang": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      }
+    },
+    "troubleshooting": {
+      "full_history": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      },
+      "rolling_summary": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      },
+      "belieflang": {
+        "correct": 7,
+        "checkpoints": 8,
+        "accuracy": 0.875
+      }
+    },
+    "task_management": {
+      "full_history": {
+        "correct": 7,
+        "checkpoints": 8,
+        "accuracy": 0.875
+      },
+      "rolling_summary": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      },
+      "belieflang": {
+        "correct": 8,
+        "checkpoints": 8,
+        "accuracy": 1
+      }
+    }
+  },
+  "attempts": 602,
+  "successful_calls": 600,
+  "failed_calls": 2,
+  "failed_call_ledger": [
+    {
+      "conversation": "travel_conference",
+      "turn": 20,
+      "method": "rolling_summary",
+      "status": "failed",
+      "estimated_usd": 0.00203725,
+      "error": "OpenAI response status: incomplete",
+      "at": "2026-10-17T22:07:19.327Z"
+    },
+    {
+      "conversation": "tasks_grant",
+      "turn": 18,
+      "method": "rolling_summary",
+      "status": "failed",
+      "estimated_usd": 0.0018355,
+      "error": "OpenAI response status: incomplete",
+      "at": "2026-10-17T22:20:53.982Z"
+    }
+  ],
+  "final_evaluation_estimated_usd_including_failure_reserve": 0.10839848999999992,
+  "pilot_calls": 180,
+  "pilot_estimated_usd": 0.021918915,
+  "total_experiment_estimated_usd": 0.13031740499999991,
+  "budget_cap_usd": 5,
+  "cumulative_cost_tokens_and_accuracy_by_turn": {
+    "full_history": [
+      {
+        "conversation_turn": 1,
+        "cumulative_input_tokens_reported": 9256,
+        "cumulative_output_tokens_reported": 657,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0012541,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 2,
+        "cumulative_input_tokens_reported": 18635,
+        "cumulative_output_tokens_reported": 1454,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0025905,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 3,
+        "cumulative_input_tokens_reported": 28139,
+        "cumulative_output_tokens_reported": 2469,
+        "cumulative_estimated_usd_including_failure_reserve": 0.004074100000000001,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 4,
+        "cumulative_input_tokens_reported": 37749,
+        "cumulative_output_tokens_reported": 3746,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0056995,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 5,
+        "cumulative_input_tokens_reported": 47648,
+        "cumulative_output_tokens_reported": 4965,
+        "cumulative_estimated_usd_including_failure_reserve": 0.007351650000000001,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 6,
+        "cumulative_input_tokens_reported": 57517,
+        "cumulative_output_tokens_reported": 6240,
+        "cumulative_estimated_usd_including_failure_reserve": 0.009028625000000004,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 7,
+        "cumulative_input_tokens_reported": 67543,
+        "cumulative_output_tokens_reported": 7510,
+        "cumulative_estimated_usd_including_failure_reserve": 0.010719675000000003,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 8,
+        "cumulative_input_tokens_reported": 77726,
+        "cumulative_output_tokens_reported": 8863,
+        "cumulative_estimated_usd_including_failure_reserve": 0.012401830000000006,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 11
+      },
+      {
+        "conversation_turn": 9,
+        "cumulative_input_tokens_reported": 88022,
+        "cumulative_output_tokens_reported": 10244,
+        "cumulative_estimated_usd_including_failure_reserve": 0.014202980000000002,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 11
+      },
+      {
+        "conversation_turn": 10,
+        "cumulative_input_tokens_reported": 98562,
+        "cumulative_output_tokens_reported": 11714,
+        "cumulative_estimated_usd_including_failure_reserve": 0.01620368,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 11,
+        "cumulative_input_tokens_reported": 109109,
+        "cumulative_output_tokens_reported": 13249,
+        "cumulative_estimated_usd_including_failure_reserve": 0.018237755000000005,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 12,
+        "cumulative_input_tokens_reported": 119790,
+        "cumulative_output_tokens_reported": 14770,
+        "cumulative_estimated_usd_including_failure_reserve": 0.020332630000000008,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 13,
+        "cumulative_input_tokens_reported": 130596,
+        "cumulative_output_tokens_reported": 16280,
+        "cumulative_estimated_usd_including_failure_reserve": 0.022437630000000007,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 14,
+        "cumulative_input_tokens_reported": 141542,
+        "cumulative_output_tokens_reported": 17874,
+        "cumulative_estimated_usd_including_failure_reserve": 0.02460213,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 15,
+        "cumulative_input_tokens_reported": 152784,
+        "cumulative_output_tokens_reported": 19467,
+        "cumulative_estimated_usd_including_failure_reserve": 0.02680313,
+        "recall_accuracy": 0.9666666666666667,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 16,
+        "cumulative_input_tokens_reported": 164011,
+        "cumulative_output_tokens_reported": 21187,
+        "cumulative_estimated_usd_including_failure_reserve": 0.029065755000000006,
+        "recall_accuracy": 0.9666666666666667,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 17,
+        "cumulative_input_tokens_reported": 175376,
+        "cumulative_output_tokens_reported": 22936,
+        "cumulative_estimated_usd_including_failure_reserve": 0.03136013000000001,
+        "recall_accuracy": 0.9666666666666667,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 18,
+        "cumulative_input_tokens_reported": 186867,
+        "cumulative_output_tokens_reported": 24663,
+        "cumulative_estimated_usd_including_failure_reserve": 0.03365925500000002,
+        "recall_accuracy": 0.9666666666666667,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 19,
+        "cumulative_input_tokens_reported": 198493,
+        "cumulative_output_tokens_reported": 26293,
+        "cumulative_estimated_usd_including_failure_reserve": 0.035926755000000005,
+        "recall_accuracy": 0.9666666666666667,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 20,
+        "cumulative_input_tokens_reported": 210436,
+        "cumulative_output_tokens_reported": 27939,
+        "cumulative_estimated_usd_including_failure_reserve": 0.03824188,
+        "recall_accuracy": 0.95,
+        "scored_checkpoints": 40
+      }
+    ],
+    "rolling_summary": [
+      {
+        "conversation_turn": 1,
+        "cumulative_input_tokens_reported": 9616,
+        "cumulative_output_tokens_reported": 896,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0014354,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 2,
+        "cumulative_input_tokens_reported": 19413,
+        "cumulative_output_tokens_reported": 1671,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0028554750000000005,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 3,
+        "cumulative_input_tokens_reported": 29304,
+        "cumulative_output_tokens_reported": 2561,
+        "cumulative_estimated_usd_including_failure_reserve": 0.004342799999999999,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 4,
+        "cumulative_input_tokens_reported": 39285,
+        "cumulative_output_tokens_reported": 3541,
+        "cumulative_estimated_usd_including_failure_reserve": 0.005884400000000001,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 5,
+        "cumulative_input_tokens_reported": 49541,
+        "cumulative_output_tokens_reported": 4289,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0073643,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 6,
+        "cumulative_input_tokens_reported": 59625,
+        "cumulative_output_tokens_reported": 5129,
+        "cumulative_estimated_usd_including_failure_reserve": 0.00884645,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 7,
+        "cumulative_input_tokens_reported": 69733,
+        "cumulative_output_tokens_reported": 6141,
+        "cumulative_estimated_usd_including_failure_reserve": 0.010417250000000001,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 8,
+        "cumulative_input_tokens_reported": 79915,
+        "cumulative_output_tokens_reported": 7214,
+        "cumulative_estimated_usd_including_failure_reserve": 0.012052100000000005,
+        "recall_accuracy": 0.9090909090909091,
+        "scored_checkpoints": 11
+      },
+      {
+        "conversation_turn": 9,
+        "cumulative_input_tokens_reported": 90145,
+        "cumulative_output_tokens_reported": 8452,
+        "cumulative_estimated_usd_including_failure_reserve": 0.013774150000000006,
+        "recall_accuracy": 0.9090909090909091,
+        "scored_checkpoints": 11
+      },
+      {
+        "conversation_turn": 10,
+        "cumulative_input_tokens_reported": 100537,
+        "cumulative_output_tokens_reported": 9614,
+        "cumulative_estimated_usd_including_failure_reserve": 0.015527500000000007,
+        "recall_accuracy": 0.95,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 11,
+        "cumulative_input_tokens_reported": 110783,
+        "cumulative_output_tokens_reported": 10842,
+        "cumulative_estimated_usd_including_failure_reserve": 0.01724652500000001,
+        "recall_accuracy": 0.95,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 12,
+        "cumulative_input_tokens_reported": 121125,
+        "cumulative_output_tokens_reported": 12080,
+        "cumulative_estimated_usd_including_failure_reserve": 0.019032100000000003,
+        "recall_accuracy": 0.95,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 13,
+        "cumulative_input_tokens_reported": 131480,
+        "cumulative_output_tokens_reported": 13327,
+        "cumulative_estimated_usd_including_failure_reserve": 0.020823975,
+        "recall_accuracy": 0.95,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 14,
+        "cumulative_input_tokens_reported": 141875,
+        "cumulative_output_tokens_reported": 14613,
+        "cumulative_estimated_usd_including_failure_reserve": 0.022640450000000003,
+        "recall_accuracy": 0.95,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 15,
+        "cumulative_input_tokens_reported": 152476,
+        "cumulative_output_tokens_reported": 15644,
+        "cumulative_estimated_usd_including_failure_reserve": 0.024404099999999998,
+        "recall_accuracy": 0.9333333333333333,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 16,
+        "cumulative_input_tokens_reported": 162852,
+        "cumulative_output_tokens_reported": 17082,
+        "cumulative_estimated_usd_including_failure_reserve": 0.026293575000000003,
+        "recall_accuracy": 0.9333333333333333,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 17,
+        "cumulative_input_tokens_reported": 173274,
+        "cumulative_output_tokens_reported": 18556,
+        "cumulative_estimated_usd_including_failure_reserve": 0.028231625,
+        "recall_accuracy": 0.9333333333333333,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 18,
+        "cumulative_input_tokens_reported": 183696,
+        "cumulative_output_tokens_reported": 19830,
+        "cumulative_estimated_usd_including_failure_reserve": 0.031879899999999996,
+        "recall_accuracy": 0.9333333333333333,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 19,
+        "cumulative_input_tokens_reported": 194168,
+        "cumulative_output_tokens_reported": 21290,
+        "cumulative_estimated_usd_including_failure_reserve": 0.033816949999999985,
+        "recall_accuracy": 0.9333333333333333,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 20,
+        "cumulative_input_tokens_reported": 204871,
+        "cumulative_output_tokens_reported": 22732,
+        "cumulative_estimated_usd_including_failure_reserve": 0.03778018999999998,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 40
+      }
+    ],
+    "belieflang": [
+      {
+        "conversation_turn": 1,
+        "cumulative_input_tokens_reported": 10312,
+        "cumulative_output_tokens_reported": 672,
+        "cumulative_estimated_usd_including_failure_reserve": 0.001422175,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 2,
+        "cumulative_input_tokens_reported": 21049,
+        "cumulative_output_tokens_reported": 1149,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0028808400000000004,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 3,
+        "cumulative_input_tokens_reported": 32103,
+        "cumulative_output_tokens_reported": 1612,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0043679899999999995,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 4,
+        "cumulative_input_tokens_reported": 43432,
+        "cumulative_output_tokens_reported": 2081,
+        "cumulative_estimated_usd_including_failure_reserve": 0.005889295,
+        "recall_accuracy": null,
+        "scored_checkpoints": 0
+      },
+      {
+        "conversation_turn": 5,
+        "cumulative_input_tokens_reported": 55232,
+        "cumulative_output_tokens_reported": 2335,
+        "cumulative_estimated_usd_including_failure_reserve": 0.0073558799999999995,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 6,
+        "cumulative_input_tokens_reported": 66857,
+        "cumulative_output_tokens_reported": 2575,
+        "cumulative_estimated_usd_including_failure_reserve": 0.00879589,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 7,
+        "cumulative_input_tokens_reported": 78506,
+        "cumulative_output_tokens_reported": 3030,
+        "cumulative_estimated_usd_including_failure_reserve": 0.010346169999999998,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 10
+      },
+      {
+        "conversation_turn": 8,
+        "cumulative_input_tokens_reported": 90197,
+        "cumulative_output_tokens_reported": 3448,
+        "cumulative_estimated_usd_including_failure_reserve": 0.012015795,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 11
+      },
+      {
+        "conversation_turn": 9,
+        "cumulative_input_tokens_reported": 102063,
+        "cumulative_output_tokens_reported": 3834,
+        "cumulative_estimated_usd_including_failure_reserve": 0.013691295000000001,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 11
+      },
+      {
+        "conversation_turn": 10,
+        "cumulative_input_tokens_reported": 114059,
+        "cumulative_output_tokens_reported": 4090,
+        "cumulative_estimated_usd_including_failure_reserve": 0.015318045000000002,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 11,
+        "cumulative_input_tokens_reported": 125924,
+        "cumulative_output_tokens_reported": 4536,
+        "cumulative_estimated_usd_including_failure_reserve": 0.017023419999999994,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 12,
+        "cumulative_input_tokens_reported": 138030,
+        "cumulative_output_tokens_reported": 4914,
+        "cumulative_estimated_usd_including_failure_reserve": 0.018724919999999996,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 13,
+        "cumulative_input_tokens_reported": 150120,
+        "cumulative_output_tokens_reported": 5348,
+        "cumulative_estimated_usd_including_failure_reserve": 0.020452420000000002,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 14,
+        "cumulative_input_tokens_reported": 162225,
+        "cumulative_output_tokens_reported": 5764,
+        "cumulative_estimated_usd_including_failure_reserve": 0.02217279500000001,
+        "recall_accuracy": 1,
+        "scored_checkpoints": 20
+      },
+      {
+        "conversation_turn": 15,
+        "cumulative_input_tokens_reported": 174590,
+        "cumulative_output_tokens_reported": 6022,
+        "cumulative_estimated_usd_including_failure_reserve": 0.02384667000000001,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 16,
+        "cumulative_input_tokens_reported": 186787,
+        "cumulative_output_tokens_reported": 6452,
+        "cumulative_estimated_usd_including_failure_reserve": 0.025585545000000008,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 17,
+        "cumulative_input_tokens_reported": 199006,
+        "cumulative_output_tokens_reported": 6757,
+        "cumulative_estimated_usd_including_failure_reserve": 0.027264670000000008,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 18,
+        "cumulative_input_tokens_reported": 211215,
+        "cumulative_output_tokens_reported": 7184,
+        "cumulative_estimated_usd_including_failure_reserve": 0.029003545000000006,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 19,
+        "cumulative_input_tokens_reported": 223460,
+        "cumulative_output_tokens_reported": 7507,
+        "cumulative_estimated_usd_including_failure_reserve": 0.03069492000000001,
+        "recall_accuracy": 0.9,
+        "scored_checkpoints": 30
+      },
+      {
+        "conversation_turn": 20,
+        "cumulative_input_tokens_reported": 235886,
+        "cumulative_output_tokens_reported": 7765,
+        "cumulative_estimated_usd_including_failure_reserve": 0.03237642000000002,
+        "recall_accuracy": 0.925,
+        "scored_checkpoints": 40
+      }
+    ]
+  },
+  "context_summary_snapshot_chars_by_turn": {
+    "full_history": [
+      {
+        "conversation_turn": 5,
+        "median_context_chars": 5772,
+        "median_summary_chars": null,
+        "median_snapshot_chars": null
+      },
+      {
+        "conversation_turn": 10,
+        "median_context_chars": 6074,
+        "median_summary_chars": null,
+        "median_snapshot_chars": null
+      },
+      {
+        "conversation_turn": 15,
+        "median_context_chars": 6435,
+        "median_summary_chars": null,
+        "median_snapshot_chars": null
+      },
+      {
+        "conversation_turn": 20,
+        "median_context_chars": 6787.5,
+        "median_summary_chars": null,
+        "median_snapshot_chars": null
+      }
+    ],
+    "rolling_summary": [
+      {
+        "conversation_turn": 5,
+        "median_context_chars": 6025.5,
+        "median_summary_chars": 205.5,
+        "median_snapshot_chars": null
+      },
+      {
+        "conversation_turn": 10,
+        "median_context_chars": 6104.5,
+        "median_summary_chars": 278,
+        "median_snapshot_chars": null
+      },
+      {
+        "conversation_turn": 15,
+        "median_context_chars": 6206,
+        "median_summary_chars": 332,
+        "median_snapshot_chars": null
+      },
+      {
+        "conversation_turn": 20,
+        "median_context_chars": 6226.5,
+        "median_summary_chars": 384.5,
+        "median_snapshot_chars": null
+      }
+    ],
+    "belieflang": [
+      {
+        "conversation_turn": 5,
+        "median_context_chars": 6531,
+        "median_summary_chars": null,
+        "median_snapshot_chars": 771.5
+      },
+      {
+        "conversation_turn": 10,
+        "median_context_chars": 6627.5,
+        "median_summary_chars": null,
+        "median_snapshot_chars": 862
+      },
+      {
+        "conversation_turn": 15,
+        "median_context_chars": 6714.5,
+        "median_summary_chars": null,
+        "median_snapshot_chars": 956
+      },
+      {
+        "conversation_turn": 20,
+        "median_context_chars": 6732.5,
+        "median_summary_chars": null,
+        "median_snapshot_chars": 972
+      }
+    ]
+  },
+  "accuracy_cost_points": [
+    {
+      "method": "full_history",
+      "accuracy": 0.95,
+      "cost_usd": 0.03824188
+    },
+    {
+      "method": "rolling_summary",
+      "accuracy": 0.9,
+      "cost_usd": 0.03778018999999998
+    },
+    {
+      "method": "belieflang",
+      "accuracy": 0.925,
+      "cost_usd": 0.03237642000000002
+    }
+  ],
+  "quality_matched_break_even_turn": {
+    "belieflang_vs_full_history": 6,
+    "belieflang_vs_rolling_summary": 10
+  },
+  "known_fixture_issue": "The event_launch owner checkpoint labels expect 'event organizer' at turns 10, 15, and 20, although the conversation explicitly names Nina Patel as event owner at turn 4. These frozen labels were not edited after evaluation; all three methods' Nina Patel answer is counted as incorrect at turn 15. Treat these checkpoints and the headline exact-match scores as conservatively biased by one shared label error (2.5 percentage points per method).",
+  "analysis_note": "Method-level costs include the conservative reserve for incomplete responses. Per-method token counts include reported usage only; incomplete response token usage was unavailable. The two incomplete attempts were each retried after persisting the failure; both original failures remain in the ledger and in attempts/cost. Confidence Brier scores apply only to fact records present at checkpoints and do not measure omitted facts. The shared event-owner label inconsistency also affects checkpoint state-retention counts."
+}

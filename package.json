@@ -30,7 +30,10 @@
     "benchmark:multidomain:report": "npm run build && node dist/src/multidomain_report.js",
     "benchmark:multidomain:experiment": "npm run build && node --env-file-if-exists=.env dist/src/multidomain_experiment.js",
     "benchmark:multidomain:continuity": "npm run benchmark:multidomain -- --prompt continuity",
-    "benchmark:multidomain:compact": "npm run benchmark:multidomain -- --prompt compact"
+    "benchmark:multidomain:compact": "npm run benchmark:multidomain -- --prompt compact",
+    "benchmark:long-horizon": "npm run build && node --env-file-if-exists=.env dist/src/long_horizon_benchmark.js",
+    "benchmark:long-horizon:validate": "npm run build && node dist/src/long_horizon_benchmark.js --validate",
+    "benchmark:long-horizon:report": "npm run build && node dist/src/long_horizon_report.js"
   },
   "keywords": [
     "ai",
