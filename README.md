@@ -94,6 +94,9 @@ Run `npm run benchmark:multidomain:validate` to validate the supplied 100-turn, 
 
 The separate [long-horizon v2 benchmark](docs/long-horizon-v2.md) compares full history, Luna-maintained rolling summaries, and typed BeliefLang runtime snapshots on ten 20-turn conversations. Validate fixtures offline with `npm run benchmark:long-horizon:validate`; regenerate the saved analysis and charts with `npm run benchmark:long-horizon:report`. The frozen run, compressed raw evaluation data, cost accounting, and fixture limitations are documented in the report.
 
+The opt-in [v3 factual memory and decision guard](docs/delta-state-v3.md) add typed deltas, source-tracked original/previous values, explicit uncertainty and deterministic permission checks. Run `npm run benchmark:v3:validate` and `npm run benchmark:v3:offline` without credentials. The offline comparison includes plain typed JSON and full history on demand; JSON matches v3 on these deterministic contracts. No live v3 accuracy, token or cost advantage has been measured.
+
+
 The [task-continuity follow-up](docs/multidomain-continuity.md) tests `--prompt continuity` on the same workflows and on fresh synthetic conversations. It preserves task intent across preference-only updates while keeping explicit unrelated questions separate. The shared OpenAI adapter also distinguishes intermediate commentary from final structured output. The original prompt remains selectable with `--prompt original`.
 
 The [prompt-compression experiment](docs/multidomain-compression.md) tests `--prompt compact` across all three history methods and reruns the existing synthetic cases as regression data. Compact snapshots cost 17.99% less than the longer continuity snapshot, but scored 299/300 instead of 300/300 on the original suite. They scored 90/90 on the reused synthetic suite. This opt-in experimental variant failed the strict no-regression acceptance rule.

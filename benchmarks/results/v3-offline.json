@@ -1,0 +1,373 @@
+{
+  "version": 3,
+  "mode": "offline-oracle-mock",
+  "status": "complete",
+  "fingerprint": "86fb58488ee476fb403c7b31be5495d3fc6cc244bdaca294bb519770b7b18d75",
+  "fixtureCounts": {
+    "conversations": 10,
+    "domains": 5,
+    "turns": 120,
+    "questions": 80,
+    "tools": 70
+  },
+  "config": {
+    "model": "gpt-6-luna",
+    "repetitions": 3,
+    "maxOutputTokens": 2048,
+    "inputTokenCeiling": 1050000,
+    "timeoutMs": 45000
+  },
+  "environment": {
+    "node": "v25.1.0",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "limitations": [
+    "Oracle extraction and adversarial always-attempt tool proposals; not model accuracy or calibration.",
+    "Bytes are measured serialized benchmark payloads, not tokens; token/cost metrics are null.",
+    "Local timing includes mock/harness work, not provider inference latency."
+  ],
+  "completedRuns": 180,
+  "rawRuns": "v3-offline.json.runs.json.gz",
+  "rawRunsSha256": "01f4e692737acf1b206d728d5802c0fe3d662e6c6308cb82406116f7ae3c76ba",
+  "summaryScope": "Completed runs only; the live accounting ledger also includes any interrupted partial run.",
+  "summary": [
+    {
+      "method": "full_eager",
+      "runs": 30,
+      "calls": 810,
+      "failedCalls": 0,
+      "answers": 240,
+      "correct": 240,
+      "accuracy": 1,
+      "current": {
+        "correct": 90,
+        "total": 90
+      },
+      "historical": {
+        "original": {
+          "correct": 60,
+          "total": 60
+        },
+        "previous": {
+          "correct": 30,
+          "total": 30
+        }
+      },
+      "contradictions": {
+        "correct": 30,
+        "total": 30
+      },
+      "missing": {
+        "correct": 30,
+        "total": 30
+      },
+      "factualValueAccuracy": 1,
+      "statusAccuracy": 1,
+      "brier": 0,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedTokens": null,
+      "cacheWriteTokens": null,
+      "estimatedCost": null,
+      "costPerCorrect": null,
+      "requestBytes": 1950570,
+      "responseBytes": 88230,
+      "unmeteredCostOrUpperBound": 0,
+      "retrievals": 0,
+      "retrievalLatencyMs": 0,
+      "inferenceLatencyMs": 6.11295099999365,
+      "localElapsedMs": 117.67924800000122,
+      "finalStateBytes": 44712,
+      "maxStateBytes": 1560,
+      "stateGrowthBytes": 39258,
+      "unnecessaryUpdates": 0,
+      "suppressedNoopDeltas": 0,
+      "unsafeAttempts": 150,
+      "unsafeExecutions": 0,
+      "safeActionsExecuted": 60,
+      "safeActions": 60
+    },
+    {
+      "method": "full_query",
+      "runs": 30,
+      "calls": 450,
+      "failedCalls": 0,
+      "answers": 240,
+      "correct": 240,
+      "accuracy": 1,
+      "current": {
+        "correct": 90,
+        "total": 90
+      },
+      "historical": {
+        "original": {
+          "correct": 60,
+          "total": 60
+        },
+        "previous": {
+          "correct": 30,
+          "total": 30
+        }
+      },
+      "contradictions": {
+        "correct": 30,
+        "total": 30
+      },
+      "missing": {
+        "correct": 30,
+        "total": 30
+      },
+      "factualValueAccuracy": 1,
+      "statusAccuracy": 1,
+      "brier": 0,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedTokens": null,
+      "cacheWriteTokens": null,
+      "estimatedCost": null,
+      "costPerCorrect": null,
+      "requestBytes": 1012626,
+      "responseBytes": 60705,
+      "unmeteredCostOrUpperBound": 0,
+      "retrievals": 0,
+      "retrievalLatencyMs": 0,
+      "inferenceLatencyMs": 2.502285000002857,
+      "localElapsedMs": 80.67633300000169,
+      "finalStateBytes": 44712,
+      "maxStateBytes": 1560,
+      "stateGrowthBytes": 39258,
+      "unnecessaryUpdates": 0,
+      "suppressedNoopDeltas": 0,
+      "unsafeAttempts": 150,
+      "unsafeExecutions": 0,
+      "safeActionsExecuted": 60,
+      "safeActions": 60
+    },
+    {
+      "method": "rolling_summary",
+      "runs": 30,
+      "calls": 810,
+      "failedCalls": 0,
+      "answers": 240,
+      "correct": 240,
+      "accuracy": 1,
+      "current": {
+        "correct": 90,
+        "total": 90
+      },
+      "historical": {
+        "original": {
+          "correct": 60,
+          "total": 60
+        },
+        "previous": {
+          "correct": 30,
+          "total": 30
+        }
+      },
+      "contradictions": {
+        "correct": 30,
+        "total": 30
+      },
+      "missing": {
+        "correct": 30,
+        "total": 30
+      },
+      "factualValueAccuracy": 1,
+      "statusAccuracy": 1,
+      "brier": 0,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedTokens": null,
+      "cacheWriteTokens": null,
+      "estimatedCost": null,
+      "costPerCorrect": null,
+      "requestBytes": 1919292,
+      "responseBytes": 483945,
+      "unmeteredCostOrUpperBound": 0,
+      "retrievals": 0,
+      "retrievalLatencyMs": 0,
+      "inferenceLatencyMs": 4.398056999995838,
+      "localElapsedMs": 84.71099799999777,
+      "finalStateBytes": 40152,
+      "maxStateBytes": 1464,
+      "stateGrowthBytes": 10965,
+      "unnecessaryUpdates": 0,
+      "suppressedNoopDeltas": 0,
+      "unsafeAttempts": 150,
+      "unsafeExecutions": 0,
+      "safeActionsExecuted": 60,
+      "safeActions": 60
+    },
+    {
+      "method": "plain_json",
+      "runs": 30,
+      "calls": 810,
+      "failedCalls": 0,
+      "answers": 240,
+      "correct": 240,
+      "accuracy": 1,
+      "current": {
+        "correct": 90,
+        "total": 90
+      },
+      "historical": {
+        "original": {
+          "correct": 60,
+          "total": 60
+        },
+        "previous": {
+          "correct": 30,
+          "total": 30
+        }
+      },
+      "contradictions": {
+        "correct": 30,
+        "total": 30
+      },
+      "missing": {
+        "correct": 30,
+        "total": 30
+      },
+      "factualValueAccuracy": 1,
+      "statusAccuracy": 1,
+      "brier": 0,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedTokens": null,
+      "cacheWriteTokens": null,
+      "estimatedCost": null,
+      "costPerCorrect": null,
+      "requestBytes": 1322730,
+      "responseBytes": 88230,
+      "unmeteredCostOrUpperBound": 0,
+      "retrievals": 90,
+      "retrievalLatencyMs": 0.8556719999979805,
+      "inferenceLatencyMs": 4.274217999990945,
+      "localElapsedMs": 79.57521100000082,
+      "finalStateBytes": 160773,
+      "maxStateBytes": 5524,
+      "stateGrowthBytes": 110667,
+      "unnecessaryUpdates": 0,
+      "suppressedNoopDeltas": 30,
+      "unsafeAttempts": 150,
+      "unsafeExecutions": 0,
+      "safeActionsExecuted": 60,
+      "safeActions": 60
+    },
+    {
+      "method": "belieflang_v2",
+      "runs": 30,
+      "calls": 810,
+      "failedCalls": 0,
+      "answers": 240,
+      "correct": 90,
+      "accuracy": 0.375,
+      "current": {
+        "correct": 60,
+        "total": 90
+      },
+      "historical": {
+        "original": {
+          "correct": 0,
+          "total": 60
+        },
+        "previous": {
+          "correct": 0,
+          "total": 30
+        }
+      },
+      "contradictions": {
+        "correct": 0,
+        "total": 30
+      },
+      "missing": {
+        "correct": 30,
+        "total": 30
+      },
+      "factualValueAccuracy": 0.5,
+      "statusAccuracy": 0.375,
+      "brier": 0.625,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedTokens": null,
+      "cacheWriteTokens": null,
+      "estimatedCost": null,
+      "costPerCorrect": null,
+      "requestBytes": 1300239,
+      "responseBytes": 84846,
+      "unmeteredCostOrUpperBound": 0,
+      "retrievals": 0,
+      "retrievalLatencyMs": 0,
+      "inferenceLatencyMs": 4.8078000000053365,
+      "localElapsedMs": 166.29449899999756,
+      "finalStateBytes": 12525,
+      "maxStateBytes": 451,
+      "stateGrowthBytes": -564,
+      "unnecessaryUpdates": 60,
+      "suppressedNoopDeltas": 0,
+      "unsafeAttempts": 150,
+      "unsafeExecutions": 0,
+      "safeActionsExecuted": 60,
+      "safeActions": 60
+    },
+    {
+      "method": "belieflang_v3",
+      "runs": 30,
+      "calls": 810,
+      "failedCalls": 0,
+      "answers": 240,
+      "correct": 240,
+      "accuracy": 1,
+      "current": {
+        "correct": 90,
+        "total": 90
+      },
+      "historical": {
+        "original": {
+          "correct": 60,
+          "total": 60
+        },
+        "previous": {
+          "correct": 30,
+          "total": 30
+        }
+      },
+      "contradictions": {
+        "correct": 30,
+        "total": 30
+      },
+      "missing": {
+        "correct": 30,
+        "total": 30
+      },
+      "factualValueAccuracy": 1,
+      "statusAccuracy": 1,
+      "brier": 0,
+      "inputTokens": null,
+      "outputTokens": null,
+      "cachedTokens": null,
+      "cacheWriteTokens": null,
+      "estimatedCost": null,
+      "costPerCorrect": null,
+      "requestBytes": 1323810,
+      "responseBytes": 88230,
+      "unmeteredCostOrUpperBound": 0,
+      "retrievals": 90,
+      "retrievalLatencyMs": 2.2139970000021094,
+      "inferenceLatencyMs": 6.97012399999884,
+      "localElapsedMs": 231.0877089999999,
+      "finalStateBytes": 173613,
+      "maxStateBytes": 5917,
+      "stateGrowthBytes": 117246,
+      "unnecessaryUpdates": 0,
+      "suppressedNoopDeltas": 30,
+      "unsafeAttempts": 150,
+      "unsafeExecutions": 0,
+      "safeActionsExecuted": 60,
+      "safeActions": 60
+    }
+  ],
+  "liveCalls": 0
+}

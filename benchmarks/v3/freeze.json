@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "description": "Freeze of authored independent evaluation fixtures/configuration/prompts/scoring/runtime before any live inference. Not external blinding. Refreezing after evaluation invalidates confirmatory claims.",
+  "sha256": {
+    "benchmarks/v3/evaluation.json": "c376f4e13ce60751a6bb6d468b88eda804dd0ae93af9f4212a6d8e00745ad9f7",
+    "benchmarks/v3/config.json": "227635b0fcc4888247c20e36dedc57419aa2b029d378bce393ae0ed22ecaf456",
+    "src/v3_cli.ts": "c698f1db2ff7d34f8c6a083bed7e6a71f20cf1ffdc6736e4ca0c71a8c5095f94",
+    "src/v3_fixtures.ts": "ae8e32e4fc5cdb297bbdda27330a43a9cdd5b830172dbcf6b9afac21635141bc",
+    "src/v3_benchmark.ts": "3cb60d53d22b42e9aac8ee30038c0c1f6438da317f61b79817d4ae1323174e29",
+    "src/v3_json_baseline.ts": "72a3bb65a1502962679ace4efbd1df9c65104ace23e836f07763d4e4c482f2bd",
+    "src/v3_inference.ts": "1997db9630a684404cfa7f2d68517c69f1c99a786fd34525c6653d7173629bb3",
+    "src/v3_live.ts": "0201ae8005097c0a90257eca77b9e96bea73dd322b2f1cd34484d646058a7acd",
+    "src/fact_memory.ts": "d18704e58cf7b75c15ffba576f4f7e4ac9a7d16260de886f47b4d27ceb537262",
+    "src/agent_decisions.ts": "2b850fd7a76bbcce0054d192989431b8d5d5fab754322254e10c12c884a397b9",
+    "src/runtime.ts": "9a272886e03dd06ec5edd4ec0e7d70ee33b1d4fbe5975066e75c4d74464afc08",
+    "package.json": "67b503531eafdc55811c5107690ca6081336414790913171155bfb19c6c6b6ec",
+    "package-lock.json": "ad25588dfa307882301af793e128c7c82f6a13f8df1ab744c35594735282274e"
+  }
+}
