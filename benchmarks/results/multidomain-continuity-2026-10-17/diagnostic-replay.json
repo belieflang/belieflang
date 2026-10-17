@@ -1,0 +1,38 @@
+{
+  "source_file": "diagnostics-direct-body.json",
+  "probe": 2,
+  "live_calls": 0,
+  "baseline_commit": "c0a9120",
+  "results": {
+    "old_adapter": {
+      "error": "OpenAI returned invalid JSON"
+    },
+    "phase_aware_adapter": {
+      "patch": {
+        "intent": {
+          "cardinality": "exclusive",
+          "domain": "closed",
+          "values": {
+            "book_flight": 1,
+            "book_hotel": 0,
+            "unknown": 0
+          }
+        },
+        "user": {
+          "cardinality": "multi",
+          "domain": "closed",
+          "values": {
+            "budget_sensitive": 1,
+            "prefers_direct": 1
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 468,
+        "output_tokens": 81,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "status": "failed",
+  "updated_at": "2026-10-17T19:38:31.623Z",
+  "completed_passes": 0,
+  "expected_passes": 15,
+  "attempts": [
+    {
+      "suite": "original",
+      "prompt": "continuity",
+      "workflow": "full_history",
+      "repetition": 1,
+      "file": "original-continuity-full_history-r1-a1.json",
+      "attempt": 1,
+      "status": "failed",
+      "completed_calls": 14,
+      "error": "full_history repetition 1 travel_osaka turn 5: OpenAI returned invalid JSON"
+    },
+    {
+      "suite": "original",
+      "prompt": "continuity",
+      "workflow": "full_history",
+      "repetition": 1,
+      "file": "original-continuity-full_history-r1-a2.json",
+      "attempt": 2,
+      "status": "failed",
+      "completed_calls": 5,
+      "error": "full_history repetition 1 travel_milan turn 6: OpenAI returned invalid JSON"
+    },
+    {
+      "suite": "original",
+      "prompt": "continuity",
+      "workflow": "full_history",
+      "repetition": 1,
+      "file": "original-continuity-full_history-r1-a3.json",
+      "attempt": 3,
+      "status": "failed",
+      "completed_calls": 8,
+      "error": "full_history repetition 1 travel_milan turn 9: OpenAI returned invalid JSON"
+    }
+  ],
+  "error": "full_history repetition 1 travel_milan turn 9: OpenAI returned invalid JSON"
+}

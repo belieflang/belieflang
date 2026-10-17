@@ -1,0 +1,100 @@
+{
+  "sources": [
+    {
+      "file": "original-compact-full_history-r1-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-provider_history-r1-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-belief_snapshot-r1-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-provider_history-r2-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-belief_snapshot-r2-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-full_history-r2-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-belief_snapshot-r3-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-full_history-r3-a1.json",
+      "failed_requests_with_unreported_usage": 1
+    },
+    {
+      "file": "original-compact-full_history-r3-a2.json",
+      "failed_requests_with_unreported_usage": 0
+    },
+    {
+      "file": "original-compact-provider_history-r3-a1.json",
+      "failed_requests_with_unreported_usage": 0
+    }
+  ],
+  "selections": [
+    {
+      "source": 0,
+      "repetition": 1,
+      "as_repetition": 1,
+      "workflow": "full_history"
+    },
+    {
+      "source": 1,
+      "repetition": 1,
+      "as_repetition": 1,
+      "workflow": "provider_history"
+    },
+    {
+      "source": 2,
+      "repetition": 1,
+      "as_repetition": 1,
+      "workflow": "belief_snapshot"
+    },
+    {
+      "source": 3,
+      "repetition": 1,
+      "as_repetition": 2,
+      "workflow": "provider_history"
+    },
+    {
+      "source": 4,
+      "repetition": 1,
+      "as_repetition": 2,
+      "workflow": "belief_snapshot"
+    },
+    {
+      "source": 5,
+      "repetition": 1,
+      "as_repetition": 2,
+      "workflow": "full_history"
+    },
+    {
+      "source": 6,
+      "repetition": 1,
+      "as_repetition": 3,
+      "workflow": "belief_snapshot"
+    },
+    {
+      "source": 8,
+      "repetition": 1,
+      "as_repetition": 3,
+      "workflow": "full_history"
+    },
+    {
+      "source": 9,
+      "repetition": 1,
+      "as_repetition": 3,
+      "workflow": "provider_history"
+    }
+  ]
+}

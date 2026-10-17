@@ -1,0 +1,130 @@
+{
+  "created_at": "2026-10-17T20:41:18.044Z",
+  "planned_scored_calls": 1080,
+  "passes": [
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 1
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 1
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 1
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 2
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 2
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 2
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 3
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "full_history",
+      "repetition": 3
+    },
+    {
+      "suite": "original",
+      "prompt": "compact",
+      "workflow": "provider_history",
+      "repetition": 3
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 1
+    },
+    {
+      "suite": "holdout",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 1
+    },
+    {
+      "suite": "holdout",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 2
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 2
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 3
+    },
+    {
+      "suite": "holdout",
+      "prompt": "compact",
+      "workflow": "belief_snapshot",
+      "repetition": 3
+    }
+  ],
+  "original_fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+  "holdout_fixture_sha256": "3c96707e7f515dbe455c2028588ec922ef1a8c9ca616e68943bb24dab79b8d79",
+  "prompts_by_variant": {
+    "continuity": {
+      "travel": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: book_flight (find or book a flight); book_hotel (find or book a hotel); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for budget_sensitive (the traveler currently prioritizes low prices); prefers_direct (the traveler currently prefers nonstop flights). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+      "shopping": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: shop_phone (choose or buy a phone); shop_laptop (choose or buy a laptop); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for budget_sensitive (the buyer currently prioritizes low prices); prefers_new (the buyer currently requires a new, not used or refurbished, device). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+      "support": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: debug_api (troubleshoot an API/service); debug_database (troubleshoot a database/query); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for urgent (the incident currently requires urgent handling); allow_restart (the user currently permits a service restart as a remedial action). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+      "planning": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: schedule_meeting (schedule or reschedule a meeting); prepare_report (prepare or revise a report); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for deadline_flexible (the deadline can currently move); delegate_ok (the user currently permits delegating work to teammates). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown.",
+      "writing": "Track state for a multi-turn user conversation. You will receive EITHER JSON {messages: [all user messages in order]}, OR {new_message} with prior context stored in the API conversation, OR {previous_beliefs, new_message} with only the prior belief snapshot. Treat all formats as equivalent sources of information. Produce probabilities for the task active in this turn: draft_email (draft an email); draft_message (draft a chat/direct message); unknown (another request). Those intent probabilities must sum to one. Also produce probabilities for concise (the user currently prefers concise writing); formal (the user currently prefers formal tone). Boolean preferences persist unless the user explicitly changes them. The latest explicit change wins, including negations and reversals. Requests that are neither of the named task categories are unknown, without clearing persistent preferences. Infer ONLY from supplied context; do not invent missing history. Return the specified JSON schema, not an explanation. Intent persists across follow-up questions and changes to the active task's preferences, constraints or permissions, even without a repeated task verb. Preserve the prior task intent for these continuations. Switch intent when a different task is requested. Use unknown for a standalone unrelated request or explicit pause/cancellation, even if an earlier task remains unfinished. A preference update alone does not make intent unknown."
+    },
+    "compact": {
+      "travel": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: book_flight (find or book a flight); book_hotel (find or book a hotel); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for budget_sensitive (the traveler currently prioritizes low prices); prefers_direct (the traveler currently prefers nonstop flights). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+      "shopping": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: shop_phone (choose or buy a phone); shop_laptop (choose or buy a laptop); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for budget_sensitive (the buyer currently prioritizes low prices); prefers_new (the buyer currently requires a new, not used or refurbished, device). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+      "support": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: debug_api (troubleshoot an API/service); debug_database (troubleshoot a database/query); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for urgent (the incident currently requires urgent handling); allow_restart (the user currently permits a service restart as a remedial action). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+      "planning": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: schedule_meeting (schedule or reschedule a meeting); prepare_report (prepare or revise a report); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for deadline_flexible (the deadline can currently move); delegate_ok (the user currently permits delegating work to teammates). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON.",
+      "writing": "Track intent and persistent preferences. Context is all user messages, API history plus new_message, or previous_beliefs plus new_message; treat them equivalently. Intent: draft_email (draft an email); draft_message (draft a chat/direct message); unknown (another request). Return intent probabilities summing to 1 and independent probabilities for concise (the user currently prefers concise writing); formal (the user currently prefers formal tone). Keep intent across task follow-ups and preference/constraint/permission updates, even without a task verb. Switch for a new task. Use unknown for unrelated requests or explicit pause/cancellation. Preferences persist across tasks; latest explicit changes, negations and reversals win. Use supplied context only. Return schema JSON."
+    }
+  },
+  "hypothesis": "Shorter instructions retain task continuity accuracy while reducing snapshot token usage and estimated cost. No state, schema or adapter changes.",
+  "decision_rule": "Evaluate one frozen candidate without post-result tuning. Accept only if snapshot exact accuracy is 100% on both the original 300 predictions and the reused synthetic 90 predictions, preferences and unrelated requests remain correct, and original-suite snapshot estimated cost is lower than both the recorded continuity snapshot and the earlier full-history baseline at matched recorded accuracy. These are known regression cases, not an independent holdout; repetitions are correlated. All three workflows receive the compact prompt.",
+  "execution": "Serial requests and serial passes. Original suite order rotates by repetition; fresh snapshot prompt order alternates by repetition. No turn retries. Up to three whole-pass attempts on malformed/invalid model output only, preserving all prefixes. HTTP/transport/configuration failures stop the experiment. Never mix prompt variants in original-suite summary.",
+  "baseline_report": "../multidomain-2026-10-17-summary.json",
+  "continuity_baseline_report": "../multidomain-continuity-phase-aware-2026-10-17/summary.json",
+  "model": "gpt-6-luna",
+  "pricing_usd_per_million": {
+    "input": 0.1,
+    "cached_input": 0.01,
+    "cache_write": 0.125,
+    "output": 0.5,
+    "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+  },
+  "implementation_sha256": "3776ce0bc136900674bb020bac10222fbe3ef257b65867cb62e2a318e904c447",
+  "orchestrator_sha256": "662885e059dc7b8b8db95aed0cdcde280a25abc2265ca4f0fde11191893ea1d8",
+  "reused_evaluation_note": "The holdout suite was already evaluated during continuity development. Here it is a regression suite, not fresh or blinded. Only the two prompt variants differ in the contemporaneous synthetic snapshot comparison."
+}

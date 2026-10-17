@@ -1,0 +1,231 @@
+{
+  "benchmark": "multidomain-observed-accuracy-cost-frontier-v1",
+  "created_at": "2026-10-17T21:08:52.121Z",
+  "status": "descriptive_analysis_of_existing_results",
+  "new_api_calls": 0,
+  "methodology": "Choose the cheapest tested configuration of each workflow that meets each minimum OBSERVED exact-accuracy floor. Both workflows may select any recorded prompt, including lower-accuracy configurations. Use complete selected passes, equal 300-turn counts and each recorded explicit price schedule. Report total input+output tokens separately from price-weighted estimated cost. Historical execution times and code versions differ. Selection uses known development results; there is no new independent validation, interpolation or claim that this is the optimal frontier over untested configurations.",
+  "limitations": [
+    "100 unique annotated turns repeated three times; observations are correlated and do not establish population accuracy.",
+    "At 300 scored predictions, accuracy changes in 1/300 steps (about 0.33 percentage points); a 99.5% observed floor permits one error. This does not validate true 99.5% accuracy.",
+    "The available full-history prompts are a limited search. A future sweep must optimize both workflows and evaluate selected configurations on independent conversations.",
+    "Workflow costs exclude discarded/failed execution overhead, as in source summaries; all sources preserve separate accounting.",
+    "Original versus follow-up runs include the previously documented parser fix; comparisons are historical development references."
+  ],
+  "sources": [
+    {
+      "file": "benchmarks/results/multidomain-2026-10-17-summary.json",
+      "sha256": "64e5930c840158b63366b728b440efae1e00a2f8afeba04391e4fd7795fc4704",
+      "fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+      "implementation_sha256": "e988d2962ecda775213f530e4373a47e5c84c4c1513561b5cc54b616f8cdcf37",
+      "pricing_usd_per_million": {
+        "input": 0.1,
+        "cached_input": 0.01,
+        "cache_write": 0.125,
+        "output": 0.5,
+        "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+      }
+    },
+    {
+      "file": "benchmarks/results/multidomain-continuity-phase-aware-2026-10-17/summary.json",
+      "sha256": "e60fa2fbc911a2b7a1d9381c5cf7cc6ce9a4e6942713b8f9f54d05a8fe46a00b",
+      "fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+      "implementation_sha256": "c24529df412003de88c398978b73d47674680b58d85c5267007f3db6052eb1a4",
+      "pricing_usd_per_million": {
+        "input": 0.1,
+        "cached_input": 0.01,
+        "cache_write": 0.125,
+        "output": 0.5,
+        "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+      }
+    },
+    {
+      "file": "benchmarks/results/multidomain-compression-2026-10-17/summary.json",
+      "sha256": "5b9b8d3acc92b74f310b21eb7af64b3cc9d96a31f3b33378c6a4e73846f224d9",
+      "fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+      "implementation_sha256": "3776ce0bc136900674bb020bac10222fbe3ef257b65867cb62e2a318e904c447",
+      "pricing_usd_per_million": {
+        "input": 0.1,
+        "cached_input": 0.01,
+        "cache_write": 0.125,
+        "output": 0.5,
+        "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "id": "full_history:original",
+      "source": 0,
+      "workflow": "full_history",
+      "prompt": "original",
+      "model": "gpt-6-luna",
+      "turns": 300,
+      "correct": 300,
+      "accuracy": 1,
+      "input_tokens": 114036,
+      "output_tokens": 12479,
+      "total_tokens": 126515,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "estimated_usd": 0.0176431,
+      "median_latency_ms": 1200.5,
+      "p95_latency_ms": 1678
+    },
+    {
+      "id": "belief_snapshot:original",
+      "source": 0,
+      "workflow": "belief_snapshot",
+      "prompt": "original",
+      "model": "gpt-6-luna",
+      "turns": 300,
+      "correct": 266,
+      "accuracy": 0.8866666666666667,
+      "input_tokens": 104049,
+      "output_tokens": 12048,
+      "total_tokens": 116097,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "estimated_usd": 0.0164289,
+      "median_latency_ms": 1092,
+      "p95_latency_ms": 1639
+    },
+    {
+      "id": "full_history:continuity",
+      "source": 1,
+      "workflow": "full_history",
+      "prompt": "continuity",
+      "model": "gpt-6-luna",
+      "turns": 300,
+      "correct": 293,
+      "accuracy": 0.9766666666666667,
+      "input_tokens": 137436,
+      "output_tokens": 13152,
+      "total_tokens": 150588,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "estimated_usd": 0.020319599999999997,
+      "median_latency_ms": 1317.5,
+      "p95_latency_ms": 1944
+    },
+    {
+      "id": "belief_snapshot:continuity",
+      "source": 1,
+      "workflow": "belief_snapshot",
+      "prompt": "continuity",
+      "model": "gpt-6-luna",
+      "turns": 300,
+      "correct": 300,
+      "accuracy": 1,
+      "input_tokens": 127411,
+      "output_tokens": 12056,
+      "total_tokens": 139467,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "estimated_usd": 0.018769099999999986,
+      "median_latency_ms": 1215,
+      "p95_latency_ms": 1664
+    },
+    {
+      "id": "full_history:compact",
+      "source": 2,
+      "workflow": "full_history",
+      "prompt": "compact",
+      "model": "gpt-6-luna",
+      "turns": 300,
+      "correct": 295,
+      "accuracy": 0.9833333333333333,
+      "input_tokens": 102336,
+      "output_tokens": 12938,
+      "total_tokens": 115274,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "estimated_usd": 0.016702600000000005,
+      "median_latency_ms": 1191,
+      "p95_latency_ms": 1596
+    },
+    {
+      "id": "belief_snapshot:compact",
+      "source": 2,
+      "workflow": "belief_snapshot",
+      "prompt": "compact",
+      "model": "gpt-6-luna",
+      "turns": 300,
+      "correct": 299,
+      "accuracy": 0.9966666666666667,
+      "input_tokens": 92505,
+      "output_tokens": 12284,
+      "total_tokens": 104789,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "estimated_usd": 0.015392499999999996,
+      "median_latency_ms": 1072.5,
+      "p95_latency_ms": 1436
+    }
+  ],
+  "nondominated_condition_ids": [
+    "full_history:original",
+    "belief_snapshot:compact"
+  ],
+  "accuracy_floors": [
+    {
+      "minimum_observed_accuracy": 1,
+      "minimum_correct_out_of_300": 300,
+      "cheapest_tested_full_history": "full_history:original",
+      "cheapest_tested_snapshot": "belief_snapshot:continuity",
+      "full_history_observed_accuracy": 1,
+      "snapshot_observed_accuracy": 1,
+      "full_history_estimated_usd": 0.0176431,
+      "snapshot_estimated_usd": 0.018769099999999986,
+      "snapshot_cost_savings_percent": -6.382098384070756,
+      "snapshot_total_token_savings_percent": -10.237521242540403
+    },
+    {
+      "minimum_observed_accuracy": 0.995,
+      "minimum_correct_out_of_300": 299,
+      "cheapest_tested_full_history": "full_history:original",
+      "cheapest_tested_snapshot": "belief_snapshot:compact",
+      "full_history_observed_accuracy": 1,
+      "snapshot_observed_accuracy": 0.9966666666666667,
+      "full_history_estimated_usd": 0.0176431,
+      "snapshot_estimated_usd": 0.015392499999999996,
+      "snapshot_cost_savings_percent": 12.756261654697887,
+      "snapshot_total_token_savings_percent": 17.172667272655417
+    },
+    {
+      "minimum_observed_accuracy": 0.99,
+      "minimum_correct_out_of_300": 297,
+      "cheapest_tested_full_history": "full_history:original",
+      "cheapest_tested_snapshot": "belief_snapshot:compact",
+      "full_history_observed_accuracy": 1,
+      "snapshot_observed_accuracy": 0.9966666666666667,
+      "full_history_estimated_usd": 0.0176431,
+      "snapshot_estimated_usd": 0.015392499999999996,
+      "snapshot_cost_savings_percent": 12.756261654697887,
+      "snapshot_total_token_savings_percent": 17.172667272655417
+    },
+    {
+      "minimum_observed_accuracy": 0.98,
+      "minimum_correct_out_of_300": 294,
+      "cheapest_tested_full_history": "full_history:compact",
+      "cheapest_tested_snapshot": "belief_snapshot:compact",
+      "full_history_observed_accuracy": 0.9833333333333333,
+      "snapshot_observed_accuracy": 0.9966666666666667,
+      "full_history_estimated_usd": 0.016702600000000005,
+      "snapshot_estimated_usd": 0.015392499999999996,
+      "snapshot_cost_savings_percent": 7.84368900650203,
+      "snapshot_total_token_savings_percent": 9.095719763346466
+    },
+    {
+      "minimum_observed_accuracy": 0.95,
+      "minimum_correct_out_of_300": 285,
+      "cheapest_tested_full_history": "full_history:compact",
+      "cheapest_tested_snapshot": "belief_snapshot:compact",
+      "full_history_observed_accuracy": 0.9833333333333333,
+      "snapshot_observed_accuracy": 0.9966666666666667,
+      "full_history_estimated_usd": 0.016702600000000005,
+      "snapshot_estimated_usd": 0.015392499999999996,
+      "snapshot_cost_savings_percent": 7.84368900650203,
+      "snapshot_total_token_savings_percent": 9.095719763346466
+    }
+  ]
+}

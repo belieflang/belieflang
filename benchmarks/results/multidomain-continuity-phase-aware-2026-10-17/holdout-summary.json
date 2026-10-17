@@ -1,0 +1,450 @@
+{
+  "benchmark": "multidomain-continuity-fresh-v1",
+  "status": "completed",
+  "created_at": "2026-10-17T20:10:32.782Z",
+  "model": "gpt-6-luna",
+  "pricing_usd_per_million": {
+    "input": 0.1,
+    "cached_input": 0.01,
+    "cache_write": 0.125,
+    "output": 0.5,
+    "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+  },
+  "fixture_sha256": "3c96707e7f515dbe455c2028588ec922ef1a8c9ca616e68943bb24dab79b8d79",
+  "implementation_sha256": "c24529df412003de88c398978b73d47674680b58d85c5267007f3db6052eb1a4",
+  "methodology": "Five new synthetic conversations, six turns each; both frozen prompts, three snapshot passes each. Authored after v1 failure analysis, frozen before model calls, not independently authored or blinded. No post-result prompt tuning. All errors counted within complete passes. See plan and ledger for serial order, failed prefixes and any whole-pass restarts.",
+  "source_passes": [
+    {
+      "suite": "holdout",
+      "prompt": "original",
+      "workflow": "belief_snapshot",
+      "repetition": 1,
+      "file": "holdout-original-belief_snapshot-r1-a1.json"
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 1,
+      "file": "holdout-continuity-belief_snapshot-r1-a1.json"
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 2,
+      "file": "holdout-continuity-belief_snapshot-r2-a1.json"
+    },
+    {
+      "suite": "holdout",
+      "prompt": "original",
+      "workflow": "belief_snapshot",
+      "repetition": 2,
+      "file": "holdout-original-belief_snapshot-r2-a1.json"
+    },
+    {
+      "suite": "holdout",
+      "prompt": "original",
+      "workflow": "belief_snapshot",
+      "repetition": 3,
+      "file": "holdout-original-belief_snapshot-r3-a1.json"
+    },
+    {
+      "suite": "holdout",
+      "prompt": "continuity",
+      "workflow": "belief_snapshot",
+      "repetition": 3,
+      "file": "holdout-continuity-belief_snapshot-r3-a1.json"
+    }
+  ],
+  "results": {
+    "original": {
+      "turns": 90,
+      "exact_match_turns": 77,
+      "exact_match_rate": 0.8555555555555555,
+      "intent_correct": 77,
+      "intent_accuracy": 0.8555555555555555,
+      "preference_fields_correct": 180,
+      "preference_fields_total": 180,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 30857,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 3700,
+        "total_tokens": 34557
+      },
+      "median_latency_ms": 1166,
+      "p95_latency_ms": 2013,
+      "estimated_usd": 0.004935699999999999,
+      "unrelated_turns": 15,
+      "unrelated_correct": 15,
+      "by_repetition": {
+        "1": {
+          "turns": 30,
+          "exact_match_turns": 25,
+          "exact_match_rate": 0.8333333333333334,
+          "intent_correct": 25,
+          "intent_accuracy": 0.8333333333333334,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 10283,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1204,
+            "total_tokens": 11487
+          },
+          "median_latency_ms": 1286,
+          "p95_latency_ms": 1504,
+          "estimated_usd": 0.0016303000000000001
+        },
+        "2": {
+          "turns": 30,
+          "exact_match_turns": 26,
+          "exact_match_rate": 0.8666666666666667,
+          "intent_correct": 26,
+          "intent_accuracy": 0.8666666666666667,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 10279,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1280,
+            "total_tokens": 11559
+          },
+          "median_latency_ms": 1109,
+          "p95_latency_ms": 2282,
+          "estimated_usd": 0.0016679000000000002
+        },
+        "3": {
+          "turns": 30,
+          "exact_match_turns": 26,
+          "exact_match_rate": 0.8666666666666667,
+          "intent_correct": 26,
+          "intent_accuracy": 0.8666666666666667,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 10295,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1216,
+            "total_tokens": 11511
+          },
+          "median_latency_ms": 1103.5,
+          "p95_latency_ms": 2299,
+          "estimated_usd": 0.0016375000000000003
+        }
+      },
+      "by_domain": {
+        "travel": {
+          "turns": 18,
+          "exact_match_turns": 17,
+          "exact_match_rate": 0.9444444444444444,
+          "intent_correct": 17,
+          "intent_accuracy": 0.9444444444444444,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6225,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 756,
+            "total_tokens": 6981
+          },
+          "median_latency_ms": 1280,
+          "p95_latency_ms": 2013,
+          "estimated_usd": 0.0010004999999999997
+        },
+        "shopping": {
+          "turns": 18,
+          "exact_match_turns": 17,
+          "exact_match_rate": 0.9444444444444444,
+          "intent_correct": 17,
+          "intent_accuracy": 0.9444444444444444,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6277,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 834,
+            "total_tokens": 7111
+          },
+          "median_latency_ms": 1188.5,
+          "p95_latency_ms": 2299,
+          "estimated_usd": 0.0010447
+        },
+        "support": {
+          "turns": 18,
+          "exact_match_turns": 15,
+          "exact_match_rate": 0.8333333333333334,
+          "intent_correct": 15,
+          "intent_accuracy": 0.8333333333333334,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6154,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 688,
+            "total_tokens": 6842
+          },
+          "median_latency_ms": 1125.5,
+          "p95_latency_ms": 4120,
+          "estimated_usd": 0.0009594
+        },
+        "planning": {
+          "turns": 18,
+          "exact_match_turns": 15,
+          "exact_match_rate": 0.8333333333333334,
+          "intent_correct": 15,
+          "intent_accuracy": 0.8333333333333334,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 6240,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 738,
+            "total_tokens": 6978
+          },
+          "median_latency_ms": 1081.5,
+          "p95_latency_ms": 1333,
+          "estimated_usd": 0.000993
+        },
+        "writing": {
+          "turns": 18,
+          "exact_match_turns": 13,
+          "exact_match_rate": 0.7222222222222222,
+          "intent_correct": 13,
+          "intent_accuracy": 0.7222222222222222,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 5961,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 684,
+            "total_tokens": 6645
+          },
+          "median_latency_ms": 1077.5,
+          "p95_latency_ms": 2314,
+          "estimated_usd": 0.0009381
+        }
+      }
+    },
+    "continuity": {
+      "turns": 90,
+      "exact_match_turns": 90,
+      "exact_match_rate": 1,
+      "intent_correct": 90,
+      "intent_accuracy": 1,
+      "preference_fields_correct": 180,
+      "preference_fields_total": 180,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 37879,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 3628,
+        "total_tokens": 41507
+      },
+      "median_latency_ms": 1188,
+      "p95_latency_ms": 1527,
+      "estimated_usd": 0.005601900000000002,
+      "unrelated_turns": 15,
+      "unrelated_correct": 15,
+      "by_repetition": {
+        "1": {
+          "turns": 30,
+          "exact_match_turns": 30,
+          "exact_match_rate": 1,
+          "intent_correct": 30,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 12641,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1222,
+            "total_tokens": 13863
+          },
+          "median_latency_ms": 1226.5,
+          "p95_latency_ms": 1734,
+          "estimated_usd": 0.0018750999999999998
+        },
+        "2": {
+          "turns": 30,
+          "exact_match_turns": 30,
+          "exact_match_rate": 1,
+          "intent_correct": 30,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 12619,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1206,
+            "total_tokens": 13825
+          },
+          "median_latency_ms": 1148,
+          "p95_latency_ms": 1523,
+          "estimated_usd": 0.0018649
+        },
+        "3": {
+          "turns": 30,
+          "exact_match_turns": 30,
+          "exact_match_rate": 1,
+          "intent_correct": 30,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 60,
+          "preference_fields_total": 60,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 12619,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 1200,
+            "total_tokens": 13819
+          },
+          "median_latency_ms": 1169.5,
+          "p95_latency_ms": 1406,
+          "estimated_usd": 0.0018619
+        }
+      },
+      "by_domain": {
+        "travel": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7629,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 756,
+            "total_tokens": 8385
+          },
+          "median_latency_ms": 1252,
+          "p95_latency_ms": 3959,
+          "estimated_usd": 0.0011409
+        },
+        "shopping": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7687,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 766,
+            "total_tokens": 8453
+          },
+          "median_latency_ms": 1167,
+          "p95_latency_ms": 1734,
+          "estimated_usd": 0.0011517000000000003
+        },
+        "support": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7554,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 684,
+            "total_tokens": 8238
+          },
+          "median_latency_ms": 1145.5,
+          "p95_latency_ms": 1400,
+          "estimated_usd": 0.0010974000000000001
+        },
+        "planning": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7644,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 738,
+            "total_tokens": 8382
+          },
+          "median_latency_ms": 1269.5,
+          "p95_latency_ms": 1730,
+          "estimated_usd": 0.0011334
+        },
+        "writing": {
+          "turns": 18,
+          "exact_match_turns": 18,
+          "exact_match_rate": 1,
+          "intent_correct": 18,
+          "intent_accuracy": 1,
+          "preference_fields_correct": 36,
+          "preference_fields_total": 36,
+          "preference_accuracy": 1,
+          "usage": {
+            "input_tokens": 7365,
+            "cached_input_tokens": 0,
+            "cache_write_tokens": 0,
+            "output_tokens": 684,
+            "total_tokens": 8049
+          },
+          "median_latency_ms": 1045,
+          "p95_latency_ms": 1367,
+          "estimated_usd": 0.0010784999999999998
+        }
+      }
+    }
+  },
+  "experiment_execution_accounting": {
+    "planned_scored_calls": 1080,
+    "scored_calls": 1080,
+    "recorded_successful_calls": 1094,
+    "discarded_successful_calls": 14,
+    "failed_requests_with_unreported_usage": 1,
+    "total_attempted_calls": 1095,
+    "usage": {
+      "input_tokens": 539724,
+      "cached_input_tokens": 0,
+      "cache_write_tokens": 0,
+      "output_tokens": 45202,
+      "total_tokens": 584926
+    },
+    "estimated_usd_lower_bound": 0.07657339999999987
+  }
+}

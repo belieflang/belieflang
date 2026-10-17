@@ -1,0 +1,729 @@
+{
+  "benchmark": "multidomain-beliefs-v1",
+  "status": "completed_with_workflow_restart",
+  "created_at": "2026-10-17T19:27:23.687Z",
+  "model": "gpt-6-luna",
+  "fixture_sha256": "753adc9c0c3e89aae9280582331bb9b164ec90dd6b6dcd4f4193bbcb67bbf467",
+  "implementation_sha256": "e988d2962ecda775213f530e4373a47e5c84c4c1513561b5cc54b616f8cdcf37",
+  "pricing_usd_per_million": {
+    "input": 0.1,
+    "cached_input": 0.01,
+    "cache_write": 0.125,
+    "output": 0.5,
+    "source": "OpenAI Standard short-context rates, checked 2026-10-17: https://developers.openai.com/api/docs/pricing"
+  },
+  "runs": 3,
+  "workflows": [
+    "full_history",
+    "provider_history",
+    "belief_snapshot"
+  ],
+  "completed_calls": 900,
+  "expected_calls": 900,
+  "methodology": "Three complete passes per workflow, selected by the explicit provenance manifest. Failed workflow prefixes discarded from scored comparisons; their usage remains in execution_accounting. No turn-level cherry-picking or imputation. One final full-history pass was restarted from the first turn after malformed JSON; the remaining provider pass then ran. This is a recovered experiment, not an uninterrupted 900-call run. Failed request usage was not captured, so execution cost is a lower bound. See raw reports for prompts, timing, order, and per-turn data.",
+  "provenance": {
+    "sources": [
+      {
+        "file": "multidomain-2026-10-17-attempt-1-failed.json",
+        "failed_requests_with_unreported_usage": 1
+      },
+      {
+        "file": "multidomain-2026-10-17-attempt-2-failed.json",
+        "failed_requests_with_unreported_usage": 1
+      },
+      {
+        "file": "multidomain-2026-10-17-recovery.json",
+        "failed_requests_with_unreported_usage": 0
+      }
+    ],
+    "selections": [
+      {
+        "source": 1,
+        "repetition": 1,
+        "as_repetition": 1,
+        "workflow": "full_history"
+      },
+      {
+        "source": 1,
+        "repetition": 1,
+        "as_repetition": 1,
+        "workflow": "provider_history"
+      },
+      {
+        "source": 1,
+        "repetition": 1,
+        "as_repetition": 1,
+        "workflow": "belief_snapshot"
+      },
+      {
+        "source": 1,
+        "repetition": 2,
+        "as_repetition": 2,
+        "workflow": "full_history"
+      },
+      {
+        "source": 1,
+        "repetition": 2,
+        "as_repetition": 2,
+        "workflow": "provider_history"
+      },
+      {
+        "source": 1,
+        "repetition": 2,
+        "as_repetition": 2,
+        "workflow": "belief_snapshot"
+      },
+      {
+        "source": 2,
+        "repetition": 1,
+        "as_repetition": 3,
+        "workflow": "full_history"
+      },
+      {
+        "source": 2,
+        "repetition": 1,
+        "as_repetition": 3,
+        "workflow": "provider_history"
+      },
+      {
+        "source": 1,
+        "repetition": 3,
+        "as_repetition": 3,
+        "workflow": "belief_snapshot"
+      }
+    ]
+  },
+  "source_statuses": [
+    {
+      "file": "multidomain-2026-10-17-attempt-1-failed.json",
+      "status": "failed",
+      "completed_calls": 27,
+      "error": "full_history repetition 1 shopping_cameras turn 8: OpenAI returned invalid JSON"
+    },
+    {
+      "file": "multidomain-2026-10-17-attempt-2-failed.json",
+      "status": "failed",
+      "completed_calls": 714,
+      "error": "full_history repetition 3 travel_osaka turn 5: OpenAI returned invalid JSON"
+    },
+    {
+      "file": "multidomain-2026-10-17-recovery.json",
+      "status": "completed",
+      "completed_calls": 200
+    }
+  ],
+  "execution_accounting": {
+    "scored_calls": 900,
+    "recorded_successful_calls": 941,
+    "discarded_successful_calls": 41,
+    "failed_requests_with_unreported_usage": 2,
+    "total_attempted_calls": 943,
+    "all_recorded_calls": {
+      "turns": 941,
+      "usage": {
+        "input_tokens": 410388,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 38394,
+        "total_tokens": 448782
+      },
+      "estimated_usd": 0.0602358000000001
+    },
+    "discarded_recorded_calls": {
+      "turns": 41,
+      "usage": {
+        "input_tokens": 15861,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 1803,
+        "total_tokens": 17664
+      },
+      "estimated_usd": 0.0024876
+    },
+    "cost_note": "All-attempt cost includes discarded successful calls; excludes unknown charges for failed requests. Workflow comparison costs use only complete selected passes."
+  },
+  "results": {
+    "full_history": {
+      "turns": 300,
+      "exact_match_turns": 300,
+      "exact_match_rate": 1,
+      "intent_correct": 300,
+      "intent_accuracy": 1,
+      "preference_fields_correct": 600,
+      "preference_fields_total": 600,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 114036,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 12479,
+        "total_tokens": 126515
+      },
+      "median_latency_ms": 1200.5,
+      "p95_latency_ms": 1678,
+      "estimated_usd": 0.0176431
+    },
+    "provider_history": {
+      "turns": 300,
+      "exact_match_turns": 286,
+      "exact_match_rate": 0.9533333333333334,
+      "intent_correct": 286,
+      "intent_accuracy": 0.9533333333333334,
+      "preference_fields_correct": 595,
+      "preference_fields_total": 600,
+      "preference_accuracy": 0.9916666666666667,
+      "usage": {
+        "input_tokens": 176442,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 12064,
+        "total_tokens": 188506
+      },
+      "median_latency_ms": 1225,
+      "p95_latency_ms": 1791,
+      "estimated_usd": 0.023676200000000005
+    },
+    "belief_snapshot": {
+      "turns": 300,
+      "exact_match_turns": 266,
+      "exact_match_rate": 0.8866666666666667,
+      "intent_correct": 266,
+      "intent_accuracy": 0.8866666666666667,
+      "preference_fields_correct": 600,
+      "preference_fields_total": 600,
+      "preference_accuracy": 1,
+      "usage": {
+        "input_tokens": 104049,
+        "cached_input_tokens": 0,
+        "cache_write_tokens": 0,
+        "output_tokens": 12048,
+        "total_tokens": 116097
+      },
+      "median_latency_ms": 1092,
+      "p95_latency_ms": 1639,
+      "estimated_usd": 0.0164289
+    }
+  },
+  "by_domain": {
+    "travel": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 23979,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2627,
+          "total_tokens": 26606
+        },
+        "median_latency_ms": 1349.5,
+        "p95_latency_ms": 1671,
+        "estimated_usd": 0.003711400000000001
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 57,
+        "exact_match_rate": 0.95,
+        "intent_correct": 57,
+        "intent_accuracy": 0.95,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 37035,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2536,
+          "total_tokens": 39571
+        },
+        "median_latency_ms": 1461,
+        "p95_latency_ms": 2009,
+        "estimated_usd": 0.004971500000000002
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 57,
+        "exact_match_rate": 0.95,
+        "intent_correct": 57,
+        "intent_accuracy": 0.95,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 21171,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2520,
+          "total_tokens": 23691
+        },
+        "median_latency_ms": 1257,
+        "p95_latency_ms": 1873,
+        "estimated_usd": 0.003377100000000001
+      }
+    },
+    "shopping": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 23256,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2624,
+          "total_tokens": 25880
+        },
+        "median_latency_ms": 1101.5,
+        "p95_latency_ms": 1383,
+        "estimated_usd": 0.003637600000000001
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 58,
+        "exact_match_rate": 0.9666666666666667,
+        "intent_correct": 58,
+        "intent_accuracy": 0.9666666666666667,
+        "preference_fields_correct": 118,
+        "preference_fields_total": 120,
+        "preference_accuracy": 0.9833333333333333,
+        "usage": {
+          "input_tokens": 35946,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2460,
+          "total_tokens": 38406
+        },
+        "median_latency_ms": 1050.5,
+        "p95_latency_ms": 1539,
+        "estimated_usd": 0.0048246
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 57,
+        "exact_match_rate": 0.95,
+        "intent_correct": 57,
+        "intent_accuracy": 0.95,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 21238,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2476,
+          "total_tokens": 23714
+        },
+        "median_latency_ms": 988,
+        "p95_latency_ms": 1317,
+        "estimated_usd": 0.0033617999999999994
+      }
+    },
+    "support": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 22668,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2366,
+          "total_tokens": 25034
+        },
+        "median_latency_ms": 1269.5,
+        "p95_latency_ms": 1879,
+        "estimated_usd": 0.0034497999999999994
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 34644,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2304,
+          "total_tokens": 36948
+        },
+        "median_latency_ms": 1186.5,
+        "p95_latency_ms": 1595,
+        "estimated_usd": 0.0046164000000000005
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 53,
+        "exact_match_rate": 0.8833333333333333,
+        "intent_correct": 53,
+        "intent_accuracy": 0.8833333333333333,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 20747,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2312,
+          "total_tokens": 23059
+        },
+        "median_latency_ms": 1087,
+        "p95_latency_ms": 1384,
+        "estimated_usd": 0.003230699999999999
+      }
+    },
+    "planning": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 22587,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2470,
+          "total_tokens": 25057
+        },
+        "median_latency_ms": 1136,
+        "p95_latency_ms": 1479,
+        "estimated_usd": 0.0034937000000000006
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 59,
+        "exact_match_rate": 0.9833333333333333,
+        "intent_correct": 59,
+        "intent_accuracy": 0.9833333333333333,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 35301,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2466,
+          "total_tokens": 37767
+        },
+        "median_latency_ms": 1133,
+        "p95_latency_ms": 1485,
+        "estimated_usd": 0.004763100000000002
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 54,
+        "exact_match_rate": 0.9,
+        "intent_correct": 54,
+        "intent_accuracy": 0.9,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 20922,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2460,
+          "total_tokens": 23382
+        },
+        "median_latency_ms": 1068.5,
+        "p95_latency_ms": 1391,
+        "estimated_usd": 0.0033221999999999982
+      }
+    },
+    "writing": {
+      "full_history": {
+        "turns": 60,
+        "exact_match_turns": 60,
+        "exact_match_rate": 1,
+        "intent_correct": 60,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 21546,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2392,
+          "total_tokens": 23938
+        },
+        "median_latency_ms": 1176.5,
+        "p95_latency_ms": 1493,
+        "estimated_usd": 0.0033506
+      },
+      "provider_history": {
+        "turns": 60,
+        "exact_match_turns": 52,
+        "exact_match_rate": 0.8666666666666667,
+        "intent_correct": 52,
+        "intent_accuracy": 0.8666666666666667,
+        "preference_fields_correct": 117,
+        "preference_fields_total": 120,
+        "preference_accuracy": 0.975,
+        "usage": {
+          "input_tokens": 33516,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2298,
+          "total_tokens": 35814
+        },
+        "median_latency_ms": 1188,
+        "p95_latency_ms": 1729,
+        "estimated_usd": 0.004500599999999999
+      },
+      "belief_snapshot": {
+        "turns": 60,
+        "exact_match_turns": 45,
+        "exact_match_rate": 0.75,
+        "intent_correct": 45,
+        "intent_accuracy": 0.75,
+        "preference_fields_correct": 120,
+        "preference_fields_total": 120,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 19971,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 2280,
+          "total_tokens": 22251
+        },
+        "median_latency_ms": 1040.5,
+        "p95_latency_ms": 1345,
+        "estimated_usd": 0.0031371000000000003
+      }
+    }
+  },
+  "by_repetition": {
+    "1": {
+      "full_history": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 38012,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4152,
+          "total_tokens": 42164
+        },
+        "median_latency_ms": 1259,
+        "p95_latency_ms": 1772,
+        "estimated_usd": 0.005877200000000001
+      },
+      "provider_history": {
+        "turns": 100,
+        "exact_match_turns": 96,
+        "exact_match_rate": 0.96,
+        "intent_correct": 96,
+        "intent_accuracy": 0.96,
+        "preference_fields_correct": 198,
+        "preference_fields_total": 200,
+        "preference_accuracy": 0.99,
+        "usage": {
+          "input_tokens": 58850,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4026,
+          "total_tokens": 62876
+        },
+        "median_latency_ms": 1263.5,
+        "p95_latency_ms": 1729,
+        "estimated_usd": 0.007898
+      },
+      "belief_snapshot": {
+        "turns": 100,
+        "exact_match_turns": 88,
+        "exact_match_rate": 0.88,
+        "intent_correct": 88,
+        "intent_accuracy": 0.88,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 34699,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4032,
+          "total_tokens": 38731
+        },
+        "median_latency_ms": 1071.5,
+        "p95_latency_ms": 1603,
+        "estimated_usd": 0.005485899999999996
+      }
+    },
+    "2": {
+      "full_history": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 38012,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4148,
+          "total_tokens": 42160
+        },
+        "median_latency_ms": 1228,
+        "p95_latency_ms": 1646,
+        "estimated_usd": 0.0058752000000000006
+      },
+      "provider_history": {
+        "turns": 100,
+        "exact_match_turns": 99,
+        "exact_match_rate": 0.99,
+        "intent_correct": 99,
+        "intent_accuracy": 0.99,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 58712,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4000,
+          "total_tokens": 62712
+        },
+        "median_latency_ms": 1192.5,
+        "p95_latency_ms": 1709,
+        "estimated_usd": 0.0078712
+      },
+      "belief_snapshot": {
+        "turns": 100,
+        "exact_match_turns": 90,
+        "exact_match_rate": 0.9,
+        "intent_correct": 90,
+        "intent_accuracy": 0.9,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 34679,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4012,
+          "total_tokens": 38691
+        },
+        "median_latency_ms": 1077,
+        "p95_latency_ms": 1373,
+        "estimated_usd": 0.005473899999999996
+      }
+    },
+    "3": {
+      "full_history": {
+        "turns": 100,
+        "exact_match_turns": 100,
+        "exact_match_rate": 1,
+        "intent_correct": 100,
+        "intent_accuracy": 1,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 38012,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4179,
+          "total_tokens": 42191
+        },
+        "median_latency_ms": 1141.5,
+        "p95_latency_ms": 1504,
+        "estimated_usd": 0.005890700000000002
+      },
+      "provider_history": {
+        "turns": 100,
+        "exact_match_turns": 91,
+        "exact_match_rate": 0.91,
+        "intent_correct": 91,
+        "intent_accuracy": 0.91,
+        "preference_fields_correct": 197,
+        "preference_fields_total": 200,
+        "preference_accuracy": 0.985,
+        "usage": {
+          "input_tokens": 58880,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4038,
+          "total_tokens": 62918
+        },
+        "median_latency_ms": 1202,
+        "p95_latency_ms": 1944,
+        "estimated_usd": 0.007907
+      },
+      "belief_snapshot": {
+        "turns": 100,
+        "exact_match_turns": 88,
+        "exact_match_rate": 0.88,
+        "intent_correct": 88,
+        "intent_accuracy": 0.88,
+        "preference_fields_correct": 200,
+        "preference_fields_total": 200,
+        "preference_accuracy": 1,
+        "usage": {
+          "input_tokens": 34671,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 4004,
+          "total_tokens": 38675
+        },
+        "median_latency_ms": 1132,
+        "p95_latency_ms": 1833,
+        "estimated_usd": 0.005469099999999996
+      }
+    }
+  },
+  "comparisons": {
+    "snapshot_vs_full_history_token_reduction_percent": 8.23459668813975,
+    "snapshot_vs_full_history_accuracy_change_percentage_points": -11.333333333333329,
+    "snapshot_vs_full_history_cost_reduction_percent": 6.882010531029126,
+    "snapshot_vs_provider_history_token_reduction_percent": 38.41203993506838,
+    "snapshot_vs_provider_history_accuracy_change_percentage_points": -6.666666666666665,
+    "snapshot_vs_provider_history_cost_reduction_percent": 30.610064115018474
+  },
+  "source_sha256": [
+    {
+      "file": "multidomain-2026-10-17-attempt-1-failed.json",
+      "sha256": "33c3d533452e6d8fafa967bb2597438a5e0eaa81f310233d50009613a1904145"
+    },
+    {
+      "file": "multidomain-2026-10-17-attempt-2-failed.json",
+      "sha256": "bed5ed1cacd3cc91770a351d3bd652ffd246894551fd85d523d6d66283028de2"
+    },
+    {
+      "file": "multidomain-2026-10-17-recovery.json",
+      "sha256": "5d547127bb6769f2e9ff9cd86f1c34b24027a7d0f6511e244e2b7099c212692c"
+    }
+  ]
+}
