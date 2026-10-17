@@ -1,0 +1,7 @@
+{
+  "model": "gpt-6-luna",
+  "repetitions": 3,
+  "maxOutputTokens": 2048,
+  "inputTokenCeiling": 1050000,
+  "timeoutMs": 45000
+}

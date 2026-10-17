@@ -1,0 +1,223 @@
+{
+  "version": 3,
+  "description": "Development-only single-trip delta, negation and cancellation examples. No evaluation tool-safety template is reused here.",
+  "conversations": [
+    {
+      "id": "development_delta",
+      "split": "development",
+      "domain": "travel",
+      "schema": {
+        "destination": "string",
+        "budget": "number",
+        "departure_date": "string",
+        "direct": "boolean",
+        "airline": "string"
+      },
+      "turns": [
+        {
+          "text": "Plan a trip to Lisbon with budget 1500, departure_date 2030-06-10 and direct flights required.",
+          "deltas": [
+            {
+              "op": "set",
+              "field": "destination",
+              "value": "Lisbon",
+              "confidence": 0.9,
+              "basis": "explicit"
+            },
+            {
+              "op": "set",
+              "field": "budget",
+              "value": 1500,
+              "confidence": 0.9,
+              "basis": "explicit"
+            },
+            {
+              "op": "set",
+              "field": "departure_date",
+              "value": "2030-06-10",
+              "confidence": 0.9,
+              "basis": "explicit"
+            },
+            {
+              "op": "set",
+              "field": "direct",
+              "value": true,
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ]
+        },
+        {
+          "text": "Actually change the departure to June 12, 2030. Leave the budget alone.",
+          "deltas": [
+            {
+              "op": "set",
+              "field": "departure_date",
+              "value": "2030-06-12",
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ]
+        },
+        {
+          "text": "What was my original budget?",
+          "deltas": [],
+          "questions": [
+            {
+              "id": "development_delta_budget_original",
+              "field": "budget",
+              "kind": "original",
+              "text": "What was my original budget?",
+              "expected": {
+                "value": 1500,
+                "status": "uncertain"
+              }
+            }
+          ]
+        },
+        {
+          "text": "Increase the budget to 1600.",
+          "deltas": [
+            {
+              "op": "set",
+              "field": "budget",
+              "value": 1600,
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ],
+          "questions": [
+            {
+              "id": "development_delta_current",
+              "field": "budget",
+              "kind": "current",
+              "text": "What is the current budget?",
+              "expected": {
+                "value": 1600,
+                "status": "uncertain"
+              }
+            }
+          ]
+        },
+        {
+          "text": "I no longer require a direct flight; direct is false.",
+          "deltas": [
+            {
+              "op": "set",
+              "field": "direct",
+              "value": false,
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ]
+        },
+        {
+          "text": "Forget my direct-flight preference entirely.",
+          "deltas": [
+            {
+              "op": "clear",
+              "field": "direct",
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ]
+        },
+        {
+          "text": "Change the destination to Porto.",
+          "deltas": [
+            {
+              "op": "set",
+              "field": "destination",
+              "value": "Porto",
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ]
+        },
+        {
+          "text": "What departure date was selected before the change?",
+          "deltas": [],
+          "questions": [
+            {
+              "id": "development_delta_previous_departure",
+              "field": "departure_date",
+              "kind": "previous",
+              "text": "What was the previous departure date?",
+              "expected": {
+                "value": "2030-06-10",
+                "status": "uncertain"
+              }
+            }
+          ]
+        },
+        {
+          "text": "Budget is still 1600. No other change.",
+          "deltas": [
+            {
+              "op": "set",
+              "field": "budget",
+              "value": 1600,
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ]
+        },
+        {
+          "text": "Did we choose an airline?",
+          "deltas": [],
+          "questions": [
+            {
+              "id": "development_delta_missing_airline",
+              "field": "airline",
+              "kind": "missing",
+              "text": "Which airline was selected?",
+              "expected": {
+                "value": null,
+                "status": "missing"
+              }
+            }
+          ]
+        },
+        {
+          "text": "Cancel the departure date; leave destination and budget intact.",
+          "deltas": [
+            {
+              "op": "clear",
+              "field": "departure_date",
+              "confidence": 0.9,
+              "basis": "explicit"
+            }
+          ],
+          "questions": [
+            {
+              "id": "development_delta_cleared",
+              "field": "departure_date",
+              "kind": "current",
+              "text": "What departure date is currently recorded?",
+              "expected": {
+                "value": null,
+                "status": "cleared"
+              }
+            }
+          ]
+        },
+        {
+          "text": "What was the original departure date?",
+          "deltas": [],
+          "questions": [
+            {
+              "id": "development_delta_original_date",
+              "field": "departure_date",
+              "kind": "original",
+              "text": "What was the original departure date?",
+              "expected": {
+                "value": "2030-06-10",
+                "status": "uncertain"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

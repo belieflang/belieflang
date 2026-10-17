@@ -1,3 +1,4 @@
+import { FactMemory, type UpdatePolicy, type MemorySnapshot } from "./fact_memory.js";
 import type {
   Action,
   BeliefBlock,
@@ -96,6 +97,8 @@ export type RuntimeOptions = {
   trace?: boolean;
   inferBeliefs?: InferBeliefsAdapter;
   now?: () => number;
+  /** Opt-in factual memory; existing v1/v2 snapshot methods remain unchanged. */
+  memory?: FactMemory | { schema: FactSchema; policy?: Partial<UpdatePolicy>; maxHistory?: number };
 };
 
 type BeliefMeta = {
@@ -107,6 +110,7 @@ type BeliefMeta = {
 const EPSILON = 1e-9;
 
 export class BeliefRuntime {
+  readonly memory?: FactMemory;
   private state: BeliefState = {};
   private factSchema: FactSchema = {};
   private facts: Record<string, FactRecord> = {};
@@ -122,6 +126,7 @@ export class BeliefRuntime {
   private nextProvenanceId = 1;
 
   constructor(tools: ToolRegistry = {}, options: RuntimeOptions = {}) {
+    if (options.memory) this.memory = options.memory instanceof FactMemory ? options.memory : new FactMemory(options.memory.schema, options.memory);
     this.trace = options.trace ?? false;
     this.now = options.now ?? (() => Date.now());
     this.inferBeliefs = options.inferBeliefs ?? this.defaultInferBeliefs;
@@ -170,6 +175,12 @@ export class BeliefRuntime {
       };
     }
     return { version: 1, beliefs };
+  }
+
+  /** Combined opt-in v3 memory and current numeric beliefs. */
+  getMemorySnapshot(): MemorySnapshot {
+    if (!this.memory) throw new Error("factual memory is not enabled");
+    return { ...this.memory.snapshot(), beliefs: this.getBeliefSnapshot().beliefs };
   }
 
   declareFacts(schema: FactSchema): void {

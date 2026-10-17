@@ -2,7 +2,7 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, codex/long-horizon-v2]
   push:
     branches: [main]
 
@@ -23,3 +23,5 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npm run benchmark:multidomain:validate
+      - run: npm run benchmark:long-horizon:validate
+      - run: npm run benchmark:v3:validate

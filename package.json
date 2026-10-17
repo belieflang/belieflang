@@ -33,7 +33,11 @@
     "benchmark:multidomain:compact": "npm run benchmark:multidomain -- --prompt compact",
     "benchmark:long-horizon": "npm run build && node --env-file-if-exists=.env dist/src/long_horizon_benchmark.js",
     "benchmark:long-horizon:validate": "npm run build && node dist/src/long_horizon_benchmark.js --validate",
-    "benchmark:long-horizon:report": "npm run build && node dist/src/long_horizon_report.js"
+    "benchmark:long-horizon:report": "npm run build && node dist/src/long_horizon_report.js",
+    "benchmark:v3:validate": "npm run build && node dist/src/v3_cli.js --validate",
+    "benchmark:v3:offline": "npm run build && node dist/src/v3_cli.js --offline",
+    "benchmark:v3:freeze": "npm run build && node dist/src/v3_cli.js --freeze",
+    "benchmark:v3:live": "npm run build && node dist/src/v3_cli.js --live"
   },
   "keywords": [
     "ai",
