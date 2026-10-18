@@ -4,7 +4,7 @@ The static site is `docs/index.html`, `docs/styles.css`, and `docs/playground.js
 
 ## Playground scope
 
-The browser has a separate JavaScript parser/runtime. It is a local demonstration, not the TypeScript runtime compiled for the browser. No GPT/Jev requests are made, no API keys are read, and tool calls return sample data or record simulated actions. The keyword-based inference demo is not a general natural-language model.
+The playground uses a separate JavaScript parser/runtime with keyword-based inference and simulated tools. It makes no GPT or Jev API calls and needs no API key. The TypeScript runtime is the reference implementation.
 
 Supported examples are the small homepage program, flight intent (`examples/intent.bel`), uncertain/open intent (`examples/intent_no_flight.bel`), and observation/inference/merge (`examples/observe_infer_merge.bel`). They exercise belief modes, normalization, confidence, entropy, variables, property access, compound conditions, tools, observations and belief updates. The examples remain editable.
 
@@ -18,6 +18,8 @@ This is regression coverage for the supported examples, not proof of complete pa
 
 “Run this example” loads the displayed code, selects it, updates the fragment, scrolls to the playground, focuses the editor, and runs locally. The link retains a usable fragment target without JavaScript. Invalid programs show a focusable alert, mark the editor invalid, and clear prior output so an old successful run cannot be mistaken for the current result. The editor contents remain available to fix.
 
+Loading and stale-output messages remain visible. Successful runs announce “Run complete.” through a visually hidden live region, without adding a visible status line. Errors use the focused alert rather than a duplicate status message. The live region remains in the accessibility tree.
+
 ## Local validation
 
 From the repository root:
@@ -30,7 +32,7 @@ node scripts/audit-incremental-pilot.mjs
 python3 -m http.server 8765 --bind 127.0.0.1 --directory docs
 ```
 
-Open `http://127.0.0.1:8765/`. The site only needs the three static source files; the build/tests above validate its examples against the TypeScript reference. No provider credentials or live inference are required.
+Open `http://127.0.0.1:8765/`. The site only needs the three static source files; the build/tests above validate its examples against the TypeScript reference.
 
 Browser checks use Chromium at 320, 390, 768 and 1440 CSS pixels: syntax visible in the first viewport, keyboard activation of both example links, focus and fragment navigation, all examples, source/output labels, custom invalid code, error recovery, trace output, internal anchors, table scrolling, no page-wide horizontal overflow and reduced-motion styles. Network requests are limited to local assets and the existing Google Fonts resources. Desktop/mobile screenshots below use 1440×1000 and 390×844 viewports, respectively, with reduced motion. Font rendering may vary by machine.
 
@@ -38,6 +40,8 @@ Browser checks use Chromium at 320, 390, 768 and 1440 CSS pixels: syntax visible
 |---|---|---|
 | Desktop | [Before](assets/website-developer-review/desktop-before.png) | [After](assets/website-developer-review/desktop-after.png) |
 | Mobile | [Before](assets/website-developer-review/mobile-before.png) | [After](assets/website-developer-review/mobile-after.png) |
+
+These screenshots capture PR #11, before the subsequent copy cleanup.
 
 [Playground with the update example](assets/website-developer-review/playground-after.png) · [Update example and selected output](assets/website-developer-review/updates-after.png) · [Benchmark metrics and comparison](assets/website-developer-review/benchmarks-after.png).
 

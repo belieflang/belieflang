@@ -213,6 +213,8 @@ test("Run this example loads, focuses, and executes the intro after custom edits
   assert.equal(get("sample").value, "custom");
   assert.equal(get("filename").textContent, "custom.bel");
   assert.match(get("output-label").textContent, /Previous run/);
+  assert.equal(get("status").textContent, "Source changed. Run to update output.");
+  assert.equal(get("status").attributes.class, "small-note");
   await link.emit("click");
   assert.equal(get("source").value, api.samples.intro);
   assert.equal(get("sample").value, "intro");
@@ -222,7 +224,8 @@ test("Run this example loads, focuses, and executes the intro after custom edits
   assert.equal(target.scrolled, true);
   assert.equal(link.prevented, true);
   assert.match(get("actions-output").textContent, /search_flights/);
-  assert.match(get("status").textContent, /ran locally/);
+  assert.equal(get("status").textContent, "Run complete.");
+  assert.match(get("status").attributes.class, /visually-hidden/);
   assert.equal(get("error").hidden, true);
   assert.equal(get("run").disabled, false);
 });
@@ -235,7 +238,8 @@ test("advanced example link loads and renders observations, merged state and tra
   assert.equal(get("source").value, api.samples.dynamic);
   assert.equal(get("sample").value, "dynamic");
   assert.equal(get("output-label").textContent, "observe_infer_merge.bel");
-  assert.match(get("status").textContent, /observe_infer_merge.bel/);
+  assert.equal(get("status").textContent, "Run complete.");
+  assert.match(get("status").attributes.class, /visually-hidden/);
   assert.match(get("state-output").textContent, /book_flight=0.920/);
   assert.match(get("observations-output").textContent, /user_message/);
   assert.match(get("vars-output").textContent, /extracted/);
@@ -249,12 +253,17 @@ test("errors clear stale output, identify invalid input, and recover on a valid 
   const { get, link } = page();
   await new Promise((resolve) => setImmediate(resolve));
   get("source").value = "belief broken { @ }";
-  await get("run").emit("click");
+  const running = get("run").emit("click");
+  assert.equal(get("status").textContent, "Running intro.bel…");
+  assert.equal(get("status").attributes.class, "small-note");
+  assert.equal(get("run").disabled, true);
+  await running;
   assert.equal(get("error").hidden, false);
   assert.match(get("error").textContent, /Unexpected character/);
   assert.match(get("error").textContent, /Error in intro.bel:/);
   assert.equal(get("output-label").textContent, "intro.bel · failed");
   assert.equal(get("error").focused, true);
+  assert.equal(get("status").textContent, "");
   assert.equal(get("source").attributes["aria-invalid"], "true");
   for (const id of [
     "state-output",

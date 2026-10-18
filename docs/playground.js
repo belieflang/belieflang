@@ -1280,12 +1280,19 @@ when entropy(intent) > 0.5:
       source.setAttribute("aria-invalid", String(Boolean(message)));
     }
 
+    function setStatus(message, unobtrusive = false) {
+      if (!status) return;
+      status.setAttribute("class", unobtrusive ? "small-note visually-hidden" : "small-note");
+      status.textContent = message;
+    }
+
     function renderRuntime(runtime) {
       stateOutput.textContent = formatState(runtime);
       varsOutput.textContent = formatObject(runtime.vars, "No variables assigned.");
       observationsOutput.textContent = formatObservations(runtime.observations);
       actionsOutput.textContent = runtime.actions.join("\n") || "No actions fired.";
-      traceOutput.textContent = runtime.traceLines.join("\n") || "Trace is off or no trace lines were emitted.";
+      traceOutput.textContent = runtime.traceLines.join("\n") ||
+        (traceToggle && traceToggle.checked ? "No trace entries." : "Trace disabled.");
     }
 
     async function execute() {
@@ -1294,7 +1301,7 @@ when entropy(intent) > 0.5:
       runButton.disabled = true;
       runButton.textContent = "Running";
       if (results) results.setAttribute("aria-busy", "true");
-      if (status) status.textContent = `Running ${runningFile} locally…`;
+      setStatus(`Running ${runningFile}…`);
       if (outputLabel) outputLabel.textContent = `${runningFile} · running`;
 
       try {
@@ -1302,7 +1309,7 @@ when entropy(intent) > 0.5:
           trace: traceToggle ? traceToggle.checked : false,
         });
         renderRuntime(runtime);
-        if (status) status.textContent = `Program ran locally: ${runningFile}. No API calls were made.`;
+        setStatus("Run complete.", true);
         if (outputLabel) outputLabel.textContent = runningFile;
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
@@ -1310,7 +1317,7 @@ when entropy(intent) > 0.5:
         for (const output of [stateOutput, varsOutput, observationsOutput, actionsOutput, traceOutput]) {
           if (output) output.textContent = "Not available: the program did not run.";
         }
-        if (status) status.textContent = "Program did not run. Check the error and edit your code.";
+        setStatus("", true);
         if (outputLabel) outputLabel.textContent = `${runningFile} · failed`;
         if (errorBox) errorBox.focus();
       } finally {
@@ -1333,7 +1340,7 @@ when entropy(intent) > 0.5:
       if (!programmaticChange) {
         sample.value = "custom";
         if (filename) filename.textContent = sourceFilename();
-        if (status) status.textContent = "Custom program edited. Run to update the output.";
+        setStatus("Source changed. Run to update output.");
         if (outputLabel) outputLabel.textContent = "Previous run · source edited";
       }
     });
