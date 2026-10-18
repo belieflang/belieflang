@@ -1,5 +1,13 @@
 (() => {
   const samples = {
+    intro: `belief intent exclusive closed {
+  book_flight: 0.82
+  book_hotel: 0.12
+  unknown: 0.06
+}
+
+when confidence(intent.book_flight) > 0.7:
+  call search_flights()`,
     intent: `let threshold = 0.7
 
 belief intent exclusive closed {
@@ -1097,6 +1105,8 @@ when entropy(intent) > 0.5:
         return null;
       }
 
+      // Present simulated invocations even when a tool only returns data.
+      this.actions.push(`[call] ${toolName}()`);
       return await tool();
     }
 
@@ -1237,6 +1247,8 @@ when entropy(intent) > 0.5:
     const observationsOutput = document.querySelector("#playground-observations-output");
     const actionsOutput = document.querySelector("#playground-actions-output");
     const traceOutput = document.querySelector("#playground-trace-output");
+    const status = document.querySelector("#playground-status");
+    const results = document.querySelector(".playground-results");
 
     if (!source || !sample || !runButton) return;
 
@@ -1252,6 +1264,7 @@ when entropy(intent) > 0.5:
       if (!errorBox) return;
       errorBox.hidden = !message;
       errorBox.textContent = message || "";
+      source.setAttribute("aria-invalid", String(Boolean(message)));
     }
 
     function renderRuntime(runtime) {
@@ -1266,17 +1279,26 @@ when entropy(intent) > 0.5:
       setError("");
       runButton.disabled = true;
       runButton.textContent = "Running";
+      if (results) results.setAttribute("aria-busy", "true");
+      if (status) status.textContent = "Running locally…";
 
       try {
         const runtime = await runProgram(source.value, {
           trace: traceToggle ? traceToggle.checked : false,
         });
         renderRuntime(runtime);
+        if (status) status.textContent = "Program ran locally. No API calls were made.";
       } catch (error) {
         setError(error instanceof Error ? error.message : String(error));
+        for (const output of [stateOutput, varsOutput, observationsOutput, actionsOutput, traceOutput]) {
+          if (output) output.textContent = "Not available: the program did not run.";
+        }
+        if (status) status.textContent = "Program did not run. Check the error and edit your code.";
+        if (errorBox) errorBox.focus();
       } finally {
         runButton.disabled = false;
         runButton.textContent = "Run";
+        if (results) results.setAttribute("aria-busy", "false");
       }
     }
 
@@ -1299,7 +1321,23 @@ when entropy(intent) > 0.5:
       traceToggle.addEventListener("change", execute);
     }
 
-    setSource(samples.intent);
+    for (const link of document.querySelectorAll("[data-playground-example]")) {
+      link.addEventListener("click", (event) => {
+        const name = link.dataset.playgroundExample;
+        if (!samples[name]) return;
+        event.preventDefault();
+        sample.value = name;
+        setSource(samples[name]);
+        if (window.location.hash !== "#playground") {
+          window.history.pushState(null, "", "#playground");
+        }
+        document.querySelector("#playground").scrollIntoView({ block: "start" });
+        source.focus({ preventScroll: true });
+        execute();
+      });
+    }
+
+    setSource(samples.intro);
     execute();
   }
 
