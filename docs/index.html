@@ -45,7 +45,7 @@
       <aside class="sidebar">
         <div class="brand">
           <a class="brand-name" href="#overview">BeliefLang</a>
-          <p class="subtitle">Experimental programming language</p>
+          <p class="subtitle">Language &amp; runtime</p>
           <a class="github-link" href="https://github.com/belieflang/belieflang"
             >GitHub ↗</a
           >
@@ -72,10 +72,6 @@
                 and making decisions with deterministic rules. Update what changes
                 instead of repeatedly interpreting everything with an LLM.
               </p>
-              <p class="small-note">
-                Updates are explicit. General automatic dependency-based
-                recomputation is not implemented.
-              </p>
               <div class="hero-actions">
                 <a class="button" href="#playground">Try the playground</a>
                 <a class="button button-secondary" href="https://github.com/belieflang/belieflang">GitHub ↗</a>
@@ -83,7 +79,7 @@
               </div>
             </div>
             <div class="hero-code syntax-section" id="syntax" role="group" aria-labelledby="syntax-heading">
-              <div class="code-window">
+              <div class="code-window" id="decisions">
                 <div class="code-toolbar"><h2 id="syntax-heading">intro.bel</h2><span>BeliefLang</span></div>
                 <pre tabindex="0" aria-label="BeliefLang confidence example"><code id="syntax-example" class="language-bel"><span class="syntax-keyword">belief</span> intent <span class="syntax-keyword">exclusive</span> <span class="syntax-keyword">closed</span> {
   book_flight: <span class="syntax-number">0.82</span>
@@ -94,10 +90,6 @@
 <span class="syntax-keyword">when</span> <span class="syntax-builtin">confidence</span>(intent.book_flight) &gt; <span class="syntax-number">0.7</span>:
   <span class="syntax-keyword">call</span> search_flights()</code></pre>
               </div>
-              <p class="small-note" id="decisions">
-                Confidence 0.82 clears the 0.7 threshold, so the demo calls
-                a simulated flight search.
-              </p>
               <a class="example-link" href="#playground" data-playground-example="intro" aria-controls="playground-source">Run this example ↓</a>
             </div>
           </div>
@@ -110,12 +102,7 @@
         >
           <div class="playground-heading">
             <div>
-              <p class="badge">Local browser demo</p>
               <h2 id="playground-heading">Playground</h2>
-              <p id="playground-help">
-                Edit and run <code>.bel</code> locally. Inspect state, tool
-                actions, and the execution trace.
-              </p>
             </div>
             <div class="playground-controls" role="group" aria-label="Playground controls">
               <label for="playground-sample">Example</label>
@@ -132,12 +119,12 @@
               <button id="playground-run" type="button">Run</button>
             </div>
           </div>
-          <p class="small-note">
-            Local example inference and simulated tools. No live GPT or Jev
-            requests.
+          <p class="small-note" id="playground-help">
+            Runs in your browser. No API key required.
             <a
               href="https://github.com/belieflang/belieflang/blob/main/docs/website.md#playground-scope"
-              >What this demo supports</a
+              aria-label="Playground help"
+              >Help</a
             >.
           </p>
           <noscript
@@ -146,7 +133,7 @@
               <a href="#quickstart">run the examples locally</a>.
             </p></noscript
           >
-          <p id="playground-status" class="small-note" role="status"></p>
+          <p id="playground-status" class="small-note visually-hidden" role="status" aria-atomic="true"></p>
           <div class="playground-shell">
             <div class="playground-editor">
               <div class="editor-toolbar">
@@ -208,12 +195,8 @@
         </section>
 
         <section class="section" id="results" aria-labelledby="results-heading">
-          <p class="eyebrow">Audited incremental-memory pilot · October 18, 2026</p>
-          <h2 id="results-heading">Measured savings on a fixed workload</h2>
-          <p>
-            BeliefLang v3 used fewer cumulative tokens and had lower estimated
-            LLM costs than full-history retrieval and rolling summaries in this pilot.
-          </p>
+          <p class="eyebrow">BeliefLang v3 · October 18, 2026</p>
+          <h2 id="results-heading">Incremental memory benchmark</h2>
           <div class="metric-grid" role="group" aria-label="BeliefLang v3 pilot comparisons">
             <div class="metric"><strong>20.5%</strong><span>fewer tokens</span><small>vs full-history retrieval</small></div>
             <div class="metric"><strong>26.4%</strong><span>lower estimated LLM cost</span><small>vs full-history retrieval</small></div>
@@ -221,9 +204,9 @@
             <div class="metric"><strong>59.6%</strong><span>lower estimated LLM cost</span><small>vs rolling summaries</small></div>
           </div>
           <p class="small-note">
-            One repetition of three scripted 24-turn conversations. These
-            percentages apply to this workload, not all AI agents. Costs are
-            estimates from measured tokens and frozen pricing assumptions.
+            One repetition of three scripted 24-turn conversations using GPT-6
+            Luna. Costs are estimated from measured tokens and frozen pricing
+            assumptions.
           </p>
           <p>
             <strong>Plain JSON achieved essentially identical accuracy, token
@@ -238,7 +221,7 @@
           >
             <table>
               <caption>
-                Four strategies · totals across sparse and dense demand
+                Totals across sparse and dense demand
               </caption>
               <thead>
                 <tr>
@@ -271,50 +254,35 @@
               </tbody>
             </table>
           </div>
-          <p class="small-note">
-            The 100% scores apply only to this small test. They do not promise
-            reliability or savings in a real application.
-          </p>
-          <details>
-            <summary>How to read these numbers</summary>
-            <p>
-              The test used GPT-6 Luna. Totals include updating memory and
-              answering questions, under both frequent and occasional use.
-              Costs use the experiment's fixed rates with a 10% premium
-              assumption. They are estimates, not invoice charges.
-            </p>
-          </details>
           <p class="reference-link">
             <a
               href="https://github.com/belieflang/belieflang/blob/main/docs/incremental-memory-pilot-results.md"
-              >Full results and limits</a
+              >Results and limitations</a
             >
             ·
             <a
               href="https://github.com/belieflang/belieflang/blob/main/docs/incremental-memory-pilot.md"
-              >How we ran the test</a
+              >Methodology</a
             >
             ·
             <a
               href="https://github.com/belieflang/belieflang/tree/main/benchmarks/results/incremental-pilot-2026-10-18"
-              >Saved results and verification</a
+              >Reproduce the results</a
             >
           </p>
           <p class="small-note">
             <a
               href="https://github.com/belieflang/belieflang/blob/main/docs/experiments.md"
-              >Earlier experiments and instructions to reproduce them</a
+              >Earlier experiments</a
             >.
           </p>
         </section>
 
         <section class="section" id="updates" aria-labelledby="updates-heading">
-          <p class="eyebrow">Beyond a threshold</p>
           <h2 id="updates-heading">Observe, infer, merge, then act</h2>
           <p>
-            Record a message, run an inference adapter, merge a patch, and check
-            confidence and entropy before acting. This example uses local keyword
-            inference and a fixed tool patch; inspect each step in the playground.
+            Observe a message, infer and merge updates, then check confidence
+            and entropy.
           </p>
           <div class="advanced-grid">
             <div class="code-window">
@@ -334,14 +302,13 @@
   <span class="syntax-keyword">ask_user</span>(<span class="syntax-string">"Can you clarify your travel intent?"</span>)</code></pre>
             </div>
             <div class="code-window example-result">
-              <div class="code-toolbar"><h3>Result</h3><span>Local demo</span></div>
+              <div class="code-toolbar"><h3>Output</h3><span>State + trace</span></div>
               <pre tabindex="0" aria-label="Selected update example output"><code id="update-result">intent.book_flight = 0.920
 user.budget_sensitive = 0.860
 entropy(intent) = 0.402
 rule 1 =&gt; true
 rule 2 =&gt; false
 [call] rank_flights()</code></pre>
-              <p class="small-note">Selected state and trace lines. The uncertainty rule does not fire.</p>
             </div>
           </div>
           <a class="example-link" href="#playground" data-playground-example="dynamic" aria-controls="playground-source">Run this example ↓</a>
@@ -352,10 +319,7 @@ rule 2 =&gt; false
           id="features"
           aria-labelledby="features-heading"
         >
-          <p class="eyebrow">Implemented today</p>
-          <h2 id="features-heading">
-            What you can use today
-          </h2>
+          <h2 id="features-heading">Language and runtime</h2>
           <div class="mode-grid">
             <article class="card" id="language">
               <h3>Write rules in <code>.bel</code></h3>
@@ -372,12 +336,11 @@ rule 2 =&gt; false
               </p>
             </article>
             <article class="card" id="runtime">
-              <h3>Keep a record in TypeScript</h3>
+              <h3>TypeScript runtime</h3>
               <p>
-                Save and restore snapshots. Inspect provenance: where an
-                update came from. Optional v3 factual-memory APIs retain
-                historical values, track conflicts, and check evidence and
-                authorization before actions.
+                Snapshots and provenance inspection. V3 factual-memory APIs
+                retain historical values, track conflicts, and check evidence
+                and authorization before actions.
               </p>
               <p>
                 <a
@@ -387,34 +350,14 @@ rule 2 =&gt; false
               </p>
             </article>
           </div>
-          <p>
-            These extra memory and action checks are TypeScript APIs. They are
-            not part of the <code>.bel</code> syntax or browser demo.
-          </p>
-          <p class="small-note">
-            A confidence score isn't proof. Your application still has to
-            verify facts and give permission for actions. Saving less
-            information can also mean losing details you'll need later.
-          </p>
-          <details>
-            <summary>Technical details and current limits</summary>
-            <p>
-              The language supports probability distributions, confidence,
-              entropy (a measure of uncertainty), variables, conditions, tool
-              calls, observations, inference, and merging updates.
-            </p>
-            <p>
-              The TypeScript runtime has snapshot and provenance APIs.
-              Optional v3 components add factual memory, conflict handling,
-              and deterministic decision guards. Change history is bounded;
-              saved state can still grow, and automatic archival is not built.
-            </p>
-            <p>
-              General dependency tracking, selective invalidation, and more
-              advanced caching remain research directions. The pilot's fixed
-              decision cache does not provide complete dependency-based
-              recomputation.
-            </p>
+          <details id="limitations">
+            <summary>Current limitations</summary>
+            <ul>
+              <li>V3 factual memory and decision guards are TypeScript APIs, not <code>.bel</code> syntax.</li>
+              <li>Fact verification and action authorization come from the host application.</li>
+              <li>Change history is bounded; saved state can grow. Automatic archival is not implemented.</li>
+              <li>General dependency tracking, selective invalidation, and broader caching remain research directions.</li>
+            </ul>
           </details>
         </section>
 
@@ -423,12 +366,8 @@ rule 2 =&gt; false
           id="quickstart"
           aria-labelledby="quickstart-heading"
         >
-          <p class="eyebrow">Outside the browser</p>
-          <h2 id="quickstart-heading">Run locally or read further</h2>
-          <p>
-            Use Node.js 22 or later. This example uses local demo tools and
-            needs no API key:
-          </p>
+          <h2 id="quickstart-heading">Quick start</h2>
+          <p>Node.js 22 or later.</p>
           <pre
             tabindex="0"
             aria-label="Local quick start commands"
@@ -447,15 +386,10 @@ node dist/src/cli.js run examples/intent.bel --trace</code></pre>
               >Model integrations and experiment commands</a
             >
           </p>
-          <p class="small-note">
-            The TypeScript tools can also call GPT or Jev. Those commands need
-            API keys and may cost money.
-          </p>
         </section>
 
         <section class="section" id="roadmap" aria-labelledby="roadmap-heading">
-          <p class="eyebrow">Still testing</p>
-          <h2 id="roadmap-heading">What comes next?</h2>
+          <h2 id="roadmap-heading">Roadmap</h2>
           <ul>
             <li>
               Test longer conversations and less expensive models against JSON
@@ -483,10 +417,9 @@ node dist/src/cli.js run examples/intent.bel --trace</code></pre>
         </section>
         <footer class="footer section">
           <p>
-            Built in TypeScript. Open source under
             <a href="https://github.com/belieflang/belieflang/blob/main/LICENSE"
-              >Apache-2.0</a
-            >.
+              >Apache-2.0 license</a
+            >
           </p>
         </footer>
       </main>
