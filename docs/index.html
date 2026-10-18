@@ -3,131 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BeliefLang — beliefs to decisions</title>
-    <meta name="description" content="BeliefLang saves the beliefs needed for decisions and turns confidence thresholds into tool calls." />
+    <title>BeliefLang — structured beliefs for AI agents</title>
+    <meta
+      name="description"
+      content="An experimental language and runtime for structured beliefs, uncertainty, and decision-making in AI agents. Try the local browser playground and read the audited results."
+    />
+    <link rel="canonical" href="https://belieflang.org/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://belieflang.org/" />
+    <meta property="og:site_name" content="BeliefLang" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="BeliefLang — structured beliefs for AI agents"
+    />
+    <meta
+      property="og:description"
+      content="Explore explicit beliefs and decision rules. Try .bel in your browser and see what the experiments demonstrated."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="BeliefLang — structured beliefs for AI agents"
+    />
+    <meta
+      name="twitter:description"
+      content="An experimental language and runtime. Local playground, working syntax, and audited memory experiments."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#overview">Skip to content</a>
     <div class="page-bg" aria-hidden="true"></div>
     <div class="layout">
       <aside class="sidebar">
         <div class="brand">
-          <p class="eyebrow">Experimental language</p>
-          <h1>BeliefLang</h1>
-          <p class="subtitle">Turn uncertain input into clear decisions and tool calls.</p>
-          <a class="github-link" href="https://github.com/belieflang/belieflang" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+          <a class="brand-name" href="#overview">BeliefLang</a>
+          <p class="subtitle">Experimental language &amp; runtime</p>
+          <a class="github-link" href="https://github.com/belieflang/belieflang"
+            >GitHub ↗</a
+          >
         </div>
-        <nav class="toc" aria-label="Table of contents">
-          <a href="#overview">How it works</a>
-          <a href="#results">Results</a>
-          <a href="#decisions">Decisions</a>
-          <a href="#quickstart">Try it</a>
+        <nav class="toc" aria-label="Page navigation">
+          <a href="#overview">Overview</a>
+          <a href="#syntax">Syntax</a>
           <a href="#playground">Playground</a>
-          <a href="#language">Language</a>
-          <a href="#runtime">Runtime API</a>
+          <a href="#results">Results</a>
+          <a href="#features">Features &amp; limits</a>
+          <a href="#quickstart">Documentation</a>
+          <a href="#roadmap">Roadmap</a>
         </nav>
       </aside>
 
       <main class="content">
-        <header class="hero section" id="overview">
-          <p class="badge">Beliefs → decisions</p>
-          <h2>Make a decision, then call a tool</h2>
-          <p class="hero-lead">BeliefLang keeps the scores your workflow needs. A model updates them from new input. Rules use those scores to choose an action.</p>
-          <pre><code class="language-txt">new message → belief snapshot → threshold rule → tool call</code></pre>
-          <p>Each turn starts from the saved snapshot, so the model can update the decision state without reading every earlier message again.</p>
+        <header class="hero section" id="overview" tabindex="-1">
+          <p class="badge">An experiment in explicit state</p>
+          <h1>BeliefLang</h1>
+          <p class="hero-lead">
+            An experimental language and runtime for structured beliefs,
+            uncertainty, and decision-making in AI agents.
+          </p>
+          <p>
+            AI agents already support memory and state. BeliefLang explores
+            making beliefs, uncertainty, provenance (where information came
+            from), and decision rules explicit.
+          </p>
+          <p>
+            The goal is to keep structured belief state, update it as new
+            information arrives, and use deterministic code when another LLM
+            call isn't needed. A smaller snapshot can also lose details that
+            matter later.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#playground">Try the playground</a>
+            <a
+              class="button button-secondary"
+              href="https://github.com/belieflang/belieflang/blob/main/docs/semantics.md"
+              >Read the documentation</a
+            >
+          </div>
         </header>
 
-        <section class="section" id="results">
-          <p class="eyebrow">Live API calls · 15 October 2026</p>
-          <h3>What we measured</h3>
-          <p>Two travel chats, 20 labeled turns, using <code>gpt-6-luna</code>.</p>
-          <div class="metric-grid" aria-label="Key benchmark results">
-            <div class="metric"><strong>20/20</strong><span>turns matched the labeled beliefs with either method</span></div>
-            <div class="metric"><strong>48%</strong><span>fewer reported tokens with saved beliefs</span></div>
-            <div class="metric"><strong>29%</strong><span>lower estimated model cost with saved beliefs</span></div>
-          </div>
-          <div class="table-scroll">
-            <table>
-              <thead><tr><th>What the model reads</th><th>Label match</th><th>Tokens</th><th>Estimated cost</th></tr></thead>
-              <tbody>
-                <tr><td>Chat history</td><td>20/20</td><td>15,668</td><td>$0.001663</td></tr>
-                <tr><td>Saved beliefs + new message</td><td>20/20</td><td>8,136</td><td>$0.001175</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="small-note">The snapshot total includes the model calls that create and update it. This is a small scripted test. <a href="https://github.com/belieflang/belieflang/blob/main/docs/jev.md">See the full method, older-model tests, and other results</a>.</p>
-          <p class="small-note"><strong>Jev result:</strong> Ordinary snapshot updates missed preference changes. A change-only update with <code>jev-latest</code> matched 20/20 mock tool choices twice on new scripted chats, using 2.7% less model input than full-history Jev. On earlier longer chats it saved 17.5%. This prototype turns explicit changes into hard yes/no values. <a href="./jev.md#jev-direct-action-full-history-or-saved-beliefs">See the Jev comparison</a>.</p>
-        </section>
-
-        <section class="section" id="decisions">
-          <h3>Use a score to make a decision</h3>
-          <p>The model estimates a score. The rule is deterministic: the same score and threshold produce the same tool call.</p>
-          <pre><code class="language-bel">when confidence(intent.book_flight) &gt; 0.9:
-  call search_flights()</code></pre>
-          <h4>Settle each field separately</h4>
-          <p>Choose a confidence threshold for each decision field. When its current value is certain enough, save it and omit that field from the next update. Keep updating uncertain fields. Reopen a settled field when new input could change it.</p>
-          <pre><code class="language-txt">intent = book_flight (0.97) → settled
-prefers_direct = uncertain (0.58) → update next turn</code></pre>
-          <p class="small-note">In a separate <code>gpt-6-luna</code> test, settled fields matched 20/20 labeled turns twice and used about 10% fewer tokens: 5,828 vs 6,494, then 5,809 vs 6,458. At a 0.90 threshold, 54 of 60 numeric field updates were omitted. <a href="./jev.md#settling-confident-fields">See the method and limits</a>.</p>
-        </section>
-
-        <section class="section" id="quickstart">
-          <h3>Try it locally</h3>
-          <p>Build the project, then run an example:</p>
-          <pre><code class="language-bash">npm install
-npm run build
-node dist/src/cli.js run examples/intent.bel --trace</code></pre>
-          <p>With <code>OPENAI_API_KEY</code> in your environment or local <code>.env</code> file, try the chat modes:</p>
-          <pre><code class="language-bash">npm run chatbot
-CHAT_MODE=full-history npm run chatbot
-CHAT_MODE=coded npm run chatbot</code></pre>
-          <p>For benchmark commands and details, see the <a href="https://github.com/belieflang/belieflang/blob/main/README.md">README</a>.</p>
-        </section>
-
-        <section class="section playground-section" id="playground">
-          <div class="playground-heading">
-            <div>
-              <p class="badge">Live</p>
-              <h3>Playground</h3>
-              <p>Change the program and run it in your browser. The playground uses local example inference; live GPT and Jev calls run from the CLI.</p>
-            </div>
-            <div class="playground-controls" aria-label="Playground controls">
-              <label for="playground-sample">Example</label>
-              <select id="playground-sample">
-                <option value="intent">Flight intent</option>
-                <option value="noFlight">Open intent</option>
-                <option value="dynamic">Observe, infer, merge</option>
-                <option value="custom">Custom program</option>
-              </select>
-              <label class="trace-control" for="playground-trace"><input id="playground-trace" type="checkbox" />Trace</label>
-              <button id="playground-run" type="button">Run</button>
-            </div>
-          </div>
-          <div class="playground-shell">
-            <div class="playground-editor">
-              <div class="panel-label">Program</div>
-              <textarea id="playground-source" spellcheck="false" aria-label="BeliefLang program editor"></textarea>
-            </div>
-            <div class="playground-results" aria-live="polite">
-              <p id="playground-error" class="playground-error" role="alert" hidden></p>
-              <div class="result-grid">
-                <article class="result-panel"><h4>State</h4><pre><code id="playground-state-output"></code></pre></article>
-                <article class="result-panel"><h4>Variables</h4><pre><code id="playground-vars-output"></code></pre></article>
-                <article class="result-panel"><h4>Observations</h4><pre><code id="playground-observations-output"></code></pre></article>
-                <article class="result-panel"><h4>Actions</h4><pre><code id="playground-actions-output"></code></pre></article>
-                <article class="result-panel trace-panel"><h4>Trace</h4><pre><code id="playground-trace-output"></code></pre></article>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="section" id="language">
-          <h3>Language basics</h3>
-          <p>Define beliefs, then act when a score passes a threshold:</p>
-          <pre><code class="language-bel">belief intent exclusive closed {
+        <section
+          class="section syntax-section"
+          id="syntax"
+          aria-labelledby="syntax-heading"
+        >
+          <p class="eyebrow">A small working program</p>
+          <h2 id="syntax-heading">A belief, a threshold, an action</h2>
+          <pre
+            tabindex="0"
+            aria-label="BeliefLang example"
+          ><code id="syntax-example" class="language-bel">belief intent exclusive closed {
   book_flight: 0.82
   book_hotel: 0.12
   unknown: 0.06
@@ -135,21 +108,348 @@ CHAT_MODE=coded npm run chatbot</code></pre>
 
 when confidence(intent.book_flight) &gt; 0.7:
   call search_flights()</code></pre>
-          <div class="card-grid">
-            <article class="card"><h4><code>belief</code></h4><p>Stores scores. <code>exclusive</code> means one main answer; <code>multi</code> allows several independent scores.</p></article>
-            <article class="card"><h4><code>when</code></h4><p>Checks a condition and runs one action. Use <code>confidence(...)</code> for a score and <code>entropy(...)</code> for uncertainty.</p></article>
-            <article class="card"><h4><code>observe</code> and <code>infer</code></h4><p>Record new input and ask an inference adapter to update beliefs. <code>merge</code> applies a belief patch.</p></article>
+          <div class="syntax-notes">
+            <p>
+              <code>belief</code> declares scores;
+              <code>exclusive closed</code> normalizes them into a full
+              distribution. <code>confidence()</code> reads a stored score.
+            </p>
+            <p id="decisions">
+              <code>when</code> checks the condition and runs one action. Here,
+              0.82 exceeds 0.7, so the local demo calls
+              <code>search_flights()</code>.
+            </p>
           </div>
-          <p class="reference-link">See the <a href="https://github.com/belieflang/belieflang/blob/main/docs/semantics.md">full language reference</a> for syntax and behavior.</p>
+          <a
+            class="button"
+            href="#playground"
+            data-playground-example="intro"
+            aria-controls="playground-source"
+            >Run this example ↓</a
+          >
         </section>
 
-        <section class="section" id="runtime">
-          <h3>Runtime API</h3>
-          <p>Read state with <code>getState()</code> or <code>confidence(path)</code>. Save and restore it with <code>getBeliefSnapshot()</code> and <code>loadBeliefSnapshot()</code>. Inspect decisions with <code>getProvenance()</code>, <code>explainBelief(path)</code>, and <code>--trace</code>.</p>
-          <p>BeliefLang can infer with GPT or Jev. The <a href="https://github.com/belieflang/belieflang/blob/main/docs/jev.md">integration and benchmark notes</a> explain both adapters.</p>
+        <section
+          class="section playground-section"
+          id="playground"
+          aria-labelledby="playground-heading"
+        >
+          <div class="playground-heading">
+            <div>
+              <p class="badge">Local browser demo</p>
+              <h2 id="playground-heading">Try it here</h2>
+              <p id="playground-help">
+                Edit the code, choose an example, or turn on the trace.
+                Inference uses local example rules and tools are simulated. This
+                playground makes no GPT or Jev API calls.
+              </p>
+            </div>
+            <div class="playground-controls" aria-label="Playground controls">
+              <label for="playground-sample">Example</label>
+              <select id="playground-sample">
+                <option value="intro">Small example</option>
+                <option value="intent" selected>Flight intent</option>
+                <option value="noFlight">Open intent</option>
+                <option value="dynamic">Observe, infer, merge</option>
+                <option value="custom">Custom program</option>
+              </select>
+              <label class="trace-control" for="playground-trace"
+                ><input id="playground-trace" type="checkbox" />Trace</label
+              >
+              <button id="playground-run" type="button">Run</button>
+            </div>
+          </div>
+          <p class="small-note">
+            This separate JavaScript demo supports the examples below, not every
+            TypeScript runtime API. It has no v3 factual memory, provenance
+            history, or decision guard.
+            <a
+              href="https://github.com/belieflang/belieflang/blob/main/docs/website.md#playground-scope"
+              >Supported subset and limits</a
+            >.
+          </p>
+          <noscript
+            ><p class="playground-error">
+              Enable JavaScript to use the editor. You can also
+              <a href="#quickstart">run the examples locally</a>.
+            </p></noscript
+          >
+          <p id="playground-status" class="small-note" role="status"></p>
+          <div class="playground-shell">
+            <div class="playground-editor">
+              <label class="panel-label" for="playground-source">Program</label>
+              <textarea
+                id="playground-source"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                wrap="off"
+                aria-describedby="playground-help playground-error"
+              ></textarea>
+            </div>
+            <div class="playground-results" aria-busy="false">
+              <p
+                id="playground-error"
+                class="playground-error"
+                role="alert"
+                tabindex="-1"
+                hidden
+              ></p>
+              <div class="result-grid">
+                <article class="result-panel">
+                  <h3>Belief state</h3>
+                  <pre
+                    tabindex="0"
+                  ><code id="playground-state-output"></code></pre>
+                </article>
+                <article class="result-panel">
+                  <h3>Variables</h3>
+                  <pre
+                    tabindex="0"
+                  ><code id="playground-vars-output"></code></pre>
+                </article>
+                <article class="result-panel">
+                  <h3>Observations</h3>
+                  <pre
+                    tabindex="0"
+                  ><code id="playground-observations-output"></code></pre>
+                </article>
+                <article class="result-panel">
+                  <h3>Tools and actions</h3>
+                  <pre
+                    tabindex="0"
+                  ><code id="playground-actions-output"></code></pre>
+                </article>
+                <article class="result-panel trace-panel">
+                  <h3>Execution trace</h3>
+                  <pre
+                    tabindex="0"
+                  ><code id="playground-trace-output"></code></pre>
+                </article>
+              </div>
+            </div>
+          </div>
         </section>
 
-        <footer class="footer section"><p>BeliefLang is experimental. Test decision quality on your own workflows before using it to call tools.</p></footer>
+        <section class="section" id="results" aria-labelledby="results-heading">
+          <p class="eyebrow">Completed pilot · October 2026</p>
+          <h2 id="results-heading">What the experiments demonstrated</h2>
+          <p>
+            The latest audited GPT-6 Luna pilot compared memory strategies.
+            These totals include all cases under sparse and dense demand, with
+            updates, routing, and retrieval charged.
+          </p>
+          <div
+            class="table-scroll"
+            tabindex="0"
+            role="region"
+            aria-label="Audited incremental-memory pilot results"
+          >
+            <table>
+              <caption>
+                One repetition · three scripted 24-turn conversations
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Approach</th>
+                  <th scope="col">Accuracy</th>
+                  <th scope="col">Estimated LLM cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Full history</th>
+                  <td>89.22%</td>
+                  <td>$0.00598334</td>
+                </tr>
+                <tr>
+                  <th scope="row">Rolling summary</th>
+                  <td>91.18%</td>
+                  <td>$0.01089550</td>
+                </tr>
+                <tr>
+                  <th scope="row">Plain JSON</th>
+                  <td>100%</td>
+                  <td>$0.00440132</td>
+                </tr>
+                <tr>
+                  <th scope="row">BeliefLang v3</th>
+                  <td>100%</td>
+                  <td>$0.00440352</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Structured state reduced estimated LLM costs by
+            <strong>26.4% versus full-history retrieval</strong> and
+            <strong>59.6% versus rolling summaries</strong> in this pilot.
+            <strong
+              >Plain JSON and BeliefLang v3 performed essentially
+              identically.</strong
+            >
+            The measured benefit came from structured state and deterministic
+            processing, not the language syntax.
+          </p>
+          <p class="small-note">
+            These 100% scores are not proof of general reliability or production
+            savings. This was one repetition over three authored conversations.
+            Costs use frozen rates with a 10% premium assumption, not invoice
+            charges.
+          </p>
+          <p class="reference-link">
+            <a
+              href="https://github.com/belieflang/belieflang/blob/main/docs/incremental-memory-pilot-results.md"
+              >Full findings and limitations</a
+            >
+            ·
+            <a
+              href="https://github.com/belieflang/belieflang/blob/main/docs/incremental-memory-pilot.md"
+              >Frozen methodology</a
+            >
+            ·
+            <a
+              href="https://github.com/belieflang/belieflang/tree/main/benchmarks/results/incremental-pilot-2026-10-18"
+              >Reproducible results and audit</a
+            >
+          </p>
+          <p class="small-note">
+            Earlier travel, Jev, compression, and multi-domain experiments
+            remain available as
+            <a
+              href="https://github.com/belieflang/belieflang/blob/main/docs/experiments.md"
+              >historical research</a
+            >.
+          </p>
+        </section>
+
+        <section
+          class="section"
+          id="features"
+          aria-labelledby="features-heading"
+        >
+          <p class="eyebrow">Implemented today</p>
+          <h2 id="features-heading">
+            Language and runtime, with different roles
+          </h2>
+          <div class="mode-grid">
+            <article class="card" id="language">
+              <h3>The <code>.bel</code> language</h3>
+              <p>
+                The interpreter supports belief distributions, confidence and
+                entropy, conditional rules, variables, tool calls, observations,
+                inference, and merging updates.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/belieflang/belieflang/blob/main/docs/semantics.md"
+                  >Language reference →</a
+                >
+              </p>
+            </article>
+            <article class="card" id="runtime">
+              <h3>TypeScript runtime components</h3>
+              <p>
+                The runtime provides belief snapshots and provenance APIs.
+                Opt-in v3 components add typed factual updates, source-tracked
+                history, conflict and uncertainty handling, and deterministic
+                decision guards. These are TypeScript APIs, not new
+                <code>.bel</code> syntax.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/belieflang/belieflang/blob/main/docs/delta-state-v3.md"
+                  >Runtime and trust boundaries →</a
+                >
+              </p>
+            </article>
+          </div>
+          <p>
+            Model confidence does not verify a fact or authorize a tool. Guards
+            depend on trusted host evidence and approvals. V3 change history is
+            bounded, durable state can grow, and automatic archival is not
+            implemented.
+          </p>
+          <p class="small-note">
+            General dependency tracking, selective invalidation, and more
+            advanced caching are research directions. The pilot's fixed decision
+            cache does not provide complete dependency-based recomputation.
+          </p>
+        </section>
+
+        <section
+          class="section"
+          id="quickstart"
+          aria-labelledby="quickstart-heading"
+        >
+          <p class="eyebrow">Outside the browser</p>
+          <h2 id="quickstart-heading">Run locally or read further</h2>
+          <p>
+            Use Node.js 22 or later. This example uses local demo tools and
+            needs no API key:
+          </p>
+          <pre
+            tabindex="0"
+            aria-label="Local quick start commands"
+          ><code class="language-bash">git clone https://github.com/belieflang/belieflang.git
+cd belieflang
+npm ci
+npm run build
+node dist/src/cli.js run examples/intent.bel --trace</code></pre>
+          <p class="reference-link">
+            <a href="https://github.com/belieflang/belieflang#quick-start"
+              >README and quick start</a
+            >
+            ·
+            <a
+              href="https://github.com/belieflang/belieflang/blob/main/docs/experiments.md"
+              >Provider demos and historical commands</a
+            >
+          </p>
+          <p class="small-note">
+            GPT and Jev adapters are available from the TypeScript
+            implementation and CLI. Those live provider commands require
+            credentials and can incur API charges; they are separate from this
+            local browser demo.
+          </p>
+        </section>
+
+        <section class="section" id="roadmap" aria-labelledby="roadmap-heading">
+          <p class="eyebrow">Open research questions</p>
+          <h2 id="roadmap-heading">What comes next?</h2>
+          <ul>
+            <li>
+              Compare longer conversations and cheaper-model updates fairly with
+              optimized JSON and full-history baselines.
+            </li>
+            <li>
+              Investigate dependency tracking, selective invalidation, and
+              caching before treating them as capabilities.
+            </li>
+            <li>
+              Decide whether a separate language adds enough value. The project
+              may eventually focus on a TypeScript library.
+            </li>
+          </ul>
+          <p class="reference-link">
+            <a
+              href="https://github.com/belieflang/belieflang/blob/main/docs/product-viability.md"
+              >Product-viability review</a
+            >
+            ·
+            <a href="https://github.com/belieflang/belieflang"
+              >Source and issues on GitHub →</a
+            >
+          </p>
+        </section>
+        <footer class="footer section">
+          <p>
+            BeliefLang is experimental and implemented in TypeScript.
+            <a href="https://github.com/belieflang/belieflang/blob/main/LICENSE"
+              >Apache-2.0</a
+            >.
+          </p>
+        </footer>
       </main>
     </div>
     <script src="./playground.js" defer></script>
