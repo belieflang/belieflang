@@ -1,0 +1,6 @@
+let ctx = call read_context()
+let intent_patch = call read_intent()
+merge beliefs from intent_patch
+let threshold = 0.85
+when confidence(intent.execute) >= threshold && ctx.facts.destination.status == "confirmed" && ctx.facts.budget.status == "confirmed" && ctx.facts.departure_date.status == "confirmed" && ctx.facts.direct.status == "confirmed" && ctx.facts.budget.value > 0 && ctx.facts.budget.value <= 3000:
+  call execute_guarded()

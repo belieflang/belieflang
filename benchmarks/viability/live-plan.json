@@ -1,0 +1,144 @@
+{
+  "version": 1,
+  "authorization": "NOT AUTHORIZED / NOT EXECUTED",
+  "sourceBase": "85a7114e5dc19df0ab1a22a11b769bb6d96e38ce",
+  "originalV3Fingerprint": "86fb58488ee476fb403c7b31be5495d3fc6cc244bdaca294bb519770b7b18d75",
+  "pricing": {
+    "observedDate": "2026-10-17",
+    "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "model": "gpt-6-luna",
+    "unit": "USD per million tokens",
+    "standard": {
+      "input": 0.1,
+      "output": 0.5,
+      "cached": 0.01,
+      "cacheWrite": 0.125
+    },
+    "planningPremium": 1.1,
+    "premiumMeaning": "Reserve the documented regional premium whether or not it applies. No account or credential settings were inspected. Recheck rates before authorization; excludes taxes and unrelated account activity."
+  },
+  "ratesWithPlanningPremium": {
+    "input": 0.11000000000000001,
+    "output": 0.55,
+    "cached": 0.011000000000000001,
+    "cacheWrite": 0.1375
+  },
+  "budgetRates": {
+    "input": 0.1375,
+    "cached": 0.1375,
+    "cacheWrite": 0.1375,
+    "output": 0.55
+  },
+  "budgetRateMeaning": "Conservative accounting envelope: all input categories use the highest applicable short-context input/cache price. Missing cache-write telemetry cannot silently lower the cap estimate; reported cost is an upper bound, not an invoice.",
+  "model": "gpt-6-luna",
+  "description": "Projections, not measured model tokens or spend. Input priced entirely at the highest short-context cache-write rate; premium included. Frozen oracle traces cannot bound future model-dependent summaries or extracted state.",
+  "plannedCalls": 4500,
+  "perMethod": {
+    "full_eager": 810,
+    "full_query": 450,
+    "rolling_summary": 810,
+    "plain_json": 810,
+    "belieflang_v2": 810,
+    "belieflang_v3": 810
+  },
+  "scenarios": [
+    {
+      "name": "optimistic",
+      "bytesPerToken": 5,
+      "stateAndOutputMultiplier": 1,
+      "framingTokensPerCall": 100,
+      "projectedInputTokens": 2067249,
+      "projectedOutputTokens": 180597,
+      "projectedCost": 0.3835750875
+    },
+    {
+      "name": "central",
+      "bytesPerToken": 4,
+      "stateAndOutputMultiplier": 1,
+      "framingTokensPerCall": 100,
+      "projectedInputTokens": 2470956,
+      "projectedOutputTokens": 225249,
+      "projectedCost": 0.46364340000000004
+    },
+    {
+      "name": "stress",
+      "bytesPerToken": 3,
+      "stateAndOutputMultiplier": 2,
+      "framingTokensPerCall": 1000,
+      "projectedInputTokens": 9886239,
+      "projectedOutputTokens": 597387,
+      "projectedCost": 1.6879207125000002
+    }
+  ],
+  "replayConditionedCeiling": 11.469805462500014,
+  "perRequestReservation": 0.29043959999999996,
+  "allCallsAtReservation": 1306.9781999999998,
+  "allocation": {
+    "smoke": 0.3,
+    "evaluation": 4,
+    "contingency": 0.7,
+    "total": 5
+  },
+  "completionGuaranteed": false,
+  "automaticRetries": 0,
+  "smokeRequests": 1,
+  "maximumSeparatelyApprovedDiagnosticRetries": 2,
+  "planningScenariosFitEvaluationAllocation": true,
+  "unknownBillingSensitivity": [
+    {
+      "unknownCalls": 0,
+      "centralProjectionPlusUnknownReservationsAndNextRequest": 0.7540830000000001,
+      "couldContinueWithinEvaluationCap": true
+    },
+    {
+      "unknownCalls": 5,
+      "centralProjectionPlusUnknownReservationsAndNextRequest": 2.2062809999999997,
+      "couldContinueWithinEvaluationCap": true
+    },
+    {
+      "unknownCalls": 10,
+      "centralProjectionPlusUnknownReservationsAndNextRequest": 3.658479,
+      "couldContinueWithinEvaluationCap": true
+    },
+    {
+      "unknownCalls": 12,
+      "centralProjectionPlusUnknownReservationsAndNextRequest": 4.2393582,
+      "couldContinueWithinEvaluationCap": false
+    }
+  ],
+  "reducedFallback": {
+    "description": "Separately frozen proposal, not an alteration of the original: one repetition, all ten original conversations, five primary methods, no eager-history diagnostic. Reused cases are not a new independent holdout. Unchanged engine/prompts retain category hints and redundant output. This fallback is diagnostic only; common-contract fixes and genuinely fresh cases require a different protocol before confirmatory use.",
+    "methods": [
+      "full_query",
+      "rolling_summary",
+      "plain_json",
+      "belieflang_v2",
+      "belieflang_v3"
+    ],
+    "repetitions": 1,
+    "plannedCalls": 1230
+  },
+  "smoke": {
+    "requests": 1,
+    "config": {
+      "model": "gpt-6-luna",
+      "repetitions": 1,
+      "maxOutputTokens": 256,
+      "inputTokenCeiling": 1050000,
+      "timeoutMs": 45000
+    },
+    "reservation": 0.28896120000000003,
+    "cap": 0.3,
+    "credentialStatus": "Not inspected. API entitlement, actual usage metadata and compatibility unverified."
+  },
+  "primaryMethods": [
+    "full_query",
+    "rolling_summary",
+    "plain_json",
+    "belieflang_v2",
+    "belieflang_v3"
+  ],
+  "originalAdditionalDiagnostic": "full_eager",
+  "maximumTotalAuthorizedProposal": 5,
+  "gate": "No paid calls until separate human authorization. Frozen category hints make the original run diagnostic, not independent confirmatory evidence."
+}

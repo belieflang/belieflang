@@ -167,6 +167,10 @@ It is a small experimental runtime for belief-state execution, AI agents, and un
 - VS Code syntax highlighting
 - LLM-backed semantic extraction
 
+## Product viability review
+
+The [independent product-viability review](docs/product-viability.md) compares TypeScript, the v3 library and actual `.bel` policies on travel, support and operations workflows. Its provisional recommendation is a TypeScript library rather than a dedicated DSL. Run `node dist/src/viability/review.js --validate` after building for read-only offline checks; paid evaluation remains separately authorized.
+
 ## License
 
 Apache-2.0
