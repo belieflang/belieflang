@@ -1337,7 +1337,7 @@ when entropy(intent) > 0.5:
       });
     }
 
-    setSource(samples.intent);
+    setSource(samples.intro);
     execute();
   }
 

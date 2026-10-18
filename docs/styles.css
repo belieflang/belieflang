@@ -780,6 +780,7 @@ pre {
 a:focus-visible,
 button:focus-visible,
 select:focus-visible,
+summary:focus-visible,
 pre:focus-visible,
 .table-scroll:focus-visible,
 .playground-error:focus,
