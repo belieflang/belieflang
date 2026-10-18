@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "base": "09b4b6ebca0da46d1a9e0e8d431ca11b50e6c1d1",
+  "model": "gpt-6-luna",
+  "repetitions": 1,
+  "methods": [
+    "full_history",
+    "rolling_summary",
+    "plain_json",
+    "belieflang_v3"
+  ],
+  "schedules": [
+    "sparse",
+    "dense"
+  ],
+  "maxOutputTokens": 1024,
+  "inputTokenCeiling": 1050000,
+  "timeoutMs": 45000,
+  "automaticRetries": 0,
+  "maximumCombinedUSD": 2,
+  "smokeCapUSD": 0.3,
+  "pilotCapUSD": 1.7,
+  "authorization": "NOT AUTHORIZED / NOT EXECUTED",
+  "pricing": {
+    "observedOn": "2026-10-18",
+    "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "standardPerMillion": {
+      "input": 0.1,
+      "cached": 0.01,
+      "cacheWrite": 0.125,
+      "output": 0.5
+    },
+    "premiumMultiplier": 1.1,
+    "longContextThreshold": 272000,
+    "longInputMultiplier": 2,
+    "longOutputMultiplier": 1.5
+  },
+  "smokeMaxOutputTokens": 256
+}

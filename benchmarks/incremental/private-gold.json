@@ -1,0 +1,4439 @@
+{
+  "sparse/freight/2": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/freight/5": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "uncertain",
+        "sourceTurn": 5
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/freight/8": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": null,
+        "status": "conflicting",
+        "sourceTurn": 8
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/freight/10": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "uncertain",
+        "sourceTurn": 9
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/freight/12": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/freight/14": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": "D4",
+        "status": "confirmed",
+        "sourceTurn": 14
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/freight/15": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/freight/16": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/freight/18": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ]
+  },
+  "sparse/freight/19": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "uncertain",
+        "sourceTurn": 19
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/freight/21": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 20
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/freight/23": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 22
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/freight/24": {
+    "queries": [
+      {
+        "field": "dock",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": "D4",
+        "status": "confirmed",
+        "sourceTurn": 14
+      }
+    ]
+  },
+  "dense/freight/1": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/2": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/3": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/4": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/5": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "uncertain",
+        "sourceTurn": 5
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/6": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/7": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/8": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": null,
+        "status": "conflicting",
+        "sourceTurn": 8
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/9": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "uncertain",
+        "sourceTurn": 9
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/10": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "uncertain",
+        "sourceTurn": 9
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/11": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/12": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/13": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/14": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": "D4",
+        "status": "confirmed",
+        "sourceTurn": 14
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/15": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/16": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/17": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/18": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ]
+  },
+  "dense/freight/19": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "uncertain",
+        "sourceTurn": 19
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/20": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 20
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/21": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 20
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/22": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 22
+      }
+    ],
+    "allowed": false
+  },
+  "dense/freight/23": {
+    "queries": [
+      {
+        "field": "weight_kg",
+        "temporal": "current"
+      },
+      {
+        "field": "dock",
+        "temporal": "current"
+      },
+      {
+        "field": "weight_kg",
+        "temporal": "original"
+      },
+      {
+        "field": "sealed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 10,
+        "status": "confirmed",
+        "sourceTurn": 11
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 8,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 22
+      }
+    ],
+    "allowed": true
+  },
+  "dense/freight/24": {
+    "queries": [
+      {
+        "field": "dock",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": "D4",
+        "status": "confirmed",
+        "sourceTurn": 14
+      }
+    ]
+  },
+  "sparse/specimen/2": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/specimen/3": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/specimen/6": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "uncertain",
+        "sourceTurn": 6
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/specimen/10": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": null,
+        "status": "conflicting",
+        "sourceTurn": 10
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/specimen/12": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "uncertain",
+        "sourceTurn": 11
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/specimen/14": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/specimen/15": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/specimen/16": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/specimen/17": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "uncertain",
+        "sourceTurn": 17
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/specimen/19": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 18
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/specimen/21": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ]
+  },
+  "sparse/specimen/23": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 22
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/specimen/24": {
+    "queries": [
+      {
+        "field": "assay",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      }
+    ]
+  },
+  "dense/specimen/1": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/2": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/3": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/4": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/5": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/6": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "uncertain",
+        "sourceTurn": 6
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/7": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 7
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/8": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 7
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/9": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 7
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/10": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": null,
+        "status": "conflicting",
+        "sourceTurn": 10
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/11": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "uncertain",
+        "sourceTurn": 11
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/12": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "uncertain",
+        "sourceTurn": 11
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/13": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/14": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/15": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/16": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/17": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "uncertain",
+        "sourceTurn": 17
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/18": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 18
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/19": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 18
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/20": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 18
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/21": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ]
+  },
+  "dense/specimen/22": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 22
+      }
+    ],
+    "allowed": false
+  },
+  "dense/specimen/23": {
+    "queries": [
+      {
+        "field": "temperature_c",
+        "temporal": "current"
+      },
+      {
+        "field": "assay",
+        "temporal": "current"
+      },
+      {
+        "field": "temperature_c",
+        "temporal": "original"
+      },
+      {
+        "field": "licensed",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 5,
+        "status": "confirmed",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 15
+      },
+      {
+        "value": 3,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 22
+      }
+    ],
+    "allowed": true
+  },
+  "dense/specimen/24": {
+    "queries": [
+      {
+        "field": "assay",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": "RNA",
+        "status": "confirmed",
+        "sourceTurn": 3
+      }
+    ]
+  },
+  "sparse/gallery/2": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/gallery/5": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "uncertain",
+        "sourceTurn": 5
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/gallery/8": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "uncertain",
+        "sourceTurn": 8
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/gallery/10": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 9
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/gallery/12": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/gallery/13": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": null,
+        "status": "conflicting",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/gallery/15": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "uncertain",
+        "sourceTurn": 14
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/gallery/17": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/gallery/19": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": "amber",
+        "status": "confirmed",
+        "sourceTurn": 19
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/gallery/20": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 20
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "sparse/gallery/21": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 20
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "sparse/gallery/23": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ]
+  },
+  "sparse/gallery/24": {
+    "queries": [
+      {
+        "field": "lighting",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": "amber",
+        "status": "confirmed",
+        "sourceTurn": 19
+      }
+    ]
+  },
+  "dense/gallery/1": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/2": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/3": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/4": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/5": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "uncertain",
+        "sourceTurn": 5
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/6": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/7": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/8": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "uncertain",
+        "sourceTurn": 8
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/9": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 9
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/10": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": false,
+        "status": "confirmed",
+        "sourceTurn": 9
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/11": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/12": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 6
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/13": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": null,
+        "status": "conflicting",
+        "sourceTurn": 13
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/14": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "uncertain",
+        "sourceTurn": 14
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/15": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "uncertain",
+        "sourceTurn": 14
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/16": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/17": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/18": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "missing",
+        "sourceTurn": null
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/19": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": "amber",
+        "status": "confirmed",
+        "sourceTurn": 19
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/20": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 20
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": true
+  },
+  "dense/gallery/21": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 20
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/22": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "current"
+      },
+      {
+        "field": "lighting",
+        "temporal": "current"
+      },
+      {
+        "field": "capacity",
+        "temporal": "original"
+      },
+      {
+        "field": "accessible",
+        "temporal": "current"
+      }
+    ],
+    "answers": [
+      {
+        "value": 54,
+        "status": "confirmed",
+        "sourceTurn": 16
+      },
+      {
+        "value": null,
+        "status": "cleared",
+        "sourceTurn": 20
+      },
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      },
+      {
+        "value": true,
+        "status": "confirmed",
+        "sourceTurn": 11
+      }
+    ],
+    "allowed": false
+  },
+  "dense/gallery/23": {
+    "queries": [
+      {
+        "field": "capacity",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": 42,
+        "status": "confirmed",
+        "sourceTurn": 1
+      }
+    ]
+  },
+  "dense/gallery/24": {
+    "queries": [
+      {
+        "field": "lighting",
+        "temporal": "original"
+      }
+    ],
+    "answers": [
+      {
+        "value": "amber",
+        "status": "confirmed",
+        "sourceTurn": 19
+      }
+    ]
+  }
+}

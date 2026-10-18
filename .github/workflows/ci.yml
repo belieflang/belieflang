@@ -26,3 +26,4 @@ jobs:
       - run: npm run benchmark:long-horizon:validate
       - run: npm run benchmark:v3:validate
       - run: node dist/src/viability/review.js --validate
+      - run: node dist/src/incremental/cli.js --validate

@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "description": "New pilot protocol frozen before paid responses. Private gold is scorer-only, never an inference argument. Preserve original experiments and this protocol after inspection of live outcomes.",
+  "sha256": {
+    "benchmarks/incremental/cases.json": "6d3515d67466f44398e5f6b29fac60a2980578bc468585d648d0b11f3780108d",
+    "benchmarks/incremental/config.json": "50db6be7ac5a537e06dea2b2ed18110544c9862460b39991400035b7d898aba1",
+    "benchmarks/incremental/offline.json": "002c0ee0b37b6f13555b6fe82917fd2e94e735bd6429ecb1075f75b16152175f",
+    "benchmarks/incremental/plan.json": "34d6e4e51080a69dc2d7aefc993fb78158e52c94e5f6a735759d3c3a755950f3",
+    "benchmarks/incremental/private-gold.json": "9e510d09a7d3e91866784ee68ae04a07d3214db65fe3d2558721a964b828ce28",
+    "benchmarks/viability/freeze.json": "af3a98403ef65b06d86d82600ea7ea1a8b5882da71f30cb1e237ec18e8990983",
+    "docs/incremental-memory-pilot.md": "9c1430b423380f7b56e8874ee334f7ea08dc4235ea4014a0d6668af3a659d3ad",
+    "src/incremental/cli.ts": "7e470d4a197e4b6a5eabc2d80653a969edb7f2bd082609a35ef9fef5e230f240",
+    "src/incremental/evaluation.ts": "71b1c1d1481bd431b52064369b4ea0bd2e3700423d4d39c76a4dc295cefff322",
+    "src/incremental/fixtures.ts": "27b62fc38a3de603fbfd4bfd84e8d7de87380f733010de63baf3bdc95e674f09",
+    "src/incremental/freeze.ts": "c317c2e1126a919446df83a17617d518a9084b91d415e3ef02bc83f4e9506c0b",
+    "src/incremental/live.ts": "920cef0ff17be3e9206da9eed96798307ef084dddf7a0fc67d65c611694620a7",
+    "src/incremental/memory.ts": "2e5f860186c36571637133ec7e717a55c73a18200b83209f9d2340272f5c90c8",
+    "src/incremental/offline.ts": "147fa59e399605946a6254536c9eb3de8f7fdc63d7e7d48f04b3f7e872b432ab",
+    "src/incremental/protocol.ts": "b84edd69685d41f9615b7e64b7a82579f40061a218df9320e9b1d7925e71643e",
+    "src/incremental/runner.ts": "1fd8f70f68922f6071bacf6e74829a1c77f4f3f261fce0d69b6e5ec8b7e6de76",
+    "src/incremental/smoke.ts": "96b59feb278400c20dbfb7f8830f5c337f24047ccee76b8c9b400da798b75beb",
+    "src/incremental/types.ts": "df5ca8afda53a5849159d7d74e315d8e9b65752d3d19250ba094609661ee4d53",
+    "tests/incremental.test.ts": "f2daed1736828667486ad348c1cff734c904d9acb27c03b9069f77cdbca5a3e2",
+    "tests/incremental_live.test.ts": "8af511d4746d802208c14215cf833b98ea55ce61b141021c44ef4581f18da3a4"
+  }
+}
