@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "sourceCommit": "82c51c751766ebded4415f1c3712b5123b433c96",
+  "freezeFingerprint": "cf52578951cddd0fd8084e0012d94e54bdb15d582d3fb9fc808a1b06642f53f9",
+  "sanitization": "Replace only metadata.responseId with stable response-NNN aliases in journal, report and smoke. No other values changed. Original files remain local and unmodified; original SHA-256 values identify them but are not an independent attestation of provider execution.",
+  "preservationLimit": "The frozen transport retained parsed structured outputs, provider usage and selected metadata, not complete HTTP response envelopes or wall-clock request timestamps.",
+  "files": {
+    "journal.json.gz": {
+      "originalSHA256": "dca7fdaffcff85fbf122d0c2abd91bd6a8eadc204a268c349d98914af52d7307",
+      "sanitizedSHA256": "489d23c4551c28f1c22d6afba0a85f97418ce3a46d252f6862d6066808211c7a",
+      "storedSHA256": "b28192304ff647c57d6248d27592f17c8be4e624748e9e8d0673c6a7c36ee482",
+      "originalBytes": 1584786,
+      "sanitizedBytes": 1571972,
+      "storedBytes": 62426
+    },
+    "report.json.gz": {
+      "originalSHA256": "a727e095baa40d96609671566fd6f9b21d0a51b36b3b08b379ffff650e111065",
+      "sanitizedSHA256": "ac455fde05e51d70c8ec814ddcd91c32f36320c24f4d94f91a349ca33d2ae049",
+      "storedSHA256": "b2a77043a2a3c24fc312748ff49bbf911adf4261555afed231d6bce7c73d8aa5",
+      "originalBytes": 4130372,
+      "sanitizedBytes": 4104787,
+      "storedBytes": 174836
+    },
+    "smoke.json": {
+      "originalSHA256": "44cd419f4cae10b5c08a12e5390c587608047eef53bb77dde3c0d6181a6c6b9a",
+      "sanitizedSHA256": "a880e6e2ffd4f034813bf62cdaf7dba6b5a8b884775fa1393812eb7d09f83c97",
+      "storedSHA256": "a880e6e2ffd4f034813bf62cdaf7dba6b5a8b884775fa1393812eb7d09f83c97",
+      "originalBytes": 718,
+      "sanitizedBytes": 675,
+      "storedBytes": 675
+    }
+  }
+}
