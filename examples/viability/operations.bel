@@ -1,0 +1,6 @@
+let ctx = call read_context()
+let intent_patch = call read_intent()
+merge beliefs from intent_patch
+let threshold = 0.99
+when confidence(intent.execute) >= threshold && ctx.facts.environment.status == "confirmed" && ctx.facts.service.status == "confirmed" && ctx.facts.release.status == "confirmed" && ctx.facts.environment.value == "production":
+  call execute_guarded()

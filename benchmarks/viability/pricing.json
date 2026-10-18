@@ -1,0 +1,9 @@
+{
+  "observedDate": "2026-10-17",
+  "source": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+  "model": "gpt-6-luna",
+  "unit": "USD per million tokens",
+  "standard": { "input": 0.1, "output": 0.5, "cached": 0.01, "cacheWrite": 0.125 },
+  "planningPremium": 1.1,
+  "premiumMeaning": "Reserve the documented regional premium whether or not it applies. No account or credential settings were inspected. Recheck rates before authorization; excludes taxes and unrelated account activity."
+}

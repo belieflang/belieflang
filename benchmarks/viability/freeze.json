@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "description": "Separate product-review and proposed live-plan freeze. Original v3 freeze/results are unchanged. No paid calls authorized by this file.",
+  "sha256": {
+    "src/viability/typescript_state.ts": "9af5e41a59aa325c2b054c46f301ff68e161d31a572e77b626280a3a10027797",
+    "src/viability/workflows.ts": "aacac1195031e9d5723879f0d2d06640e7b993d73255f9aa8b4330047b2fa4dd",
+    "src/viability/travel.ts": "961b559bb80499ca639f473a272b305d6468163cb57f987c9958e9218e11f0da",
+    "src/viability/support.ts": "24077107ad22c505c5054a61314479f3bb7a8731114c3020b888426f13000d49",
+    "src/viability/operations.ts": "d67c0c35c4c366dadf91bfab31c3797a349f52b1c720d7d3a38337cc3180b522",
+    "src/viability/typescript_host.ts": "db3354ee735c6fabda4fa80a3fb0035c3cb5f83a5f629836fdc728695c3569fe",
+    "src/viability/belieflang_host.ts": "03a83669cb85be358ffa3872900e58ad49cede45df4384a4a1a2ea62606ee4c3",
+    "src/viability/compare.ts": "2dab8e523dccd03d996f7ffd5720a1f52ed72a471a82c401ef21edeba400fe6e",
+    "src/viability/audit.ts": "1f366060d780d85c76049667d469dda8dacd773ec677f3b8e21a9d5589c386ef",
+    "src/viability/live_plan.ts": "2392957a4a2e7c4b37d0f2422762d416628a56557a66c5ccdf0e54eca6fb9a29",
+    "src/viability/review.ts": "f7034206b93fb4b064b8d29b1c01f12c503aab6fcf29aee3fb512bf908738eaf",
+    "src/viability/freeze.ts": "d6d6f7d4257b8fbd983a88e23f91dff420947b637df52227ae79522ff21984a3",
+    "examples/viability/travel.bel": "f63332a515fea11efa09d8327a1254f2cfec9fde63c999be9b96f8544098d1fd",
+    "examples/viability/support.bel": "6e3f2e7d0cf99cd46f47e26d019767a09fa08b2777800cd2b6acebefdc5bc649",
+    "examples/viability/operations.bel": "db74e9daf81d51aeeab6d2b7cc0d0c2d37ba99816878519e8ebf7311083b1b3f",
+    "benchmarks/viability/pricing.json": "4fe90c31a06020b5491a0ad8578ba0962bda1c25c29112f944bb95703ddbc777",
+    "benchmarks/viability/budget-rates.json": "c0128b903da127864947c3db35cafc50744c7fffb82488c51e526ae3242a8a26",
+    "benchmarks/viability/live-plan.json": "01d0c37ea40c2c148a92d2e5f68b52083fdeef37a468ced3c47c5b27f32e8f14",
+    "benchmarks/viability/smoke-request.json": "4f5b292b472fb8dc1d40f2013f3440c40aeae67c938870478b7cc228019b97b5",
+    "benchmarks/v3/freeze.json": "c25169ef90475b27b1eb97836bef5d75387eaef14db46786c04117343234638a",
+    "src/parser.ts": "c3bd4b762d395884574282263e8b9ce5417e54851fda0d607cea2028f791b384",
+    "src/ast.ts": "f17263893689313ea95630bcf1041cc0e998cd2c78ea396ffc2f69430df4627b"
+  }
+}

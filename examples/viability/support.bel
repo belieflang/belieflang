@@ -1,0 +1,6 @@
+let ctx = call read_context()
+let intent_patch = call read_intent()
+merge beliefs from intent_patch
+let threshold = 0.9
+when confidence(intent.execute) >= threshold && ctx.facts.account_id.status == "confirmed" && ctx.facts.resolution.status == "confirmed" && ctx.facts.refund.status == "confirmed" && ctx.facts.refund.value >= 0 && ctx.facts.refund.value <= 100:
+  call execute_guarded()

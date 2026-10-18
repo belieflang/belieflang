@@ -1,0 +1,108 @@
+{
+  "id": "viability-compatibility-smoke-v1",
+  "kind": "update",
+  "prompt": "{\"instructions\":\"Return only the changed typed fact. No host metadata. Explicit corrections supersede previous values.\",\"schema\":{\"budget\":\"number\"},\"context\":{\"budget\":{\"value\":1800,\"status\":\"uncertain\"}},\"message\":\"Actually change the budget to 2100.\"}",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "deltas": {
+        "type": "array",
+        "items": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "enum": [
+                    "budget"
+                  ]
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "basis": {
+                  "type": "string",
+                  "enum": [
+                    "explicit",
+                    "inferred"
+                  ]
+                },
+                "op": {
+                  "type": "string",
+                  "enum": [
+                    "set",
+                    "conflict"
+                  ]
+                },
+                "value": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "field",
+                "confidence",
+                "basis",
+                "op",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "enum": [
+                    "budget"
+                  ]
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "basis": {
+                  "type": "string",
+                  "enum": [
+                    "explicit",
+                    "inferred"
+                  ]
+                },
+                "op": {
+                  "type": "string",
+                  "enum": [
+                    "clear"
+                  ]
+                }
+              },
+              "required": [
+                "field",
+                "confidence",
+                "basis",
+                "op"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      }
+    },
+    "required": [
+      "deltas"
+    ],
+    "additionalProperties": false
+  }
+}
