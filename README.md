@@ -8,7 +8,7 @@ Simplifying information has trade-offs: a snapshot or summary can lose details t
 
 ## Latest benchmark: completed incremental-memory pilot
 
-The pilot compared full history on demand, rolling summaries, plain typed JSON, and BeliefLang v3 with GPT-6 Luna. Costs include state updates, question routing, and retrieval.
+The pilot compared full history on demand, rolling summaries, plain typed JSON, and BeliefLang v3 with GPT-6 Luna. The table totals all cases and both demand schedules. Costs include state updates, question routing, and retrieval.
 
 | Strategy | Accuracy | Estimated LLM cost |
 |---|---:|---:|
