@@ -128,6 +128,31 @@ test("displayed update result matches actual state, uncertainty, rules and actio
   assert.equal(displayedCode("update-result"), result);
 });
 
+test("intro asks about ambiguous intent and skips clarification for a clear request", async () => {
+  const ambiguous = await api.runProgram(api.samples.intro);
+  assert.deepEqual(plain(ambiguous.state.intent), { book_flight: 0.5, book_hotel: 0.5 });
+  assert.equal(ambiguous.entropy("intent"), 1);
+  assert.deepEqual(plain(ambiguous.actions), ["[ask_user] Which would you like to book?"]);
+
+  const clear = await api.runProgram(api.samples.intro.replace("A flight or a hotel", "A flight"));
+  assert.deepEqual(plain(clear.state.intent), { book_flight: 1 });
+  assert.equal(clear.entropy("intent"), 0);
+  assert.deepEqual(plain(clear.actions), []);
+});
+
+test("hero output preview matches the executed intro state and actions", async () => {
+  const runtime = await api.runProgram(displayedCode("syntax-example"));
+  const entries = Object.entries(runtime.state.intent);
+  const width = Math.max(...entries.map(([name]) => name.length));
+  const output = [
+    "intent:",
+    ...entries.map(([name, value]) => `  ${name.padEnd(width)} = ${value.toFixed(2)}`),
+    "",
+    ...runtime.actions,
+  ].join("\n");
+  assert.equal(displayedCode("intro-result"), output);
+});
+
 // Minimal DOM fixture exercises the real page bindings without adding a browser
 // dependency to CI. Actual scrolling and keyboard focus are also checked in Chromium.
 class Element {
@@ -223,7 +248,8 @@ test("Run this example loads, focuses, and executes the intro after custom edits
   assert.equal(get("source").focused, true);
   assert.equal(target.scrolled, true);
   assert.equal(link.prevented, true);
-  assert.match(get("actions-output").textContent, /search_flights/);
+  assert.match(get("actions-output").textContent, /Which would you like to book/);
+  assert.match(get("observations-output").textContent, /A flight or a hotel/);
   assert.equal(get("status").textContent, "Run complete.");
   assert.match(get("status").attributes.class, /visually-hidden/);
   assert.equal(get("error").hidden, true);
@@ -276,7 +302,7 @@ test("errors clear stale output, identify invalid input, and recover on a valid 
   await link.emit("click");
   assert.equal(get("error").hidden, true);
   assert.equal(get("source").attributes["aria-invalid"], "false");
-  assert.match(get("state-output").textContent, /book_flight=0.820/);
+  assert.match(get("state-output").textContent, /book_flight=0.500/);
 });
 
 test("existing example selection, observations, variables and trace remain functional", async () => {
