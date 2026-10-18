@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BeliefLang — keep track of what your AI agent believes</title>
+    <title>BeliefLang — beliefs as state, decisions as code</title>
     <meta
       name="description"
-      content="Keep track of what an AI agent believes and how confident it is. Update stored information and try simple rules in your browser. An experimental language and runtime."
+      content="An experimental programming language for beliefs, uncertainty, and deterministic rules. Try real .bel syntax in the browser and explore the audited memory pilot."
     />
     <link rel="canonical" href="https://belieflang.org/" />
     <meta property="og:type" content="website" />
@@ -15,20 +15,20 @@
     <meta property="og:locale" content="en_US" />
     <meta
       property="og:title"
-      content="BeliefLang — keep track of what your AI agent believes"
+      content="BeliefLang — beliefs as state, decisions as code"
     />
     <meta
       property="og:description"
-      content="Your trip budget changed. Your AI agent needs to keep up. Try a small language experiment in your browser."
+      content="Beliefs as state. Decisions as code. Try the BeliefLang playground and explore the measured results and limits."
     />
     <meta name="twitter:card" content="summary" />
     <meta
       name="twitter:title"
-      content="BeliefLang — keep track of what your AI agent believes"
+      content="BeliefLang — beliefs as state, decisions as code"
     />
     <meta
       name="twitter:description"
-      content="Store what an AI agent believes, update it when information changes, and use regular code for simple decisions. Try the browser demo."
+      content="An experimental programming language for beliefs, uncertainty, and deterministic rules. Working syntax, local playground, and audited results."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -45,16 +45,16 @@
       <aside class="sidebar">
         <div class="brand">
           <a class="brand-name" href="#overview">BeliefLang</a>
-          <p class="subtitle">A small language experiment</p>
+          <p class="subtitle">Experimental programming language</p>
           <a class="github-link" href="https://github.com/belieflang/belieflang"
             >GitHub ↗</a
           >
         </div>
         <nav class="toc" aria-label="Page navigation">
           <a href="#overview">Overview</a>
-          <a href="#syntax">Syntax</a>
           <a href="#playground">Playground</a>
-          <a href="#results">Results</a>
+          <a href="#results">Benchmarks</a>
+          <a href="#updates">Observe &amp; update</a>
           <a href="#features">Features &amp; limits</a>
           <a href="#quickstart">Documentation</a>
           <a href="#roadmap">Roadmap</a>
@@ -63,76 +63,45 @@
 
       <main class="content">
         <header class="hero section" id="overview" tabindex="-1">
-          <p class="badge">A small language experiment</p>
-          <h1>BeliefLang</h1>
-          <p class="hero-lead">
-            Your trip budget changed from $1,500 to $1,200. Your AI agent needs
-            to keep up.
-          </p>
-          <p>
-            BeliefLang keeps track of what an agent believes and how confident
-            it is. A <strong>belief</strong> is something the agent currently
-            thinks is true. <strong>Uncertainty</strong> means it may be wrong.
-          </p>
-          <p>
-            New information can update those stored beliefs. Regular code can
-            then handle decisions, such as checking a price against your new
-            budget, without asking a language model again.
-          </p>
-          <p>
-            Agents already have memory. We're testing whether a dedicated
-            language helps more than an ordinary library.
-          </p>
-          <div class="hero-actions">
-            <a class="button" href="#playground">Try the playground</a>
-            <a
-              class="button button-secondary"
-              href="https://github.com/belieflang/belieflang/blob/main/docs/semantics.md"
-              >Read the documentation</a
-            >
-          </div>
-        </header>
-
-        <section
-          class="section syntax-section"
-          id="syntax"
-          aria-labelledby="syntax-heading"
-        >
-          <p class="eyebrow">A small working program</p>
-          <h2 id="syntax-heading">
-            Search for flights when confidence is high enough
-          </h2>
-          <pre
-            tabindex="0"
-            aria-label="BeliefLang example"
-          ><code id="syntax-example" class="language-bel">belief intent exclusive closed {
-  book_flight: 0.82
-  book_hotel: 0.12
-  unknown: 0.06
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="badge">BeliefLang · experimental language</p>
+              <h1>Beliefs as state.<br />Decisions as code.</h1>
+              <p class="hero-lead">
+                An experimental language for defining beliefs, tracking uncertainty,
+                and making decisions with deterministic rules. Update what changes
+                instead of repeatedly interpreting everything with an LLM.
+              </p>
+              <p class="small-note">
+                Updates are explicit. General automatic dependency-based
+                recomputation is not implemented.
+              </p>
+              <div class="hero-actions">
+                <a class="button" href="#playground">Try the playground</a>
+                <a class="button button-secondary" href="https://github.com/belieflang/belieflang">GitHub ↗</a>
+                <a class="button button-secondary" href="https://github.com/belieflang/belieflang/blob/main/docs/semantics.md">Documentation</a>
+              </div>
+            </div>
+            <div class="hero-code syntax-section" id="syntax" role="group" aria-labelledby="syntax-heading">
+              <div class="code-window">
+                <div class="code-toolbar"><h2 id="syntax-heading">intro.bel</h2><span>BeliefLang</span></div>
+                <pre tabindex="0" aria-label="BeliefLang confidence example"><code id="syntax-example" class="language-bel"><span class="syntax-keyword">belief</span> intent <span class="syntax-keyword">exclusive</span> <span class="syntax-keyword">closed</span> {
+  book_flight: <span class="syntax-number">0.82</span>
+  book_hotel: <span class="syntax-number">0.12</span>
+  unknown: <span class="syntax-number">0.06</span>
 }
 
-when confidence(intent.book_flight) &gt; 0.7:
-  call search_flights()</code></pre>
-          <div class="syntax-notes">
-            <p>
-              Here, <code>belief intent</code> stores what the agent thinks you
-              want to do: book a flight, book a hotel, or something unknown.
-              The scores add up to 1.
-            </p>
-            <p id="decisions">
-              <code>confidence()</code> reads the stored score.
-              <code>when</code> checks it against a threshold. Here, 0.82 is
-              above 0.7, so the demo calls <code>search_flights()</code>.
-            </p>
+<span class="syntax-keyword">when</span> <span class="syntax-builtin">confidence</span>(intent.book_flight) &gt; <span class="syntax-number">0.7</span>:
+  <span class="syntax-keyword">call</span> search_flights()</code></pre>
+              </div>
+              <p class="small-note" id="decisions">
+                Confidence 0.82 clears the 0.7 threshold, so the demo calls
+                a simulated flight search.
+              </p>
+              <a class="example-link" href="#playground" data-playground-example="intro" aria-controls="playground-source">Run this example ↓</a>
+            </div>
           </div>
-          <a
-            class="button"
-            href="#playground"
-            data-playground-example="intro"
-            aria-controls="playground-source"
-            >Run this example ↓</a
-          >
-        </section>
+        </header>
 
         <section
           class="section playground-section"
@@ -142,31 +111,30 @@ when confidence(intent.book_flight) &gt; 0.7:
           <div class="playground-heading">
             <div>
               <p class="badge">Local browser demo</p>
-              <h2 id="playground-heading">Try it here</h2>
+              <h2 id="playground-heading">Playground</h2>
               <p id="playground-help">
-                In the small example, change the threshold from 0.7 to 0.9 and
-                click Run. The flight search will no longer run. Turn on Show
-                steps to see why.
+                Edit and run <code>.bel</code> locally. Inspect state, tool
+                actions, and the execution trace.
               </p>
             </div>
-            <div class="playground-controls" aria-label="Playground controls">
+            <div class="playground-controls" role="group" aria-label="Playground controls">
               <label for="playground-sample">Example</label>
               <select id="playground-sample">
                 <option value="intro" selected>Small example</option>
-                <option value="intent">Flight preferences</option>
-                <option value="noFlight">Ask when unsure</option>
-                <option value="dynamic">Update from a message</option>
+                <option value="intent">Flight intent</option>
+                <option value="noFlight">Uncertain / open beliefs</option>
+                <option value="dynamic">Observe / infer / merge</option>
                 <option value="custom">Custom program</option>
               </select>
               <label class="trace-control" for="playground-trace"
-                ><input id="playground-trace" type="checkbox" />Show steps</label
+                ><input id="playground-trace" type="checkbox" />Trace</label
               >
               <button id="playground-run" type="button">Run</button>
             </div>
           </div>
           <p class="small-note">
-            This runs in your browser. Tools return sample data, and simple
-            example rules stand in for a model. No GPT or Jev API calls are made.
+            Local example inference and simulated tools. No live GPT or Jev
+            requests.
             <a
               href="https://github.com/belieflang/belieflang/blob/main/docs/website.md#playground-scope"
               >What this demo supports</a
@@ -181,7 +149,10 @@ when confidence(intent.book_flight) &gt; 0.7:
           <p id="playground-status" class="small-note" role="status"></p>
           <div class="playground-shell">
             <div class="playground-editor">
-              <label class="panel-label" for="playground-source">Program</label>
+              <div class="editor-toolbar">
+                <label class="panel-label" for="playground-source">Source</label>
+                <span id="playground-filename">intro.bel</span>
+              </div>
               <textarea
                 id="playground-source"
                 spellcheck="false"
@@ -192,6 +163,7 @@ when confidence(intent.book_flight) &gt; 0.7:
               ></textarea>
             </div>
             <div class="playground-results" aria-busy="false">
+              <div class="output-toolbar"><span>Output</span><span id="playground-output-label">intro.bel</span></div>
               <p
                 id="playground-error"
                 class="playground-error"
@@ -201,7 +173,7 @@ when confidence(intent.book_flight) &gt; 0.7:
               ></p>
               <div class="result-grid">
                 <article class="result-panel">
-                  <h3>Stored beliefs</h3>
+                  <h3>Belief state</h3>
                   <pre
                     tabindex="0"
                   ><code id="playground-state-output"></code></pre>
@@ -213,7 +185,7 @@ when confidence(intent.book_flight) &gt; 0.7:
                   ><code id="playground-vars-output"></code></pre>
                 </article>
                 <article class="result-panel">
-                  <h3>Incoming information</h3>
+                  <h3>Observations</h3>
                   <pre
                     tabindex="0"
                   ><code id="playground-observations-output"></code></pre>
@@ -225,7 +197,7 @@ when confidence(intent.book_flight) &gt; 0.7:
                   ><code id="playground-actions-output"></code></pre>
                 </article>
                 <article class="result-panel trace-panel">
-                  <h3>Step-by-step trace</h3>
+                  <h3>Execution trace</h3>
                   <pre
                     tabindex="0"
                   ><code id="playground-trace-output"></code></pre>
@@ -236,12 +208,27 @@ when confidence(intent.book_flight) &gt; 0.7:
         </section>
 
         <section class="section" id="results" aria-labelledby="results-heading">
-          <p class="eyebrow">Results · October 2026</p>
-          <h2 id="results-heading">A small test of conversation memory</h2>
+          <p class="eyebrow">Audited incremental-memory pilot · October 18, 2026</p>
+          <h2 id="results-heading">Measured savings on a fixed workload</h2>
           <p>
-            We compared four ways to remember a conversation: send the full
-            chat history to the model, keep a running summary, or store selected
-            information in JSON or BeliefLang.
+            BeliefLang v3 used fewer cumulative tokens and had lower estimated
+            LLM costs than full-history retrieval and rolling summaries in this pilot.
+          </p>
+          <div class="metric-grid" role="group" aria-label="BeliefLang v3 pilot comparisons">
+            <div class="metric"><strong>20.5%</strong><span>fewer tokens</span><small>vs full-history retrieval</small></div>
+            <div class="metric"><strong>26.4%</strong><span>lower estimated LLM cost</span><small>vs full-history retrieval</small></div>
+            <div class="metric"><strong>48.9%</strong><span>fewer tokens</span><small>vs rolling summaries</small></div>
+            <div class="metric"><strong>59.6%</strong><span>lower estimated LLM cost</span><small>vs rolling summaries</small></div>
+          </div>
+          <p class="small-note">
+            One repetition of three scripted 24-turn conversations. These
+            percentages apply to this workload, not all AI agents. Costs are
+            estimates from measured tokens and frozen pricing assumptions.
+          </p>
+          <p>
+            <strong>Plain JSON achieved essentially identical accuracy, token
+            use, and cost to BeliefLang v3.</strong> The gains came from
+            structured state and deterministic processing, not the language syntax.
           </p>
           <div
             class="table-scroll"
@@ -251,7 +238,7 @@ when confidence(intent.book_flight) &gt; 0.7:
           >
             <table>
               <caption>
-                One run · three scripted conversations · 24 turns each
+                Four strategies · totals across sparse and dense demand
               </caption>
               <thead>
                 <tr>
@@ -284,17 +271,6 @@ when confidence(intent.book_flight) &gt; 0.7:
               </tbody>
             </table>
           </div>
-          <p>
-            Storing selected information and using regular code cut estimated
-            model costs by <strong>26.4% versus full history</strong> and
-            <strong>59.6% versus rolling summaries</strong> in this test.
-            <strong
-              >Plain JSON and BeliefLang v3 performed essentially
-              identically.</strong
-            >
-            The savings came from how information was stored and processed,
-            not the language syntax.
-          </p>
           <p class="small-note">
             The 100% scores apply only to this small test. They do not promise
             reliability or savings in a real application.
@@ -332,6 +308,45 @@ when confidence(intent.book_flight) &gt; 0.7:
           </p>
         </section>
 
+        <section class="section" id="updates" aria-labelledby="updates-heading">
+          <p class="eyebrow">Beyond a threshold</p>
+          <h2 id="updates-heading">Observe, infer, merge, then act</h2>
+          <p>
+            Record a message, run an inference adapter, merge a patch, and check
+            confidence and entropy before acting. This example uses local keyword
+            inference and a fixed tool patch; inspect each step in the playground.
+          </p>
+          <div class="advanced-grid">
+            <div class="code-window">
+              <div class="code-toolbar"><h3>observe_infer_merge.bel</h3><span>BeliefLang</span></div>
+              <pre tabindex="0" aria-label="BeliefLang update example"><code id="update-example" class="language-bel"><span class="syntax-keyword">let</span> message = <span class="syntax-string">"I need a cheap direct flight to Berlin"</span>
+
+<span class="syntax-keyword">observe</span> user_message(message)
+<span class="syntax-keyword">infer</span> <span class="syntax-keyword">beliefs</span> <span class="syntax-keyword">from</span> user_message
+
+<span class="syntax-keyword">let</span> extracted = <span class="syntax-keyword">call</span> extract_patch()
+<span class="syntax-keyword">merge</span> <span class="syntax-keyword">beliefs</span> <span class="syntax-keyword">from</span> extracted
+
+<span class="syntax-keyword">when</span> <span class="syntax-builtin">confidence</span>(intent.book_flight) &gt; <span class="syntax-number">0.7</span> &amp;&amp; <span class="syntax-builtin">confidence</span>(user.budget_sensitive) &gt; <span class="syntax-number">0.5</span>:
+  <span class="syntax-keyword">call</span> rank_flights()
+
+<span class="syntax-keyword">when</span> <span class="syntax-builtin">entropy</span>(intent) &gt; <span class="syntax-number">0.5</span>:
+  <span class="syntax-keyword">ask_user</span>(<span class="syntax-string">"Can you clarify your travel intent?"</span>)</code></pre>
+            </div>
+            <div class="code-window example-result">
+              <div class="code-toolbar"><h3>Result</h3><span>Local demo</span></div>
+              <pre tabindex="0" aria-label="Selected update example output"><code id="update-result">intent.book_flight = 0.920
+user.budget_sensitive = 0.860
+entropy(intent) = 0.402
+rule 1 =&gt; true
+rule 2 =&gt; false
+[call] rank_flights()</code></pre>
+              <p class="small-note">Selected state and trace lines. The uncertainty rule does not fire.</p>
+            </div>
+          </div>
+          <a class="example-link" href="#playground" data-playground-example="dynamic" aria-controls="playground-source">Run this example ↓</a>
+        </section>
+
         <section
           class="section"
           id="features"
@@ -345,10 +360,9 @@ when confidence(intent.book_flight) &gt; 0.7:
             <article class="card" id="language">
               <h3>Write rules in <code>.bel</code></h3>
               <p>
-                Store possible answers with confidence scores. Use
-                <code>when</code> rules to call a function, such as a flight
-                search, or ask a question. Read new input and update stored
-                scores.
+                Belief declarations, confidence and entropy operations,
+                conditional rules, variables, tool calls, observations,
+                inference adapters, and merging updates.
               </p>
               <p>
                 <a
@@ -360,10 +374,10 @@ when confidence(intent.book_flight) &gt; 0.7:
             <article class="card" id="runtime">
               <h3>Keep a record in TypeScript</h3>
               <p>
-                Keep the current budget, its earlier values, and the message
-                behind each change. That's <strong>provenance</strong>: where
-                information came from. Mark conflicting information and check
-                evidence or approval before allowing an action.
+                Save and restore snapshots. Inspect provenance: where an
+                update came from. Optional v3 factual-memory APIs retain
+                historical values, track conflicts, and check evidence and
+                authorization before actions.
               </p>
               <p>
                 <a
@@ -450,6 +464,10 @@ node dist/src/cli.js run examples/intent.bel --trace</code></pre>
             <li>
               Work out when a changed value means a saved answer must be
               recalculated.
+            </li>
+            <li>
+              Test whether dedicated syntax adds enough value over an ordinary
+              TypeScript library.
             </li>
           </ul>
           <p class="reference-link">
