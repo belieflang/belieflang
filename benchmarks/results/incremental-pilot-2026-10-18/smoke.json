@@ -1,0 +1,30 @@
+{
+  "fingerprint": "cf52578951cddd0fd8084e0012d94e54bdb15d582d3fb9fc808a1b06642f53f9",
+  "report": {
+    "status": "passed",
+    "usage": {
+      "input": 388,
+      "output": 38,
+      "cached": 0,
+      "cacheWrite": 0,
+      "reasoning": 0
+    },
+    "usd": {
+      "lower": 0.00006358000000000001,
+      "upper": 0.00006358000000000001
+    },
+    "metadata": {
+      "model": "gpt-6-luna",
+      "tier": "default",
+      "responseId": "response-001"
+    },
+    "replayed": false
+  },
+  "accounting": {
+    "maximumUSD": 2,
+    "committedUpperUSD": 0.00006358000000000001,
+    "smokeUpperUSD": 0.00006358000000000001,
+    "pilotUpperUSD": 0,
+    "unmeteredCalls": 0
+  }
+}
