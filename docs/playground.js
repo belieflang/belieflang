@@ -1206,13 +1206,13 @@ when entropy(intent) > 0.5:
       const meta = runtime.beliefMeta[name];
       const values = Object.entries(dist)
         .map(([key, value]) => `${key}=${value.toFixed(3)}`)
-        .join(", ");
+        .join("\n  ");
       const openOther =
         meta && meta.cardinality === "exclusive" && meta.domain === "open" && meta.openMass > 0
-          ? `, other=${meta.openMass.toFixed(3)}`
+          ? `\n  other=${meta.openMass.toFixed(3)}`
           : "";
       const label = meta ? `${name} [${meta.cardinality}/${meta.domain}]` : name;
-      lines.push(`${label}: ${values}${openOther}`);
+      lines.push(`${label}:\n  ${values}${openOther}`);
     }
     return lines.join("\n") || "No beliefs loaded.";
   }
@@ -1249,15 +1249,28 @@ when entropy(intent) > 0.5:
     const traceOutput = document.querySelector("#playground-trace-output");
     const status = document.querySelector("#playground-status");
     const results = document.querySelector(".playground-results");
+    const filename = document.querySelector("#playground-filename");
+    const outputLabel = document.querySelector("#playground-output-label");
+    const exampleFiles = {
+      intro: "intro.bel",
+      intent: "intent.bel",
+      noFlight: "intent_no_flight.bel",
+      dynamic: "observe_infer_merge.bel",
+    };
 
     if (!source || !sample || !runButton) return;
 
     let programmaticChange = false;
 
+    function sourceFilename() {
+      return exampleFiles[sample.value] || "custom.bel";
+    }
+
     function setSource(value) {
       programmaticChange = true;
       source.value = value;
       programmaticChange = false;
+      if (filename) filename.textContent = sourceFilename();
     }
 
     function setError(message) {
@@ -1276,24 +1289,29 @@ when entropy(intent) > 0.5:
     }
 
     async function execute() {
+      const runningFile = sourceFilename();
       setError("");
       runButton.disabled = true;
       runButton.textContent = "Running";
       if (results) results.setAttribute("aria-busy", "true");
-      if (status) status.textContent = "Running locally…";
+      if (status) status.textContent = `Running ${runningFile} locally…`;
+      if (outputLabel) outputLabel.textContent = `${runningFile} · running`;
 
       try {
         const runtime = await runProgram(source.value, {
           trace: traceToggle ? traceToggle.checked : false,
         });
         renderRuntime(runtime);
-        if (status) status.textContent = "Program ran locally. No API calls were made.";
+        if (status) status.textContent = `Program ran locally: ${runningFile}. No API calls were made.`;
+        if (outputLabel) outputLabel.textContent = runningFile;
       } catch (error) {
-        setError(error instanceof Error ? error.message : String(error));
+        const message = error instanceof Error ? error.message : String(error);
+        setError(`Error in ${runningFile}: ${message}`);
         for (const output of [stateOutput, varsOutput, observationsOutput, actionsOutput, traceOutput]) {
           if (output) output.textContent = "Not available: the program did not run.";
         }
         if (status) status.textContent = "Program did not run. Check the error and edit your code.";
+        if (outputLabel) outputLabel.textContent = `${runningFile} · failed`;
         if (errorBox) errorBox.focus();
       } finally {
         runButton.disabled = false;
@@ -1304,6 +1322,7 @@ when entropy(intent) > 0.5:
 
     sample.addEventListener("change", () => {
       const selected = sample.value;
+      if (filename) filename.textContent = sourceFilename();
       if (samples[selected]) {
         setSource(samples[selected]);
         execute();
@@ -1313,6 +1332,9 @@ when entropy(intent) > 0.5:
     source.addEventListener("input", () => {
       if (!programmaticChange) {
         sample.value = "custom";
+        if (filename) filename.textContent = sourceFilename();
+        if (status) status.textContent = "Custom program edited. Run to update the output.";
+        if (outputLabel) outputLabel.textContent = "Previous run · source edited";
       }
     });
 
@@ -1337,6 +1359,7 @@ when entropy(intent) > 0.5:
       });
     }
 
+    sample.value = "intro";
     setSource(samples.intro);
     execute();
   }

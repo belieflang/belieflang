@@ -6,11 +6,12 @@ import { parse } from "../src/parser.js";
 import { BeliefRuntime } from "../src/runtime.js";
 
 type BrowserRuntime = {
-  state: object;
+  state: Record<string, Record<string, number>>;
   vars: object;
   observations: object[];
   actions: string[];
   traceLines: string[];
+  entropy(name: string): number;
 };
 type BrowserAPI = {
   samples: Record<string, string>;
@@ -23,6 +24,14 @@ type BrowserAPI = {
 const script = readFileSync("docs/playground.js", "utf8");
 const html = readFileSync("docs/index.html", "utf8");
 const plain = (value: unknown) => JSON.parse(JSON.stringify(value));
+function displayedCode(id: string) {
+  return html
+    .match(new RegExp(`<code id="${id}"[^>]*>([\\s\\S]*?)<\\/code>`))![1]
+    .replace(/<[^>]*>/g, "")
+    .replaceAll("&gt;", ">")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&amp;", "&");
+}
 function browser(document?: object): BrowserAPI {
   const window: {
     BeliefPlayground?: BrowserAPI;
@@ -95,13 +104,28 @@ for (const [name, source] of Object.entries(api.samples)) {
   });
 }
 
-test("homepage syntax is the actual runnable intro sample", () => {
-  const source = html
-    .match(/<code id="syntax-example"[^>]*>([\s\S]*?)<\/code>/)![1]
-    .replaceAll("&gt;", ">");
-  assert.equal(source, api.samples.intro);
-  assert.match(html, /href="#playground"\s+data-playground-example="intro"/);
-  assert.deepEqual(plain(api.parse(source)), parse(source));
+for (const [id, name] of [["syntax-example", "intro"], ["update-example", "dynamic"]]) {
+  test(`displayed ${name} syntax is the actual runnable playground sample`, () => {
+    const source = displayedCode(id);
+    assert.equal(source, api.samples[name]);
+    assert.match(html, new RegExp(`href="#playground"\\s+data-playground-example="${name}"`));
+    assert.deepEqual(plain(api.parse(source)), parse(source));
+  });
+}
+
+test("displayed update result matches actual state, uncertainty, rules and actions", async () => {
+  const runtime = await api.runProgram(displayedCode("update-example"), { trace: true });
+  const ruleResult = (index: number) => runtime.traceLines
+    .find((line) => line.startsWith(`[trace] rule ${index} `))!.split(" => ").at(-1);
+  const result = [
+    `intent.book_flight = ${runtime.state.intent.book_flight.toFixed(3)}`,
+    `user.budget_sensitive = ${runtime.state.user.budget_sensitive.toFixed(3)}`,
+    `entropy(intent) = ${runtime.entropy("intent").toFixed(3)}`,
+    `rule 1 => ${ruleResult(1)}`,
+    `rule 2 => ${ruleResult(2)}`,
+    runtime.actions.find((line) => line === "[call] rank_flights()"),
+  ].join("\n");
+  assert.equal(displayedCode("update-result"), result);
 });
 
 // Minimal DOM fixture exercises the real page bindings without adding a browser
@@ -159,6 +183,8 @@ function page() {
     "actions-output",
     "trace-output",
     "status",
+    "filename",
+    "output-label",
   ];
   const elements = new Map(
     ids.map((id) => [`#playground-${id}`, new Element()]),
@@ -167,14 +193,16 @@ function page() {
   elements.set("#playground", new Element());
   const link = new Element();
   link.dataset.playgroundExample = "intro";
+  const updateLink = new Element();
+  updateLink.dataset.playgroundExample = "dynamic";
   const document = {
     readyState: "complete",
     querySelector: (s: string) => elements.get(s) ?? null,
-    querySelectorAll: () => [link],
+    querySelectorAll: () => [link, updateLink],
   };
   browser(document);
   const get = (id: string) => elements.get(`#playground-${id}`)!;
-  return { get, link, target: elements.get("#playground")! };
+  return { get, link, updateLink, target: elements.get("#playground")! };
 }
 
 test("Run this example loads, focuses, and executes the intro after custom edits", async () => {
@@ -183,9 +211,13 @@ test("Run this example loads, focuses, and executes the intro after custom edits
   get("source").value = "not a valid program";
   await get("source").emit("input");
   assert.equal(get("sample").value, "custom");
+  assert.equal(get("filename").textContent, "custom.bel");
+  assert.match(get("output-label").textContent, /Previous run/);
   await link.emit("click");
   assert.equal(get("source").value, api.samples.intro);
   assert.equal(get("sample").value, "intro");
+  assert.equal(get("filename").textContent, "intro.bel");
+  assert.equal(get("output-label").textContent, "intro.bel");
   assert.equal(get("source").focused, true);
   assert.equal(target.scrolled, true);
   assert.equal(link.prevented, true);
@@ -195,6 +227,24 @@ test("Run this example loads, focuses, and executes the intro after custom edits
   assert.equal(get("run").disabled, false);
 });
 
+test("advanced example link loads and renders observations, merged state and trace", async () => {
+  const { get, updateLink, target } = page();
+  await new Promise((resolve) => setImmediate(resolve));
+  get("trace").checked = true;
+  await updateLink.emit("click");
+  assert.equal(get("source").value, api.samples.dynamic);
+  assert.equal(get("sample").value, "dynamic");
+  assert.equal(get("output-label").textContent, "observe_infer_merge.bel");
+  assert.match(get("status").textContent, /observe_infer_merge.bel/);
+  assert.match(get("state-output").textContent, /book_flight=0.920/);
+  assert.match(get("observations-output").textContent, /user_message/);
+  assert.match(get("vars-output").textContent, /extracted/);
+  assert.match(get("actions-output").textContent, /rank_flights/);
+  assert.match(get("trace-output").textContent, /merge beliefs/);
+  assert.equal(get("source").focused, true);
+  assert.equal(target.scrolled, true);
+});
+
 test("errors clear stale output, identify invalid input, and recover on a valid example", async () => {
   const { get, link } = page();
   await new Promise((resolve) => setImmediate(resolve));
@@ -202,6 +252,8 @@ test("errors clear stale output, identify invalid input, and recover on a valid 
   await get("run").emit("click");
   assert.equal(get("error").hidden, false);
   assert.match(get("error").textContent, /Unexpected character/);
+  assert.match(get("error").textContent, /Error in intro.bel:/);
+  assert.equal(get("output-label").textContent, "intro.bel · failed");
   assert.equal(get("error").focused, true);
   assert.equal(get("source").attributes["aria-invalid"], "true");
   for (const id of [

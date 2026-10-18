@@ -8,7 +8,11 @@ The browser has a separate JavaScript parser/runtime. It is a local demonstratio
 
 Supported examples are the small homepage program, flight intent (`examples/intent.bel`), uncertain/open intent (`examples/intent_no_flight.bel`), and observation/inference/merge (`examples/observe_infer_merge.bel`). They exercise belief modes, normalization, confidence, entropy, variables, property access, compound conditions, tools, observations and belief updates. The examples remain editable.
 
+The hero shows the small confidence example. The observe/infer/merge section shows the existing update example and selected, tested state/trace output. Both “Run this example” links load the matching editable program. Colored tokens in these static examples are authored HTML; the editor remains a native textarea without an overlay, editor framework, or dependency. Source and output have separate file labels. Editing marks the output as a previous run; errors identify the attempted file and retain the original parser/runtime message. Belief values are displayed on separate lines, and output wraps within its panels.
+
 `tests/playground.test.ts` loads the actual browser script in a Node VM and compares all four examples with the current TypeScript parser/runtime: ASTs, state, variables, observations (excluding TypeScript timestamps), simulated tool results/actions and execution traces. It also checks selected validation failures, example loading/focus/scroll requests, example selection, custom edits, trace controls, error display, stale-output clearing and recovery.
+
+Both displayed programs must match their executable samples after removing static color markup. Tests also recompute the selected update output from runtime state, entropy, rule traces and actions, and exercise the advanced example link and source/output labels. The interpreter and inference adapter behavior are unchanged.
 
 This is regression coverage for the supported examples, not proof of complete parity for arbitrary programs. Browser observations omit timestamps; the demo does not expose TypeScript snapshot/provenance APIs, v3 factual memory/history, decision guards, live adapters or host tool registration. Use the [TypeScript CLI and runtime](https://github.com/belieflang/belieflang/blob/main/README.md#quick-start) as the reference. The new tool-invocation lines are display records; neither the interpreter's decisions nor the sample tools' return values changed.
 
@@ -28,16 +32,28 @@ python3 -m http.server 8765 --bind 127.0.0.1 --directory docs
 
 Open `http://127.0.0.1:8765/`. The site only needs the three static source files; the build/tests above validate its examples against the TypeScript reference. No provider credentials or live inference are required.
 
-Browser checks use Chromium at 320, 390, 768 and 1440 CSS pixels: keyboard activation of the example link, focus and fragment navigation, all examples, custom invalid code, error recovery, trace output, internal anchors, table scrolling, no page-wide horizontal overflow and reduced-motion styles. Network requests are limited to local assets and the existing Google Fonts resources. Desktop/mobile screenshots below use 1440×1000 and 390×844 viewports, respectively, with reduced motion. Font rendering may vary by machine.
+Browser checks use Chromium at 320, 390, 768 and 1440 CSS pixels: syntax visible in the first viewport, keyboard activation of both example links, focus and fragment navigation, all examples, source/output labels, custom invalid code, error recovery, trace output, internal anchors, table scrolling, no page-wide horizontal overflow and reduced-motion styles. Network requests are limited to local assets and the existing Google Fonts resources. Desktop/mobile screenshots below use 1440×1000 and 390×844 viewports, respectively, with reduced motion. Font rendering may vary by machine.
 
 | Viewport | Before | After |
 |---|---|---|
-| Desktop | [Before](assets/website-review/desktop-before.png) | [After](assets/website-review/desktop-after.png) |
-| Mobile | [Before](assets/website-review/mobile-before.png) | [After](assets/website-review/mobile-after.png) |
+| Desktop | [Before](assets/website-developer-review/desktop-before.png) | [After](assets/website-developer-review/desktop-after.png) |
+| Mobile | [Before](assets/website-developer-review/mobile-before.png) | [After](assets/website-developer-review/mobile-after.png) |
 
-[Mobile playground after loading the small example](assets/website-review/mobile-playground-after.png).
+[Playground with the update example](assets/website-developer-review/playground-after.png) · [Update example and selected output](assets/website-developer-review/updates-after.png) · [Benchmark metrics and comparison](assets/website-developer-review/benchmarks-after.png).
+
+The earlier [desktop](assets/website-review/desktop-after.png) and [mobile](assets/website-review/mobile-after.png) screenshots preserve the preceding PR #10 design.
 
 ## Deployment verification
+
+After PR #10 merged, fresh HTTP responses from `https://belieflang.org/`, `/styles.css`, and `/playground.js` on 2026-10-18 were byte-identical to `main` at `e2a6485`, including PRs #9 and #10. The domain is serving those merged website sources. The responses reported HTTP 200, Cloudflare, `DYNAMIC`, and `public, max-age=0, must-revalidate`. This is a content check, not proof of a particular Cloudflare deployment commit or account setting. No deployment configuration was changed.
+
+| File | SHA-256 of both public response body and checked main file after PR #10 |
+|---|---|
+| `/` → `docs/index.html` | `a393a094e1784081801e2b070678805b0c51769ad7d1e1765f7acc50cb38139d` |
+| `/styles.css` | `ee2464d90f1668ca857d4bd60f85612a754afbe6bce573d8cba6b72b7919cefa` |
+| `/playground.js` | `7404984d1e83e205aa41f258ea735c259dae1c7aafbde55811e102e6300e4ad6` |
+
+### Earlier check before PR #10
 
 Checked on 2026-10-18, before these website edits, against `main` at `937b3bd` (merged README PR #9): the public domain returned HTTP 200, and its HTML, CSS and JavaScript were **byte-identical** to the corresponding tracked files. The public page's older research content was also in the source. This observation does not establish an older deployment or a broken cache. It also cannot identify the deployed commit, since those website files were unchanged across several commits.
 
