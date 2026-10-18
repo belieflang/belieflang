@@ -1,13 +1,10 @@
 (() => {
   const samples = {
-    intro: `belief intent exclusive closed {
-  book_flight: 0.82
-  book_hotel: 0.12
-  unknown: 0.06
-}
+    intro: `observe request("A flight or a hotel")
+infer beliefs from request
 
-when confidence(intent.book_flight) > 0.7:
-  call search_flights()`,
+when entropy(intent) > 0.5:
+  ask_user("Which would you like to book?")`,
     intent: `let threshold = 0.7
 
 belief intent exclusive closed {

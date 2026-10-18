@@ -68,9 +68,8 @@
               <p class="badge">BeliefLang · experimental language</p>
               <h1>Beliefs as state.<br />Decisions as code.</h1>
               <p class="hero-lead">
-                An experimental language for defining beliefs, tracking uncertainty,
-                and making decisions with deterministic rules. Update what changes
-                instead of repeatedly interpreting everything with an LLM.
+                Define beliefs, track uncertainty, and update state from new
+                observations. Use deterministic rules to decide what happens next.
               </p>
               <div class="hero-actions">
                 <a class="button" href="#playground">Try the playground</a>
@@ -81,15 +80,16 @@
             <div class="hero-code syntax-section" id="syntax" role="group" aria-labelledby="syntax-heading">
               <div class="code-window" id="decisions">
                 <div class="code-toolbar"><h2 id="syntax-heading">intro.bel</h2><span>BeliefLang</span></div>
-                <pre tabindex="0" aria-label="BeliefLang confidence example"><code id="syntax-example" class="language-bel"><span class="syntax-keyword">belief</span> intent <span class="syntax-keyword">exclusive</span> <span class="syntax-keyword">closed</span> {
-  book_flight: <span class="syntax-number">0.82</span>
-  book_hotel: <span class="syntax-number">0.12</span>
-  unknown: <span class="syntax-number">0.06</span>
-}
+                <pre tabindex="0" aria-label="BeliefLang uncertainty example"><code id="syntax-example" class="language-bel"><span class="syntax-keyword">observe</span> request(<span class="syntax-string">"A flight or a hotel"</span>)
+<span class="syntax-keyword">infer</span> <span class="syntax-keyword">beliefs</span> <span class="syntax-keyword">from</span> request
 
-<span class="syntax-keyword">when</span> <span class="syntax-builtin">confidence</span>(intent.book_flight) &gt; <span class="syntax-number">0.7</span>:
-  <span class="syntax-keyword">call</span> search_flights()</code></pre>
+<span class="syntax-keyword">when</span> <span class="syntax-builtin">entropy</span>(intent) &gt; <span class="syntax-number">0.5</span>:
+  <span class="syntax-keyword">ask_user</span>(<span class="syntax-string">"Which would you like to book?"</span>)</code></pre>
               </div>
+              <p class="small-note">
+                <code>infer</code> updates the belief state; <code>entropy()</code>
+                measures uncertainty. Here, the agent asks a clarifying question.
+              </p>
               <a class="example-link" href="#playground" data-playground-example="intro" aria-controls="playground-source">Run this example ↓</a>
             </div>
           </div>
