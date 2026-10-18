@@ -717,6 +717,13 @@ tbody tr:last-child td {
 .hero-code .small-note {
   margin: 0.65rem 0;
 }
+.hero-output {
+  margin-top: 0.65rem;
+}
+.code-window.hero-output pre {
+  padding: 0.6rem 0.8rem;
+  line-height: 1.4;
+}
 .code-window {
   min-width: 0;
   overflow: hidden;

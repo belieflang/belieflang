@@ -140,6 +140,19 @@ test("intro asks about ambiguous intent and skips clarification for a clear requ
   assert.deepEqual(plain(clear.actions), []);
 });
 
+test("hero output preview matches the executed intro state and actions", async () => {
+  const runtime = await api.runProgram(displayedCode("syntax-example"));
+  const entries = Object.entries(runtime.state.intent);
+  const width = Math.max(...entries.map(([name]) => name.length));
+  const output = [
+    "intent:",
+    ...entries.map(([name, value]) => `  ${name.padEnd(width)} = ${value.toFixed(2)}`),
+    "",
+    ...runtime.actions,
+  ].join("\n");
+  assert.equal(displayedCode("intro-result"), output);
+});
+
 // Minimal DOM fixture exercises the real page bindings without adding a browser
 // dependency to CI. Actual scrolling and keyboard focus are also checked in Chromium.
 class Element {

@@ -86,10 +86,13 @@
 <span class="syntax-keyword">when</span> <span class="syntax-builtin">entropy</span>(intent) &gt; <span class="syntax-number">0.5</span>:
   <span class="syntax-keyword">ask_user</span>(<span class="syntax-string">"Which would you like to book?"</span>)</code></pre>
               </div>
-              <p class="small-note">
-                <code>infer</code> updates the belief state; <code>entropy()</code>
-                measures uncertainty. Here, the agent asks a clarifying question.
-              </p>
+              <div class="code-window hero-output">
+                <pre tabindex="0" aria-label="Intro example output"><code id="intro-result">intent:
+  book_flight = 0.50
+  book_hotel  = 0.50
+
+[ask_user] Which would you like to book?</code></pre>
+              </div>
               <a class="example-link" href="#playground" data-playground-example="intro" aria-controls="playground-source">Run this example ↓</a>
             </div>
           </div>
@@ -350,6 +353,10 @@ rule 2 =&gt; false
               </p>
             </article>
           </div>
+          <p>
+            Use OpenAI or Jev for inference, or connect another model through the
+            <a href="https://github.com/belieflang/belieflang/blob/main/src/runtime.ts">TypeScript inference adapter</a>.
+          </p>
           <details id="limitations">
             <summary>Current limitations</summary>
             <ul>

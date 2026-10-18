@@ -37,6 +37,28 @@ This runs the larger intent example with local demo tools and requires no API ke
 
 After building, run `npm test` for offline tests or `node scripts/audit-incremental-pilot.mjs` to verify the archived pilot without inference.
 
+## Try model inference
+
+The local heuristic engine is the default. Built-in adapters support OpenAI and TypeSafe Jev. Live provider calls may incur costs.
+
+### OpenAI
+
+Set `OPENAI_API_KEY` in your environment or a local `.env` file. Optionally set `OPENAI_MODEL`.
+
+```bash
+node --env-file-if-exists=.env dist/src/cli.js run examples/chatgpt_hotel.bel --engine chatgpt --trace --usage
+```
+
+### TypeSafe Jev
+
+Set `TYPESAFE_API_KEY` in your environment or a local `.env` file. Optionally set `JEV_MODEL`.
+
+```bash
+node --env-file-if-exists=.env dist/src/cli.js run examples/jev_intent.bel --engine jev --trace --usage
+```
+
+For another provider, pass an `inferBeliefs` adapter when constructing `BeliefRuntime` in TypeScript. See the [adapter contract](src/runtime.ts), [integration guide](docs/jev.md), and [examples](examples/).
+
 ## Latest benchmark: completed incremental-memory pilot
 
 The pilot compared full history on demand, rolling summaries, plain typed JSON, and BeliefLang v3 with GPT-6 Luna. The table totals all cases and both demand schedules. Costs include state updates, question routing, and retrieval.
@@ -59,7 +81,7 @@ See the [full findings and limitations](docs/incremental-memory-pilot-results.md
 - **Language and CLI:** belief blocks with exclusive/multi and open/closed modes; `confidence()` and `entropy()`; variables, compound conditions, tool return values, observations, inference/merge statements, and execution traces.
 - **Runtime APIs:** save/restore belief snapshots and inspect provenance with `getProvenance()` and `explainBelief("intent.book_flight")`.
 - **Opt-in v3 TypeScript components:** typed atomic deltas, explicit uncertain/conflicting/cleared states, source-tracked history, original/previous-value retrieval, snapshot validation, and a deterministic decision guard. These are [runtime APIs](docs/delta-state-v3.md), not additional `.bel` syntax.
-- **Inference adapters:** local heuristic demonstrations plus OpenAI and Jev integrations. Provider inference requires credentials and incurs API costs; the quick start above runs locally.
+- **Inference adapters:** local heuristic, OpenAI, Jev, or a custom TypeScript `inferBeliefs` implementation.
 
 Model confidence does not verify a fact or authorize an action. Guards depend on trusted host evidence and approvals. V3 change history is bounded, durable state can grow, and automatic archival is not implemented. The runtime does not provide general automatic dependency tracking or selective rule recomputation; the benchmark's fixed dependency cache is a narrower experiment. See the [design and product-viability review](docs/product-viability.md).
 
