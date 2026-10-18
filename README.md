@@ -171,6 +171,8 @@ It is a small experimental runtime for belief-state execution, AI agents, and un
 
 The [independent product-viability review](docs/product-viability.md) compares TypeScript, the v3 library and actual `.bel` policies on travel, support and operations workflows. Its provisional recommendation is a TypeScript library rather than a dedicated DSL. Run `node dist/src/viability/review.js --validate` after building for read-only offline checks; paid evaluation remains separately authorized.
 
+The separately frozen [incremental-memory pilot](docs/incremental-memory-pilot.md) compares cumulative inference work for full history, rolling summary, typed JSON and BeliefLang v3 using new cases and corrected evidence handling. Run `node dist/src/incremental/cli.js --validate` after building. Its local Luna smoke/pilot commands require separate paid-call authorization; the proposed combined maximum is $2. Historical experiments are preserved.
+
 ## License
 
 Apache-2.0

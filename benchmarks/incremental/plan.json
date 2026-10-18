@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "authorization": "NOT AUTHORIZED / NOT EXECUTED",
+  "model": "gpt-6-luna",
+  "caseCount": 3,
+  "conditions": [
+    "full_history",
+    "rolling_summary",
+    "plain_json",
+    "belieflang_v3"
+  ],
+  "schedules": [
+    "sparse",
+    "dense"
+  ],
+  "repetitions": 1,
+  "plannedCalls": 284,
+  "scenarios": [
+    {
+      "name": "central",
+      "bytesPerToken": 4,
+      "stateMultiplier": 1,
+      "framing": 200,
+      "byCondition": [
+        {
+          "schedule": "sparse",
+          "method": "full_history",
+          "calls": 26,
+          "projectedInputTokens": 24370,
+          "projectedOutputTokens": 815,
+          "projectedUSD": 0.003799125
+        },
+        {
+          "schedule": "sparse",
+          "method": "rolling_summary",
+          "calls": 50,
+          "projectedInputTokens": 46141,
+          "projectedOutputTokens": 4238,
+          "projectedUSD": 0.0086752875
+        },
+        {
+          "schedule": "sparse",
+          "method": "plain_json",
+          "calls": 30,
+          "projectedInputTokens": 27153,
+          "projectedOutputTokens": 443,
+          "projectedUSD": 0.0039771875
+        },
+        {
+          "schedule": "sparse",
+          "method": "belieflang_v3",
+          "calls": 30,
+          "projectedInputTokens": 27153,
+          "projectedOutputTokens": 443,
+          "projectedUSD": 0.0039771875
+        },
+        {
+          "schedule": "dense",
+          "method": "full_history",
+          "calls": 32,
+          "projectedInputTokens": 29829,
+          "projectedOutputTokens": 1103,
+          "projectedUSD": 0.0047081375
+        },
+        {
+          "schedule": "dense",
+          "method": "rolling_summary",
+          "calls": 56,
+          "projectedInputTokens": 51977,
+          "projectedOutputTokens": 4526,
+          "projectedUSD": 0.009636137500000001
+        },
+        {
+          "schedule": "dense",
+          "method": "plain_json",
+          "calls": 30,
+          "projectedInputTokens": 27153,
+          "projectedOutputTokens": 443,
+          "projectedUSD": 0.0039771875
+        },
+        {
+          "schedule": "dense",
+          "method": "belieflang_v3",
+          "calls": 30,
+          "projectedInputTokens": 27153,
+          "projectedOutputTokens": 443,
+          "projectedUSD": 0.0039771875
+        }
+      ],
+      "totalProjectedUSD": 0.0427274375
+    },
+    {
+      "name": "stress",
+      "bytesPerToken": 3,
+      "stateMultiplier": 2,
+      "framing": 1000,
+      "byCondition": [
+        {
+          "schedule": "sparse",
+          "method": "full_history",
+          "calls": 26,
+          "projectedInputTokens": 77103,
+          "projectedOutputTokens": 2151,
+          "projectedUSD": 0.0117847125
+        },
+        {
+          "schedule": "sparse",
+          "method": "rolling_summary",
+          "calls": 50,
+          "projectedInputTokens": 146340,
+          "projectedOutputTokens": 11264,
+          "projectedUSD": 0.026316950000000002
+        },
+        {
+          "schedule": "sparse",
+          "method": "plain_json",
+          "calls": 30,
+          "projectedInputTokens": 86396,
+          "projectedOutputTokens": 1149,
+          "projectedUSD": 0.0125114
+        },
+        {
+          "schedule": "sparse",
+          "method": "belieflang_v3",
+          "calls": 30,
+          "projectedInputTokens": 86396,
+          "projectedOutputTokens": 1149,
+          "projectedUSD": 0.0125114
+        },
+        {
+          "schedule": "dense",
+          "method": "full_history",
+          "calls": 32,
+          "projectedInputTokens": 94457,
+          "projectedOutputTokens": 2916,
+          "projectedUSD": 0.0145916375
+        },
+        {
+          "schedule": "dense",
+          "method": "rolling_summary",
+          "calls": 56,
+          "projectedInputTokens": 164703,
+          "projectedOutputTokens": 12029,
+          "projectedUSD": 0.0292626125
+        },
+        {
+          "schedule": "dense",
+          "method": "plain_json",
+          "calls": 30,
+          "projectedInputTokens": 86396,
+          "projectedOutputTokens": 1149,
+          "projectedUSD": 0.0125114
+        },
+        {
+          "schedule": "dense",
+          "method": "belieflang_v3",
+          "calls": 30,
+          "projectedInputTokens": 86396,
+          "projectedOutputTokens": 1149,
+          "projectedUSD": 0.0125114
+        }
+      ],
+      "totalProjectedUSD": 0.13200151250000003
+    }
+  ],
+  "assumptions": "Serialized request/output bytes and offline parser traces, not measured tokens. All projected input charged at cache-write rate, 10% premium included, no cache savings assumed. Future model summaries/patches may change sizes. Token distribution is aggregated for planning, not provider billing.",
+  "maximumCombinedUSD": 2,
+  "smokeCapUSD": 0.3,
+  "pilotCapUSD": 1.7,
+  "automaticRetries": 0,
+  "smokeReservationUSD": 0.28896120000000003,
+  "pilotPerCallReservationUSD": 0.28959480000000004,
+  "allCallsAtReservationUSD": 82.24492320000002,
+  "completionGuaranteed": false,
+  "unknownBilling": "Each failed/interrupted request with unknown usage retains the entire reservation. All failures consume the same caps. No replacement calls or automatic retries. Stop and report partial paired coverage at the cap."
+}

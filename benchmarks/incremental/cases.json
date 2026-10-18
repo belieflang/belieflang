@@ -1,0 +1,579 @@
+{
+  "version": 1,
+  "description": "New authored controlled-language pilot cases. Independent of previous fixture sets; not externally blinded or a population sample. No provider responses inspected. Same 24 public events per case under two demand schedules.",
+  "cases": [
+    {
+      "id": "freight",
+      "schema": {
+        "weight_kg": "number",
+        "sealed": "boolean",
+        "dock": "string",
+        "crate": "string"
+      },
+      "numeric": "weight_kg",
+      "flag": "sealed",
+      "auxiliary": "dock",
+      "maximum": 12,
+      "action": "dispatch_crate",
+      "sparseAfter": [
+        2,
+        5,
+        8,
+        10,
+        12,
+        14,
+        15,
+        16,
+        19,
+        21,
+        23
+      ],
+      "events": [
+        {
+          "type": "host",
+          "facts": {
+            "weight_kg": 8,
+            "sealed": true,
+            "crate": "M73"
+          },
+          "id": "e01"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "weight_kg": 8,
+            "sealed": true
+          },
+          "id": "e02"
+        },
+        {
+          "type": "chat",
+          "text": "Thanks for the update. I will wait here while the team prepares.",
+          "id": "e03"
+        },
+        {
+          "type": "chat",
+          "text": "Thanks for the update. I will wait here while the team prepares.",
+          "id": "e04"
+        },
+        {
+          "type": "chat",
+          "text": "Please change weight_kg to 10; this replaces the previous figure.",
+          "id": "e05"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "weight_kg": 10
+          },
+          "id": "e06"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "weight_kg": 10,
+            "sealed": true
+          },
+          "id": "e07"
+        },
+        {
+          "type": "chat",
+          "text": "An unverified colleague reports weight_kg as 17; we have not resolved the disagreement.",
+          "id": "e08"
+        },
+        {
+          "type": "chat",
+          "text": "Please change weight_kg to 10; this replaces the previous figure.",
+          "id": "e09"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "weight_kg": 10,
+            "sealed": true
+          },
+          "id": "e10"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "weight_kg": 10
+          },
+          "id": "e11"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "weight_kg": 10,
+            "sealed": true
+          },
+          "id": "e12"
+        },
+        {
+          "type": "chat",
+          "text": "To repeat our existing requirement, weight_kg remains 10.",
+          "id": "e13"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "dock": "D4"
+          },
+          "id": "e14"
+        },
+        {
+          "type": "chat",
+          "text": "Withdraw the dock value; there is no replacement yet.",
+          "id": "e15"
+        },
+        {
+          "type": "approval",
+          "allowed": false,
+          "values": {
+            "weight_kg": 10,
+            "sealed": true
+          },
+          "id": "e16"
+        },
+        {
+          "type": "chat",
+          "text": "The paperwork is queued. No additional instructions from me right now.",
+          "id": "e17"
+        },
+        {
+          "type": "ask",
+          "text": "Before any revisions, how heavy did we think the crate was?",
+          "id": "e18"
+        },
+        {
+          "type": "chat",
+          "text": "Please change sealed to false; this replaces the previous figure.",
+          "id": "e19"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "sealed": false
+          },
+          "id": "e20"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "weight_kg": 10,
+            "sealed": false
+          },
+          "id": "e21"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "sealed": true
+          },
+          "id": "e22"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "weight_kg": 10,
+            "sealed": true
+          },
+          "id": "e23"
+        },
+        {
+          "type": "ask",
+          "text": "Which loading bay were we first assigned, before it was withdrawn?",
+          "id": "e24"
+        }
+      ]
+    },
+    {
+      "id": "specimen",
+      "schema": {
+        "temperature_c": "number",
+        "licensed": "boolean",
+        "assay": "string",
+        "sample": "string"
+      },
+      "numeric": "temperature_c",
+      "flag": "licensed",
+      "auxiliary": "assay",
+      "maximum": 6,
+      "action": "release_sample",
+      "sparseAfter": [
+        2,
+        3,
+        6,
+        10,
+        12,
+        14,
+        15,
+        16,
+        17,
+        19,
+        23
+      ],
+      "events": [
+        {
+          "type": "host",
+          "facts": {
+            "temperature_c": 3,
+            "licensed": true,
+            "sample": "Q18"
+          },
+          "id": "e01"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "temperature_c": 3,
+            "licensed": true
+          },
+          "id": "e02"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "assay": "RNA"
+          },
+          "id": "e03"
+        },
+        {
+          "type": "chat",
+          "text": "The lab has received the courier paperwork; we are waiting for the next shift.",
+          "id": "e04"
+        },
+        {
+          "type": "chat",
+          "text": "The lab has received the courier paperwork; we are waiting for the next shift.",
+          "id": "e05"
+        },
+        {
+          "type": "chat",
+          "text": "Please change temperature_c to 5; this replaces the previous figure.",
+          "id": "e06"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "temperature_c": 5
+          },
+          "id": "e07"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "temperature_c": 5,
+            "licensed": true
+          },
+          "id": "e08"
+        },
+        {
+          "type": "chat",
+          "text": "To repeat our existing requirement, temperature_c remains 5.",
+          "id": "e09"
+        },
+        {
+          "type": "chat",
+          "text": "An unverified colleague reports temperature_c as 9; we have not resolved the disagreement.",
+          "id": "e10"
+        },
+        {
+          "type": "chat",
+          "text": "Please change temperature_c to 5; this replaces the previous figure.",
+          "id": "e11"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "temperature_c": 5,
+            "licensed": true
+          },
+          "id": "e12"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "temperature_c": 5
+          },
+          "id": "e13"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "temperature_c": 5,
+            "licensed": true
+          },
+          "id": "e14"
+        },
+        {
+          "type": "chat",
+          "text": "Withdraw the assay value; there is no replacement yet.",
+          "id": "e15"
+        },
+        {
+          "type": "approval",
+          "allowed": false,
+          "values": {
+            "temperature_c": 5,
+            "licensed": true
+          },
+          "id": "e16"
+        },
+        {
+          "type": "chat",
+          "text": "Please change licensed to false; this replaces the previous figure.",
+          "id": "e17"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "licensed": false
+          },
+          "id": "e18"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "temperature_c": 5,
+            "licensed": false
+          },
+          "id": "e19"
+        },
+        {
+          "type": "chat",
+          "text": "The refrigerator log is filed. There are no new sample instructions.",
+          "id": "e20"
+        },
+        {
+          "type": "ask",
+          "text": "What temperature did this sample start out at?",
+          "id": "e21"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "licensed": true
+          },
+          "id": "e22"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "temperature_c": 5,
+            "licensed": true
+          },
+          "id": "e23"
+        },
+        {
+          "type": "ask",
+          "text": "Which assay was initially selected for this sample?",
+          "id": "e24"
+        }
+      ]
+    },
+    {
+      "id": "gallery",
+      "schema": {
+        "capacity": "number",
+        "accessible": "boolean",
+        "lighting": "string",
+        "hall": "string"
+      },
+      "numeric": "capacity",
+      "flag": "accessible",
+      "auxiliary": "lighting",
+      "maximum": 60,
+      "action": "open_hall",
+      "sparseAfter": [
+        2,
+        5,
+        8,
+        10,
+        12,
+        13,
+        15,
+        17,
+        19,
+        20,
+        21
+      ],
+      "events": [
+        {
+          "type": "host",
+          "facts": {
+            "capacity": 42,
+            "accessible": true,
+            "hall": "East"
+          },
+          "id": "e01"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "capacity": 42,
+            "accessible": true
+          },
+          "id": "e02"
+        },
+        {
+          "type": "chat",
+          "text": "The gallery team is arranging labels; I have nothing else to change.",
+          "id": "e03"
+        },
+        {
+          "type": "chat",
+          "text": "The gallery team is arranging labels; I have nothing else to change.",
+          "id": "e04"
+        },
+        {
+          "type": "chat",
+          "text": "Please change capacity to 54; this replaces the previous figure.",
+          "id": "e05"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "capacity": 54
+          },
+          "id": "e06"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "capacity": 54,
+            "accessible": true
+          },
+          "id": "e07"
+        },
+        {
+          "type": "chat",
+          "text": "Please change accessible to false; this replaces the previous figure.",
+          "id": "e08"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "accessible": false
+          },
+          "id": "e09"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "capacity": 54,
+            "accessible": false
+          },
+          "id": "e10"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "accessible": true
+          },
+          "id": "e11"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "capacity": 54,
+            "accessible": true
+          },
+          "id": "e12"
+        },
+        {
+          "type": "chat",
+          "text": "An unverified colleague reports capacity as 75; we have not resolved the disagreement.",
+          "id": "e13"
+        },
+        {
+          "type": "chat",
+          "text": "Please change capacity to 54; this replaces the previous figure.",
+          "id": "e14"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "capacity": 54,
+            "accessible": true
+          },
+          "id": "e15"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "capacity": 54
+          },
+          "id": "e16"
+        },
+        {
+          "type": "approval",
+          "allowed": true,
+          "values": {
+            "capacity": 54,
+            "accessible": true
+          },
+          "id": "e17"
+        },
+        {
+          "type": "chat",
+          "text": "To repeat our existing requirement, capacity remains 54.",
+          "id": "e18"
+        },
+        {
+          "type": "host",
+          "facts": {
+            "lighting": "amber"
+          },
+          "id": "e19"
+        },
+        {
+          "type": "chat",
+          "text": "Withdraw the lighting value; there is no replacement yet.",
+          "id": "e20"
+        },
+        {
+          "type": "approval",
+          "allowed": false,
+          "values": {
+            "capacity": 54,
+            "accessible": true
+          },
+          "id": "e21"
+        },
+        {
+          "type": "chat",
+          "text": "The signage team will return tomorrow; today's visitor plan stands.",
+          "id": "e22"
+        },
+        {
+          "type": "ask",
+          "text": "At the outset, how many visitors did this hall accommodate?",
+          "id": "e23"
+        },
+        {
+          "type": "ask",
+          "text": "What lighting was selected originally for the hall?",
+          "id": "e24"
+        }
+      ]
+    }
+  ]
+}

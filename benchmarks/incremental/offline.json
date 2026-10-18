@@ -1,0 +1,4413 @@
+{
+  "version": 1,
+  "description": "Offline controlled-text parser and deterministic contracts, not measured model accuracy/tokens/cost/latency. No gold is passed into inference. No paid calls.",
+  "liveCalls": 0,
+  "summary": [
+    {
+      "method": "full_history",
+      "schedule": "sparse",
+      "case": "freight",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 5,
+          "correct": 5
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 9,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 0,
+          "read": 7
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 9,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 24183,
+        "responseBytes": 1089
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 3943,
+      "finalStateBytes": 3943
+    },
+    {
+      "method": "rolling_summary",
+      "schedule": "sparse",
+      "case": "freight",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 5,
+          "correct": 5
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 17,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 8,
+          "read": 7
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 17,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 44043,
+        "responseBytes": 5380
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 2483,
+      "finalStateBytes": 2483
+    },
+    {
+      "method": "plain_json",
+      "schedule": "sparse",
+      "case": "freight",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 5,
+          "correct": 5
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 25290,
+        "responseBytes": 561
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 4540,
+      "finalStateBytes": 4540
+    },
+    {
+      "method": "belieflang_v3",
+      "schedule": "sparse",
+      "case": "freight",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 5,
+          "correct": 5
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 25290,
+        "responseBytes": 561
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 8775,
+      "finalStateBytes": 8775
+    },
+    {
+      "method": "rolling_summary",
+      "schedule": "sparse",
+      "case": "specimen",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 36,
+          "correct": 36
+        },
+        "missing": {
+          "total": 1,
+          "correct": 1
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 16,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 8,
+          "read": 6
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 16,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 43892,
+        "responseBytes": 6152
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 2578,
+      "finalStateBytes": 2578
+    },
+    {
+      "method": "plain_json",
+      "schedule": "sparse",
+      "case": "specimen",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 36,
+          "correct": 36
+        },
+        "missing": {
+          "total": 1,
+          "correct": 1
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 26406,
+        "responseBytes": 578
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 4771,
+      "finalStateBytes": 4771
+    },
+    {
+      "method": "belieflang_v3",
+      "schedule": "sparse",
+      "case": "specimen",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 36,
+          "correct": 36
+        },
+        "missing": {
+          "total": 1,
+          "correct": 1
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 26406,
+        "responseBytes": 578
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 9028,
+      "finalStateBytes": 9028
+    },
+    {
+      "method": "full_history",
+      "schedule": "sparse",
+      "case": "specimen",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 36,
+          "correct": 36
+        },
+        "missing": {
+          "total": 1,
+          "correct": 1
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 5,
+          "correct": 5
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 8,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 0,
+          "read": 6
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 8,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 21946,
+        "responseBytes": 1025
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 4119,
+      "finalStateBytes": 4119
+    },
+    {
+      "method": "plain_json",
+      "schedule": "sparse",
+      "case": "gallery",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 8,
+          "correct": 8
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 27003,
+        "responseBytes": 569
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 4575,
+      "finalStateBytes": 4575
+    },
+    {
+      "method": "belieflang_v3",
+      "schedule": "sparse",
+      "case": "gallery",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 8,
+          "correct": 8
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 27003,
+        "responseBytes": 569
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 8843,
+      "finalStateBytes": 8843
+    },
+    {
+      "method": "full_history",
+      "schedule": "sparse",
+      "case": "gallery",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 8,
+          "correct": 8
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 9,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 0,
+          "read": 7
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 9,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 25415,
+        "responseBytes": 1101
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 3870,
+      "finalStateBytes": 3844
+    },
+    {
+      "method": "rolling_summary",
+      "schedule": "sparse",
+      "case": "gallery",
+      "total": 46,
+      "correct": 46,
+      "accuracy": 1,
+      "valueCorrect": 46,
+      "statusCorrect": 46,
+      "sourceCorrect": 46,
+      "groups": {
+        "current": {
+          "total": 33,
+          "correct": 33
+        },
+        "confirmed": {
+          "total": 32,
+          "correct": 32
+        },
+        "missing": {
+          "total": 8,
+          "correct": 8
+        },
+        "original": {
+          "total": 13,
+          "correct": 13
+        },
+        "uncertain": {
+          "total": 3,
+          "correct": 3
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 2,
+          "correct": 2
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 3,
+      "unsafeExecutions": 0,
+      "safeExecutions": 5,
+      "safeOpportunities": 5,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 17,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 8,
+          "read": 7
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 17,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 46749,
+        "responseBytes": 5339
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 9,
+      "decisionCacheHits": 2,
+      "maxStateBytes": 2493,
+      "finalStateBytes": 2353
+    },
+    {
+      "method": "rolling_summary",
+      "schedule": "dense",
+      "case": "freight",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 13,
+          "correct": 13
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 19,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 8,
+          "read": 9
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 19,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 49731,
+        "responseBytes": 5760
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 2483,
+      "finalStateBytes": 2483
+    },
+    {
+      "method": "plain_json",
+      "schedule": "dense",
+      "case": "freight",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 13,
+          "correct": 13
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 25290,
+        "responseBytes": 561
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 4540,
+      "finalStateBytes": 4540
+    },
+    {
+      "method": "belieflang_v3",
+      "schedule": "dense",
+      "case": "freight",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 13,
+          "correct": 13
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 25290,
+        "responseBytes": 561
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 8775,
+      "finalStateBytes": 8775
+    },
+    {
+      "method": "full_history",
+      "schedule": "dense",
+      "case": "freight",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 13,
+          "correct": 13
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 11,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 0,
+          "read": 9
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 11,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 29562,
+        "responseBytes": 1469
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 3943,
+      "finalStateBytes": 3943
+    },
+    {
+      "method": "plain_json",
+      "schedule": "dense",
+      "case": "specimen",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 75,
+          "correct": 75
+        },
+        "missing": {
+          "total": 2,
+          "correct": 2
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 8,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 26406,
+        "responseBytes": 578
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 4771,
+      "finalStateBytes": 4771
+    },
+    {
+      "method": "belieflang_v3",
+      "schedule": "dense",
+      "case": "specimen",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 75,
+          "correct": 75
+        },
+        "missing": {
+          "total": 2,
+          "correct": 2
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 8,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 26406,
+        "responseBytes": 578
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 9028,
+      "finalStateBytes": 9028
+    },
+    {
+      "method": "full_history",
+      "schedule": "dense",
+      "case": "specimen",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 75,
+          "correct": 75
+        },
+        "missing": {
+          "total": 2,
+          "correct": 2
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 8,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 0,
+          "read": 8
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 26455,
+        "responseBytes": 1406
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 4119,
+      "finalStateBytes": 4119
+    },
+    {
+      "method": "rolling_summary",
+      "schedule": "dense",
+      "case": "specimen",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 75,
+          "correct": 75
+        },
+        "missing": {
+          "total": 2,
+          "correct": 2
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 8,
+          "correct": 8
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 8,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 18,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 8,
+          "read": 8
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 18,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 49407,
+        "responseBytes": 6533
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 2578,
+      "finalStateBytes": 2578
+    },
+    {
+      "method": "belieflang_v3",
+      "schedule": "dense",
+      "case": "gallery",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 18,
+          "correct": 18
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 3,
+          "correct": 3
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 27003,
+        "responseBytes": 569
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 8843,
+      "finalStateBytes": 8843
+    },
+    {
+      "method": "full_history",
+      "schedule": "dense",
+      "case": "gallery",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 18,
+          "correct": 18
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 3,
+          "correct": 3
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 11,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 0,
+          "read": 9
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 11,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 31380,
+        "responseBytes": 1483
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 4061,
+      "finalStateBytes": 4061
+    },
+    {
+      "method": "rolling_summary",
+      "schedule": "dense",
+      "case": "gallery",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 18,
+          "correct": 18
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 3,
+          "correct": 3
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 19,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 0,
+          "summary": 8,
+          "read": 9
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 19,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 52910,
+        "responseBytes": 5721
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 2570,
+      "finalStateBytes": 2570
+    },
+    {
+      "method": "plain_json",
+      "schedule": "dense",
+      "case": "gallery",
+      "total": 90,
+      "correct": 90,
+      "accuracy": 1,
+      "valueCorrect": 90,
+      "statusCorrect": 90,
+      "sourceCorrect": 90,
+      "groups": {
+        "current": {
+          "total": 66,
+          "correct": 66
+        },
+        "confirmed": {
+          "total": 64,
+          "correct": 64
+        },
+        "missing": {
+          "total": 18,
+          "correct": 18
+        },
+        "original": {
+          "total": 24,
+          "correct": 24
+        },
+        "uncertain": {
+          "total": 4,
+          "correct": 4
+        },
+        "conflicting": {
+          "total": 1,
+          "correct": 1
+        },
+        "cleared": {
+          "total": 3,
+          "correct": 3
+        }
+      },
+      "routingCorrect": 2,
+      "routingTotal": 2,
+      "unsafeAttempts": 9,
+      "unsafeExecutions": 0,
+      "safeExecutions": 9,
+      "safeOpportunities": 9,
+      "falseDenials": 0,
+      "cumulative": {
+        "calls": 10,
+        "failedCalls": 0,
+        "byKind": {
+          "route": 2,
+          "update": 8,
+          "summary": 0,
+          "read": 0
+        },
+        "measuredTokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "cacheWrite": null,
+          "reasoning": null
+        },
+        "knownTokens": {
+          "input": 0,
+          "output": 0,
+          "cached": 0,
+          "cacheWrite": 0,
+          "reasoning": 0
+        },
+        "unmeteredCalls": 10,
+        "usd": null,
+        "latencyMs": 0,
+        "knownLatencyMs": 0,
+        "unmeasuredLatencies": 0,
+        "requestBytes": 27003,
+        "responseBytes": 569
+      },
+      "usdPerCorrect": null,
+      "decisionRecomputations": 15,
+      "decisionCacheHits": 7,
+      "maxStateBytes": 4575,
+      "finalStateBytes": 4575
+    }
+  ],
+  "curves": [
+    {
+      "case": "freight",
+      "method": "full_history",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 1,
+          "requestBytes": 2227
+        },
+        {
+          "turn": 8,
+          "calls": 2,
+          "requestBytes": 4789
+        },
+        {
+          "turn": 10,
+          "calls": 3,
+          "requestBytes": 7590
+        },
+        {
+          "turn": 12,
+          "calls": 3,
+          "requestBytes": 7590
+        },
+        {
+          "turn": 14,
+          "calls": 4,
+          "requestBytes": 10728
+        },
+        {
+          "turn": 15,
+          "calls": 5,
+          "requestBytes": 14026
+        },
+        {
+          "turn": 16,
+          "calls": 5,
+          "requestBytes": 14026
+        },
+        {
+          "turn": 18,
+          "calls": 6,
+          "requestBytes": 15290
+        },
+        {
+          "turn": 19,
+          "calls": 7,
+          "requestBytes": 18960
+        },
+        {
+          "turn": 21,
+          "calls": 7,
+          "requestBytes": 18960
+        },
+        {
+          "turn": 23,
+          "calls": 7,
+          "requestBytes": 18960
+        },
+        {
+          "turn": 24,
+          "calls": 9,
+          "requestBytes": 24183
+        }
+      ]
+    },
+    {
+      "case": "freight",
+      "method": "rolling_summary",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 3,
+          "requestBytes": 6314
+        },
+        {
+          "turn": 8,
+          "calls": 5,
+          "requestBytes": 11420
+        },
+        {
+          "turn": 10,
+          "calls": 7,
+          "requestBytes": 16618
+        },
+        {
+          "turn": 12,
+          "calls": 7,
+          "requestBytes": 16618
+        },
+        {
+          "turn": 14,
+          "calls": 9,
+          "requestBytes": 22330
+        },
+        {
+          "turn": 15,
+          "calls": 11,
+          "requestBytes": 28343
+        },
+        {
+          "turn": 16,
+          "calls": 11,
+          "requestBytes": 28343
+        },
+        {
+          "turn": 18,
+          "calls": 13,
+          "requestBytes": 32700
+        },
+        {
+          "turn": 19,
+          "calls": 15,
+          "requestBytes": 39139
+        },
+        {
+          "turn": 21,
+          "calls": 15,
+          "requestBytes": 39139
+        },
+        {
+          "turn": 23,
+          "calls": 15,
+          "requestBytes": 39139
+        },
+        {
+          "turn": 24,
+          "calls": 17,
+          "requestBytes": 44043
+        }
+      ]
+    },
+    {
+      "case": "freight",
+      "method": "plain_json",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7599
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 12,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13228
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 18,
+          "calls": 8,
+          "requestBytes": 20804
+        },
+        {
+          "turn": 19,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 25290
+        }
+      ]
+    },
+    {
+      "case": "freight",
+      "method": "belieflang_v3",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7599
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 12,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13228
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 18,
+          "calls": 8,
+          "requestBytes": 20804
+        },
+        {
+          "turn": 19,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 25290
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "rolling_summary",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 6,
+          "calls": 3,
+          "requestBytes": 7040
+        },
+        {
+          "turn": 10,
+          "calls": 6,
+          "requestBytes": 15494
+        },
+        {
+          "turn": 12,
+          "calls": 8,
+          "requestBytes": 21333
+        },
+        {
+          "turn": 14,
+          "calls": 8,
+          "requestBytes": 21333
+        },
+        {
+          "turn": 15,
+          "calls": 10,
+          "requestBytes": 27660
+        },
+        {
+          "turn": 16,
+          "calls": 10,
+          "requestBytes": 27660
+        },
+        {
+          "turn": 17,
+          "calls": 12,
+          "requestBytes": 34234
+        },
+        {
+          "turn": 19,
+          "calls": 12,
+          "requestBytes": 34234
+        },
+        {
+          "turn": 21,
+          "calls": 14,
+          "requestBytes": 38855
+        },
+        {
+          "turn": 23,
+          "calls": 15,
+          "requestBytes": 42620
+        },
+        {
+          "turn": 24,
+          "calls": 16,
+          "requestBytes": 43892
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "plain_json",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 11049
+        },
+        {
+          "turn": 12,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 19,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 26406
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "belieflang_v3",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 11049
+        },
+        {
+          "turn": 12,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 19,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 26406
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "full_history",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 6,
+          "calls": 1,
+          "requestBytes": 2362
+        },
+        {
+          "turn": 10,
+          "calls": 2,
+          "requestBytes": 5191
+        },
+        {
+          "turn": 12,
+          "calls": 3,
+          "requestBytes": 8268
+        },
+        {
+          "turn": 14,
+          "calls": 3,
+          "requestBytes": 8268
+        },
+        {
+          "turn": 15,
+          "calls": 4,
+          "requestBytes": 11658
+        },
+        {
+          "turn": 16,
+          "calls": 4,
+          "requestBytes": 11658
+        },
+        {
+          "turn": 17,
+          "calls": 5,
+          "requestBytes": 15296
+        },
+        {
+          "turn": 19,
+          "calls": 5,
+          "requestBytes": 15296
+        },
+        {
+          "turn": 21,
+          "calls": 6,
+          "requestBytes": 16563
+        },
+        {
+          "turn": 23,
+          "calls": 7,
+          "requestBytes": 20674
+        },
+        {
+          "turn": 24,
+          "calls": 8,
+          "requestBytes": 21946
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "plain_json",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 10,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 12,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 13,
+          "calls": 4,
+          "requestBytes": 10774
+        },
+        {
+          "turn": 15,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 17,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 19,
+          "calls": 6,
+          "requestBytes": 17258
+        },
+        {
+          "turn": 20,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 21,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25735
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 27003
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "belieflang_v3",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 10,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 12,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 13,
+          "calls": 4,
+          "requestBytes": 10774
+        },
+        {
+          "turn": 15,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 17,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 19,
+          "calls": 6,
+          "requestBytes": 17258
+        },
+        {
+          "turn": 20,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 21,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25735
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 27003
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "full_history",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 1,
+          "requestBytes": 2255
+        },
+        {
+          "turn": 8,
+          "calls": 2,
+          "requestBytes": 4829
+        },
+        {
+          "turn": 10,
+          "calls": 2,
+          "requestBytes": 4829
+        },
+        {
+          "turn": 12,
+          "calls": 2,
+          "requestBytes": 4829
+        },
+        {
+          "turn": 13,
+          "calls": 3,
+          "requestBytes": 7943
+        },
+        {
+          "turn": 15,
+          "calls": 4,
+          "requestBytes": 11299
+        },
+        {
+          "turn": 17,
+          "calls": 4,
+          "requestBytes": 11299
+        },
+        {
+          "turn": 19,
+          "calls": 5,
+          "requestBytes": 14996
+        },
+        {
+          "turn": 20,
+          "calls": 6,
+          "requestBytes": 18861
+        },
+        {
+          "turn": 21,
+          "calls": 6,
+          "requestBytes": 18861
+        },
+        {
+          "turn": 23,
+          "calls": 7,
+          "requestBytes": 20137
+        },
+        {
+          "turn": 24,
+          "calls": 9,
+          "requestBytes": 25415
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "rolling_summary",
+      "schedule": "sparse",
+      "points": [
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 5,
+          "calls": 3,
+          "requestBytes": 6381
+        },
+        {
+          "turn": 8,
+          "calls": 5,
+          "requestBytes": 11519
+        },
+        {
+          "turn": 10,
+          "calls": 5,
+          "requestBytes": 11519
+        },
+        {
+          "turn": 12,
+          "calls": 5,
+          "requestBytes": 11519
+        },
+        {
+          "turn": 13,
+          "calls": 7,
+          "requestBytes": 17468
+        },
+        {
+          "turn": 15,
+          "calls": 9,
+          "requestBytes": 23514
+        },
+        {
+          "turn": 17,
+          "calls": 9,
+          "requestBytes": 23514
+        },
+        {
+          "turn": 19,
+          "calls": 11,
+          "requestBytes": 30081
+        },
+        {
+          "turn": 20,
+          "calls": 13,
+          "requestBytes": 36974
+        },
+        {
+          "turn": 21,
+          "calls": 13,
+          "requestBytes": 36974
+        },
+        {
+          "turn": 23,
+          "calls": 15,
+          "requestBytes": 41783
+        },
+        {
+          "turn": 24,
+          "calls": 17,
+          "requestBytes": 46749
+        }
+      ]
+    },
+    {
+      "case": "freight",
+      "method": "rolling_summary",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 2,
+          "requestBytes": 4093
+        },
+        {
+          "turn": 4,
+          "calls": 2,
+          "requestBytes": 4093
+        },
+        {
+          "turn": 5,
+          "calls": 4,
+          "requestBytes": 8796
+        },
+        {
+          "turn": 6,
+          "calls": 4,
+          "requestBytes": 8796
+        },
+        {
+          "turn": 7,
+          "calls": 4,
+          "requestBytes": 8796
+        },
+        {
+          "turn": 8,
+          "calls": 6,
+          "requestBytes": 13902
+        },
+        {
+          "turn": 9,
+          "calls": 8,
+          "requestBytes": 18986
+        },
+        {
+          "turn": 10,
+          "calls": 8,
+          "requestBytes": 18986
+        },
+        {
+          "turn": 11,
+          "calls": 8,
+          "requestBytes": 18986
+        },
+        {
+          "turn": 12,
+          "calls": 8,
+          "requestBytes": 18986
+        },
+        {
+          "turn": 13,
+          "calls": 10,
+          "requestBytes": 24669
+        },
+        {
+          "turn": 14,
+          "calls": 10,
+          "requestBytes": 24669
+        },
+        {
+          "turn": 15,
+          "calls": 12,
+          "requestBytes": 30682
+        },
+        {
+          "turn": 16,
+          "calls": 12,
+          "requestBytes": 30682
+        },
+        {
+          "turn": 17,
+          "calls": 14,
+          "requestBytes": 37124
+        },
+        {
+          "turn": 18,
+          "calls": 15,
+          "requestBytes": 38388
+        },
+        {
+          "turn": 19,
+          "calls": 17,
+          "requestBytes": 44827
+        },
+        {
+          "turn": 20,
+          "calls": 17,
+          "requestBytes": 44827
+        },
+        {
+          "turn": 21,
+          "calls": 17,
+          "requestBytes": 44827
+        },
+        {
+          "turn": 22,
+          "calls": 17,
+          "requestBytes": 44827
+        },
+        {
+          "turn": 23,
+          "calls": 17,
+          "requestBytes": 44827
+        },
+        {
+          "turn": 24,
+          "calls": 19,
+          "requestBytes": 49731
+        }
+      ]
+    },
+    {
+      "case": "freight",
+      "method": "plain_json",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 1,
+          "requestBytes": 2462
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2462
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7599
+        },
+        {
+          "turn": 9,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 11,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 12,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 13,
+          "calls": 5,
+          "requestBytes": 13228
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13228
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 19540
+        },
+        {
+          "turn": 18,
+          "calls": 8,
+          "requestBytes": 20804
+        },
+        {
+          "turn": 19,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 20,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 22,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 25290
+        }
+      ]
+    },
+    {
+      "case": "freight",
+      "method": "belieflang_v3",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 1,
+          "requestBytes": 2462
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2462
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 4925
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7599
+        },
+        {
+          "turn": 9,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 11,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 12,
+          "calls": 4,
+          "requestBytes": 10278
+        },
+        {
+          "turn": 13,
+          "calls": 5,
+          "requestBytes": 13228
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13228
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 16320
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 19540
+        },
+        {
+          "turn": 18,
+          "calls": 8,
+          "requestBytes": 20804
+        },
+        {
+          "turn": 19,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 20,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 22,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 24019
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 25290
+        }
+      ]
+    },
+    {
+      "case": "freight",
+      "method": "full_history",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 1,
+          "requestBytes": 1978
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 1978
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4205
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 4205
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 4205
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 6767
+        },
+        {
+          "turn": 9,
+          "calls": 4,
+          "requestBytes": 9454
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 9454
+        },
+        {
+          "turn": 11,
+          "calls": 4,
+          "requestBytes": 9454
+        },
+        {
+          "turn": 12,
+          "calls": 4,
+          "requestBytes": 9454
+        },
+        {
+          "turn": 13,
+          "calls": 5,
+          "requestBytes": 12563
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 12563
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 15861
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 15861
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 19405
+        },
+        {
+          "turn": 18,
+          "calls": 8,
+          "requestBytes": 20669
+        },
+        {
+          "turn": 19,
+          "calls": 9,
+          "requestBytes": 24339
+        },
+        {
+          "turn": 20,
+          "calls": 9,
+          "requestBytes": 24339
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 24339
+        },
+        {
+          "turn": 22,
+          "calls": 9,
+          "requestBytes": 24339
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 24339
+        },
+        {
+          "turn": 24,
+          "calls": 11,
+          "requestBytes": 29562
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "plain_json",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2668
+        },
+        {
+          "turn": 5,
+          "calls": 1,
+          "requestBytes": 2668
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 8,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 9,
+          "calls": 3,
+          "requestBytes": 8172
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 11049
+        },
+        {
+          "turn": 11,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 12,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 13,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 18,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 19,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 20,
+          "calls": 8,
+          "requestBytes": 23867
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 22,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 26406
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "belieflang_v3",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2668
+        },
+        {
+          "turn": 5,
+          "calls": 1,
+          "requestBytes": 2668
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 8,
+          "calls": 2,
+          "requestBytes": 5326
+        },
+        {
+          "turn": 9,
+          "calls": 3,
+          "requestBytes": 8172
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 11049
+        },
+        {
+          "turn": 11,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 12,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 13,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13931
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 17090
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 18,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 19,
+          "calls": 7,
+          "requestBytes": 20378
+        },
+        {
+          "turn": 20,
+          "calls": 8,
+          "requestBytes": 23867
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 22,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25134
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 26406
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "full_history",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2096
+        },
+        {
+          "turn": 5,
+          "calls": 1,
+          "requestBytes": 2096
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 4458
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 4458
+        },
+        {
+          "turn": 8,
+          "calls": 2,
+          "requestBytes": 4458
+        },
+        {
+          "turn": 9,
+          "calls": 3,
+          "requestBytes": 7136
+        },
+        {
+          "turn": 10,
+          "calls": 4,
+          "requestBytes": 9965
+        },
+        {
+          "turn": 11,
+          "calls": 5,
+          "requestBytes": 12923
+        },
+        {
+          "turn": 12,
+          "calls": 5,
+          "requestBytes": 12923
+        },
+        {
+          "turn": 13,
+          "calls": 5,
+          "requestBytes": 12923
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 12923
+        },
+        {
+          "turn": 15,
+          "calls": 6,
+          "requestBytes": 16313
+        },
+        {
+          "turn": 16,
+          "calls": 6,
+          "requestBytes": 16313
+        },
+        {
+          "turn": 17,
+          "calls": 7,
+          "requestBytes": 19951
+        },
+        {
+          "turn": 18,
+          "calls": 7,
+          "requestBytes": 19951
+        },
+        {
+          "turn": 19,
+          "calls": 7,
+          "requestBytes": 19951
+        },
+        {
+          "turn": 20,
+          "calls": 8,
+          "requestBytes": 23916
+        },
+        {
+          "turn": 21,
+          "calls": 9,
+          "requestBytes": 25183
+        },
+        {
+          "turn": 22,
+          "calls": 9,
+          "requestBytes": 25183
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25183
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 26455
+        }
+      ]
+    },
+    {
+      "case": "specimen",
+      "method": "rolling_summary",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 4,
+          "calls": 2,
+          "requestBytes": 4514
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4514
+        },
+        {
+          "turn": 6,
+          "calls": 4,
+          "requestBytes": 9832
+        },
+        {
+          "turn": 7,
+          "calls": 4,
+          "requestBytes": 9832
+        },
+        {
+          "turn": 8,
+          "calls": 4,
+          "requestBytes": 9832
+        },
+        {
+          "turn": 9,
+          "calls": 6,
+          "requestBytes": 15534
+        },
+        {
+          "turn": 10,
+          "calls": 8,
+          "requestBytes": 21274
+        },
+        {
+          "turn": 11,
+          "calls": 10,
+          "requestBytes": 26994
+        },
+        {
+          "turn": 12,
+          "calls": 10,
+          "requestBytes": 26994
+        },
+        {
+          "turn": 13,
+          "calls": 10,
+          "requestBytes": 26994
+        },
+        {
+          "turn": 14,
+          "calls": 10,
+          "requestBytes": 26994
+        },
+        {
+          "turn": 15,
+          "calls": 12,
+          "requestBytes": 33321
+        },
+        {
+          "turn": 16,
+          "calls": 12,
+          "requestBytes": 33321
+        },
+        {
+          "turn": 17,
+          "calls": 14,
+          "requestBytes": 39895
+        },
+        {
+          "turn": 18,
+          "calls": 14,
+          "requestBytes": 39895
+        },
+        {
+          "turn": 19,
+          "calls": 14,
+          "requestBytes": 39895
+        },
+        {
+          "turn": 20,
+          "calls": 16,
+          "requestBytes": 46868
+        },
+        {
+          "turn": 21,
+          "calls": 17,
+          "requestBytes": 48135
+        },
+        {
+          "turn": 22,
+          "calls": 17,
+          "requestBytes": 48135
+        },
+        {
+          "turn": 23,
+          "calls": 17,
+          "requestBytes": 48135
+        },
+        {
+          "turn": 24,
+          "calls": 18,
+          "requestBytes": 49407
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "belieflang_v3",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 1,
+          "requestBytes": 2496
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2496
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 9,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 10,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 11,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 12,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 13,
+          "calls": 4,
+          "requestBytes": 10774
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 15,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 16,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 17,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 18,
+          "calls": 6,
+          "requestBytes": 17258
+        },
+        {
+          "turn": 19,
+          "calls": 6,
+          "requestBytes": 17258
+        },
+        {
+          "turn": 20,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 21,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 22,
+          "calls": 8,
+          "requestBytes": 24459
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25735
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 27003
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "full_history",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 1,
+          "requestBytes": 2003
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2003
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4258
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 4258
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 4258
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 6832
+        },
+        {
+          "turn": 9,
+          "calls": 3,
+          "requestBytes": 6832
+        },
+        {
+          "turn": 10,
+          "calls": 3,
+          "requestBytes": 6832
+        },
+        {
+          "turn": 11,
+          "calls": 3,
+          "requestBytes": 6832
+        },
+        {
+          "turn": 12,
+          "calls": 3,
+          "requestBytes": 6832
+        },
+        {
+          "turn": 13,
+          "calls": 4,
+          "requestBytes": 9946
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13185
+        },
+        {
+          "turn": 15,
+          "calls": 5,
+          "requestBytes": 13185
+        },
+        {
+          "turn": 16,
+          "calls": 5,
+          "requestBytes": 13185
+        },
+        {
+          "turn": 17,
+          "calls": 5,
+          "requestBytes": 13185
+        },
+        {
+          "turn": 18,
+          "calls": 6,
+          "requestBytes": 16850
+        },
+        {
+          "turn": 19,
+          "calls": 6,
+          "requestBytes": 16850
+        },
+        {
+          "turn": 20,
+          "calls": 7,
+          "requestBytes": 20715
+        },
+        {
+          "turn": 21,
+          "calls": 7,
+          "requestBytes": 20715
+        },
+        {
+          "turn": 22,
+          "calls": 8,
+          "requestBytes": 24826
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 26102
+        },
+        {
+          "turn": 24,
+          "calls": 11,
+          "requestBytes": 31380
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "rolling_summary",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 2,
+          "requestBytes": 4140
+        },
+        {
+          "turn": 4,
+          "calls": 2,
+          "requestBytes": 4140
+        },
+        {
+          "turn": 5,
+          "calls": 4,
+          "requestBytes": 8892
+        },
+        {
+          "turn": 6,
+          "calls": 4,
+          "requestBytes": 8892
+        },
+        {
+          "turn": 7,
+          "calls": 4,
+          "requestBytes": 8892
+        },
+        {
+          "turn": 8,
+          "calls": 6,
+          "requestBytes": 14030
+        },
+        {
+          "turn": 9,
+          "calls": 6,
+          "requestBytes": 14030
+        },
+        {
+          "turn": 10,
+          "calls": 6,
+          "requestBytes": 14030
+        },
+        {
+          "turn": 11,
+          "calls": 6,
+          "requestBytes": 14030
+        },
+        {
+          "turn": 12,
+          "calls": 6,
+          "requestBytes": 14030
+        },
+        {
+          "turn": 13,
+          "calls": 8,
+          "requestBytes": 19979
+        },
+        {
+          "turn": 14,
+          "calls": 10,
+          "requestBytes": 25908
+        },
+        {
+          "turn": 15,
+          "calls": 10,
+          "requestBytes": 25908
+        },
+        {
+          "turn": 16,
+          "calls": 10,
+          "requestBytes": 25908
+        },
+        {
+          "turn": 17,
+          "calls": 10,
+          "requestBytes": 25908
+        },
+        {
+          "turn": 18,
+          "calls": 12,
+          "requestBytes": 32443
+        },
+        {
+          "turn": 19,
+          "calls": 12,
+          "requestBytes": 32443
+        },
+        {
+          "turn": 20,
+          "calls": 14,
+          "requestBytes": 39336
+        },
+        {
+          "turn": 21,
+          "calls": 14,
+          "requestBytes": 39336
+        },
+        {
+          "turn": 22,
+          "calls": 16,
+          "requestBytes": 46668
+        },
+        {
+          "turn": 23,
+          "calls": 17,
+          "requestBytes": 47944
+        },
+        {
+          "turn": 24,
+          "calls": 19,
+          "requestBytes": 52910
+        }
+      ]
+    },
+    {
+      "case": "gallery",
+      "method": "plain_json",
+      "schedule": "dense",
+      "points": [
+        {
+          "turn": 1,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 2,
+          "calls": 0,
+          "requestBytes": 0
+        },
+        {
+          "turn": 3,
+          "calls": 1,
+          "requestBytes": 2496
+        },
+        {
+          "turn": 4,
+          "calls": 1,
+          "requestBytes": 2496
+        },
+        {
+          "turn": 5,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 6,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 7,
+          "calls": 2,
+          "requestBytes": 4988
+        },
+        {
+          "turn": 8,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 9,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 10,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 11,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 12,
+          "calls": 3,
+          "requestBytes": 7675
+        },
+        {
+          "turn": 13,
+          "calls": 4,
+          "requestBytes": 10774
+        },
+        {
+          "turn": 14,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 15,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 16,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 17,
+          "calls": 5,
+          "requestBytes": 13879
+        },
+        {
+          "turn": 18,
+          "calls": 6,
+          "requestBytes": 17258
+        },
+        {
+          "turn": 19,
+          "calls": 6,
+          "requestBytes": 17258
+        },
+        {
+          "turn": 20,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 21,
+          "calls": 7,
+          "requestBytes": 20798
+        },
+        {
+          "turn": 22,
+          "calls": 8,
+          "requestBytes": 24459
+        },
+        {
+          "turn": 23,
+          "calls": 9,
+          "requestBytes": 25735
+        },
+        {
+          "turn": 24,
+          "calls": 10,
+          "requestBytes": 27003
+        }
+      ]
+    }
+  ]
+}
