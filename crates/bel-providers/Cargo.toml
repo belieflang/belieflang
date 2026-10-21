@@ -1,0 +1,19 @@
+[package]
+name = "bel-providers"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "Inference provider integrations (Local Heuristic, Jev, OpenAI) for BeliefLang"
+
+[dependencies]
+bel-syntax = { path = "../bel-syntax" }
+bel-runtime = { path = "../bel-runtime" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }
+reqwest = { workspace = true }
+async-trait = { workspace = true }
+indexmap = { workspace = true }
