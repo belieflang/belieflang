@@ -90,8 +90,8 @@ impl InferBeliefsAdapter for JevInferAdapter {
         source: &RuntimeValue,
         _context: &InferContext,
     ) -> Result<BeliefPatch, String> {
-        let source_str = match source {
-            Value::String(s) => s,
+        let source_str = match source.as_str() {
+            Some(s) => s,
             _ => return Err("Jev inference currently requires a string source".to_string()),
         };
 
@@ -129,7 +129,7 @@ impl InferBeliefsAdapter for JevInferAdapter {
                 }
             }
         } else {
-            Value::String(source_str.clone())
+            Value::String(source_str.to_string())
         };
 
         let endpoint = self
@@ -256,18 +256,22 @@ impl InferBeliefsAdapter for JevInferAdapter {
         user_values.insert("budget_sensitive".to_string(), budget_val);
         user_values.insert("prefers_direct".to_string(), direct_val);
 
-        if let Some(usage_obj) = data.get("usage").and_then(|u| u.as_object()) {
-            let input_tokens =
-                check_token_count(usage_obj.get("input_tokens"), "usage.input_tokens")?;
-            let output_tokens =
-                check_token_count(usage_obj.get("output_tokens"), "usage.output_tokens")?;
+        let usage_val = data
+            .get("usage")
+            .ok_or_else(|| "invalid Jev object at usage".to_string())?;
+        let usage_obj = usage_val
+            .as_object()
+            .ok_or_else(|| "invalid Jev object at usage".to_string())?;
 
-            if let Some(on_usage) = &self.options.on_usage {
-                on_usage(JevUsage {
-                    input_tokens,
-                    output_tokens,
-                });
-            }
+        let input_tokens = check_token_count(usage_obj.get("input_tokens"), "usage.input_tokens")?;
+        let output_tokens =
+            check_token_count(usage_obj.get("output_tokens"), "usage.output_tokens")?;
+
+        if let Some(on_usage) = &self.options.on_usage {
+            on_usage(JevUsage {
+                input_tokens,
+                output_tokens,
+            });
         }
 
         let mut patch = IndexMap::new();

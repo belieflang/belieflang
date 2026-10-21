@@ -23,7 +23,37 @@ use std::pin::Pin;
 use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-pub type ToolFn = Arc<dyn Fn() -> Pin<Box<dyn Future<Output = RuntimeValue> + Send>> + Send + Sync>;
+pub trait IntoToolResult: Send {
+    fn into_tool_result(self) -> Result<RuntimeValue, String>;
+}
+
+impl IntoToolResult for RuntimeValue {
+    fn into_tool_result(self) -> Result<RuntimeValue, String> {
+        Ok(self)
+    }
+}
+
+impl IntoToolResult for Value {
+    fn into_tool_result(self) -> Result<RuntimeValue, String> {
+        Ok(RuntimeValue::from(self))
+    }
+}
+
+impl<E: std::fmt::Display + Send> IntoToolResult for Result<RuntimeValue, E> {
+    fn into_tool_result(self) -> Result<RuntimeValue, String> {
+        self.map_err(|e| e.to_string())
+    }
+}
+
+impl<E: std::fmt::Display + Send> IntoToolResult for Result<Value, E> {
+    fn into_tool_result(self) -> Result<RuntimeValue, String> {
+        self.map(RuntimeValue::from).map_err(|e| e.to_string())
+    }
+}
+
+pub type ToolFn = Arc<
+    dyn Fn() -> Pin<Box<dyn Future<Output = Result<RuntimeValue, String>> + Send>> + Send + Sync,
+>;
 
 #[derive(Clone, Default)]
 pub struct ToolRegistry {
@@ -37,26 +67,33 @@ impl ToolRegistry {
         }
     }
 
-    pub fn insert_sync<F>(&mut self, name: &str, f: F)
+    pub fn insert_sync<F, R>(&mut self, name: &str, f: F)
     where
-        F: Fn() -> RuntimeValue + Send + Sync + 'static,
+        F: Fn() -> R + Send + Sync + 'static,
+        R: IntoToolResult + 'static,
     {
         self.tools.insert(
             name.to_string(),
             Arc::new(move || {
-                let res = f();
+                let res = f().into_tool_result();
                 Box::pin(async move { res })
             }),
         );
     }
 
-    pub fn insert_async<F, Fut>(&mut self, name: &str, f: F)
+    pub fn insert_async<F, Fut, R>(&mut self, name: &str, f: F)
     where
         F: Fn() -> Fut + Send + Sync + 'static,
-        Fut: Future<Output = RuntimeValue> + Send + 'static,
+        Fut: Future<Output = R> + Send + 'static,
+        R: IntoToolResult + 'static,
     {
-        self.tools
-            .insert(name.to_string(), Arc::new(move || Box::pin(f())));
+        self.tools.insert(
+            name.to_string(),
+            Arc::new(move || {
+                let fut = f();
+                Box::pin(async move { fut.await.into_tool_result() })
+            }),
+        );
     }
 
     pub fn get(&self, name: &str) -> Option<&ToolFn> {
@@ -102,8 +139,8 @@ impl InferBeliefsAdapter for HeuristicInferAdapter {
         source: &RuntimeValue,
         _context: &InferContext,
     ) -> Result<BeliefPatch, String> {
-        let text = match source {
-            Value::String(s) => s.to_lowercase(),
+        let text = match source.as_str() {
+            Some(s) => s.to_lowercase(),
             _ => return Ok(IndexMap::new()),
         };
 
@@ -243,7 +280,7 @@ impl BeliefRuntime {
         });
         final_tools.insert_sync("rank_flights", || {
             println!("[tool] rank_flights()");
-            Value::Null
+            RuntimeValue::Null
         });
 
         // Merge user tools over defaults
@@ -580,11 +617,11 @@ impl BeliefRuntime {
             Some(v) => v.clone(),
             None => {
                 if let Some(dist) = self.state.get(root) {
-                    let mut map = serde_json::Map::new();
+                    let mut map = IndexMap::new();
                     for (k, v) in dist {
-                        map.insert(k.clone(), serde_json::json!(v));
+                        map.insert(k.clone(), RuntimeValue::Number(*v));
                     }
-                    Value::Object(map)
+                    RuntimeValue::Object(Arc::new(map))
                 } else {
                     return Err(format!("unknown reference {path}"));
                 }
@@ -593,7 +630,7 @@ impl BeliefRuntime {
 
         for part in &parts[1..] {
             match current {
-                Value::Object(map) => {
+                RuntimeValue::Object(map) => {
                     if let Some(v) = map.get(*part) {
                         current = v.clone();
                     } else {
@@ -613,17 +650,17 @@ impl BeliefRuntime {
 
     pub async fn eval_value(&self, expr: &ValueExpression) -> Result<RuntimeValue, String> {
         match expr {
-            ValueExpression::Number { value } => Ok(serde_json::json!(value)),
-            ValueExpression::String { value } => Ok(Value::String(value.clone())),
-            ValueExpression::Boolean { value } => Ok(Value::Bool(*value)),
+            ValueExpression::Number { value } => Ok(RuntimeValue::Number(*value)),
+            ValueExpression::String { value } => Ok(RuntimeValue::String(value.clone())),
+            ValueExpression::Boolean { value } => Ok(RuntimeValue::Bool(*value)),
             ValueExpression::Identifier { name } => self.resolve_path(name),
             ValueExpression::Metric { function, arg } => match function {
                 bel_syntax::ast::ConditionFunction::Confidence => {
-                    Ok(serde_json::json!(self.confidence(arg)))
+                    Ok(RuntimeValue::Number(self.confidence(arg)))
                 }
                 bel_syntax::ast::ConditionFunction::Entropy => {
                     let ent = self.entropy(arg)?;
-                    Ok(serde_json::json!(ent))
+                    Ok(RuntimeValue::Number(ent))
                 }
             },
             ValueExpression::Call { tool_name } => self.call_tool(tool_name).await,
@@ -634,10 +671,10 @@ impl BeliefRuntime {
         self.log_trace(&format!("call {tool_name}()"));
 
         if let Some(tool) = self.tools.get(tool_name) {
-            Ok(tool().await)
+            tool().await
         } else {
             println!("[call] {tool_name}()");
-            Ok(Value::Null)
+            Ok(RuntimeValue::Null)
         }
     }
 
@@ -938,7 +975,7 @@ impl BeliefRuntime {
     async fn execute_observe(&mut self, statement: &ObserveStatement) -> Result<(), String> {
         let observed_val = match &statement.value {
             Some(expr) => self.eval_value(expr).await?,
-            None => Value::Null,
+            None => RuntimeValue::Null,
         };
 
         let obs = ObservationRecord {
@@ -1028,7 +1065,7 @@ impl BeliefRuntime {
     fn coerce_patch_entry(
         &self,
         belief_name: &str,
-        raw: &serde_json::Map<String, Value>,
+        raw: &IndexMap<String, RuntimeValue>,
     ) -> Result<BeliefPatchEntry, String> {
         if let Some(values_val) = raw.get("values") {
             let values_obj = values_val.as_object().ok_or_else(|| {
@@ -1037,7 +1074,7 @@ impl BeliefRuntime {
             let values = self.as_belief_distribution(values_obj, belief_name)?;
 
             let cardinality = match raw.get("cardinality") {
-                Some(Value::String(s)) => {
+                Some(RuntimeValue::String(s)) => {
                     if s == "exclusive" {
                         Some(BeliefCardinality::Exclusive)
                     } else if s == "multi" {
@@ -1050,14 +1087,15 @@ impl BeliefRuntime {
                 }
                 Some(other) => {
                     return Err(format!(
-                        "invalid cardinality '{other}' for belief {belief_name}"
+                        "invalid cardinality '{}' for belief {belief_name}",
+                        format_value(other)
                     ))
                 }
                 None => None,
             };
 
             let domain = match raw.get("domain") {
-                Some(Value::String(s)) => {
+                Some(RuntimeValue::String(s)) => {
                     if s == "open" {
                         Some(BeliefDomain::Open)
                     } else if s == "closed" {
@@ -1067,7 +1105,10 @@ impl BeliefRuntime {
                     }
                 }
                 Some(other) => {
-                    return Err(format!("invalid domain '{other}' for belief {belief_name}"))
+                    return Err(format!(
+                        "invalid domain '{}' for belief {belief_name}",
+                        format_value(other)
+                    ))
                 }
                 None => None,
             };
@@ -1089,7 +1130,7 @@ impl BeliefRuntime {
 
     fn as_belief_distribution(
         &self,
-        source: &serde_json::Map<String, Value>,
+        source: &IndexMap<String, RuntimeValue>,
         belief_name: &str,
     ) -> Result<BeliefDistribution, String> {
         if source.is_empty() {
@@ -1099,21 +1140,20 @@ impl BeliefRuntime {
         let mut values = IndexMap::new();
         for (label, raw_val) in source {
             let num = match raw_val {
-                Value::Number(n) => n.as_f64().ok_or_else(|| {
-                    format!("belief patch {belief_name}.{label} must be a finite number")
-                })?,
+                RuntimeValue::Number(n) => {
+                    if !n.is_finite() {
+                        return Err(format!(
+                            "belief patch {belief_name}.{label} must be a finite number"
+                        ));
+                    }
+                    *n
+                }
                 _ => {
                     return Err(format!(
                         "belief patch {belief_name}.{label} must be a finite number"
                     ))
                 }
             };
-
-            if !num.is_finite() {
-                return Err(format!(
-                    "belief patch {belief_name}.{label} must be a finite number"
-                ));
-            }
 
             values.insert(label.clone(), num);
         }

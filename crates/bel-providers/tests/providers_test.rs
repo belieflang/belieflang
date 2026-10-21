@@ -201,6 +201,182 @@ async fn jev_rejects_malformed_probabilities() {
 }
 
 #[tokio::test]
+async fn jev_rejects_missing_or_malformed_usage() {
+    // 1. Missing usage object entirely
+    let transport_missing = MockTransport::new(|_url, _headers, _body| {
+        Ok(HttpResponse {
+            status: 200,
+            body: json!({
+                "answers": {
+                    "intent": {
+                        "type": "choice",
+                        "probabilities": { "book_flight": 0.8, "book_hotel": 0.1, "unknown": 0.1 }
+                    },
+                    "budget_sensitive": { "type": "noul", "noul": 0.5 },
+                    "prefers_direct": { "type": "noul", "noul": 0.5 }
+                }
+            })
+            .to_string(),
+        })
+    });
+
+    let adapter_missing = JevInferAdapter::new(JevOptions {
+        api_key: "test-key".to_string(),
+        model: None,
+        chat_snapshot: false,
+        chat_history: false,
+        endpoint: None,
+        transport: Some(Arc::new(transport_missing)),
+        on_usage: None,
+    })
+    .unwrap();
+
+    let mut runtime1 = BeliefRuntime::new(
+        bel_runtime::ToolRegistry::new(),
+        RuntimeOptions {
+            infer_beliefs: Some(Arc::new(adapter_missing)),
+            ..Default::default()
+        },
+    );
+
+    runtime1
+        .assign(
+            "message",
+            &ValueExpression::String {
+                value: "flight".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+
+    let res1 = runtime1
+        .infer(&ValueExpression::Identifier {
+            name: "message".to_string(),
+        })
+        .await;
+
+    assert!(res1.is_err());
+    assert_eq!(res1.err().unwrap(), "invalid Jev object at usage");
+
+    // 2. Malformed usage (not an object)
+    let transport_malformed = MockTransport::new(|_url, _headers, _body| {
+        Ok(HttpResponse {
+            status: 200,
+            body: json!({
+                "answers": {
+                    "intent": {
+                        "type": "choice",
+                        "probabilities": { "book_flight": 0.8, "book_hotel": 0.1, "unknown": 0.1 }
+                    },
+                    "budget_sensitive": { "type": "noul", "noul": 0.5 },
+                    "prefers_direct": { "type": "noul", "noul": 0.5 }
+                },
+                "usage": "non-object-string"
+            })
+            .to_string(),
+        })
+    });
+
+    let adapter_malformed = JevInferAdapter::new(JevOptions {
+        api_key: "test-key".to_string(),
+        model: None,
+        chat_snapshot: false,
+        chat_history: false,
+        endpoint: None,
+        transport: Some(Arc::new(transport_malformed)),
+        on_usage: None,
+    })
+    .unwrap();
+
+    let mut runtime2 = BeliefRuntime::new(
+        bel_runtime::ToolRegistry::new(),
+        RuntimeOptions {
+            infer_beliefs: Some(Arc::new(adapter_malformed)),
+            ..Default::default()
+        },
+    );
+
+    runtime2
+        .assign(
+            "message",
+            &ValueExpression::String {
+                value: "flight".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+
+    let res2 = runtime2
+        .infer(&ValueExpression::Identifier {
+            name: "message".to_string(),
+        })
+        .await;
+
+    assert!(res2.is_err());
+    assert_eq!(res2.err().unwrap(), "invalid Jev object at usage");
+
+    // 3. Malformed token counts in usage
+    let transport_invalid_tokens = MockTransport::new(|_url, _headers, _body| {
+        Ok(HttpResponse {
+            status: 200,
+            body: json!({
+                "answers": {
+                    "intent": {
+                        "type": "choice",
+                        "probabilities": { "book_flight": 0.8, "book_hotel": 0.1, "unknown": 0.1 }
+                    },
+                    "budget_sensitive": { "type": "noul", "noul": 0.5 },
+                    "prefers_direct": { "type": "noul", "noul": 0.5 }
+                },
+                "usage": { "input_tokens": "invalid-str", "output_tokens": 10 }
+            })
+            .to_string(),
+        })
+    });
+
+    let adapter_invalid_tokens = JevInferAdapter::new(JevOptions {
+        api_key: "test-key".to_string(),
+        model: None,
+        chat_snapshot: false,
+        chat_history: false,
+        endpoint: None,
+        transport: Some(Arc::new(transport_invalid_tokens)),
+        on_usage: None,
+    })
+    .unwrap();
+
+    let mut runtime3 = BeliefRuntime::new(
+        bel_runtime::ToolRegistry::new(),
+        RuntimeOptions {
+            infer_beliefs: Some(Arc::new(adapter_invalid_tokens)),
+            ..Default::default()
+        },
+    );
+
+    runtime3
+        .assign(
+            "message",
+            &ValueExpression::String {
+                value: "flight".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+
+    let res3 = runtime3
+        .infer(&ValueExpression::Identifier {
+            name: "message".to_string(),
+        })
+        .await;
+
+    assert!(res3.is_err());
+    assert_eq!(
+        res3.err().unwrap(),
+        "invalid Jev token count at usage.input_tokens"
+    );
+}
+
+#[tokio::test]
 async fn openai_structured_response_feeds_beliefs_and_reports_token_usage() {
     let input_tokens = Arc::new(AtomicU64::new(0));
     let output_tokens = Arc::new(AtomicU64::new(0));

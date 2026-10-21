@@ -158,8 +158,8 @@ impl InferBeliefsAdapter for OpenAIInferAdapter {
         source: &RuntimeValue,
         _context: &InferContext,
     ) -> Result<BeliefPatch, String> {
-        let source_str = match source {
-            Value::String(s) => s,
+        let source_str = match source.as_str() {
+            Some(s) => s,
             _ => return Err("ChatGPT inference currently requires a string source".to_string()),
         };
 

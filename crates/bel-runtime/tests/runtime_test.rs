@@ -80,7 +80,7 @@ async fn stores_literal_variables() {
         .await
         .unwrap();
 
-    assert_eq!(runtime.get_vars().get("threshold"), Some(&json!(0.7)));
+    assert_eq!(runtime.get_vars().get("threshold").unwrap(), &json!(0.7));
 }
 
 #[tokio::test]
@@ -101,8 +101,8 @@ async fn stores_tool_return_values() {
         .unwrap();
 
     assert_eq!(
-        runtime.get_vars().get("result"),
-        Some(&json!({ "count": 2 }))
+        runtime.get_vars().get("result").unwrap(),
+        &json!({ "count": 2 })
     );
     assert_eq!(runtime.resolve_path("result.count").unwrap(), json!(2));
 }
@@ -160,8 +160,8 @@ async fn stores_observations_and_exposes_latest_observed_value_as_variable() {
     assert_eq!(obs[0].event_name, "user_message");
     assert_eq!(obs[0].value, json!("book me a flight"));
     assert_eq!(
-        runtime.get_vars().get("user_message"),
-        Some(&json!("book me a flight"))
+        runtime.get_vars().get("user_message").unwrap(),
+        &json!("book me a flight")
     );
 }
 
@@ -242,7 +242,11 @@ fn merges_belief_patches_with_multi_value_clamping() {
     });
 
     runtime
-        .merge_beliefs_from_runtime_value(&patch_json, ProvenanceOrigin::Merge, "test")
+        .merge_beliefs_from_runtime_value(
+            &RuntimeValue::from(patch_json),
+            ProvenanceOrigin::Merge,
+            "test",
+        )
         .unwrap();
 
     assert_eq!(runtime.confidence("constraint.cheap"), 1.0);
@@ -357,4 +361,205 @@ fn belief_snapshots_restore_distributions_and_open_mass_without_sharing_mutable_
     assert_eq!(restored.confidence("user.budget_sensitive"), 0.8);
 
     assert_eq!(original.confidence("destination.berlin"), 0.6);
+}
+
+#[tokio::test]
+async fn sync_and_async_tool_failures_propagate_and_halt_execution() {
+    let mut tools = ToolRegistry::new();
+    tools.insert_sync(
+        "failing_sync",
+        || -> Result<serde_json::Value, &'static str> {
+            Err("sync tool database connection failed")
+        },
+    );
+    tools.insert_async("failing_async", || async {
+        Result::<serde_json::Value, String>::Err("async tool timed out".to_string())
+    });
+
+    let mut runtime = BeliefRuntime::new(tools, RuntimeOptions::default());
+
+    // Statement assignment tool failure
+    let assign_result = runtime
+        .assign(
+            "x",
+            &ValueExpression::Call {
+                tool_name: "failing_sync".to_string(),
+            },
+        )
+        .await;
+    assert!(assign_result.is_err());
+    assert!(assign_result
+        .unwrap_err()
+        .contains("sync tool database connection failed"));
+
+    // Action tool failure
+    let action_result = runtime
+        .execute_action(&bel_syntax::ast::Action::Call {
+            tool_name: "failing_async".to_string(),
+        })
+        .await;
+    assert!(action_result.is_err());
+    assert!(action_result.unwrap_err().contains("async tool timed out"));
+
+    // Rule condition tool failure
+    let rule = bel_syntax::ast::Rule {
+        condition: bel_syntax::ast::ConditionExpression::Comparison {
+            left: Box::new(ValueExpression::Call {
+                tool_name: "failing_sync".to_string(),
+            }),
+            op: bel_syntax::ast::Operator::Gt,
+            right: Box::new(ValueExpression::Number { value: 0.0 }),
+        },
+        action: bel_syntax::ast::Action::Call {
+            tool_name: "rank_flights".to_string(),
+        },
+    };
+    let eval_res = runtime.eval_condition(&rule, 0).await;
+    assert!(eval_res.is_err());
+    assert!(eval_res
+        .unwrap_err()
+        .contains("sync tool database connection failed"));
+}
+
+#[tokio::test]
+async fn comparison_identity_semantics_match_javascript() {
+    let mut tools = ToolRegistry::new();
+    tools.insert_sync("make_obj", || json!({ "count": 42 }));
+    tools.insert_sync("make_arr", || json!([1, 2, 3]));
+
+    let mut runtime = BeliefRuntime::new(tools, RuntimeOptions::default());
+
+    // Create two distinct objects with identical content
+    runtime
+        .assign(
+            "a",
+            &ValueExpression::Call {
+                tool_name: "make_obj".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+    runtime
+        .assign(
+            "b",
+            &ValueExpression::Call {
+                tool_name: "make_obj".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+    // Assign c = a (shares the same Arc reference)
+    runtime
+        .assign(
+            "c",
+            &ValueExpression::Identifier {
+                name: "a".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+
+    let val_a = runtime.resolve_path("a").unwrap();
+    let val_b = runtime.resolve_path("b").unwrap();
+    let val_c = runtime.resolve_path("c").unwrap();
+
+    // In JS: a === b is false, a === c is true, a !== b is true, a !== c is false
+    assert!(!compare_values(&val_a, bel_syntax::ast::Operator::Eq, &val_b).unwrap());
+    assert!(compare_values(&val_a, bel_syntax::ast::Operator::Eq, &val_c).unwrap());
+    assert!(compare_values(&val_a, bel_syntax::ast::Operator::Neq, &val_b).unwrap());
+    assert!(!compare_values(&val_a, bel_syntax::ast::Operator::Neq, &val_c).unwrap());
+
+    // Arrays: arr1 === arr2 is false, arr1 === arr3 is true
+    runtime
+        .assign(
+            "arr1",
+            &ValueExpression::Call {
+                tool_name: "make_arr".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+    runtime
+        .assign(
+            "arr2",
+            &ValueExpression::Call {
+                tool_name: "make_arr".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+    runtime
+        .assign(
+            "arr3",
+            &ValueExpression::Identifier {
+                name: "arr1".to_string(),
+            },
+        )
+        .await
+        .unwrap();
+
+    let arr1 = runtime.resolve_path("arr1").unwrap();
+    let arr2 = runtime.resolve_path("arr2").unwrap();
+    let arr3 = runtime.resolve_path("arr3").unwrap();
+
+    assert!(!compare_values(&arr1, bel_syntax::ast::Operator::Eq, &arr2).unwrap());
+    assert!(compare_values(&arr1, bel_syntax::ast::Operator::Eq, &arr3).unwrap());
+}
+
+#[test]
+fn numeric_coercion_semantics_match_javascript() {
+    let empty_str = RuntimeValue::from("");
+    let spaces_str = RuntimeValue::from("   ");
+    let zero = RuntimeValue::from(0.0);
+    let one = RuntimeValue::from(1.0);
+    let null_val = RuntimeValue::Null;
+    let false_val = RuntimeValue::from(false);
+    let true_val = RuntimeValue::from(true);
+    let empty_arr = RuntimeValue::from(json!([]));
+    let num_arr = RuntimeValue::from(json!(["42"]));
+    let multi_arr = RuntimeValue::from(json!([1, 2]));
+    let obj = RuntimeValue::from(json!({}));
+    let nan_str = RuntimeValue::from("abc");
+
+    // JS strict equality (===): different types are not equal
+    assert!(!compare_values(&empty_str, bel_syntax::ast::Operator::Eq, &zero).unwrap());
+    assert!(!compare_values(&null_val, bel_syntax::ast::Operator::Eq, &zero).unwrap());
+    assert!(!compare_values(&false_val, bel_syntax::ast::Operator::Eq, &zero).unwrap());
+    assert!(!compare_values(&true_val, bel_syntax::ast::Operator::Eq, &one).unwrap());
+
+    // Relational comparisons coerce operands like Number(val) in JavaScript
+    // Number("") === 0, so "" < 1 is true, "" <= 0 is true
+    assert!(compare_values(&empty_str, bel_syntax::ast::Operator::Lt, &one).unwrap());
+    assert!(compare_values(&empty_str, bel_syntax::ast::Operator::Lte, &zero).unwrap());
+    assert!(compare_values(&spaces_str, bel_syntax::ast::Operator::Lt, &one).unwrap());
+
+    // Number(null) === 0
+    assert!(compare_values(&null_val, bel_syntax::ast::Operator::Lt, &one).unwrap());
+    assert!(compare_values(&null_val, bel_syntax::ast::Operator::Lte, &zero).unwrap());
+
+    // Number(false) === 0, Number(true) === 1
+    assert!(compare_values(&false_val, bel_syntax::ast::Operator::Lt, &one).unwrap());
+    assert!(compare_values(&true_val, bel_syntax::ast::Operator::Lte, &one).unwrap());
+
+    // Number([]) === 0
+    assert!(compare_values(&empty_arr, bel_syntax::ast::Operator::Lt, &one).unwrap());
+
+    // Number(["42"]) === 42
+    let forty = RuntimeValue::from(40.0);
+    assert!(compare_values(&num_arr, bel_syntax::ast::Operator::Gt, &forty).unwrap());
+
+    // Coercion resulting in NaN errors out with "Operator <op> requires numeric operands"
+    assert!(
+        compare_values(&multi_arr, bel_syntax::ast::Operator::Gt, &zero)
+            .unwrap_err()
+            .contains("requires numeric operands")
+    );
+    assert!(compare_values(&obj, bel_syntax::ast::Operator::Gt, &zero)
+        .unwrap_err()
+        .contains("requires numeric operands"));
+    assert!(
+        compare_values(&nan_str, bel_syntax::ast::Operator::Lt, &one)
+            .unwrap_err()
+            .contains("requires numeric operands")
+    );
 }
