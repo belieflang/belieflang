@@ -363,6 +363,58 @@ fn belief_snapshots_restore_distributions_and_open_mass_without_sharing_mutable_
     assert_eq!(original.confidence("destination.berlin"), 0.6);
 }
 
+#[test]
+fn load_belief_snapshot_is_atomic_on_failure() {
+    let mut runtime = BeliefRuntime::new(ToolRegistry::new(), RuntimeOptions::default());
+
+    let mut valid_vals = BeliefDistribution::new();
+    valid_vals.insert("opt1".to_string(), 0.8);
+    valid_vals.insert("opt2".to_string(), 0.2);
+
+    let mut invalid_vals = BeliefDistribution::new();
+    invalid_vals.insert("bad1".to_string(), 0.0);
+    invalid_vals.insert("bad2".to_string(), 0.0);
+
+    let mut beliefs = indexmap::IndexMap::new();
+    beliefs.insert(
+        "valid_belief".to_string(),
+        BeliefSnapshotEntry {
+            cardinality: BeliefCardinality::Exclusive,
+            domain: BeliefDomain::Closed,
+            values: valid_vals,
+        },
+    );
+    beliefs.insert(
+        "invalid_belief".to_string(),
+        BeliefSnapshotEntry {
+            cardinality: BeliefCardinality::Exclusive,
+            domain: BeliefDomain::Closed,
+            values: invalid_vals,
+        },
+    );
+
+    let snapshot = BeliefSnapshot {
+        version: 1,
+        beliefs,
+    };
+
+    let result = runtime.load_belief_snapshot(&snapshot);
+    assert!(result.is_err());
+    assert!(result
+        .unwrap_err()
+        .contains("belief invalid_belief has non-positive probability mass"));
+
+    // Assert that failed restoration leaves the runtime completely unchanged
+    assert!(runtime.get_state().is_empty());
+    assert!(runtime.get_provenance().is_empty());
+    assert_eq!(runtime.confidence("valid_belief.opt1"), 0.0);
+    assert_eq!(runtime.confidence("invalid_belief.bad1"), 0.0);
+    assert_eq!(
+        runtime.explain_belief("valid_belief.opt1").unwrap().len(),
+        0
+    );
+}
+
 #[tokio::test]
 async fn sync_and_async_tool_failures_propagate_and_halt_execution() {
     let mut tools = ToolRegistry::new();

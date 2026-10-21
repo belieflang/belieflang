@@ -389,14 +389,75 @@ impl BeliefRuntime {
             return Err("invalid belief snapshot".to_string());
         }
 
+        let mut staged_state = self.state.clone();
+        let mut staged_meta = self.belief_meta.clone();
+        let mut staged_provenance = self.provenance.clone();
+        let mut staged_next_prov_id = self.next_provenance_id;
+        let mut trace_logs = Vec::new();
+        let timestamp = (self.now)();
+
         for (name, entry) in &snapshot.beliefs {
-            self.load_belief(&BeliefBlock {
-                name: name.clone(),
+            let mut trace_msgs = Vec::new();
+            let normalized = normalize_belief(
+                name,
+                &entry.values,
+                entry.cardinality,
+                entry.domain,
+                false,
+                |msg| trace_msgs.push(msg),
+            )?;
+
+            staged_state.insert(name.clone(), normalized.values.clone());
+            let meta = BeliefMeta {
                 cardinality: entry.cardinality,
                 domain: entry.domain,
-                values: entry.values.clone(),
-            })?;
+                open_mass: normalized.open_mass,
+            };
+            staged_meta.insert(name.clone(), meta.clone());
+
+            let source = format!("belief {name}");
+            for (label, &value) in &normalized.values {
+                staged_provenance.push(ProvenanceRecord {
+                    id: staged_next_prov_id,
+                    timestamp,
+                    belief_name: name.clone(),
+                    label: label.clone(),
+                    value,
+                    cardinality: meta.cardinality,
+                    domain: meta.domain,
+                    source: source.clone(),
+                    origin: ProvenanceOrigin::Load,
+                });
+                staged_next_prov_id += 1;
+            }
+
+            if meta.cardinality == BeliefCardinality::Exclusive && meta.domain == BeliefDomain::Open
+            {
+                staged_provenance.push(ProvenanceRecord {
+                    id: staged_next_prov_id,
+                    timestamp,
+                    belief_name: name.clone(),
+                    label: "other".to_string(),
+                    value: meta.open_mass,
+                    cardinality: meta.cardinality,
+                    domain: meta.domain,
+                    source: source.clone(),
+                    origin: ProvenanceOrigin::Load,
+                });
+                staged_next_prov_id += 1;
+            }
+
+            trace_logs.extend(trace_msgs);
         }
+
+        // Commit all staged state atomically
+        for msg in trace_logs {
+            self.log_trace(&msg);
+        }
+        self.state = staged_state;
+        self.belief_meta = staged_meta;
+        self.provenance = staged_provenance;
+        self.next_provenance_id = staged_next_prov_id;
 
         Ok(())
     }

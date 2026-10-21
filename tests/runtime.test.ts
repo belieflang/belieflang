@@ -304,3 +304,35 @@ test("belief snapshots restore distributions and open mass without sharing mutab
   assert.equal(restored.confidence("destination.berlin"), 0.6);
   assert.equal(original.confidence("destination.berlin"), 0.6);
 });
+
+test("loadBeliefSnapshot() restoration is atomic on failure", () => {
+  const runtime = new BeliefRuntime();
+  const invalidSnapshot = {
+    version: 1,
+    beliefs: {
+      valid_belief: {
+        cardinality: "exclusive",
+        domain: "closed",
+        values: { opt1: 0.8, opt2: 0.2 },
+      },
+      invalid_belief: {
+        cardinality: "exclusive",
+        domain: "closed",
+        values: { bad1: 0, bad2: 0 },
+      },
+    },
+  };
+
+  assert.throws(
+    () => {
+      runtime.loadBeliefSnapshot(invalidSnapshot as any);
+    },
+    /belief invalid_belief has non-positive probability mass/,
+  );
+
+  assert.deepEqual(runtime.getState(), {});
+  assert.equal(runtime.getProvenance().length, 0);
+  assert.equal(runtime.confidence("valid_belief.opt1"), 0);
+  assert.equal(runtime.confidence("invalid_belief.bad1"), 0);
+  assert.equal(runtime.explainBelief("valid_belief.opt1").length, 0);
+});
