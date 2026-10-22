@@ -15,6 +15,46 @@ fn cli_rejects_unknown_flags_with_exit_code_2() {
 }
 
 #[test]
+fn cli_reports_version() {
+    for flag in ["--version", "-V"] {
+        let output = Command::new(env!("CARGO_BIN_EXE_bel"))
+            .arg(flag)
+            .output()
+            .expect("Failed to execute bel");
+
+        assert!(output.status.success());
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        assert_eq!(stdout, format!("bel {}\n", env!("CARGO_PKG_VERSION")));
+    }
+}
+
+#[test]
+fn cli_prints_help() {
+    for flag in ["--help", "-h"] {
+        let output = Command::new(env!("CARGO_BIN_EXE_bel"))
+            .arg(flag)
+            .output()
+            .expect("Failed to execute bel");
+
+        assert!(output.status.success());
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        assert!(stdout.contains("usage: bel run <file.bel>"));
+        assert!(stdout.contains("--version"));
+    }
+}
+
+#[test]
+fn cli_without_arguments_exits_with_usage() {
+    let output = Command::new(env!("CARGO_BIN_EXE_bel"))
+        .output()
+        .expect("Failed to execute bel");
+
+    assert_eq!(output.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(stderr.contains("usage: bel run <file.bel>"));
+}
+
+#[test]
 fn cli_rejects_missing_file_with_exit_code_1() {
     let output = Command::new(env!("CARGO_BIN_EXE_bel"))
         .args(["run", "nonexistent.bel"])

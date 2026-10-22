@@ -5,16 +5,21 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 repository.workspace = true
-description = "CLI executable for BeliefLang"
+homepage.workspace = true
+readme = "README.md"
+keywords.workspace = true
+categories = ["command-line-utilities", "compilers"]
+include = ["src/**/*.rs", "Cargo.toml", "README.md", "LICENSE"]
+description = "Native `bel` command-line interpreter for the BeliefLang probabilistic programming language"
 
 [[bin]]
 name = "bel"
 path = "src/main.rs"
 
 [dependencies]
-bel-syntax = { path = "../bel-syntax" }
-bel-runtime = { path = "../bel-runtime" }
-bel-providers = { path = "../bel-providers" }
+bel-syntax = { workspace = true }
+bel-runtime = { workspace = true }
+bel-providers = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }

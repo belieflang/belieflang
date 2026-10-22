@@ -7,14 +7,26 @@ members = [
 ]
 resolver = "2"
 
+# The workspace version is the single source of truth for every release
+# artifact (crates, npm packages, GitHub release archives). Use
+# `node scripts/release/version.mjs set <version>` to change it; the script
+# keeps the internal crate pins and npm packages in sync.
 [workspace.package]
-version = "0.1.1-alpha"
+version = "0.2.0-alpha.0"
 edition = "2021"
 authors = ["BeliefLang Contributors"]
 license = "Apache-2.0"
 repository = "https://github.com/belieflang/belieflang"
+homepage = "https://github.com/belieflang/belieflang"
+keywords = ["belieflang", "probabilistic", "agents", "language", "interpreter"]
 
 [workspace.dependencies]
+# Internal crates are pinned to the exact workspace version so that published
+# crates always resolve to the matching release of their siblings.
+bel-syntax = { path = "crates/bel-syntax", version = "=0.2.0-alpha.0" }
+bel-runtime = { path = "crates/bel-runtime", version = "=0.2.0-alpha.0" }
+bel-providers = { path = "crates/bel-providers", version = "=0.2.0-alpha.0" }
+
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", features = ["preserve_order"] }
 thiserror = "2.0"
@@ -22,3 +34,9 @@ tokio = { version = "1.40", features = ["full"] }
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
 async-trait = "0.1"
 indexmap = { version = "2.6", features = ["serde"] }
+
+# Release binaries: smaller, faster executables for distribution.
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

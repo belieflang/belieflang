@@ -1,0 +1,32 @@
+{
+  "name": "@belieflang/cli-linux-arm64",
+  "version": "0.2.0-alpha.0",
+  "description": "The Linux (ARM64, static musl; runs on glibc and musl distributions) native binary for BeliefLang's `bel` CLI. Install `belieflang` instead of using this package directly.",
+  "keywords": [
+    "belieflang"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/belieflang/belieflang#readme",
+  "bugs": {
+    "url": "https://github.com/belieflang/belieflang/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/belieflang/belieflang.git",
+    "directory": "npm/cli-linux-arm64"
+  },
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "files": [
+    "bin/bel"
+  ],
+  "preferUnplugged": true,
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}

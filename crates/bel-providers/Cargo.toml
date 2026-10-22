@@ -5,11 +5,17 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 repository.workspace = true
-description = "Inference provider integrations (Local Heuristic, Jev, OpenAI) for BeliefLang"
+homepage.workspace = true
+documentation = "https://docs.rs/bel-providers"
+readme = "README.md"
+keywords.workspace = true
+categories = ["compilers"]
+include = ["src/**/*.rs", "Cargo.toml", "README.md", "LICENSE"]
+description = "Inference provider integrations (local heuristic, TypeSafe Jev, OpenAI) for BeliefLang"
 
 [dependencies]
-bel-syntax = { path = "../bel-syntax" }
-bel-runtime = { path = "../bel-runtime" }
+bel-syntax = { workspace = true }
+bel-runtime = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }

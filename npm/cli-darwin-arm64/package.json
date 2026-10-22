@@ -1,0 +1,32 @@
+{
+  "name": "@belieflang/cli-darwin-arm64",
+  "version": "0.2.0-alpha.0",
+  "description": "The macOS (Apple Silicon, ARM64) native binary for BeliefLang's `bel` CLI. Install `belieflang` instead of using this package directly.",
+  "keywords": [
+    "belieflang"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/belieflang/belieflang#readme",
+  "bugs": {
+    "url": "https://github.com/belieflang/belieflang/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/belieflang/belieflang.git",
+    "directory": "npm/cli-darwin-arm64"
+  },
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "arm64"
+  ],
+  "files": [
+    "bin/bel"
+  ],
+  "preferUnplugged": true,
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}

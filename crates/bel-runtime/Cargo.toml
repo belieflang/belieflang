@@ -5,10 +5,16 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 repository.workspace = true
-description = "Interpreter runtime, belief state, memory, and decision guard for BeliefLang"
+homepage.workspace = true
+documentation = "https://docs.rs/bel-runtime"
+readme = "README.md"
+keywords.workspace = true
+categories = ["compilers"]
+include = ["src/**/*.rs", "Cargo.toml", "README.md", "LICENSE"]
+description = "Interpreter runtime, belief state, provenance, factual memory, and decision guard for BeliefLang"
 
 [dependencies]
-bel-syntax = { path = "../bel-syntax" }
+bel-syntax = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }

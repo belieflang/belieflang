@@ -21,7 +21,34 @@ when confidence(intent.book_flight) > 0.7:
 
 The rule calls a tool when the stored flight-intent score exceeds 0.7. It needs no model call to evaluate that condition. The CLI's built-in `search_flights()` is a local demo tool that returns sample data; it does not book travel. See [language semantics](docs/semantics.md) and [runnable examples](examples/).
 
-## Quick start
+## Installation
+
+BeliefLang provides a fast, standalone native Rust interpreter executable named `bel`.
+
+### npm (Recommended for Node.js developers)
+
+```bash
+npm install -g belieflang@next
+bel --version
+bel run examples/intent.bel --trace
+```
+
+> The `belieflang` npm package is a lightweight native launcher that automatically installs and executes the precompiled Rust binary for your platform. Node.js is not required to run the interpreter once installed.
+
+### Cargo (crates.io)
+
+```bash
+cargo install bel-cli --version 0.2.0-alpha.0 --locked
+bel --version
+```
+
+### GitHub Releases (Precompiled Binaries)
+
+Download standalone archives for macOS (Apple Silicon / Intel), Linux (static musl for glibc and Alpine), and Windows from [GitHub Releases](https://github.com/belieflang/belieflang/releases).
+
+For complete verification, platform support tables, and troubleshooting, see the [Installation Guide](docs/installation.md).
+
+## Quick start (from source)
 
 Requires a standard Rust toolchain (Rust 1.80+ or latest stable):
 
@@ -33,7 +60,7 @@ cd belieflang
 cargo run -p bel-cli -- run examples/intent.bel --trace
 ```
 
-To install the native `bel` CLI globally:
+To install the native `bel` CLI globally from source:
 
 ```bash
 cargo install --path crates/bel-cli
