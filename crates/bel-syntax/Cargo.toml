@@ -5,7 +5,13 @@ edition.workspace = true
 authors.workspace = true
 license.workspace = true
 repository.workspace = true
-description = "AST, lexer, and parser for BeliefLang"
+homepage.workspace = true
+documentation = "https://docs.rs/bel-syntax"
+readme = "README.md"
+keywords.workspace = true
+categories = ["parser-implementations", "compilers"]
+include = ["src/**/*.rs", "Cargo.toml", "README.md", "LICENSE"]
+description = "Lexer, parser, and AST for the BeliefLang probabilistic programming language"
 
 [dependencies]
 serde = { workspace = true }

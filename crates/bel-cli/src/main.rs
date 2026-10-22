@@ -12,6 +12,30 @@ use std::sync::Arc;
 const USAGE_TEXT: &str =
     "usage: bel run <file.bel> [--trace] [--engine heuristic|jev|chatgpt] [--usage]";
 
+/// Version reported by `bel --version`. Taken from the Cargo workspace version,
+/// which is the single source of truth for all release artifacts.
+const VERSION: &str = env!("CARGO_PKG_VERSION");
+
+fn help_text() -> String {
+    format!(
+        "bel {VERSION} - native BeliefLang interpreter\n\
+         \n\
+         {USAGE_TEXT}\n\
+         \n\
+         commands:\n\
+         \x20 run <file.bel>     execute a BeliefLang program\n\
+         \n\
+         run options:\n\
+         \x20 --trace            print rule evaluation and state traces\n\
+         \x20 --engine <name>    inference engine: heuristic (default), jev, chatgpt\n\
+         \x20 --usage            print model token usage after the run\n\
+         \n\
+         global options:\n\
+         \x20 -h, --help         print this help\n\
+         \x20 -V, --version      print the bel version"
+    )
+}
+
 #[tokio::main]
 async fn main() -> ExitCode {
     let args: Vec<String> = env::args().collect();
@@ -23,6 +47,22 @@ async fn main() -> ExitCode {
     }
 
     let command = &args[1];
+
+    // Distribution metadata flags (top-level only; no effect on `.bel` semantics).
+    if args.len() == 2 {
+        match command.as_str() {
+            "--version" | "-V" => {
+                println!("bel {VERSION}");
+                return ExitCode::from(0);
+            }
+            "--help" | "-h" => {
+                println!("{}", help_text());
+                return ExitCode::from(0);
+            }
+            _ => {}
+        }
+    }
+
     if command != "run" {
         eprintln!("{USAGE_TEXT}");
         return ExitCode::from(2);

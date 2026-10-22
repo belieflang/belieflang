@@ -1,0 +1,61 @@
+{
+  "name": "belieflang",
+  "version": "0.2.0-alpha.0",
+  "description": "BeliefLang: the native Rust `bel` interpreter for probabilistic programs, structured beliefs, and AI agents.",
+  "keywords": [
+    "belieflang",
+    "ai",
+    "agents",
+    "probabilistic-programming",
+    "belief-state",
+    "dsl",
+    "language",
+    "cli"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/belieflang/belieflang#readme",
+  "bugs": {
+    "url": "https://github.com/belieflang/belieflang/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/belieflang/belieflang.git",
+    "directory": "npm/belieflang"
+  },
+  "type": "commonjs",
+  "bin": {
+    "bel": "bin/bel.js"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "bin/bel.js",
+    "lib/index.js",
+    "lib/index.d.ts",
+    "lib/platforms.js"
+  ],
+  "scripts": {
+    "test": "node --test test/launcher.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "optionalDependencies": {
+    "@belieflang/cli-darwin-arm64": "0.2.0-alpha.0",
+    "@belieflang/cli-darwin-x64": "0.2.0-alpha.0",
+    "@belieflang/cli-linux-x64": "0.2.0-alpha.0",
+    "@belieflang/cli-linux-arm64": "0.2.0-alpha.0",
+    "@belieflang/cli-win32-x64": "0.2.0-alpha.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
+  }
+}

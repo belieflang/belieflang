@@ -1,0 +1,19 @@
+[trace] call search_flights()
+[state]
+  intent [exclusive/closed]: book_flight=0.820, book_hotel=0.120, unknown=0.060
+  user [multi/closed]: budget_sensitive=0.910, prefers_direct=0.840
+[vars]
+  threshold: 0.7
+  flights: {"count":3,"best_price":214,"currency":"EUR"}
+[trace] rule 1 when (confidence(intent.book_flight) > threshold && user.prefers_direct > 0.5) => true
+[trace]   confidence(intent.book_flight)=0.820 > threshold=0.700 -> true
+[trace]   user.prefers_direct=0.840 > 0.5=0.500 -> true
+[trace]   and -> true
+[trace] action call rank_flights()
+[trace] call rank_flights()
+[tool] rank_flights()
+[trace] rule 2 when (flights.count > 0 || entropy(intent) > 0.6) => true
+[trace]   flights.count=3 > 0=0 -> true
+[trace]   or short-circuit -> true
+[trace] action ask_user("I found flight options.")
+[ask_user] I found flight options.
