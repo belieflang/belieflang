@@ -1,10 +1,10 @@
 # BeliefLang
 
-An experimental language and runtime for structured beliefs, uncertainty, and decision-making in AI agents.
+A probabilistic programming language and native runtime for structured beliefs, uncertainty, provenance, and deterministic decision-making in AI agents.
 
-AI agents already support memory and state. BeliefLang explores making beliefs, uncertainty, provenance (where information came from), and decision rules explicit. The goal is to maintain structured belief snapshots, update them as new information arrives, and use deterministic code for facts and decisions that do not need another LLM call.
+AI agents already support memory and state. BeliefLang makes beliefs, uncertainty, provenance (where information came from), and decision rules explicit. The goal is to maintain structured belief snapshots, update them as new observations arrive, and use deterministic code for facts and decisions that do not need another LLM call.
 
-Simplifying information has trade-offs: a snapshot or summary can lose details that become important later. BeliefLang is an experimental TypeScript implementation, and whether it needs a dedicated language rather than a TypeScript library remains an open design question.
+BeliefLang is implemented as a native **Rust** interpreter and workspace with reusable library crates, an executable CLI (`bel`), and integrations for local heuristic inference, TypeSafe Jev, and OpenAI.
 
 ## A small `.bel` example
 
@@ -23,41 +23,83 @@ The rule calls a tool when the stored flight-intent score exceeds 0.7. It needs 
 
 ## Quick start
 
-Use Node.js 22 or later:
+Requires a standard Rust toolchain (Rust 1.80+ or latest stable):
 
 ```bash
 git clone https://github.com/belieflang/belieflang.git
 cd belieflang
-npm ci
-npm run build
-node dist/src/cli.js run examples/intent.bel --trace
+
+# Build and run with cargo
+cargo run -p bel-cli -- run examples/intent.bel --trace
 ```
 
-This runs the larger intent example with local demo tools and requires no API key. To run the snippet above, save it as `example.bel` and use `node dist/src/cli.js run example.bel --trace`.
+To install the native `bel` CLI globally:
 
-After building, run `npm test` for offline tests or `node scripts/audit-incremental-pilot.mjs` to verify the archived pilot without inference.
+```bash
+cargo install --path crates/bel-cli
+bel run examples/intent.bel --trace
+```
+
+Run test suite and linter:
+
+```bash
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test --workspace
+```
 
 ## Try model inference
 
 The local heuristic engine is the default. Built-in adapters support OpenAI and TypeSafe Jev. Live provider calls may incur costs.
 
-### OpenAI
+### Local Heuristic (Default)
 
-Set `OPENAI_API_KEY` in your environment or a local `.env` file. Optionally set `OPENAI_MODEL`.
+Runs offline with deterministic heuristic extraction:
 
 ```bash
-node --env-file-if-exists=.env dist/src/cli.js run examples/chatgpt_hotel.bel --engine chatgpt --trace --usage
+bel run examples/intent.bel --trace
+```
+
+### OpenAI
+
+Set `OPENAI_API_KEY` in your environment (and optionally `OPENAI_MODEL`):
+
+```bash
+OPENAI_API_KEY="your-key" bel run examples/chatgpt_hotel.bel --engine chatgpt --trace --usage
 ```
 
 ### TypeSafe Jev
 
-Set `TYPESAFE_API_KEY` in your environment or a local `.env` file. Optionally set `JEV_MODEL`.
+Set `TYPESAFE_API_KEY` in your environment (and optionally `JEV_MODEL`):
 
 ```bash
-node --env-file-if-exists=.env dist/src/cli.js run examples/jev_intent.bel --engine jev --trace --usage
+TYPESAFE_API_KEY="your-key" bel run examples/jev_intent.bel --engine jev --trace --usage
 ```
 
-For another provider, pass an `inferBeliefs` adapter when constructing `BeliefRuntime` in TypeScript. See the [adapter contract](src/runtime.ts), [integration guide](docs/jev.md), and [examples](examples/).
+For custom providers, implement the `InferBeliefsAdapter` trait when constructing `BeliefRuntime` in Rust.
+
+## Architecture
+
+BeliefLang is organized as a Cargo workspace with four focused crates:
+
+```text
+belieflang/
+├── Cargo.toml
+├── crates/
+│   ├── bel-syntax/      # Lexer, recursive-descent parser, AST
+│   ├── bel-runtime/     # Belief interpreter, provenance, snapshots, factual memory, decision guard
+│   ├── bel-providers/   # Heuristic, TypeSafe Jev, and OpenAI inference adapters
+│   └── bel-cli/         # Native `bel` CLI executable
+├── examples/            # Runnable .bel programs
+└── docs/                # Language semantics and research reports
+```
+
+### Crate APIs
+
+- **`bel-syntax`**: exports `parse`, `tokenize`, `strip_comments`, and AST types (`Statement`, `BeliefBlock`, `Rule`, `ConditionExpression`).
+- **`bel-runtime`**: exports `BeliefRuntime`, `ToolRegistry`, `FactMemory` (opt-in typed factual delta memory), `AgentDecisionGuard` (deterministic fail-closed decision policy), snapshot types, and provenance models.
+- **`bel-providers`**: exports `JevInferAdapter`, `OpenAIInferAdapter`, `HttpTransport`, and mockable transport abstractions for deterministic contract tests.
+- **`bel-cli`**: provides the `bel run <file.bel>` command with `--trace`, `--engine`, and `--usage` flags.
 
 ## Latest benchmark: completed incremental-memory pilot
 
@@ -79,9 +121,9 @@ See the [full findings and limitations](docs/incremental-memory-pilot-results.md
 ## Current features and limitations
 
 - **Language and CLI:** belief blocks with exclusive/multi and open/closed modes; `confidence()` and `entropy()`; variables, compound conditions, tool return values, observations, inference/merge statements, and execution traces.
-- **Runtime APIs:** save/restore belief snapshots and inspect provenance with `getProvenance()` and `explainBelief("intent.book_flight")`.
-- **Opt-in v3 TypeScript components:** typed atomic deltas, explicit uncertain/conflicting/cleared states, source-tracked history, original/previous-value retrieval, snapshot validation, and a deterministic decision guard. These are [runtime APIs](docs/delta-state-v3.md), not additional `.bel` syntax.
-- **Inference adapters:** local heuristic, OpenAI, Jev, or a custom TypeScript `inferBeliefs` implementation.
+- **Runtime APIs:** save/restore belief snapshots and inspect provenance with `get_provenance()` and `explain_belief("intent.book_flight")`.
+- **Opt-in v3 components:** typed atomic deltas, explicit uncertain/conflicting/cleared states, source-tracked history, original/previous-value retrieval, snapshot validation, and a deterministic decision guard. These are [runtime APIs](docs/delta-state-v3.md), not additional `.bel` syntax.
+- **Inference adapters:** local heuristic, OpenAI, Jev, or custom `InferBeliefsAdapter` implementations.
 
 Model confidence does not verify a fact or authorize an action. Guards depend on trusted host evidence and approvals. V3 change history is bounded, durable state can grow, and automatic archival is not implemented. The runtime does not provide general automatic dependency tracking or selective rule recomputation; the benchmark's fixed dependency cache is a narrower experiment. See the [design and product-viability review](docs/product-viability.md).
 
@@ -93,11 +135,9 @@ Model confidence does not verify a fact or authorize an action. Guards depend on
 - [Multi-domain benchmark commands](benchmarks/README.md), [methodology](docs/multidomain-benchmark.md), and [long-horizon v2 results](docs/long-horizon-v2.md).
 - [Product-viability review](docs/product-viability.md), including the comparison with ordinary TypeScript.
 
-## Roadmap
+## Legacy TypeScript Reference
 
-- Evaluate longer conversations and cheaper-model updates against optimized JSON and full-history baselines, as [proposed in the research report](docs/incremental-memory-pilot-results.md#one-proposed-next-experiment-not-authorized-or-implemented).
-- Investigate general dependency tracking and selective recomputation; these are proposed work.
-- Use evidence from those comparisons to decide whether to maintain a dedicated language or focus on TypeScript components.
+The original TypeScript implementation is preserved in Git history and under `src/` for historical benchmark replay and reference. Rust is the canonical, maintained implementation of BeliefLang.
 
 ## License
 

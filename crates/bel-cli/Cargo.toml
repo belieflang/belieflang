@@ -1,0 +1,21 @@
+[package]
+name = "bel-cli"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "CLI executable for BeliefLang"
+
+[[bin]]
+name = "bel"
+path = "src/main.rs"
+
+[dependencies]
+bel-syntax = { path = "../bel-syntax" }
+bel-runtime = { path = "../bel-runtime" }
+bel-providers = { path = "../bel-providers" }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+tokio = { workspace = true }

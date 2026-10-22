@@ -10,18 +10,36 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  rust:
+    name: Rust Check & Test
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Format Check
+        run: cargo fmt --all -- --check
+      - name: Clippy Lint
+        run: cargo clippy --workspace --all-targets -- -D warnings
+      - name: Run Tests
+        run: cargo test --workspace
+      - name: Run E2E Example
+        run: cargo run -p bel-cli -- run examples/intent.bel --trace
+
+  legacy-audit:
+    name: Legacy Benchmarks & Historical Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: npm
       - run: npm ci
       - run: npm run build
-      - run: npm test
       - run: npm run benchmark:multidomain:validate
       - run: npm run benchmark:long-horizon:validate
       - run: npm run benchmark:v3:validate
